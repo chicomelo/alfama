@@ -4222,6 +4222,12 @@ a {
   margin-bottom: 16px;
   color: #003B71;
 }
+.sub-titulo {
+  font-size: 2.1rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: #003B71;
+}
 .orange {
   color: #EA7D1E;
 }
@@ -4266,7 +4272,7 @@ a {
 .btn.btn-outline {
   color: #EA7D1E;
   border-color: #EA7D1E;
-  background-color: #fff;
+  background-color: transparent;
 }
 .btn.btn-outline:hover {
   border-color: #FF9F4B;
@@ -4297,7 +4303,104 @@ a {
   .titulo {
     font-size: 3.2rem;
   }
+  .sub-titulo {
+    font-size: 2.4rem;
+  }
   .paragrafo {
     font-size: 2rem;
   }
+}
+.header-principal {
+  background-color: #EA7D1E;
+  width: 100%;
+  height: 70px;
+}
+.header-principal .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+.header-principal .logo {
+  padding-top: 24px;
+  width: 260px;
+}
+.header-principal .menu-principal__wrapper {
+  display: flex;
+  height: 100%;
+}
+.header-principal .menu-social__wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.header-principal .menu-menu-principal-container {
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+.header-principal .menu-menu-principal-container .menu {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+.header-principal .menu-menu-principal-container .menu .menu-item a {
+  color: #fff;
+  padding: 6px;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.header-principal .menu-menu-principal-container .menu .menu-item a:hover {
+  color: #FF9F4B;
+}
+.header-principal .menu-social {
+  display: flex;
+  align-items: center;
+  margin-right: 64px;
+  gap: 12px;
+}
+.header-principal .menu-social a {
+  display: inline-block;
+  height: 42px;
+  width: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.header-principal .menu-social a svg {
+  height: 21px;
+  fill: #fff;
+  transition: all 0.2s;
+}
+.header-principal .menu-social a.facebook svg {
+  height: 24px;
+}
+.header-principal .menu-social a:hover svg {
+  fill: #FF9F4B;
+}
+.header-principal .menu-search {
+  display: flex;
+  align-items: center;
+}
+.header-principal .menu-search a {
+  height: 42px;
+  width: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.header-principal .menu-search a svg {
+  height: 21px;
+  fill: #fff;
+  transition: all 0.2s;
+}
+.header-principal .menu-search a.facebook svg {
+  height: 24px;
+}
+.header-principal .menu-search a:hover svg {
+  fill: #FF9F4B;
 }

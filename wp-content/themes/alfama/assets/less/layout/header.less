@@ -1,1 +1,114 @@
 // main: "../main.less"
+
+.header-principal{
+
+    background-color: @orange1;
+    width: 100%;
+    height: 70px;
+    .container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+    }
+    .logo{
+        padding-top: 24px;
+        width: 260px;
+    }
+    
+    .menu-principal__wrapper{
+        display: flex;
+        height: 100%;
+    }
+    .menu-social__wrapper{
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .menu-menu-principal-container{
+        align-items: center;
+        display: flex;
+        height: 100%;
+        .menu{
+            display: flex;
+            align-items: center;
+            gap: 42px;
+            .menu-item{
+                a{
+                    color: @white;
+                    padding: 6px;
+                    text-transform: uppercase;
+                    font-size: 1.6rem;
+                    font-weight: 500;
+                    transition: all 0.2s;
+                    &:hover{
+                        color: @orange2;
+                    }
+                }
+            }
+        }
+    }
+
+    .menu-social{
+        display: flex;
+        align-items: center;
+        margin-right: 64px;
+        gap: 12px;
+        a{
+            display: inline-block;
+            height: 42px;
+            width: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            svg{
+                height: 21px;
+                fill: @white;
+                transition: all 0.2s;
+            }
+            &.facebook{
+                svg{
+                    height: 24px;
+                }
+
+            }
+            &:hover{
+                svg{
+                    fill: @orange2;
+                }
+            }
+        }
+    }
+
+    .menu-search{
+        display: flex;
+        align-items: center;
+        a{
+            height: 42px;
+            width: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            svg{
+                height: 21px;
+                fill: @white;
+                transition: all 0.2s;
+            }
+            &.facebook{
+                svg{
+                    height: 24px;
+                }
+
+            }
+            &:hover{
+                svg{
+                    fill: @orange2;
+                }
+            }
+        }
+    }
+    
+}

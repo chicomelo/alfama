@@ -10,6 +10,7 @@ the_content();
         <div class="col">2</div>
     </div>
     <h1 class="titulo">Título principal</h1>
+    <h1 class="sub-titulo">Sub título</h1>
     <p class="paragrafo">Entregamos produtos que são desenvolvidos através de um processo Lean Manufacturing, feito com muita dedicação, garra e intensidade. Pensados para não focar apenas qualidade de produtos, mas sim, qualidade em resultados, solidez nas relações e perenidade nos negócios para todos.</p>
     <p class="paragrafo">Desafiamos nossos próprios limites em busca de melhores resultados. Isso, sem perder de vista, processos sustentáveis, respeitando, valorizando e garantindo a segurança de toda a nossa cadeia produtiva e de parcerias.</p>
 
