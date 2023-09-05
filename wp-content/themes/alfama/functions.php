@@ -10,30 +10,37 @@ function hs_image_editor_default_to_gd( $editors ) {
 add_filter( 'wp_image_editors', 'hs_image_editor_default_to_gd' );
 
 
-if ( ! function_exists( 'alfama_styles' ) ) :
+if ( ! function_exists( 'alfama_assets' ) ) :
 
-	function alfama_styles() {
-		// Register theme stylesheet.
+
+	function alfama_assets() {
+
 		$theme_version = wp_get_theme()->get( 'Version' );
-
 		$version_string = is_string( $theme_version ) ? $theme_version : false;
-		wp_register_style(
-			'alfama_styles',
+
+		wp_register_style( 
+			'main-style', 
 			get_template_directory_uri() . '/assets/css/main-style.css',
-			//get_template_directory_uri() . '/assets/css/main-style.min.css',
-			
 			array(),
 			$version_string
 		);
 
-		// Enqueue theme stylesheet.
-		wp_enqueue_style( 'alfama_styles' );
 
+		wp_register_script( 
+			'main-scripts', 
+			get_template_directory_uri() . '/assets/js/main-scripts.js',
+			array('jquery'),
+			$version_string,
+			true
+		);
+	
+		wp_enqueue_style( 'main-style' );
+		wp_enqueue_script( 'main-scripts' );
 	}
 
 endif;
 
-add_action( 'wp_enqueue_scripts', 'alfama_styles' );
+add_action( 'wp_enqueue_scripts', 'alfama_assets' );
 
 // Add Shortcode
 function img_url() {
