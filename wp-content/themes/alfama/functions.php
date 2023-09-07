@@ -18,6 +18,7 @@ if ( ! function_exists( 'alfama_assets' ) ) :
 		$theme_version = wp_get_theme()->get( 'Version' );
 		$version_string = is_string( $theme_version ) ? $theme_version : false;
 
+		// styles
 		wp_register_style( 
 			'main-style', 
 			get_template_directory_uri() . '/assets/css/main-style.css',
@@ -25,7 +26,7 @@ if ( ! function_exists( 'alfama_assets' ) ) :
 			$version_string
 		);
 
-
+		// scripts
 		wp_register_script( 
 			'main-scripts', 
 			get_template_directory_uri() . '/assets/js/main-scripts.js',
@@ -33,9 +34,16 @@ if ( ! function_exists( 'alfama_assets' ) ) :
 			$version_string,
 			true
 		);
-	
+		wp_register_script( 
+			'slick-slider', 
+			get_template_directory_uri() . '/assets/js/slick.min.js',
+			array('jquery'),
+			$version_string,
+			true
+		);
 		wp_enqueue_style( 'main-style' );
 		wp_enqueue_script( 'main-scripts' );
+		wp_enqueue_script( 'slick-slider' );
 	}
 
 endif;
@@ -44,7 +52,7 @@ add_action( 'wp_enqueue_scripts', 'alfama_assets' );
 
 // Add Shortcode
 function img_url() {
-    return get_template_directory_uri().'-child/img/'; 
+    return get_template_directory_uri().'/assets/img/'; 
 }
 add_shortcode( 'img-url', 'img_url' );
 

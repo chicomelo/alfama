@@ -3,5 +3,7 @@
 </body>
 
 <footer>
-footer
+    <div class="container">
+        Teste
+    </div>
 </footer>

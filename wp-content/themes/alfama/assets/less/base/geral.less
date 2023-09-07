@@ -8,17 +8,20 @@
 a{
     text-decoration: none;
 }
-
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
 .titulo{
     font-size: 2.4rem;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 16px;
     color: @blue1;
 }
 
 .sub-titulo{
     font-size: 2.1rem;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 16px;
     color: @blue1;
 }
@@ -31,12 +34,25 @@ a{
     color: @red;
 }
 
-
-
 .paragrafo{
     font-size: 1.6rem;
     color: @grey1;
     margin-bottom: 16px;
+    line-height: 1.4;
+}
+.paragrafo-2{
+    font-size: 1.4rem;
+    color: @grey1;
+    line-height: 1.4;
+}
+
+.link{
+    color: @orange1;
+    font-size: 1.4rem;
+    font-weight: 600;
+    &:hover{
+        color: @orange2;
+    }
 }
 
 .btn{
@@ -109,7 +125,6 @@ a{
     .titulo{
         font-size: 3.2rem;
     }
-    
     .sub-titulo{
         font-size: 2.4rem;
     }
