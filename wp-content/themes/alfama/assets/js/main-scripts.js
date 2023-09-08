@@ -53,7 +53,7 @@ jQuery(document).ready(function ($) {
                     arrows: false,
                     dots: true,
                     centerMode: true,
-                    centerPadding: '70px',
+                    centerPadding: '45px',
                     slidesToShow: 1
                 }
             }

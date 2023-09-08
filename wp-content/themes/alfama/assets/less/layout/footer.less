@@ -4,4 +4,140 @@ footer{
     background-color: @blue1;
     color: @white;
     padding: 42px 0;
+
+    .footer__wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        .logo{
+            width: 172px;
+        }
+        .menu-footer__wrapper{
+            padding: 24px 0;
+            .menu-menu-principal-container{
+                width: 100%;
+                .menu{
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    flex-direction: column;
+                    .menu-item{
+                        a{
+                            line-height: 1;
+                            display: block;
+                            color: @white;
+                            padding: 10px;
+                            text-transform: uppercase;
+                            font-size: 1.6rem;
+                            font-weight: 500;
+                            transition: all 0.2s;
+                            &:hover{
+                                color: @blue2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .menu-social__wrapper{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column-reverse;
+            justify-content: center;
+            .menu-social{
+                display: flex;
+                align-items: center;
+                margin-right: 0;
+                gap: 12px;
+                a{
+                    display: inline-block;
+                    height: 42px;
+                    width: 42px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.2s;
+                    svg{
+                        height: 21px;
+                        fill: @white;
+                        transition: all 0.2s;
+                    }
+                    &.facebook{
+                        svg{
+                            height: 24px;
+                        }
+        
+                    }
+                    &:hover{
+                        svg{
+                            fill: @blue2;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        .copy{
+            margin-top: 24px;
+            color: @blue2;
+            font-size: 1.2rem;
+        }
+    }
+}
+
+
+@media (min-width: 1200px) {
+    footer{
+
+        .footer__wrapper{
+            flex-direction: row;
+
+            .logo{
+                width: 200px;
+            }
+
+            .menu-footer__wrapper{
+                display: flex;
+                left: 0;
+                top: 0;
+                padding: 0;
+                position: relative;
+                transition: none;
+                .menu-menu-principal-container{
+                    .menu{
+                        flex-direction: row;
+                        gap: 42px;
+                        .menu-item{
+                            a{
+                                padding: 6px;
+                            }
+                        }
+                    }
+                }
+
+
+                &.active{
+                    padding: 0;
+                    left: 0;
+                    top: 0;
+                    position: relative;
+                    display: flex;
+                    background: none;
+                }
+
+            }
+            .menu-social__wrapper{
+                padding: 0;
+                flex-direction: row;
+
+            }
+            .copy{
+                margin: 0;
+            }
+        }
+    }
 }

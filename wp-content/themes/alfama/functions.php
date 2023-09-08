@@ -80,5 +80,4 @@ add_action( 'after_setup_theme', 'alfama_custom_logo_setup' );
 add_theme_support( 'custom-logo' );
 
 
-
 ?>

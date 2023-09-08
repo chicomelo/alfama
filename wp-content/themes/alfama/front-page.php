@@ -1,9 +1,14 @@
 <?php
 /* Template Name: Home page */ 
 get_header();
-
 the_content();
 ?>
+<div class="d-none d-md-block">
+    <?php echo do_shortcode('[smartslider3 slider="2"]'); ?>
+</div>
+<div class="d-md-none">
+    <?php echo do_shortcode('[smartslider3 slider="3"]'); ?>
+</div>
 
 <section class="food-service">
     <div class="container">
