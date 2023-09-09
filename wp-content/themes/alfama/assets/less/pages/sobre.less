@@ -1,0 +1,171 @@
+// main: "../main.less"
+
+.banner-sobre{
+
+    background: url('../img/banner-sobre-alfama-mobile.jpg');
+    background-size: 768px;
+    background-position: center;
+    height: 530px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .titulo{
+        color: @white;
+        margin-bottom: 42px;
+        text-align: center;
+        font-size: 3.6rem;
+    }
+}
+
+
+.especialistas-proteina{
+    padding: 42px 0;
+    .row{
+        align-items: center;
+    }
+    .titulo{
+        text-align: center;
+    }
+    .icones-animais{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin: 42px 0;
+        svg{
+            width: 59px;
+            height: 52px;
+        }
+        .boi{
+            svg{
+                fill: @red;
+            }
+        }
+        .frango{
+            svg{
+                fill: @orange3;
+            }
+        }
+        .suino{
+            svg{
+                fill: @pink;
+            }
+        }
+    }
+
+}
+
+.nossa-missao{
+    background-color: @blue1;
+    padding-bottom: 42px;
+    .paragrafo, .titulo{
+        color: @white;
+    }
+    .conteudo-nossa-missao{
+        padding-top: 42px;
+    }
+}
+
+.timeline{
+    padding: 64px 0 124px 0;
+    .titulo{
+        text-align: center;
+        margin: 0;
+    }
+    .slider-ano{
+        text-align: center;
+        margin: 32px 0;
+        p{
+            font-size: 4.2rem;
+            color: @grey4;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .slick-current{
+            p{
+                color: @blue1;
+            }
+        }
+    }
+    .slider-conteudo{
+        p{
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: @blue1;
+            text-align: center;
+        }
+        .slick-dots{
+            bottom: -64px;
+        }
+    }
+}
+
+
+@media (min-width: 992px) {
+
+    .banner-sobre{
+        background: url('../img/banner-sobre-alfama.jpg');
+        height: 800px;
+        background-size: cover;
+        .titulo{
+            font-size: 3.6rem;
+        }
+        .btn{
+            margin: 0 auto;
+        }
+    }
+    .especialistas-proteina{
+        background: url('../img/bg-vetor-direita.png');
+        background-repeat: no-repeat;
+        background-position: bottom right;
+        height: 470px;
+        display: flex;
+        align-items: center;
+        .titulo{
+            text-align: left;
+            font-size: 3.6rem;
+        }
+        .icones-animais{
+            justify-content: flex-start;
+        }
+    }
+    .nossa-missao{
+        padding: 0;
+        .col-12{
+            position: relative;
+            height: 800px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        img{
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .paragrafo, .titulo{
+            color: @white;
+        }
+        .conteudo-nossa-missao{
+            padding-top: 0;
+        }
+    }
+    .timeline{
+        padding: 92px 0 142px 0;
+        .slider-ano{
+            p{
+                font-size: 4.8rem;
+            }
+        }
+        .slider-conteudo{
+            p{
+                font-size: 1.6rem;
+            }
+        }
+    }
+}

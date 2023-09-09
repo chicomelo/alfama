@@ -2,7 +2,7 @@
 
 </body>
 
-<footer>
+<footer class="footer__alfama">
     <div class="container">
         <div class="footer__wrapper">
             <div class="logo">
