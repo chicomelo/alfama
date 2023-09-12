@@ -107,6 +107,51 @@ the_content();
     </div>
 </section>
 
+<section class="eficiencia">
+
+    <img class="img-fluid d-md-none" src="<?php echo do_shortcode("[img-url]"); ?>img-eficiencia-mobile.jpg" alt="Eficiência e tecnologia" />
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <img class="d-none d-md-block" src="<?php echo do_shortcode("[img-url]"); ?>img-eficiencia.jpg" alt="Eficiência e tecnologia" />
+            
+            </div>
+            <div class="col-12 col-md-5 offset-md-1">
+                <div class="conteudo-eficiencia">
+                    <h2 class="titulo">Eficiência e <span class="red">tecnologia</span></h2>
+                    <p class="paragrafo">
+                        Nosso propósito é ajudar o empreendedor do setor de alimentação a vender mais, gerir melhor e a desenvolver seus negócios. Somos obcecados por eficiência em tudo que fazemos e transportamos isso para o nosso modelo de gestão. Utilizamos tecnologia para aproximar pessoas e negócios, transportando resultados sólidos para toda a cadeia.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="qualidade">
+
+    <img class="img-fluid d-md-none" src="<?php echo do_shortcode("[img-url]"); ?>img-qualidade-mobile.jpg" alt="Qualidade e relacionamentos" />
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12 col-md-5">
+                <div class="conteudo-qualidade">
+                    <h2 class="titulo">Qualidade e <span class="red">relacionamentos</span></h2>
+                    <p class="paragrafo">
+                        Entregamos produtos que são desenvolvidos através de um processo Lean Manufacturing, feito com muita dedicação, garra e intensidade. Pensados para não focar apenas qualidade de produtos, mas sim, qualidade em resultados, solidez nas relações e perenidade nos negócios para todos.
+                    </p>
+                    <p class="paragrafo">
+                    Desafiamos nossos próprios limites em busca de melhores resultados. Isso, sem perder de vista, processos sustentáveis, respeitando, valorizando e garantindo a segurança de toda a nossa cadeia produtiva e de parcerias.
+                    </p>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 offset-md-1">
+                <img class="d-none d-md-block" src="<?php echo do_shortcode("[img-url]"); ?>img-qualidade.jpg" alt="Qualidade e relacionamentos" />
+            </div>
+        </div>
+    </div>
+</section>
+
 <?php
     get_footer();
 ?>
