@@ -23,7 +23,6 @@ the_content();
                 <h1 class="titulo mt-4 mt-md-0">Somos especialistas em <br /><b class="red">Food Service</b></h1>
                 <p class="paragrafo mb-5">Identificamos as dificuldades nas rotinas das principais cozinhas profissionais do Brasil e investimos no desenvolvimento de soluções completas em proteína animal: produtos que facilitam a operação, simplificam processos, reduzem custos e garantem qualidade e sabor às suas receitas.</p>
                 <a href="#" class="btn btn-outline" title="Saiba mais">Saiba mais</a>
-                <a href="#" class="link link-arrow" title="Saiba mais">Saiba mais</a>
             </div>
         </div>
     </div>

@@ -16,13 +16,20 @@
         }
     }
 
-    .lista-produtos{
-        padding-top: 24px;
+    .filtro-mobile{
+        padding: 42px 0 24px 0;
 
+        .titulo-mobile{
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: @blue1;
+            text-align: center;
+            margin-top: 24px;
+        }
     }
 
     .tab-produtos{
-        padding-top: 24px;
+        display: none;
         .tab{
             font-weight: 600;
             display: flex;
@@ -34,9 +41,172 @@
             color: @blue1;
             border-bottom: 1px solid @grey5;
             cursor: pointer;
+
+            input{
+                display:none;
+                width: 0;
+                height: 0;
+                &:checked + span:after{
+                    content: "";
+                    display: block;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    background-color: @orange1;
+                }
+            }
+            span{
+                width: 20px;
+                height: 20px;
+                position: relative;
+                margin-right: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: 1px solid @grey3;
+            }
+
             &:hover{
                 color: @orange1;
                 transition: 0.2s;
+            }
+        }
+    }
+
+    .tab-produtos-mobile{
+        background-color: @white;
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        left: 0;
+        top: 0;
+        z-index: 2;
+        .tab{
+            &:hover{
+                color: @blue2;
+            }
+        }
+        .voltar{
+            color: @orange1;
+            font-size: 2.1rem;
+            line-height: 1;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            &::before{
+                margin-right: 16px;
+                display: block;
+                content: '';
+                width: 25px;
+                height: 14px;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 14.7' xml:space='preserve'%3E%3Cpath d='M26 6.4H3.4l4.7-4.7c.4-.4.4-1 0-1.4-.4-.4-1-.4-1.4 0L.3 6.7c-.4.4-.4 1 0 1.4l6.4 6.4c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4L3.4 8.4H26v-2z' fill='%23ea7d1e'/%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-size: 25px;
+                margin-top: 0px;
+            }
+        }
+
+        .btn{
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+        }
+    }
+
+    .lista-produtos{
+        padding-top: 24px;
+
+        .produto{
+            margin-bottom: 42px;
+            .fotos{
+                margin-bottom: 16px;
+                img{
+                    display: block;
+                }
+                .slick-dots{
+                    position: relative;
+                    bottom: auto;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    li {
+                        position: relative;
+                        margin: 0;
+                        button {
+                            padding: 0;
+                        }
+                    }
+                }
+                .slick-prev,
+                .slick-next {
+                    top: auto;
+                    bottom: -12px;
+                }
+                .slick-prev{
+                    left: 0%;
+                }
+                .slick-next{
+                    right: 0%;
+                }
+            }
+            .nome{
+                font-weight: 600;
+                color: @blue1;
+                font-size: 2.1rem;
+                line-height: 1.4;
+                min-height: 62px;
+            }
+            .locais{
+                display: flex;
+                gap: 16px;
+                margin: 16px 0 12px 0;
+                & > div{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.2rem;
+                    color: @grey1;
+                    .icone{
+                        height: 20px;
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 4px;
+                        svg{
+                            fill: @orange1;
+                        }
+                        &.panela{
+                            svg{
+                                width: 23px;
+                            }
+                        }
+                        &.forno{
+                            svg{
+                                width: 19px;
+                            }
+                        }
+                        &.frigideira{
+                            svg{
+                                width: 24px;
+                            }
+                        }
+                    }
+                }
+            }
+            .paragrafo{
+                font-size: 1.4rem;
+            }
+
+            &.col-12{
+                .nome{
+                    min-height: auto;
+                }
             }
         }
     }
@@ -54,6 +224,9 @@
             }
         }
 
+        .tab-produtos-mobile{
+            display: none;
+        }
 
         .tab-produtos{
             padding-top: 42px;
@@ -61,6 +234,9 @@
             flex-wrap: nowrap;
             gap: 40px;
             .voltar{
+                display: none;
+            }
+            .btn{
                 display: none;
             }
             .tab{
@@ -83,7 +259,35 @@
         }
 
         .lista-produtos{
-            padding-top: 64px;
+            padding-top: 42px;
+
+            .produto{
+                .fotos{
+                    .slick-prev{
+                        left: 20%;
+                    }
+                    .slick-next{
+                        right: 20%;
+                    }
+                }
+                .nome{
+                    font-size: 2.1rem;
+                    min-height: 60px;
+                }
+                .locais{
+                    display: flex;
+                    gap: 24px;
+                    margin: 24px 0 16px 0;
+                }
+                .paragrafo{
+                    font-size: 1.6rem;
+                }
+                &.col-12{
+                    .nome{
+                        min-height: 60px;
+                    }
+                }
+            }
         }
 
     }
@@ -102,7 +306,18 @@
             }
         }
         .lista-produtos{
+            .produto{
+                .nome{
+                    font-size: 2.4rem;
+                    min-height: 68px;
+                }
 
+                &.col-12{
+                    .nome{
+                        min-height: 68px;
+                    }
+                }
+            }
         }
 
     }
