@@ -1,0 +1,228 @@
+// main: "../main.less"
+
+.page-template-template-contato {
+    .banner-contato {
+        background: url('../img/banner-contato-mobile.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 768px;
+        height: 218px;
+        display: flex;
+        align-items: center;
+
+        .titulo {
+            color: @white;
+            padding-top: 24px;
+            font-size: 3.2rem;
+        }
+    }
+
+    .conteudo-contato__wrapper {
+        padding: 32px 0;
+    }
+
+    .tabs-contato {
+        display: flex;
+        gap: 24px;
+
+        a {
+            padding: 0 6px;
+            padding-bottom: 10px;
+            border: none;
+            font-size: 1.6rem;
+            font-weight: 400;
+            line-height: 1.4;
+            color: @grey1;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+
+            &.ativo {
+                color: @orange1;
+                border-color: @orange1;
+            }
+        }
+    }
+
+    .conteudo-tabs-contato {
+        padding-top: 42px;
+
+        &>div {
+            display: none;
+
+            &.ativo {
+                display: block;
+            }
+        }
+
+        form {
+            p {
+                margin: 0;
+                margin-bottom: 20px;
+                color: @grey2;
+
+                label {
+                    font-size: 1.6rem;
+                    color: @grey2;
+                    display: block;
+
+                    input,
+                    select {
+                        margin-top: 8px;
+                        background-color: @grey6;
+                        border: 1px solid @grey4;
+                        border-radius: 12px;
+                        display: block;
+                        width: 100%;
+                        font-size: 1.6rem;
+                        padding: 12px 20px;
+                        line-height: 1;
+                        color: @black;
+                        outline: none;
+
+                        &::placeholder {
+                            /* Chrome, Firefox, Opera, Safari 10.1+ */
+                            color: @grey3;
+                        }
+
+                        &:-ms-input-placeholder {
+                            /* Internet Explorer 10-11 */
+                            color: @grey3;
+                        }
+
+                        &::-ms-input-placeholder {
+                            /* Microsoft Edge */
+                            color: @grey3;
+                        }
+
+                        &:focus{
+                            border-color: @orange1;
+                        }
+                    }
+
+                    select {
+                        /* Reset */
+                        appearance: none;
+                        outline: 0;
+                        font: inherit;
+                        /* Personalize */
+                        background-image: url("data:image/svg+xml,%3Csvg width='17' height='10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m1.804 1.507 6.611 6.68 6.612-6.68' stroke='%23EA7D1E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+                        background-size: 15px;
+                        background-repeat: no-repeat;
+                        background-position: center right 0.8em;
+                        color: @grey2;
+                        cursor: pointer;
+
+                        /* Remove IE arrow */
+                        &::-ms-expand {
+                            display: none;
+                        }
+
+                        /* Remove focus outline */
+                        &:focus {
+                            outline: none;
+                        }
+
+                        /* <option> colors */
+                        option {
+                            color: @grey1;
+                            background-color: white;
+                        }
+                    }
+
+                    &.file{
+                        font-weight: 600;
+                        color: @orange1;
+                        input[type=file] {
+                            color: transparent;
+                            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='20' fill='none'%3E%3Cg clip-path='url(%23a)'%3E%3Cpath d='M11.992 0a.794.794 0 0 0-.559.236l-4.8 4.865a.82.82 0 0 0-.207.785.796.796 0 0 0 1.34.364L11.2 2.77v11.013a.818.818 0 0 0 .23.581.793.793 0 0 0 1.14 0 .82.82 0 0 0 .23-.58V2.77l3.433 3.48a.795.795 0 0 0 1.341-.364.818.818 0 0 0-.207-.784l-4.8-4.866A.794.794 0 0 0 11.991 0ZM.792 14.037a.826.826 0 0 0-.084.009.797.797 0 0 0-.51.271.818.818 0 0 0-.198.548v3.032C0 19.05.946 20 2.083 20h19.834C23.054 20 24 19.05 24 17.897v-3.032a.818.818 0 0 0-.23-.58.794.794 0 0 0-1.14 0 .818.818 0 0 0-.23.58v3.032c0 .28-.203.482-.484.482H2.083a.466.466 0 0 1-.483-.482v-3.032a.817.817 0 0 0-.232-.587.795.795 0 0 0-.577-.24Z' fill='%23EA7D1E'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='%23fff' d='M0 0h24v20H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+                            background-size: 24px;
+                            background-repeat: no-repeat;
+                            background-position: center right 1em;
+                            border: 2px solid @orange1;
+                        }
+    
+                        input[type=file]::-webkit-file-upload-button {
+                            visibility: hidden;
+                        }
+    
+                        input[type=file]::before {
+                            content: 'Escolher arquivo';
+                            color: @orange1;
+                            display: inline-block;
+                            outline: none;
+                            white-space: nowrap;
+                            -webkit-user-select: none;
+                            cursor: pointer;
+                            font-size: 1.6rem;
+                            font-weight: 600;
+                        }
+    
+                        input[type=file]:hover::before {
+                            border-color: black;
+                        }
+    
+                        input[type=file]:active {
+                            outline: 0;
+                        }
+    
+                        input[type=file]:active::before {}
+    
+                    }
+
+                   
+                }
+            }
+        }
+    }
+
+}
+
+
+@media (min-width: 768px) {
+
+
+    .page-template-template-contato {
+
+        .conteudo-contato__wrapper {
+            padding: 0;
+        }
+
+        .contato__wrapper {
+            padding: 64px 0 92px 0;
+        }
+
+        .banner-contato {
+            background: url('../img/banner-contato.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 320px;
+
+            .titulo {
+                padding-top: 36px;
+                font-size: 3.2rem;
+            }
+        }
+
+
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .page-template-template-contato {
+        .tabs-contato {
+            display: flex;
+            gap: 24px;
+        }
+    }
+}
+
+@media (min-width: 1650px) {
+    .page-template-template-contato {
+        .tabs-contato {
+            a {
+                font-size: 2rem;
+            }
+        }
+    }
+}

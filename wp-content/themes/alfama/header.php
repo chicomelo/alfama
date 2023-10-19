@@ -8,6 +8,11 @@
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
 <?php wp_head(); ?>
+
+<script type="text/javascript">
+    var img_url = '<?php echo do_shortcode("[img-url]"); ?>';
+</script>
+
 </head>
 
 <body <?php body_class(); ?>>

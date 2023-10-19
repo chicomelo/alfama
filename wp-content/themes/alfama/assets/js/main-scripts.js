@@ -519,4 +519,26 @@ jQuery(document).ready(function ($) {
         });
     }
 
+    // tabs contato
+    $('body').on('click', '.tabs-contato a', function(){
+        
+        if(!$(this).hasClass('ativo')){
+            var formulario_selecionado = $(this).attr('class').split(' ')[0];
+            $('.tabs-contato a').removeClass('ativo');
+            $(this).addClass('ativo');
+            $('.conteudo-tabs-contato > div').hide();
+            $('.conteudo-tabs-contato .' + formulario_selecionado).show();
+        }
+    });
+
+
+
+    // redireciona apos enviar e-mail
+    document.addEventListener( 'wpcf7mailsent', function( event ) {
+        location = '/contato/formulario-enviado';
+    }, false );
+
+
+
+
 });

@@ -6,9 +6,7 @@ the_content();
 include_once 'produtos.php';
 
 ?>
-<script type="text/javascript">
-    var img_url = '<?php echo do_shortcode("[img-url]"); ?>';
-</script>
+
 <div class="banner-produtos">
     <div class="container">
         <div class="row">
@@ -18,8 +16,8 @@ include_once 'produtos.php';
         </div>
     </div>
 </div>
-<div class="container">
 
+<div class="container">
     <div class="filtro-mobile d-md-none">
         <a href="javascript: void(0);" class="btn btn-outline btn-icon">
             Filtrar produtos

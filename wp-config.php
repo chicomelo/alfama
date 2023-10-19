@@ -37,6 +37,8 @@ define( 'DB_CHARSET', 'utf8mb4' );
 /** O tipo de Collate do banco de dados. Não altere isso se tiver dúvidas. */
 define( 'DB_COLLATE', '' );
 
+define('WPCF7_AUTOP', false );
+
 /**#@+
  * Chaves únicas de autenticação e salts.
  *
@@ -97,3 +99,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Configura as variáveis e arquivos do WordPress. */
 require_once ABSPATH . 'wp-settings.php';
+
+
