@@ -33,12 +33,12 @@
             .limpar-filtro{
                 display: none;
                 padding: 6px 0;
-                color: @orange1;
+                color: @red1;
                 align-items: center;
                 font-size: 1.6rem;
                 line-height: 1;
                 svg{
-                    fill: @orange1;
+                    fill: @red1;
                     width: 12px;
                     height: 12px;
                     margin-left: 10px;
@@ -71,7 +71,7 @@
                     width: 12px;
                     height: 12px;
                     border-radius: 50%;
-                    background-color: @orange1;
+                    background-color: @red1;
                 }
             }
             span{
@@ -87,7 +87,7 @@
             }
 
             &:hover{
-                color: @orange1;
+                color: @red1;
                 transition: all 0.2s;
             }
         }
@@ -148,26 +148,47 @@
                     font-size: 1.2rem;
                     color: @grey1;
                     .icone{
-                        height: 20px;
+                        height: 24px;
                         display: flex;
                         align-items: center;
                         margin-bottom: 4px;
                         svg{
-                            fill: @orange1;
+                            fill: @red1;
+                        }
+                        &.churrasqueira{
+                            svg{
+                                width: 20px;
+                                height: 24px;
+                            }
                         }
                         &.panela{
                             svg{
-                                width: 23px;
+                                width: 24px;
+                                height: 19px;
+                            }
+                        }
+                        &.fritadeira{
+                            svg{
+                                width: 27px;
+                                height: 19px;
                             }
                         }
                         &.forno{
                             svg{
-                                width: 19px;
+                                width: 23px;
+                                height: 24px;
                             }
                         }
-                        &.frigideira{
+                        &.chapa{
                             svg{
-                                width: 24px;
+                                width: 19px;
+                                height: 24px;
+                            }
+                        }
+                        &.broiler{
+                            svg{
+                                width: 26px;
+                                height: 20px;
                             }
                         }
                     }
@@ -184,6 +205,7 @@
             &.col-12{
                 .nome{
                     min-height: auto;
+                    font-size: 2.1rem;
                 }
             }
         }
@@ -191,12 +213,128 @@
 
     .modal-produto{
         padding: 32px 24px;
+
+        .fancybox-button{
+            display: none;
+        }
+
+        .btn-voltar{
+            display: flex;
+            align-items: center;
+            color: @red1;
+            line-height: 1;
+            margin-bottom: 32px;
+            cursor: pointer;
+            width: 100px;
+            outline: none;
+            p{
+                font-size: 1.8rem;
+                font-weight: 600;
+                line-height: 1;
+                margin-bottom: 4px;
+            }
+            svg{
+                width: 20px;
+                height: fit-content;
+                fill: @red1;
+                margin-right: 16px;
+            }
+
+            &:hover{
+                color: @red2;
+                svg{
+                    fill: @red2;
+                }
+            }
+        }
+
         .produto{
+            .origem{
+                display: flex;
+                align-items: center;
+                .icone{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 36px;
+                    height: 36px;
+                    border: 2px solid #fff;
+                    background-color: grey;
+                    border-radius: 50%;
+                    position: absolute;
+                    z-index: 2;
+                    svg{
+                        fill: @white;
+                        width: 22px;
+                        height: 22px;
+                    }
+                }
+                .texto{
+                    position: relative;
+                    z-index: 1;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: @grey1;
+                    height: 26px;
+                    left: 1px;
+                    border: 1px solid grey;
+                    padding: 0 12px 2px 42px;
+                    line-height: 1;
+                    display: flex;
+                    align-items: center;
+                    border-radius: 20px;
+                    text-transform: uppercase;
+                }
+
+                &.bovino{
+                    .icone{
+                        background-color: @red1;
+                        svg{
+                            fill: @white;
+                        }
+                    }
+                    .texto{
+                        color: @red1;
+                        border-color: @red1;
+                    }
+                }
+                &.suino{
+                    .icone{
+                        background-color: @pink;
+                        svg{
+                            fill: @white;
+                        }
+                    }
+                    .texto{
+                        color: @pink;
+                        border-color: @pink;
+                    }
+                }
+                &.frango{
+                    .icone{
+                        background-color: @orange2;
+                        svg{
+                            fill: @white;
+                        }
+                    }
+                    .texto{
+                        color: @orange2;
+                        border-color: @orange2;
+                    }
+                }
+            }
+
+            .galeria{
+                display: flex;
+                align-items: center;
+            }
+
             .fotos{
-                margin-bottom: 16px;
+                margin-top: 16px;
+                margin-bottom: 8px;
                 img{
                     display: block;
-                    max-width: 242px;
+                    max-width: 100%;
                     margin: 0 auto;
                 }
                 .slick-dots{
@@ -225,57 +363,131 @@
                     right: 0%;
                 }
             }
+
+            .locais{
+                display: flex;
+                gap: 16px;
+                margin: 0;
+                flex-direction: column;
+                & > div{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.2rem;
+                    color: @grey1;
+                    .icone{
+                        height: 24px;
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 4px;
+                        svg{
+                            fill: @red1;
+                        }
+                        &.churrasqueira{
+                            svg{
+                                width: 20px;
+                                height: 24px;
+                            }
+                        }
+                        &.panela{
+                            svg{
+                                width: 24px;
+                                height: 19px;
+                            }
+                        }
+                        &.fritadeira{
+                            svg{
+                                width: 27px;
+                                height: 19px;
+                            }
+                        }
+                        &.forno{
+                            svg{
+                                width: 23px;
+                                height: 24px;
+                            }
+                        }
+                        &.chapa{
+                            svg{
+                                width: 19px;
+                                height: 24px;
+                            }
+                        }
+                        &.broiler{
+                            svg{
+                                width: 26px;
+                                height: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+
             .nome{
                 font-weight: 600;
                 color: @blue1;
                 font-size: 2.1rem;
                 line-height: 1.4;
             }
-            .locais{
+
+            .pesos{
                 display: flex;
-                gap: 16px;
-                margin: 16px 0 12px 0;
-                & > div{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 1.4rem;
-                    color: @grey1;
-                    .icone{
-                        height: 20px;
-                        display: flex;
-                        align-items: center;
-                        margin-bottom: 4px;
-                        svg{
-                            fill: @orange1;
-                        }
-                        &.panela{
-                            svg{
-                                width: 23px;
-                            }
-                        }
-                        &.forno{
-                            svg{
-                                width: 19px;
-                            }
-                        }
-                        &.frigideira{
-                            svg{
-                                width: 24px;
-                            }
-                        }
-                    }
+                gap: 12px;
+                margin-top: 16px;
+                .peso{
+                    color: @blue1;
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                    border: 2px solid @blue1;
+                    border-radius: 20px;
+                    padding: 3px 12px 6px 12px;
+                    line-height: 1;
+                }
+            }
+
+            .sub-titulo{
+                display: flex;
+                align-items: center;
+                
+                svg{
+                    fill: @red1;
+                    width: 24px;
+                    height: 22px;
+                    margin-right: 16px;
                 }
             }
             .paragrafo{
                 font-size: 1.4rem;
                 color: @black;
             }
-            .validade{
-                font-size: 1.4rem;
-                color: @grey2;
+
+            .caracteristicas{
+                display: flex;
+                align-items: flex-start;
+                gap: 16px;
+                flex-wrap: wrap;
+                margin: 32px 0;
+                & > div{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 6px;
+                    color: @grey1;
+                    text-align: center;
+                    font-size: 1.4rem;
+                    font-style: normal;
+                    font-weight: 300;
+                }
             }
+
+            .receitas{
+                margin: 32px 0 32px 0;
+            }
+            .btn{
+                outline: none ;
+            }
+
         }
     }
 }
@@ -301,7 +513,7 @@
                 }
             }
             .voltar{
-                color: @orange1;
+                color: @red1;
                 font-size: 2.1rem;
                 line-height: 1;
                 font-weight: 600;
@@ -314,7 +526,7 @@
                     content: '';
                     width: 25px;
                     height: 14px;
-                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 14.7' xml:space='preserve'%3E%3Cpath d='M26 6.4H3.4l4.7-4.7c.4-.4.4-1 0-1.4-.4-.4-1-.4-1.4 0L.3 6.7c-.4.4-.4 1 0 1.4l6.4 6.4c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4L3.4 8.4H26v-2z' fill='%23ea7d1e'/%3E%3C/svg%3E");
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 14.7' xml:space='preserve'%3E%3Cpath d='M26 6.4H3.4l4.7-4.7c.4-.4.4-1 0-1.4-.4-.4-1-.4-1.4 0L.3 6.7c-.4.4-.4 1 0 1.4l6.4 6.4c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4L3.4 8.4H26v-2z' fill='%23BC204B'/%3E%3C/svg%3E");
                     background-repeat: no-repeat;
                     background-size: 25px;
                     margin-top: 0px;
@@ -384,8 +596,8 @@
                     display: none;
                 }
                 &.ativo{
-                    color: @orange1;
-                    border-bottom: 3px solid @orange1;
+                    color: @red1;
+                    border-bottom: 3px solid @red1;
                 }
                 span{
                     display: none;
@@ -426,6 +638,7 @@
                 &.col-12{
                     .nome{
                         min-height: 62px;
+                        font-size: 2.4rem;
                     }
                 }
             }
@@ -438,7 +651,7 @@
             right: 0px;
             top: 0px;
             position: absolute;
-            padding: 24px 44px;
+            padding: 36px 44px;
             .produto{
                 .fotos{
                     img{
@@ -453,8 +666,18 @@
                     gap: 24px;
                     margin: 24px 0 16px 0;
                 }
+                .fotos{
+                    img{
+                        max-width: 378px;
+                    }
+                }
                 .paragrafo{
                     font-size: 1.6rem;
+                }
+                .pesos{
+                    .peso{
+                        font-size: 2.1rem;
+                    }
                 }
             }
         }

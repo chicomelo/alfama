@@ -5,8 +5,16 @@ the_content();
 ?>
 <div class="banner-sobre">
     <div class="container">
-    <h2 class="titulo">Uma empresa que pensa grande</h2>
-    <a class="btn btn-icon" data-width="1024" data-height="580" data-fancybox href="https://www.youtube.com/watch?v=_sI_Ps7JSEk&amp;autoplay=1&amp;rel=0&amp;controls=0&amp;showinfo=0">Assista nosso manifesto <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" xml:space="preserve"><path d="m15.5 9.6-5.3-3.5C9.7 5.7 9 5.7 8.5 6c-.6.3-.9.9-.9 1.5v7c0 .6.3 1.2.9 1.5.3.1.5.2.8.2.3 0 .7-.1.9-.3 0 0 .1 0 .1-.1l5.2-3.5c.5-.3.8-.8.8-1.4 0-.5-.3-1-.8-1.3zm-.6 1.8-5.3 3.5h-.1c-.2.1-.4 0-.4 0-.1 0-.3-.2-.3-.4v-7c0-.3.2-.4.2-.5h.3c.1 0 .2 0 .3.1l5.3 3.5c.2.1.2.3.2.4 0 .1 0 .3-.2.4z"/><path d="M11 0C4.9 0 0 4.9 0 11s4.9 11 11 11 11-4.9 11-11S17.1 0 11 0zm0 20.8c-5.4 0-9.8-4.4-9.8-9.8S5.6 1.2 11 1.2s9.8 4.4 9.8 9.8-4.4 9.8-9.8 9.8z"/></svg></a>
+        <h2 class="titulo">Uma empresa que pensa grande</h2>
+        <a class="btn btn-icon" data-width="1024" data-height="576" data-fancybox data-src="#video-alfama" href="javascript:;" >Assista nosso manifesto <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" xml:space="preserve"><path d="m15.5 9.6-5.3-3.5C9.7 5.7 9 5.7 8.5 6c-.6.3-.9.9-.9 1.5v7c0 .6.3 1.2.9 1.5.3.1.5.2.8.2.3 0 .7-.1.9-.3 0 0 .1 0 .1-.1l5.2-3.5c.5-.3.8-.8.8-1.4 0-.5-.3-1-.8-1.3zm-.6 1.8-5.3 3.5h-.1c-.2.1-.4 0-.4 0-.1 0-.3-.2-.3-.4v-7c0-.3.2-.4.2-.5h.3c.1 0 .2 0 .3.1l5.3 3.5c.2.1.2.3.2.4 0 .1 0 .3-.2.4z"/><path d="M11 0C4.9 0 0 4.9 0 11s4.9 11 11 11 11-4.9 11-11S17.1 0 11 0zm0 20.8c-5.4 0-9.8-4.4-9.8-9.8S5.6 1.2 11 1.2s9.8 4.4 9.8 9.8-4.4 9.8-9.8 9.8z"/></svg></a>
+
+        <div style="display: none;" id="video-alfama">
+            <div class="embed-responsive embed-responsive-16by9">
+                <video src="https://www.alfamaalimentos.com.br/wp-content/uploads/2021/11/Alfama_alta.m4v" controls="true" playsinline="" controlslist="nodownload"></video>
+            </div>
+        </div>
+
+        
     </div>
 </div>
 
@@ -47,7 +55,7 @@ the_content();
             </div>
             <div class="col-12 col-md-5 offset-md-1">
                 <div class="conteudo-nossa-missao">
-                    <h2 class="titulo">Nossa <span class="orange">missão</span></h2>
+                    <h2 class="titulo">Nossa <span class="bege">missão</span></h2>
                     <p class="paragrafo">A missão da Alfama é ajudar o empreendedor do setor de alimentação a encantar seus clientes e otimizar seu negócio, com pratos saborosos, padronizados, com baixo desperdício e alta rentabilidade.</p>
                     <p class="paragrafo">Para isso, estudamos a fundo o mercado, identificamos as dificuldades nas rotinas das principais cozinhas profissionais do Brasil e investimos no desenvolvimento de soluções completas em proteína animal: produtos que facilitam a operação, simplificam processos, reduzem custos e garantem qualidade e sabor às suas receitas.</p>
                     <p class="paragrafo">Com isso nos tornamos o principal parceiro do Brasil no fornecimento de carnes pré-prontas para pizzarias, bares, restaurantes, padarias e cozinhas profissionais em geral. Nos orgulhamos em estar presente em mais de 25.000 cozinhas todos os meses, contribuindo diretamente com o sucesso desses empreendedores.</p>
@@ -59,7 +67,7 @@ the_content();
 
 <section class="timeline">
     <div class="container">
-        <h2 class="titulo">Um pouco da <span class="orange">nossa história</span></h2>
+        <h2 class="titulo">Um pouco da <span class="red">nossa história</span></h2>
         
         <div class="slider-ano">
             <div><p>2012</p></div>
@@ -68,6 +76,7 @@ the_content();
             <div><p>2017</p></div>
             <div><p>2019</p></div>
             <div><p>2020</p></div>
+            <div><p>2021</p></div>
             <div><p>2022</p></div>
 
         </div>
@@ -82,23 +91,38 @@ the_content();
                     </div>
                     <div>
                         <p>
-                        Início das atividades em Cascavel/PR, com uma indústria de alimentos de pequeno porte Início das atividades em Cascavel/PR, com uma indústria de alimentos de pequeno porte, para atendimento exclusivo da rede de restaurantes Armazém Português.    
+                            Criação da marca Alfama e início do atendimento às redes de restaurantes e supermercados locais com a linha de Carnes Preparadas.
                         </p>
                     </div>
                     <div>
-                        <p></p>
+                        <p>
+                            Inauguração do Escritório Comercial em São Paulo e início do atendimento aos estados do Sudeste.
+                        </p>
                     </div>
                     <div>
-                        <p></p>
+                        <p>
+                            Expansão nacional do canal Distribuição, criando parcerias comerciais com mais de 15 distribuidores Food Service, totalizando 800 vendedores parceiros.
+                        </p>
                     </div>
                     <div>
-                        <p></p>
+                        <p>
+                            Início da operação da nova unidade fabril, com capacidade de produção de 500 ton/ mês com foco em produtos à base de carnes in natura, cozidas, assadas e grelhadas.
+                        </p>
                     </div>
                     <div>
-                        <p></p>
+                        <p>
+                            Profissionalização da gestão, implantação do Sistema SAP e início da Governança Corporativa Alfama.
+                        </p>
                     </div>
                     <div>
-                        <p></p>
+                        <p>
+                            Consolidação da marca no mercado de Proteína Animal Food Service, atingindo a marca de mais de 20.000 clientes atendidos mensalmente em 14 estados brasileiros.
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            Aquisição do Frigorífico Novilho Nobre, fortalecendo a estratégia de expansão da companhia, com foco em aumento de capacidade produtiva, diversificação do portfólio e abertura de novos canais de venda.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -112,11 +136,10 @@ the_content();
     <img class="img-fluid d-md-none" src="<?php echo do_shortcode("[img-url]"); ?>img-eficiencia-mobile.jpg" alt="Eficiência e tecnologia" />
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-5">
                 <img class="d-none d-md-block" src="<?php echo do_shortcode("[img-url]"); ?>img-eficiencia.jpg" alt="Eficiência e tecnologia" />
-            
             </div>
-            <div class="col-12 col-md-5 offset-md-1">
+            <div class="col-12 col-md-6 offset-md-1">
                 <div class="conteudo-eficiencia">
                     <h2 class="titulo">Eficiência e <span class="red">tecnologia</span></h2>
                     <p class="paragrafo">
@@ -134,7 +157,7 @@ the_content();
     <div class="container">
         <div class="row">
 
-            <div class="col-12 col-md-5">
+            <div class="col-12 col-md-6">
                 <div class="conteudo-qualidade">
                     <h2 class="titulo">Qualidade e <span class="red">relacionamentos</span></h2>
                     <p class="paragrafo">
@@ -145,7 +168,7 @@ the_content();
                     </p>
                 </div>
             </div>
-            <div class="col-12 col-md-6 offset-md-1">
+            <div class="col-12 col-md-5 offset-md-1">
                 <img class="d-none d-md-block" src="<?php echo do_shortcode("[img-url]"); ?>img-qualidade.jpg" alt="Qualidade e relacionamentos" />
             </div>
         </div>

@@ -17,9 +17,14 @@
         text-align: center;
         font-size: 3.6rem;
     }
+
+
 }
 
 
+#video-alfama{
+    padding: 0;
+}
 .especialistas-proteina{
     padding: 42px 0;
     .row{
@@ -45,7 +50,7 @@
         }
         .frango{
             svg{
-                fill: @orange3;
+                fill: @red1;
             }
         }
         .suino{
@@ -85,7 +90,7 @@
         }
         .slick-current{
             p{
-                color: @blue1;
+                color: @bege;
             }
         }
     }
@@ -100,10 +105,23 @@
         .slick-dots{
             bottom: -64px;
         }
+        .slick-prev,
+        .slick-next {
+            top: auto;
+            bottom: -72px;
+            width: 30px;
+        }
+        .slick-prev{
+            left: 5%;
+        }
+        .slick-next{
+            right: 5%;
+        }
     }
 }
 
 .eficiencia{
+    overflow: hidden;
     padding-bottom: 42px;
     .conteudo-eficiencia{
         padding-top: 42px;
@@ -112,6 +130,7 @@
 
 .qualidade{
     padding-bottom: 42px;
+    overflow: hidden;
     .conteudo-qualidade{
         padding-top: 42px;
     }
@@ -179,6 +198,21 @@
         .slider-conteudo{
             p{
                 font-size: 1.6rem;
+            }
+            .slick-dots{
+                bottom: -64px;
+            }
+            .slick-prev,
+            .slick-next {
+                top: auto;
+                bottom: -68px;
+                width: 40px;
+            }
+            .slick-prev{
+                left: 30%;
+            }
+            .slick-next{
+                right: 30%;
             }
         }
     }

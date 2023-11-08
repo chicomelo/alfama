@@ -118,6 +118,7 @@ jQuery(document).ready(function ($) {
         infinite: false,
         asNavFor: '.slider-conteudo',
         dots: false,
+        arrows: false,
         centerMode: true,
         focusOnSelect: true,
         adaptiveHeight: true,
@@ -158,6 +159,9 @@ jQuery(document).ready(function ($) {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: true,
+        infinite: false,
+        prevArrow: arrow_esquerda,
+        nextArrow: arrow_direita,
         fade: true,
         dots: true,
         adaptiveHeight: true,
@@ -505,6 +509,7 @@ jQuery(document).ready(function ($) {
 
     //ProdutosAlfama.load();
     // Produtos: FIM
+
     if ($('.lista-produtos .produto > .fotos')) {
         $('.lista-produtos .produto > .fotos').slick({
             centerMode: false,
@@ -531,7 +536,9 @@ jQuery(document).ready(function ($) {
         }
     });
 
-
+    $('body').on('click', '.btn-voltar', function(){
+        $('.fancybox-button').click();
+    });
 
     // redireciona apos enviar e-mail
     document.addEventListener( 'wpcf7mailsent', function( event ) {

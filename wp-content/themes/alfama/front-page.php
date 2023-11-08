@@ -29,7 +29,7 @@ the_content();
 </section>
 <section class="solucoes">
     <div class="container">
-        <h1 class="titulo">Soluções em <b class="orange">proteína animal</b> pensadas para o seu negócio</h1>
+        <h1 class="titulo">Soluções em <b class="red">proteína animal</b> pensadas para o seu negócio</h1>
 
         <div class="lista-solucoes">
             <div class="card">
@@ -38,8 +38,8 @@ the_content();
                 </div>
                 <div class="card-content">
                     <h2 class="sub-titulo">Desfiados</h2>
-                    <p class="paragrafo-2">Nosso propósito é ajudar o empreendedor do setor.</p>
-                    <a href="#" class="link" title="Ver produtos">Ver produtos</a>
+                    <p class="paragrafo-2">Cozidos e desfiados que vão  gerar mais rentabilidade para o seu negócio.</p>
+                    <a href="/produtos" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
             </div>
             <div class="card">
@@ -48,8 +48,8 @@ the_content();
                 </div>
                 <div class="card-content">
                     <h2 class="sub-titulo">Hambúrguer</h2>
-                    <p class="paragrafo-2">Nosso propósito é ajudar o empreendedor do setor.</p>
-                    <a href="#" class="link" title="Ver produtos">Ver produtos</a>
+                    <p class="paragrafo-2">100% carne bovina e gordura, garantindo suculência e muito sabor.</p>
+                    <a href="/produtos" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
             </div>
             <div class="card">
@@ -58,8 +58,8 @@ the_content();
                 </div>
                 <div class="card-content">
                     <h2 class="sub-titulo">Moídas</h2>
-                    <p class="paragrafo-2">Nosso propósito é ajudar o empreendedor do setor.</p>
-                    <a href="#" class="link" title="Ver produtos">Ver produtos</a>
+                    <p class="paragrafo-2">Cortes frescos, sem nervos, cartilagens, conservantes ou condimentos.</p>
+                    <a href="/produtos" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
             </div>
             <div class="card">
@@ -68,8 +68,8 @@ the_content();
                 </div>
                 <div class="card-content">
                     <h2 class="sub-titulo">Formados</h2>
-                    <p class="paragrafo-2">Nosso propósito é ajudar o empreendedor do setor.</p>
-                    <a href="#" class="link" title="Ver produtos">Ver produtos</a>
+                    <p class="paragrafo-2">100% carne bovina. Por isso são tão deliciosos e com um gostinho de feitos em casa.</p>
+                    <a href="/produtos" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
             </div>
             <div class="card">
@@ -78,13 +78,13 @@ the_content();
                 </div>
                 <div class="card-content">
                     <h2 class="sub-titulo">Defumados</h2>
-                    <p class="paragrafo-2">Nosso propósito é ajudar o empreendedor do setor.</p>
-                    <a href="#" class="link" title="Ver produtos">Ver produtos</a>
+                    <p class="paragrafo-2">100% pernil suíno, pré-cozido e defumado. Zero perdas e alta rentabilidade.</p>
+                    <a href="/produtos" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
             </div>
         </div>
 
-        <a href="#" class="btn btn-outline" title="Ver todas as solucões">Ver todas as solucões</a>
+        <a href="/produtos" class="btn btn-outline" title="Ver todas as solucões">Ver todas as solucões</a>
 
     </div>
 
@@ -97,7 +97,7 @@ the_content();
             <div class="col-12 col-md-6">
                 <h1 class="titulo mt-5 mt-md-0">Presente nas melhores cozinhas</h1>
                 <p class="paragrafo mb-5">Nos tornamos o principal parceiro do Brasil no fornecimento de carnes pré-prontas para pizzarias, bares, restaurantes, padarias e cozinhas profissionais em geral. Nos orgulhamos em estar presente em mais de 25.000 cozinhas todos os meses, contribuindo diretamente com o sucesso desses empreendedores.</p>
-                <a href="#" class="btn btn-outline" title="Saiba mais">Saiba mais</a>
+                <a href="/sobre-a-alfama" class="btn btn-outline" title="Saiba mais">Saiba mais</a>
             </div>
             <div class="col-12 col-md-6">
                 <img class="d-none d-md-block" src="<?php echo do_shortcode("[img-url]"); ?>img-melhores-cozinhas.jpg" alt="Presente nas melhores cozinhas" />
@@ -115,7 +115,7 @@ the_content();
                 </div>
                 <p>Entre em contato conosco e conheça mais sobre <br />nossas soluções e como podemos ajudar seu negócio.</p>
             </div>
-            <a href="#" class="btn btn-white" title="Quero falar com a Alfama">Quero falar com a Alfama</a>
+            <a href="/contato" class="btn btn-white" title="Quero falar com a Alfama">Quero falar com a Alfama</a>
         </div>
     </div>
 </section>

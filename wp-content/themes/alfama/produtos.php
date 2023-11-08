@@ -12,12 +12,19 @@ $produtos = [
         "locais"=> [
             "panela",
             "forno",
-            "frigideira"
+            "chapa"
         ],
-        "descricao_curta"=> "1kg(Food service) e 400g(Varejo) cozido, dessalgado e desfiado sem nervos ou gorduras",
-        "diferenciais"=> "Desfiamento padronizado, fibras longas que melhoram a utilização proporcionando maior rentabilidade nas receitas. O produto encontra-se já cozido, dessalgado e desfiado. Sendo extremamente prático, saboroso. <br /><br />Alta qualidade; sem nervos e gorduras, o que gera uma considerável otimização pela redução de perdas quando comparada ao processo da carne seca in natura. Um dos maiores benefícios finais é a redução de processos nas cozinhas. Produto qualificado e pronto para consumo.",
-        "receitas"=> "Pizza; Escondidinho; Coxinhas; Empadas; Pastel; Sopa; Arroz carreteiro; Croquete; Recheio de batata frita ou rosti; Tapioca etc.",
-        "validade"=> "Validade do produto congelado=> 1 ano"
+        "origem"=> "bovino",
+        "peso"=> [
+            "1kg"
+        ],
+        "caracteristicas" => [
+            "desfiamento",
+            "fibras-longas",
+            "dessalgada"
+        ],
+        "descricao_curta"=> "&bull; 1kg <br />&bull; Cozido, desfiado e dessalgado <br />&bull; Alta rentabilidade",
+        "receitas"=> "Panqueca, Fricassê, Lasanha, Molho bolonhesa, Escondidinho e Salgados."
     ],
     [
         "destaque"=> false,
@@ -30,12 +37,22 @@ $produtos = [
         "locais"=> [
             "panela",
             "forno",
-            "frigideira"
+            "chapa"
         ],
-        "descricao_curta"=> "1kg(Food service) e 400g(Varejo) cozido, dessalgado e desfiado sem nervos ou gorduras",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "bovino",
+        "peso"=> [
+            "1kg",
+            "2kg",
+            "3kg"
+        ],
+        "caracteristicas" => [
+            "desfiamento",
+            "fibras-rusticas",
+            "nervos"
+        ],
+        "descricao_curta"=> "&bull; 1kg <br />&bull; Cozido e desfiado <br />&bull; Alta rentabilidade",
+        "receitas"=> "Pizza, Escondidinho, Ragú de Costela, Torta, Pastel, Sopa, Hambúrguer e Croquete."
+
     ],
     [
         "destaque"=> false,
@@ -48,12 +65,20 @@ $produtos = [
         "locais"=> [
             "panela",
             "forno",
-            "frigideira"
+            "chapa"
         ],
-        "descricao_curta"=> "1kg(Food service) e 400g(Varejo) cozido, dessalgado e desfiado sem nervos ou gorduras",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "bovino",
+        "peso"=> [
+            "1kg"
+        ],
+        "caracteristicas" => [
+            "cozido-desfiado",
+            "fibras rusticas",
+            "pressao"
+        ],
+        "descricao_curta"=> "&bull; 1kg <br />&bull; Cozido e desfiado <br />&bull; Alta rentabilidade",
+        "receitas"=> "Pizza, Escondidinho, Ragú de Cupim, Salgados, Pastel, Sopa, Sanduíche e Croquete."
+
     ],
     [
         "destaque"=> false,
@@ -66,12 +91,20 @@ $produtos = [
         "locais"=> [
             "panela",
             "forno",
-            "frigideira"
+            "chapa"
         ],
-        "descricao_curta"=> "",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "frango",
+        "peso"=> [
+            "1kg"
+        ],
+        "caracteristicas" => [
+            "cozido-desfiado",
+            "fibras longas",
+            "nervos"
+        ],
+        "descricao_curta"=> "&bull; 1kg <br />&bull; Cozido e desfiado <br />&bull; 100% Peito de Frango",
+        "receitas"=> "Pizza, Escondidinho, Coxinha, Fricassê, Pastel, Torta, Arroz de Forno"
+
     ],
     [
         "destaque"=> false,
@@ -84,12 +117,20 @@ $produtos = [
         "locais"=> [
             "panela",
             "forno",
-            "frigideira"
+            "chapa"
         ],
-        "descricao_curta"=> "",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "suino",
+        "peso"=> [
+            "1kg"
+        ],
+        "caracteristicas" => [
+            "fibras-rusticas",
+            "suino",
+            "cozido-desfiado"
+        ],
+        "descricao_curta"=> "&bull; 1kg <br />&bull; Cozido e desfiado <br />&bull; 100% Pernil Suíno",
+        "receitas"=> "Pizza, Escondidinho, Shawarma, Pulled pork, Pastel, Hambúrguer, Sanduíche e Esfiha."
+
     ],
     [
         "destaque"=> true,
@@ -102,12 +143,22 @@ $produtos = [
         "locais"=> [
             "panela",
             "forno",
-            "frigideira"
+            "chapa",
+            "fritadeira"
         ],
-        "descricao_curta"=> "",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "bovino",
+        "peso"=> [
+            "500g",
+            "1kg"
+        ],
+        "caracteristicas" => [
+            "bovino",
+            "condimentos",
+            "nervos"
+        ],
+        "descricao_curta"=> "&bull; 1kg(Food service) e 500g(Varejo) <br />&bull; 100% Carne Bovina <br />&bull; Sem condimentos",
+        "receitas"=> "Panqueca, Fricassê, Lasanha, Molho bolonhesa, Escondidinho e Salgados."
+
     ],
     [
         "destaque"=> false,
@@ -120,12 +171,22 @@ $produtos = [
         "locais"=> [
             "panela",
             "forno",
-            "frigideira"
+            "chapa",
+            "fritadeira"
         ],
-        "descricao_curta"=> "",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "bovino",
+        "peso"=> [
+            "500g",
+            "1kg"
+        ],
+        "caracteristicas" => [
+            "bovino",
+            "condimentos",
+            "nervos"
+        ],
+        "descricao_curta"=> "&bull; 1kg(Food service) e 500g(Varejo) <br />&bull; 100% Carne Bovina <br />&bull; Sem condimentos",
+        "receitas"=> "Pastel, Empada, Carne moída refogada, Rocambole e Salgados."
+
     ],
     [
         "destaque"=> false,
@@ -138,12 +199,21 @@ $produtos = [
         "locais"=> [
             "panela",
             "forno",
-            "frigideira"
+            "chapa",
+            "fritadeira"
         ],
-        "descricao_curta"=> "",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "bovino",
+        "peso"=> [
+            "2,5kg"
+        ],
+        "caracteristicas" => [
+            "bovino",
+            "condimentos",
+            "nervos"
+        ],
+        "descricao_curta"=> "&bull; 2,5kg<br />&bull; 100% Carne Bovina<br />&bull; Sem condimentos",
+        "receitas"=> "Torta de carne, Empadão, Polpetone, Empanada, Quibe e Salgados."
+
     ],
     [
         "destaque"=> true,
@@ -154,14 +224,25 @@ $produtos = [
         ],
         "nome"=> "Hambúrguer Gourmet Costela",
         "locais"=> [
-            "panela",
-            "forno",
-            "frigideira"
+            "churrasqueira",
+            "chapa",
+            "broiler"
         ],
-        "descricao_curta"=> "",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "bovino",
+        "peso"=> [
+            "110g",
+            "150g",
+            "200g"
+        ],
+        "caracteristicas" => [
+            "bovino",
+            "condimentos",
+            "mordida",
+            "grelhar"
+        ],
+        "descricao_curta"=> "&bull; 110g, 150g e 200g<br />&bull; 100% Carne Bovina<br />&bull; Aspecto artesanal",
+        "receitas"=> ""
+
     ],
     [
         "destaque"=> false,
@@ -172,14 +253,25 @@ $produtos = [
         ],
         "nome"=> "Hambúrguer Gourmet Picanha",
         "locais"=> [
-            "panela",
-            "forno",
-            "frigideira"
+            "churrasqueira",
+            "chapa",
+            "broiler"
         ],
-        "descricao_curta"=> "",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "bovino",
+        "peso"=> [
+            "110g",
+            "150g",
+            "200g"
+        ],
+        "caracteristicas" => [
+            "bovino",
+            "condimentos",
+            "mordida",
+            "grelhar"
+        ],
+        "descricao_curta"=> "&bull; 110g, 150g e 200g<br />&bull; 100% Carne Bovina<br />&bull; Aspecto artesanal",
+        "receitas"=> ""
+
     ],
     [
         "destaque"=> false,
@@ -190,14 +282,25 @@ $produtos = [
         ],
         "nome"=> "Hambúrguer Gourmet",
         "locais"=> [
-            "panela",
-            "forno",
-            "frigideira"
+            "churrasqueira",
+            "chapa",
+            "broiler"
         ],
-        "descricao_curta"=> "",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "bovino",
+        "peso"=> [
+            "110g",
+            "150g",
+            "200g"
+        ],
+        "caracteristicas" => [
+            "bovino",
+            "condimentos",
+            "mordida",
+            "grelhar"
+        ],
+        "descricao_curta"=> "&bull; 110g, 150g e 200g<br />&bull; 100% Carne Bovina<br />&bull; Aspecto artesanal",
+        "receitas"=> ""
+
     ],
     [
         "destaque"=> false,
@@ -208,14 +311,22 @@ $produtos = [
         ],
         "nome"=> "Hambúrguer Gourmet",
         "locais"=> [
-            "panela",
-            "forno",
-            "frigideira"
+            "churrasqueira",
+            "chapa",
+            "broiler"
         ],
-        "descricao_curta"=> "",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "bovino",
+        "peso"=> [
+            "90g"
+        ],
+        "caracteristicas" => [
+            "bovino",
+            "saboroso",
+            "lanches"
+        ],
+        "descricao_curta"=> "&bull; 90g<br />&bull; 100% Carne Bovina<br />&bull; Aspecto artesanal",
+        "receitas"=> ""
+
     ],
     [
         "destaque"=> false,
@@ -228,12 +339,20 @@ $produtos = [
         "locais"=> [
             "panela",
             "forno",
-            "frigideira"
+            "fritadeira"
         ],
-        "descricao_curta"=> "",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "bovino",
+        "peso"=> [
+            "2kg"
+        ],
+        "caracteristicas" => [
+            "bovino",
+            "congelado",
+            "30g"
+        ],
+        "descricao_curta"=> "&bull; 2kg<br />&bull; 100% Carne Bovina<br />&bull; Congelado individualmente (IQF)",
+        "receitas"=> "Massa com almôndegas, Almôndegas ao molho, Almôndegas à parmegiana, Almôndegas fritas, Almôndegas empanadas, Pizza e Sanduíche."
+
     ],
     [
         "destaque"=> false,
@@ -244,14 +363,23 @@ $produtos = [
         ],
         "nome"=> "Beef Steak Churrasco",
         "locais"=> [
-            "panela",
-            "forno",
-            "frigideira"
+            "churrasqueira",
+            "chapa",
+            "broiler"
         ],
-        "descricao_curta"=> "",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "bovino",
+        "peso"=> [
+            "100g"
+        ],
+        "caracteristicas" => [
+            "bovino",
+            "saboroso",
+            "custo-beneficio",
+            "facil"
+        ],
+        "descricao_curta"=> "&bull; 100g<br />&bull; Preparo fácil<br />&bull; Muito saboroso",
+        "receitas"=> "Lanches de metro, Prato feito, À parmegiana, Beirute, Katsu sando, À milanesa e Salgados."
+
     ],
     [
         "destaque"=> false,
@@ -264,12 +392,22 @@ $produtos = [
         "locais"=> [
             "panela",
             "forno",
-            "frigideira"
+            "fritadeira",
+            "chapa"
         ],
-        "descricao_curta"=> "",
-        "diferenciais"=> "",
-        "receitas"=> "",
-        "validade"=> ""
+        "origem"=> "bovino",
+        "peso"=> [
+            "100g"
+        ],
+        "caracteristicas" => [
+            "suino",
+            "cozido-defumado",
+            "topping",
+            "facil"
+        ],
+        "descricao_curta"=> "&bull; 1kg<br />&bull; Cozido e defumado<br />&bull; 100% Pernil suíno",
+        "receitas"=> "Batata frita, Hambúrguer, Sanduíche, Pizza, Risoto, Quiche, Macarrão e Salada."
+
     ]
     
 ];
