@@ -5712,7 +5712,7 @@ body.compensate-for-scrollbar {
   width: 216px;
   background-color: #fff;
   border-radius: 0 0 24px 24px;
-  padding: 16px 24px 24px 24px;
+  padding: 16px 20px 24px 20px;
 }
 .solucoes .lista-solucoes .card .card-content .sub-titulo {
   margin: 0;
@@ -5755,9 +5755,13 @@ body.compensate-for-scrollbar {
 }
 .nossas-unidades {
   padding: 42px 0 64px 0;
+  background-color: #FFF9F1;
 }
 .nossas-unidades .lista-unidades {
   margin-top: 24px;
+}
+.nossas-unidades .lista-unidades .unidade {
+  width: 25%;
 }
 .nossas-unidades .lista-unidades .unidade .icone {
   margin-bottom: 16px;
@@ -6730,8 +6734,8 @@ body.compensate-for-scrollbar {
   transition: all 0.2s;
 }
 .page-template-template-contato .tabs-contato a.ativo {
-  color: #EA7D1E;
-  border-color: #EA7D1E;
+  color: #BC204B;
+  border-color: #BC204B;
 }
 .page-template-template-contato .conteudo-tabs-contato {
   padding-top: 42px;
@@ -6783,7 +6787,7 @@ body.compensate-for-scrollbar {
 }
 .page-template-template-contato .conteudo-tabs-contato form p label input:focus,
 .page-template-template-contato .conteudo-tabs-contato form p label select:focus {
-  border-color: #EA7D1E;
+  border-color: #BC204B;
 }
 .page-template-template-contato .conteudo-tabs-contato form p label select {
   /* Reset */
@@ -6813,22 +6817,21 @@ body.compensate-for-scrollbar {
 }
 .page-template-template-contato .conteudo-tabs-contato form p label.file {
   font-weight: 600;
-  color: #EA7D1E;
+  color: #BC204B;
 }
 .page-template-template-contato .conteudo-tabs-contato form p label.file input[type=file] {
-  color: transparent;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='20' fill='none'%3E%3Cg clip-path='url(%23a)'%3E%3Cpath d='M11.992 0a.794.794 0 0 0-.559.236l-4.8 4.865a.82.82 0 0 0-.207.785.796.796 0 0 0 1.34.364L11.2 2.77v11.013a.818.818 0 0 0 .23.581.793.793 0 0 0 1.14 0 .82.82 0 0 0 .23-.58V2.77l3.433 3.48a.795.795 0 0 0 1.341-.364.818.818 0 0 0-.207-.784l-4.8-4.866A.794.794 0 0 0 11.991 0ZM.792 14.037a.826.826 0 0 0-.084.009.797.797 0 0 0-.51.271.818.818 0 0 0-.198.548v3.032C0 19.05.946 20 2.083 20h19.834C23.054 20 24 19.05 24 17.897v-3.032a.818.818 0 0 0-.23-.58.794.794 0 0 0-1.14 0 .818.818 0 0 0-.23.58v3.032c0 .28-.203.482-.484.482H2.083a.466.466 0 0 1-.483-.482v-3.032a.817.817 0 0 0-.232-.587.795.795 0 0 0-.577-.24Z' fill='%23BC204B'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='%23fff' d='M0 0h24v20H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
   background-size: 24px;
   background-repeat: no-repeat;
   background-position: center right 1em;
-  border: 2px solid #EA7D1E;
+  border: 2px solid #BC204B;
 }
 .page-template-template-contato .conteudo-tabs-contato form p label.file input[type=file]::-webkit-file-upload-button {
   visibility: hidden;
 }
 .page-template-template-contato .conteudo-tabs-contato form p label.file input[type=file]::before {
   content: 'Escolher arquivo';
-  color: #EA7D1E;
+  color: #BC204B;
   display: inline-block;
   outline: none;
   white-space: nowrap;

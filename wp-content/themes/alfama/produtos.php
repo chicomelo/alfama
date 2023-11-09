@@ -395,7 +395,7 @@ $produtos = [
             "fritadeira",
             "chapa"
         ],
-        "origem"=> "bovino",
+        "origem"=> "suino",
         "peso"=> [
             "100g"
         ],

@@ -30,12 +30,10 @@ the_content();
             <div class="col-12 offset-lg-1 col-lg-6">
                 <div class="tabs-contato">
                     <a href="javascript: void(0);" class="fale ativo" title="Fale conosco">Fale conosco</a>
-                    <a href="javascript: void(0);" class="cliente" title="Seja um cliente">Seja um cliente</a>
                     <a href="javascript: void(0);" class="trabalhe" title="Trabalhe conosco">Trabalhe conosco</a>
                 </div>
                 <div class="conteudo-tabs-contato">
                     <div class="fale ativo"><?php echo apply_shortcodes('[contact-form-7 id="6bea044" title="Fale conosco"]'); ?></div>
-                    <div class="cliente"><?php echo apply_shortcodes('[contact-form-7 id="974fd3a" title="Seja um cliente"]'); ?></div>
                     <div class="trabalhe"><?php echo apply_shortcodes('[contact-form-7 id="bb3f502" title="Trabalhe conosco"]'); ?></div>
                 </div>
             </div>

@@ -39,7 +39,7 @@ the_content();
                 <div class="card-content">
                     <h2 class="sub-titulo">Desfiados</h2>
                     <p class="paragrafo-2">Cozidos e desfiados que vão  gerar mais rentabilidade para o seu negócio.</p>
-                    <a href="/produtos" class="link" title="Ver produtos">Ver produtos</a>
+                    <a href="/produtos/?produto=desfiados" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
             </div>
             <div class="card">
@@ -49,7 +49,7 @@ the_content();
                 <div class="card-content">
                     <h2 class="sub-titulo">Hambúrguer</h2>
                     <p class="paragrafo-2">100% carne bovina e gordura, garantindo suculência e muito sabor.</p>
-                    <a href="/produtos" class="link" title="Ver produtos">Ver produtos</a>
+                    <a href="/produtos/?produto=hamburguer" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
             </div>
             <div class="card">
@@ -59,7 +59,7 @@ the_content();
                 <div class="card-content">
                     <h2 class="sub-titulo">Moídas</h2>
                     <p class="paragrafo-2">Cortes frescos, sem nervos, cartilagens, conservantes ou condimentos.</p>
-                    <a href="/produtos" class="link" title="Ver produtos">Ver produtos</a>
+                    <a href="/produtos/?produto=moidas" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
             </div>
             <div class="card">
@@ -69,7 +69,7 @@ the_content();
                 <div class="card-content">
                     <h2 class="sub-titulo">Formados</h2>
                     <p class="paragrafo-2">100% carne bovina. Por isso são tão deliciosos e com um gostinho de feitos em casa.</p>
-                    <a href="/produtos" class="link" title="Ver produtos">Ver produtos</a>
+                    <a href="/produtos/?produto=formados" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
             </div>
             <div class="card">
@@ -79,7 +79,7 @@ the_content();
                 <div class="card-content">
                     <h2 class="sub-titulo">Defumados</h2>
                     <p class="paragrafo-2">100% pernil suíno, pré-cozido e defumado. Zero perdas e alta rentabilidade.</p>
-                    <a href="/produtos" class="link" title="Ver produtos">Ver produtos</a>
+                    <a href="/produtos/?produto=defumados" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
             </div>
         </div>
@@ -134,37 +134,11 @@ the_content();
                 <p class="sub-titulo">Cascavel</p>
                 <p class="tipo">Unidade Industrial</p>
                 <p class="paragrafo">
-                    Av. Renato Festugato, 633 <br />
+                    Av. Renato Festugato, 677<br />
                     Cascavel Velho, Cascavel - PR <br />
                     CEP 85818-118
                 </p>
-                <a href="#" class="link">Ver no mapa</a>
-            </div>
-            <div class="unidade">
-                <div class="icone">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 43" xml:space="preserve"><path d="M40 11h-9.4V4c0-2.2-1.8-4-4-4H4C1.8 0 0 1.8 0 4v37.9c0 .7.5 1.1 1.1 1.1h41.8c.6 0 1.1-.5 1.1-1.1V15c0-2.2-1.8-4-4-4zM2.2 4C2.2 3 3 2.2 4 2.2h22.4c1 0 1.8.8 1.8 1.8v36.8h-26V4zm39.6 36.8H30.5V13.2H40c1 0 1.8.8 1.8 1.8v25.8z"/><path d="M12.6 6.7H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1V7.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H7.9V8.9h3.6v3.6zM23.7 6.7h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1V7.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H19V8.9h3.6v3.6zM12.6 17.5H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H7.9v-3.6h3.6v3.6zM23.7 17.5h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H19v-3.6h3.6v3.6zM12.6 28.3H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zM11.5 34H7.9v-3.6h3.6V34zM23.7 28.3h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zM22.6 34H19v-3.6h3.6V34zM38.9 17.5h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 23h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 28.5h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 34h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1z"/></svg>
-                </div>
-                <p class="sub-titulo">São Paulo</p>
-                <p class="tipo">Unidade Corporativa</p>
-                <p class="paragrafo">
-                    Av. Renato Festugato, 633 <br />
-                    Cascavel Velho, Cascavel - PR <br />
-                    CEP 85818-118
-                </p>
-                <a href="#" class="link">Ver no mapa</a>
-            </div>
-            <div class="unidade">
-                <div class="icone">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 43" xml:space="preserve"><path d="M40 11h-9.4V4c0-2.2-1.8-4-4-4H4C1.8 0 0 1.8 0 4v37.9c0 .7.5 1.1 1.1 1.1h41.8c.6 0 1.1-.5 1.1-1.1V15c0-2.2-1.8-4-4-4zM2.2 4C2.2 3 3 2.2 4 2.2h22.4c1 0 1.8.8 1.8 1.8v36.8h-26V4zm39.6 36.8H30.5V13.2H40c1 0 1.8.8 1.8 1.8v25.8z"/><path d="M12.6 6.7H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1V7.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H7.9V8.9h3.6v3.6zM23.7 6.7h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1V7.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H19V8.9h3.6v3.6zM12.6 17.5H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H7.9v-3.6h3.6v3.6zM23.7 17.5h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H19v-3.6h3.6v3.6zM12.6 28.3H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zM11.5 34H7.9v-3.6h3.6V34zM23.7 28.3h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zM22.6 34H19v-3.6h3.6V34zM38.9 17.5h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 23h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 28.5h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 34h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1z"/></svg>
-                </div>
-                <p class="sub-titulo">Lisboa</p>
-                <p class="tipo">Unidade Corporativa</p>
-                <p class="paragrafo">
-                    Av. Renato Festugato, 633 <br />
-                    Cascavel Velho, Cascavel - PR <br />
-                    CEP 85818-118
-                </p>
-                <a href="#" class="link">Ver no mapa</a>
+                <a target="_blank" href="https://www.google.com/maps/place/Alfama+Foods/@-24.9745466,-53.3757413,19z/data=!4m15!1m8!3m7!1s0x94f22ac440255705:0xe63e1cb6e1f324d9!2sAv.+Renato+Festugato,+677+-+Cascavel+Velho,+Cascavel+-+PR,+85818-118!3b1!8m2!3d-24.9744241!4d-53.3757941!16s%2Fg%2F11kqktcqf_!3m5!1s0x94f3d37b8a7f6131:0x43c58959dfd40db0!8m2!3d-24.9744152!4d-53.3758286!16s%2Fg%2F11csqgzz7_?entry=ttu" class="link">Ver no mapa</a>
             </div>
             <div class="unidade">
                 <div class="icone">
@@ -173,13 +147,37 @@ the_content();
                 <p class="sub-titulo">Curitiba</p>
                 <p class="tipo">Unidade Industrial</p>
                 <p class="paragrafo">
-                    Av. Renato Festugato, 633 <br />
-                    Cascavel Velho, Cascavel - PR <br />
-                    CEP 85818-118
+                    BR 277, Km 121 S/N<br />
+                    São Caetano, Balsa Nova - PR<br />
+                    CEP 83650-000
                 </p>
-                <a href="#" class="link">Ver no mapa</a>
+                <a target="_blank" href="https://www.google.com/maps/place/Alfama+foods/@-25.4625435,-49.591268,18z/data=!4m6!3m5!1s0x94dd17e14fbd5917:0x598cd31aa94d6ffd!8m2!3d-25.462391!4d-49.5908603!16s%2Fg%2F11kqxrszj4?entry=ttu" class="link">Ver no mapa</a>
             </div>
-            
+            <div class="unidade">
+                <div class="icone">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 43" xml:space="preserve"><path d="M40 11h-9.4V4c0-2.2-1.8-4-4-4H4C1.8 0 0 1.8 0 4v37.9c0 .7.5 1.1 1.1 1.1h41.8c.6 0 1.1-.5 1.1-1.1V15c0-2.2-1.8-4-4-4zM2.2 4C2.2 3 3 2.2 4 2.2h22.4c1 0 1.8.8 1.8 1.8v36.8h-26V4zm39.6 36.8H30.5V13.2H40c1 0 1.8.8 1.8 1.8v25.8z"/><path d="M12.6 6.7H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1V7.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H7.9V8.9h3.6v3.6zM23.7 6.7h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1V7.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H19V8.9h3.6v3.6zM12.6 17.5H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H7.9v-3.6h3.6v3.6zM23.7 17.5h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H19v-3.6h3.6v3.6zM12.6 28.3H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zM11.5 34H7.9v-3.6h3.6V34zM23.7 28.3h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zM22.6 34H19v-3.6h3.6V34zM38.9 17.5h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 23h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 28.5h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 34h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1z"/></svg>
+                </div>
+                <p class="sub-titulo">São Paulo</p>
+                <p class="tipo">Unidade Corporativa</p>
+                <p class="paragrafo">
+                    Av. Brig. Faria Lima, 3729 - 5° andar<br />
+                    Itaim Bibi, São Paulo - SP<br />
+                    CEP 04538-905
+                </p>
+                <a target="_blank" href="https://www.google.com/maps/place/Av.+Brig.+Faria+Lima,+3729+-+Itaim+Bibi,+S%C3%A3o+Paulo+-+SP,+04538-133/@-23.5893868,-46.6816206,18z/data=!4m6!3m5!1s0x94ce57436527f1df:0x9e1017378548a965!8m2!3d-23.5889395!4d-46.6815482!16s%2Fg%2F11csnxh9mw?entry=ttu" class="link">Ver no mapa</a>
+            </div>
+            <div class="unidade">
+                <div class="icone">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 43" xml:space="preserve"><path d="M40 11h-9.4V4c0-2.2-1.8-4-4-4H4C1.8 0 0 1.8 0 4v37.9c0 .7.5 1.1 1.1 1.1h41.8c.6 0 1.1-.5 1.1-1.1V15c0-2.2-1.8-4-4-4zM2.2 4C2.2 3 3 2.2 4 2.2h22.4c1 0 1.8.8 1.8 1.8v36.8h-26V4zm39.6 36.8H30.5V13.2H40c1 0 1.8.8 1.8 1.8v25.8z"/><path d="M12.6 6.7H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1V7.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H7.9V8.9h3.6v3.6zM23.7 6.7h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1V7.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H19V8.9h3.6v3.6zM12.6 17.5H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H7.9v-3.6h3.6v3.6zM23.7 17.5h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H19v-3.6h3.6v3.6zM12.6 28.3H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zM11.5 34H7.9v-3.6h3.6V34zM23.7 28.3h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zM22.6 34H19v-3.6h3.6V34zM38.9 17.5h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 23h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 28.5h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 34h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1z"/></svg>
+                </div>
+                <p class="sub-titulo">Lisboa</p>
+                <p class="tipo">Unidade Corporativa</p>
+                <p class="paragrafo">
+                    Av. D. João II, 50 - 4° andar<br />
+                    Parque das Nações, Lisboa - Portugal
+                </p>
+                <a target="_blank" href="https://www.google.com/maps/place/Av.+Dom+Jo%C3%A3o+II+50+4%C2%B0+andar,+1990-095+Lisboa,+Portugal/@38.7702084,-9.0968813,18z/data=!4m6!3m5!1s0xd193188e71a0aeb:0x17673b3b7c5f2eb3!8m2!3d38.7707386!4d-9.0973312!16s%2Fg%2F11ll_z39rt?entry=ttu" class="link">Ver no mapa</a>
+            </div>
 
             
         </div>
