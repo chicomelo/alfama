@@ -45,8 +45,11 @@
     outline: none;
     z-index: 1;
     &.slick-disabled{
-        opacity: 0.5;
+        opacity: 0.6;
         cursor: default;
+        svg{
+            fill: @grey3;
+        }
     }
     svg{
         fill: @red1;
@@ -57,7 +60,7 @@
         }
         &.slick-disabled{
             svg{
-                fill: @red1;
+                fill: @grey3;
             }
         }
     }

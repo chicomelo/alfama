@@ -465,7 +465,7 @@
             .caracteristicas{
                 display: flex;
                 align-items: flex-start;
-                gap: 16px;
+                gap: 20px;
                 flex-wrap: wrap;
                 margin: 32px 0;
                 & > div{
@@ -639,6 +639,16 @@
                     .nome{
                         min-height: 62px;
                         font-size: 2.4rem;
+                    }
+                }
+                a{
+                    &:hover{
+                        .nome{
+                            color: @blue3;
+                        }
+                        .link{
+                            color: @red2;
+                        }
                     }
                 }
             }

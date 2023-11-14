@@ -4508,8 +4508,12 @@ a {
 }
 .slick-prev.slick-disabled,
 .slick-next.slick-disabled {
-  opacity: 0.5;
+  opacity: 0.6;
   cursor: default;
+}
+.slick-prev.slick-disabled svg,
+.slick-next.slick-disabled svg {
+  fill: #CACACA;
 }
 .slick-prev svg,
 .slick-next svg {
@@ -4521,7 +4525,7 @@ a {
 }
 .slick-prev:hover.slick-disabled svg,
 .slick-next:hover.slick-disabled svg {
-  fill: #BC204B;
+  fill: #CACACA;
 }
 .slick-prev {
   left: 0;
@@ -5748,7 +5752,7 @@ body.compensate-for-scrollbar {
 .contato .contato__wrapper .titulo__wrapper .icone svg {
   height: 51px;
   width: 53px;
-  fill: #FF9FBA;
+  fill: #C6AA76;
 }
 .contato .contato__wrapper .titulo__wrapper p {
   margin: 24px 0;
@@ -6489,7 +6493,7 @@ body.compensate-for-scrollbar {
 .page-template-template-produtos .modal-produto .produto .caracteristicas {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
+  gap: 20px;
   flex-wrap: wrap;
   margin: 32px 0;
 }
@@ -6638,6 +6642,12 @@ body.compensate-for-scrollbar {
     min-height: 62px;
     font-size: 2.4rem;
   }
+  .page-template-template-produtos .lista-produtos .produto a:hover .nome {
+    color: #0E5DA6;
+  }
+  .page-template-template-produtos .lista-produtos .produto a:hover .link {
+    color: #D16384;
+  }
   .page-template-template-produtos .modal-produto {
     height: 100%;
     width: 100%;
@@ -6702,18 +6712,15 @@ body.compensate-for-scrollbar {
   }
 }
 .page-template-template-contato .banner-contato {
-  background: url('../img/banner-contato-mobile.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 768px;
-  height: 218px;
+  background-color: #003B71;
+  height: 164px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 .page-template-template-contato .banner-contato .titulo {
   color: #fff;
-  padding-top: 24px;
   font-size: 3.2rem;
+  margin-bottom: 42px;
 }
 .page-template-template-contato .conteudo-contato__wrapper {
   padding: 32px 0;
@@ -6746,6 +6753,108 @@ body.compensate-for-scrollbar {
 .page-template-template-contato .conteudo-tabs-contato > div.ativo {
   display: block;
 }
+.page-template-template-contato .conteudo-tabs-contato form {
+  position: relative;
+}
+.page-template-template-contato .conteudo-tabs-contato form .segmento,
+.page-template-template-contato .conteudo-tabs-contato form .cnpj,
+.page-template-template-contato .conteudo-tabs-contato form .nome-empresa,
+.page-template-template-contato .conteudo-tabs-contato form .motivo-contato {
+  display: none;
+}
+.page-template-template-contato .conteudo-tabs-contato form .btn-enviar,
+.page-template-template-contato .conteudo-tabs-contato form .btn-enviar-trabalhe-conosco {
+  display: flex;
+  justify-content: flex-end;
+}
+.page-template-template-contato .conteudo-tabs-contato form .btn-enviar .wpcf7-spinner,
+.page-template-template-contato .conteudo-tabs-contato form .btn-enviar-trabalhe-conosco .wpcf7-spinner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  background: #fff;
+  margin: 0;
+  opacity: 0.8;
+  top: 0;
+  left: 0;
+}
+.page-template-template-contato .conteudo-tabs-contato form .btn-enviar .wpcf7-spinner::before,
+.page-template-template-contato .conteudo-tabs-contato form .btn-enviar-trabalhe-conosco .wpcf7-spinner::before {
+  content: none;
+}
+.page-template-template-contato .conteudo-tabs-contato form .btn-enviar .wpcf7-spinner .spinner,
+.page-template-template-contato .conteudo-tabs-contato form .btn-enviar-trabalhe-conosco .wpcf7-spinner .spinner {
+  height: 42px;
+  width: 42px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -21px 0 0 -21px;
+  -webkit-animation: rotation 1s infinite linear;
+  -moz-animation: rotation 1s infinite linear;
+  -o-animation: rotation 1s infinite linear;
+  animation: rotation 1s infinite linear;
+  border: 6px solid rgba(0, 0, 0, 0.1);
+  border-radius: 100%;
+}
+.page-template-template-contato .conteudo-tabs-contato form .btn-enviar .wpcf7-spinner .spinner:before,
+.page-template-template-contato .conteudo-tabs-contato form .btn-enviar-trabalhe-conosco .wpcf7-spinner .spinner:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: -5px;
+  height: 100%;
+  width: 100%;
+  border-top: 4px solid #BC204B;
+  border-left: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-radius: 100%;
+}
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@-moz-keyframes rotation {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(359deg);
+  }
+}
+@-o-keyframes rotation {
+  from {
+    -o-transform: rotate(0deg);
+  }
+  to {
+    -o-transform: rotate(359deg);
+  }
+}
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+.page-template-template-contato .conteudo-tabs-contato form .wpcf7-response-output {
+  border: none;
+  padding: 0;
+  text-align: center;
+  color: #dc3232;
+}
+.page-template-template-contato .conteudo-tabs-contato form .btn-disabled {
+  background-color: #CACACA;
+  cursor: default;
+}
 .page-template-template-contato .conteudo-tabs-contato form p {
   margin: 0;
   margin-bottom: 20px;
@@ -6756,6 +6865,7 @@ body.compensate-for-scrollbar {
   color: #8A8A8A;
   display: block;
 }
+.page-template-template-contato .conteudo-tabs-contato form p label textarea,
 .page-template-template-contato .conteudo-tabs-contato form p label input,
 .page-template-template-contato .conteudo-tabs-contato form p label select {
   margin-top: 8px;
@@ -6770,24 +6880,38 @@ body.compensate-for-scrollbar {
   color: #000;
   outline: none;
 }
+.page-template-template-contato .conteudo-tabs-contato form p label textarea::placeholder,
 .page-template-template-contato .conteudo-tabs-contato form p label input::placeholder,
 .page-template-template-contato .conteudo-tabs-contato form p label select::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #CACACA;
 }
+.page-template-template-contato .conteudo-tabs-contato form p label textarea:-ms-input-placeholder,
 .page-template-template-contato .conteudo-tabs-contato form p label input:-ms-input-placeholder,
 .page-template-template-contato .conteudo-tabs-contato form p label select:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: #CACACA;
 }
+.page-template-template-contato .conteudo-tabs-contato form p label textarea::-ms-input-placeholder,
 .page-template-template-contato .conteudo-tabs-contato form p label input::-ms-input-placeholder,
 .page-template-template-contato .conteudo-tabs-contato form p label select::-ms-input-placeholder {
   /* Microsoft Edge */
   color: #CACACA;
 }
+.page-template-template-contato .conteudo-tabs-contato form p label textarea:focus,
 .page-template-template-contato .conteudo-tabs-contato form p label input:focus,
 .page-template-template-contato .conteudo-tabs-contato form p label select:focus {
+  border-color: #003B71;
+}
+.page-template-template-contato .conteudo-tabs-contato form p label textarea.wpcf7-not-valid,
+.page-template-template-contato .conteudo-tabs-contato form p label input.wpcf7-not-valid,
+.page-template-template-contato .conteudo-tabs-contato form p label select.wpcf7-not-valid {
   border-color: #BC204B;
+}
+.page-template-template-contato .conteudo-tabs-contato form p label textarea.wpcf7-not-valid:focus,
+.page-template-template-contato .conteudo-tabs-contato form p label input.wpcf7-not-valid:focus,
+.page-template-template-contato .conteudo-tabs-contato form p label select.wpcf7-not-valid:focus {
+  border-color: #003B71;
 }
 .page-template-template-contato .conteudo-tabs-contato form p label select {
   /* Reset */
@@ -6854,10 +6978,9 @@ body.compensate-for-scrollbar {
     padding: 64px 0 92px 0;
   }
   .page-template-template-contato .banner-contato {
-    background: url('../img/banner-contato.jpg');
     background-repeat: no-repeat;
     background-position: center;
-    height: 320px;
+    height: 186px;
   }
   .page-template-template-contato .banner-contato .titulo {
     padding-top: 36px;
