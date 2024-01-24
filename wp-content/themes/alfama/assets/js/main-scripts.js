@@ -280,9 +280,9 @@ jQuery(document).ready(function ($) {
 
 
     // redireciona apos enviar e-mail
-    // document.addEventListener( 'wpcf7mailsent', function( event ) {
-    //     location = '/contato/formulario-enviado';
-    // }, false );
+    document.addEventListener( 'wpcf7mailsent', function( event ) {
+        location = '/contato/enviado';
+    }, false );
 
 
     if($('body').hasClass('page-template-template-contato')){
@@ -309,6 +309,9 @@ jQuery(document).ready(function ($) {
         $('body').on('change', '.input-your-recipient', function(){
             var opcao = $(this).val().toLowerCase();
             $('.segmento, .cnpj, .nome-empresa, .motivo-contato').hide();
+
+            alert(opcao);
+
             switch(opcao){
                 case '':
                     $('.btn-enviar .btn').addClass('btn-disabled')

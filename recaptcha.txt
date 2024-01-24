@@ -1,2 +1,20 @@
 Chave de Site 6Lcoo80nAAAAACvQaJZKaCrBBYif-BD8yIlZ-bME
 Chave Secreta 6Lcoo80nAAAAAFcEykKy1jAGc9thrSEymfleKYea
+
+_dmarc	TXT	 "v=DMARC1; p=none; fo=1; rua=mailto:web@alfama.com.br"
+
+.	TXT	 "v=spf1 include:spf.protection.outlook.com -all"
+
+redirect	CNAME	 www.alfamaalimentos.com.br.redirect.center
+
+
+
+
+
+
+config smtp
+host: email-ssl.com.br
+encryption: TLS
+port: 587
+username: web@alfama.com.br
+pass: Santoandre@27
