@@ -310,8 +310,6 @@ jQuery(document).ready(function ($) {
             var opcao = $(this).val().toLowerCase();
             $('.segmento, .cnpj, .nome-empresa, .motivo-contato').hide();
 
-            alert(opcao);
-
             switch(opcao){
                 case '':
                     $('.btn-enviar .btn').addClass('btn-disabled')
