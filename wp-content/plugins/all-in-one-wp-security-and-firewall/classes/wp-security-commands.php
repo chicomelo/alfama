@@ -161,4 +161,65 @@ class AIOWPSecurity_Commands {
 
 		return $response;
 	}
+
+	/**
+	 * This is a helper function to save settings options using key/value pairs
+	 *
+	 * @param array $options  - An array of options to save to the config
+	 * @param null  $callback - A callback function to call when the options are saved
+	 *
+	 * @return bool
+	 */
+	public function save_settings($options, $callback = null) {
+		global $aio_wp_security;
+
+		foreach ($options as $key => $value) {
+			$aio_wp_security->configs->set_value($key, $value);
+		}
+		//commit the config changes
+		$aio_wp_security->configs->save_config();
+
+		if (is_callable($callback)) {
+			call_user_func($callback, $options);
+		}
+		return true;
+	}
+
+	/**
+	 * This is a helper function to get the output feature details badge
+	 *
+	 * @param string $feature_id - the id of the feature we want to get the badge for
+	 *
+	 * @return string
+	 */
+	public function get_feature_details_badge($feature_id) {
+		ob_start();
+		$aiowps_feature_mgr = new AIOWPSecurity_Feature_Item_Manager();
+		//Recalculate points after the feature status/options have been altered
+		$aiowps_feature_mgr->check_feature_status_and_recalculate_points();
+		$aiowps_feature_mgr->output_feature_details_badge($feature_id);
+		return ob_get_clean();
+	}
+
+	/**
+	 * Retrieves the IDs and HTML content for features.
+	 *
+	 * This method processes an array of features and returns an associative array containing
+	 * the IDs and corresponding HTML content for each feature badge.
+	 *
+	 * @param array $features - An array containing the features to retrieve IDs and HTML for.
+	 *
+	 * @return array An associative array containing the IDs and HTML content for each feature badge.
+	 */
+	public function get_features_id_and_html($features) {
+		$result = array();
+		foreach ($features as $feature) {
+			$result[] = array(
+				'id' => '#' . $feature . '-badge',
+				'html' => $this->get_feature_details_badge($feature)
+			);
+		}
+
+		return $result;
+	}
 }

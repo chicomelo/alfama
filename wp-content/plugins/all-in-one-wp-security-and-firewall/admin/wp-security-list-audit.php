@@ -10,7 +10,7 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 	 * Sets up some table attributes (i.e: the plurals and whether it's ajax or not)
 	 */
 	public function __construct() {
-		global $status, $page;
+
 
 		// Set parent defaults
 		parent::__construct(array(
@@ -24,9 +24,9 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 	/**
 	 * Returns the default column item
 	 *
-	 * @param object $item
-	 * @param string $column_name
-	 * @return void
+	 * @param object $item        - item from which column data is returned
+	 * @param string $column_name - column name to be fetched from item
+	 * @return string
 	 */
 	public function column_default($item, $column_name) {
 		return $item[$column_name];
@@ -50,28 +50,60 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 	/**
 	 * Returns created column html to be rendered.
 	 *
-	 * @param array - data for the columns on the current row
+	 * @param array $item Data for the columns on the current row.
 	 *
-	 * @return string - the html to be rendered
+	 * @return string The html to be rendered.
 	 */
 	public function column_created($item) {
-		// Build row actions
 		$actions = array(
-			'delete' => '<a class="aios-delete-audit-log" data-id="'.esc_attr($item['id']).'" data-message="'.esc_js(__('Are you sure you want to delete this item?', 'all-in-one-wp-security-and-firewall')).'"  href="" >'.__('Delete').'</a>',
+			'delete' => '<a class="aios-delete-audit-log" data-id="' . esc_attr($item['id']) . '" data-message="' . esc_js(__('Are you sure you want to delete this item?', 'all-in-one-wp-security-and-firewall')) . '" href="">' . esc_html__('Delete', 'all-in-one-wp-security-and-firewall') . '</a>'
 		);
-		// Return the user_login contents
-		$date_time = function_exists('wp_date') ? wp_date('Y-m-d H:i:s', $item['created']) : get_date_from_gmt(gmdate('Y-m-d H:i:s', $item['created']), 'Y-m-d H:i:s');
-		
-		return sprintf('%1$s <span style="color:silver"></span>%2$s',
-			/* $1%s */ $date_time,
-			/* $2%s */ $this->row_actions($actions)
-		);
+
+		return AIOWPSecurity_Utility::convert_timestamp($item['created']) . '<span style="color:silver"></span>' . $this->row_actions($actions);
 	}
-	
+
+	/**
+	 * Returns ip column html to be rendered.
+	 *
+	 * @global AIO_WP_Security $aio_wp_security
+	 *
+	 * @param array $item Data for the columns on the current row.
+	 *
+	 * @return string The html to be rendered.
+	 */
+	public function column_ip($item) {
+		global $aio_wp_security;
+
+		$ip = $item['ip'];
+
+		$unblacklist_ip_warning_translation = __('Are you sure you want to unblacklist this IP address?', 'all-in-one-wp-security-and-firewall');
+		$unlock_ip_warning_translation = __('Are you sure you want to unlock this IP address?', 'all-in-one-wp-security-and-firewall');
+		$lock_ip_warning_translation = __('Are you sure you want to temporarily lock this IP address?', 'all-in-one-wp-security-and-firewall');
+		$blacklist_ip_warning_translation = __('Are you sure you want to blacklist this IP address?', 'all-in-one-wp-security-and-firewall');
+
+		// Build row actions.
+		if (false !== strpos($aio_wp_security->configs->get_value('aiowps_banned_ip_addresses'), $ip)) {
+			$actions = array(
+				'unblacklist' => '<a class="aios-unblacklist-ip-button" data-ip="' . esc_attr($ip) . '" data-message="' . esc_js($unblacklist_ip_warning_translation) . '" href="">' . esc_html__('Unblacklist', 'all-in-one-wp-security-and-firewall') . '</a>',
+			);
+		} elseif (AIOWPSecurity_Utility::check_locked_ip($ip, 'audit-log')) {
+			$actions = array(
+				'unlock' => '<a class="aios-unlock-ip-button" data-ip="' . esc_attr($ip) . '" data-message="' . esc_js($unlock_ip_warning_translation) . '" href="">' . esc_html__('Unlock', 'all-in-one-wp-security-and-firewall') . '</a>',
+			);
+		} else {
+			$actions = array(
+				'lock_ip' => '<a class="aios-lock-ip-button" data-ip="' . esc_attr($ip) . '" data-message="' . esc_js($lock_ip_warning_translation) . '" href="">' . esc_html__('Lock IP', 'all-in-one-wp-security-and-firewall') . '</a>',
+				'blacklist_ip' => '<a class="aios-blacklist-ip-button" data-ip="' . esc_attr($ip) . '" data-message="' . esc_js($blacklist_ip_warning_translation) . '" href="">' . esc_html__('Blacklist IP', 'all-in-one-wp-security-and-firewall') . '</a>',
+			);
+		}
+
+		return $ip . '<span style="color:silver"></span>' . $this->row_actions($actions);
+	}
+
 	/**
 	 * Returns event type column html to be rendered.
 	 *
-	 * @param array - data for the columns on the current row
+	 * @param array $item - data for the columns on the current row
 	 *
 	 * @return string - the html to be rendered
 	 */
@@ -86,7 +118,7 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 	/**
 	 * Returns details column html to be rendered.
 	 *
-	 * @param array - data for the columns on the current row
+	 * @param array $item - data for the columns on the current row
 	 *
 	 * @return string - the html to be rendered
 	 */
@@ -97,7 +129,7 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 
 		$key = array_keys($details)[0];
 
-		if (method_exists("AIOWPSecurity_Audit_Text_Handler","{$key}_to_text")) {
+		if (method_exists("AIOWPSecurity_Audit_Text_Handler", "{$key}_to_text")) {
 			return call_user_func("AIOWPSecurity_Audit_Text_Handler::{$key}_to_text", $details[$key]);
 		}
 
@@ -107,7 +139,7 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 	/**
 	 * Returns stack trace column html to be rendered.
 	 *
-	 * @param array - data for the columns on the current row
+	 * @param array $item - data for the columns on the current row
 	 *
 	 * @return string - the html to be rendered
 	 */
@@ -173,7 +205,7 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 	/**
 	 * This function will display a list of bulk actions for the list table
 	 *
-	 * @return void
+	 * @return array
 	 */
 	public function get_bulk_actions() {
 		$actions = array(
@@ -188,7 +220,7 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 	 * This function will process the bulk action request, $search_term and $filters are only used if the user is trying to bulk delete the filtered items
 	 *
 	 * @param string $search_term - the search string
-	 * @param array  $filters - the filters
+	 * @param array  $filters     - the filters
 	 *
 	 * @return void
 	 */
@@ -233,7 +265,7 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 							<?php $selected = !isset($_POST['level-filter']) ? ' selected = "selected"' : ''; ?>
 							<option value="-1" <?php echo $selected; ?>><?php _e('All levels', 'all-in-one-wp-security-and-firewall'); ?></option>
 							<?php
-								foreach(AIOWPSecurity_Audit_Events::$log_levels as $level) {
+								foreach (AIOWPSecurity_Audit_Events::$log_levels as $level) {
 									$selected = isset($_POST['level-filter']) && $_POST['level-filter'] == $level ? ' selected = "selected"' : '';
 									echo '<option value="'. $level .'" '. $selected .'>'. $level .'</option>';
 								}
@@ -243,7 +275,7 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 						<?php $selected = !isset($_POST['event-filter']) ? ' selected = "selected"' : ''; ?>
 							<option value="-1" <?php echo $selected; ?>><?php _e('All events', 'all-in-one-wp-security-and-firewall'); ?></option>
 							<?php
-								foreach(AIOWPSecurity_Audit_Events::$event_types as $event => $description) {
+								foreach (AIOWPSecurity_Audit_Events::$event_types as $event => $description) {
 									$selected = isset($_POST['event-filter']) && $_POST['event-filter'] == $event ? ' selected = "selected"' : '';
 									echo '<option value="'. $event .'" '. $selected .'>'. $description .'</option>';
 								}
@@ -262,10 +294,10 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 	/**
 	 * This function will process the delete request for the audit event records
 	 *
-	 * @param integer|array $entries    - a ID or array of IDs to be deleted
+	 * @param integer|array $entries    - an ID or array of IDs to be deleted
 	 * @param boolean       $delete_all - indicates if all entries should be deleted or not (if true, then $entries will be ignored)
 	 *
-	 * @return void
+	 * @return void|string
 	 */
 	public function delete_audit_event_records($entries, $delete_all = false) {
 		global $wpdb, $aio_wp_security;
@@ -313,7 +345,7 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 	 * This function will build and return the SQL WHERE statement
 	 *
 	 * @param string $search_term - the search term applied
-	 * @param array  $filters - the filters applied
+	 * @param array  $filters     - the filters applied
 	 *
 	 * @return string - the SQL WHERE statement
 	 */
@@ -409,10 +441,9 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 
 		$audit_log_tbl = AIOWPSEC_TBL_AUDIT_LOG;
 
-		/* -- Ordering parameters -- */
 		// Parameters that are going to be used to order the result
-		isset($_GET["orderby"]) ? $orderby = strip_tags($_GET["orderby"]) : $orderby = '';
-		isset($_GET["order"]) ? $order = strip_tags($_GET["order"]) : $order = '';
+		$orderby = isset($_GET["orderby"]) ? strip_tags($_GET["orderby"]) : '';
+		$order = isset($_GET["order"]) ? strip_tags($_GET["order"]) : '';
 
 		// By default show the most recent audit log entries.
 		$orderby = !empty($orderby) ? esc_sql($orderby) : 'created';
@@ -435,7 +466,9 @@ class AIOWPSecurity_List_Audit_Log extends AIOWPSecurity_List_Table {
 		
 		// Filter the 'details' section
 		foreach ($data as $key => $entry) {
-			$data[$key]['details'] = json_encode(apply_filters('aios_audit_filter_details', json_decode($entry['details'], true), $entry['event_type']));
+			$details = json_decode($entry['details'], true);
+			$details = is_null($details) ? $entry['details'] : $details; // check if the decode worked, if not pass the json string
+			$data[$key]['details'] = json_encode(apply_filters('aios_audit_filter_details', $details, $entry['event_type']));
 		}
 		
 		$this->items = $data;

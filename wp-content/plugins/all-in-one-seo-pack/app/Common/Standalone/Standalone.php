@@ -55,6 +55,15 @@ class Standalone {
 	public $primaryTerm = null;
 
 	/**
+	 * UserProfileTab class instance.
+	 *
+	 * @since 4.5.4
+	 *
+	 * @var UserProfileTab
+	 */
+	public $userProfileTab = null;
+
+	/**
 	 * List of page builder integration class instances.
 	 *
 	 * @since 4.2.7
@@ -83,6 +92,7 @@ class Standalone {
 		$this->seoPreview       = new SeoPreview();
 		$this->setupWizard      = new SetupWizard();
 		$this->primaryTerm      = aioseo()->pro ? new ProStandalone\PrimaryTerm() : new PrimaryTerm();
+		$this->userProfileTab   = new UserProfileTab();
 
 		aioseo()->pro ? new ProStandalone\DetailsColumn() : new DetailsColumn();
 
@@ -93,9 +103,13 @@ class Standalone {
 		new WpCode();
 
 		$this->pageBuilderIntegrations = [
-			'elementor' => new PageBuilders\Elementor(),
-			'divi'      => new PageBuilders\Divi(),
-			'seedprod'  => new PageBuilders\SeedProd()
+			'elementor'  => new PageBuilders\Elementor(),
+			'divi'       => new PageBuilders\Divi(),
+			'seedprod'   => new PageBuilders\SeedProd(),
+			'wpbakery'   => new PageBuilders\WPBakery(),
+			'avada'      => new PageBuilders\Avada(),
+			'siteorigin' => new PageBuilders\SiteOrigin(),
+			'thrive'     => new PageBuilders\ThriveArchitect()
 		];
 
 		$this->standaloneBlocks = [

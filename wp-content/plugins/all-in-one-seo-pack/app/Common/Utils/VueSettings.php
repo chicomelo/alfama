@@ -115,7 +115,9 @@ class VueSettings {
 			'htmlSitemapAdvancedSettings'  => true,
 			'linkAssistantSettings'        => true,
 			'domainActivations'            => true,
-			'404Settings'                  => true
+			'404Settings'                  => true,
+			'userProfiles'                 => true,
+			'queryArgLogs'                 => true,
 		],
 		'toggledRadio'    => [
 			'breadcrumbsShowMoreSeparators' => false,
@@ -123,7 +125,9 @@ class VueSettings {
 			'overviewPostType'              => 'post',
 		],
 		'dismissedAlerts' => [
-			'searchStatisticsContentRankings' => false
+			'searchStatisticsContentRankings' => false,
+			'searchConsoleNotConnected'       => false,
+			'searchConsoleSitemapErrors'      => false
 		],
 		'internalTabs'    => [
 			'authorArchives'    => 'title-description',
@@ -143,7 +147,8 @@ class VueSettings {
 			'searchStatisticsSeoStatistics'      => 20,
 			'searchStatisticsKeywordRankings'    => 20,
 			'searchStatisticsContentRankings'    => 20,
-			'searchStatisticsPostDetailKeywords' => 20
+			'searchStatisticsPostDetailKeywords' => 20,
+			'queryArgs'                          => 20
 		]
 	];
 
@@ -158,8 +163,10 @@ class VueSettings {
 		$this->addDynamicDefaults();
 
 		$this->settingsName = $settings;
-		$this->settings     = get_user_meta( get_current_user_id(), $settings, true )
-			? array_replace_recursive( $this->defaults, get_user_meta( get_current_user_id(), $settings, true ) )
+
+		$dbSettings     = get_user_meta( get_current_user_id(), $settings, true );
+		$this->settings = $dbSettings
+			? array_replace_recursive( $this->defaults, $dbSettings )
 			: $this->defaults;
 	}
 
@@ -187,6 +194,12 @@ class VueSettings {
 		foreach ( $postTypes as $postType ) {
 			$this->defaults['toggledCards'][ $postType['name'] . 'ArchiveArchives' ] = true;
 			$this->defaults['internalTabs'][ $postType['name'] . 'ArchiveArchives' ] = 'title-description';
+		}
+
+		// Check any addons for defaults.
+		$addonsDefaults = array_filter( aioseo()->addons->doAddonFunction( 'vueSettings', 'addDynamicDefaults' ) );
+		foreach ( $addonsDefaults as $addonDefaults ) {
+			$this->defaults = array_merge_recursive( $this->defaults, $addonDefaults );
 		}
 	}
 

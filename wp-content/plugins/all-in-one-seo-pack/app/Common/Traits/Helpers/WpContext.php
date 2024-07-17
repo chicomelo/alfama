@@ -255,7 +255,16 @@ trait WpContext {
 			return $content[ $post->ID ];
 		}
 
-		$content[ $post->ID ] = $this->theContent( $post->post_content );
+		// We need to process the content for page builders.
+		$postContent = $post->post_content;
+		$pageBuilder = aioseo()->helpers->getPostPageBuilderName( $post->ID );
+		if ( ! empty( $pageBuilder ) ) {
+			$postContent = aioseo()->standalone->pageBuilderIntegrations[ $pageBuilder ]->processContent( $post->ID, $postContent );
+		}
+
+		$postContent = is_string( $postContent ) ? $postContent : '';
+
+		$content[ $post->ID ] = $this->theContent( $postContent );
 
 		if ( apply_filters( 'aioseo_description_include_custom_fields', true, $post ) ) {
 			$content[ $post->ID ] .= $this->theContent( $this->getPostCustomFieldsContent( $post ) );
@@ -311,7 +320,7 @@ trait WpContext {
 		$this->originalPost  = is_a( $post, 'WP_Post' ) ? $this->deepClone( $post ) : null;
 
 		// The order of the function calls below is intentional and should NOT change.
-		$postContent = function_exists( 'do_blocks' ) ? do_blocks( $postContent ) : $postContent; // phpcs:ignore AIOSEO.WpFunctionUse.NewFunctions.do_blocksFound
+		$postContent = do_blocks( $postContent );
 		$postContent = wpautop( $postContent );
 		$postContent = $this->doShortcodes( $postContent );
 
@@ -341,7 +350,8 @@ trait WpContext {
 			return $content[ $post->ID ];
 		}
 
-		$postContent = $this->getPostContent( $post );
+		$postContent = (string) $this->getPostContent( $post );
+
 		// Strip images, captions and WP oembed wrappers (e.g. YouTube URLs) from the post content.
 		$postContent          = preg_replace( '/(<figure.*?\/figure>|<img.*?\/>|<div.*?class="wp-block-embed__wrapper".*?>.*?<\/div>)/s', '', $postContent );
 		$postContent          = str_replace( ']]>', ']]&gt;', $postContent );
@@ -405,6 +415,65 @@ trait WpContext {
 	}
 
 	/**
+	 * Returns whether a post is eligible for being analyzed by TruSeo.
+	 *
+	 * @since 4.6.1
+	 *
+	 * @param  int  $postId Post ID.
+	 * @return bool         Whether a post is eligible for being analyzed by TruSeo.
+	 */
+	public function isPageAnalysisEligible( $postId ) {
+		if ( ! aioseo()->options->advanced->truSeo ) {
+			return false;
+		}
+
+		static $eligible = [];
+		if ( isset( $eligible[ $postId ] ) ) {
+			return $eligible[ $postId ];
+		}
+
+		$wpPost = $this->getPost( $postId );
+		if ( ! $wpPost ) {
+			return false;
+		}
+
+		$postType       = get_post_type_object( $wpPost->post_type );
+		$dynamicOptions = aioseo()->dynamicOptions->noConflict();
+		$showMetabox    = $dynamicOptions->searchAppearance->postTypes->has( $wpPost->post_type, false ) && $dynamicOptions->{$wpPost->post_type}->advanced->showMetaBox;
+		if (
+			$this->isSpecialPage( $wpPost->ID ) ||
+			! $showMetabox ||
+			empty( $postType->public )
+		) {
+			$eligible[ $postId ] = false;
+
+			return false;
+		}
+
+		$allowPostTypes = [];
+		foreach ( aioseo()->helpers->getPublicPostTypes() as $pt ) {
+			$excludedPostTypes = [ 'attachment', 'aioseo-location' ];
+			if ( class_exists( 'bbPress' ) ) {
+				$excludedPostTypes = array_merge( $excludedPostTypes, [ 'forum', 'topic', 'reply' ] );
+			}
+
+			if ( ! in_array( $pt['name'], $excludedPostTypes, true ) ) {
+				$allowPostTypes[] = $pt['name'];
+			}
+		}
+
+		if ( ! in_array( $wpPost->post_type, $allowPostTypes, true ) ) {
+			$eligible[ $postId ] = false;
+
+			return false;
+		}
+
+		$eligible[ $postId ] = true;
+
+		return true;
+	}
+
+	/**
 	 * Returns the page number of the current page.
 	 *
 	 * @since 4.0.0
@@ -434,9 +503,16 @@ trait WpContext {
 	 * @return int|false The page number or false if we're not on a comment page.
 	 */
 	public function getCommentPageNumber() {
-		$cpage = get_query_var( 'cpage' );
+		$cpage = get_query_var( 'cpage', null );
+		if ( $this->isBlockTheme() ) {
+			global $wp_query;
 
-		return ! empty( $cpage ) ? (int) $cpage : false;
+			// For block themes we can't rely on `get_query_var()` because of {@see build_comment_query_vars_from_block()},
+			// so we need to check the query directly.
+			$cpage = $wp_query->query['cpage'] ?? null;
+		}
+
+		return isset( $cpage ) ? (int) $cpage : false;
 	}
 
 	/**
@@ -861,5 +937,33 @@ trait WpContext {
 		global $_wp_theme_features;
 
 		return isset( $_wp_theme_features ) && is_array( $_wp_theme_features ) ? $_wp_theme_features : [];
+	}
+
+	/**
+	 * Returns whether the active theme is a block-based theme or not.
+	 *
+	 * @since 4.5.3
+	 *
+	 * @return bool Whether the active theme is a block-based theme or not.
+	 */
+	public function isBlockTheme() {
+		if ( function_exists( 'wp_is_block_theme' ) ) {
+			return wp_is_block_theme(); // phpcs:ignore AIOSEO.WpFunctionUse.NewFunctions.wp_is_block_themeFound
+		}
+
+		return false;
+	}
+
+	/**
+	 * Retrieves the website name.
+	 *
+	 * @since 4.6.1
+	 *
+	 * @return string The website name.
+	 */
+	public function getWebsiteName() {
+		return aioseo()->options->searchAppearance->global->schema->websiteName
+			? aioseo()->tags->replaceTags( aioseo()->options->searchAppearance->global->schema->websiteName )
+			: aioseo()->helpers->decodeHtmlEntities( get_bloginfo( 'name' ) );
 	}
 }

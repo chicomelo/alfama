@@ -260,7 +260,7 @@ trait Wp {
 
 		$taxObjects = get_taxonomies( [], 'objects' );
 		foreach ( $taxObjects as $taxObject ) {
-			if ( empty( $taxObject->label ) || ! $this->isTaxonomyViewable( $taxObject ) ) {
+			if ( empty( $taxObject->label ) || ! is_taxonomy_viewable( $taxObject ) ) {
 				continue;
 			}
 
@@ -329,7 +329,8 @@ trait Wp {
 		foreach ( $roles as $role ) {
 			$rolesWhere[] = '(um.meta_key = \'' . aioseo()->core->db->db->prefix . 'capabilities\' AND um.meta_value LIKE \'%\"' . $role . '\"%\')';
 		}
-		$dbUsers = aioseo()->core->db->start( 'users as u' )
+		$usersTableName = aioseo()->core->db->db->users; // We get the table name from WPDB since multisites share the same table.
+		$dbUsers        = aioseo()->core->db->start( "$usersTableName as u", true )
 			->select( 'u.ID, u.display_name, u.user_nicename, u.user_email' )
 			->join( 'usermeta as um', 'u.ID = um.user_id' )
 			->whereRaw( '(' . implode( ' OR ', $rolesWhere ) . ')' )
@@ -761,26 +762,6 @@ trait Wp {
 		$titles[ $postId ] = aioseo()->helpers->decodeHtmlEntities( $title );
 
 		return $titles[ $postId ];
-	}
-
-	/**
-	 * Checks whether the taxonomy should be considered viewable.
-	 * This function is a copy of the WordPress core function is_taxonomy_viewable() which was introduced in WP 5.1.
-	 *
-	 * @since 4.3.5.1
-	 *
-	 * @param  string|\WP_Taxonomy $taxonomy The taxonomy name or object.
-	 * @return bool                          Whether the taxonomy is viewable.
-	 */
-	public function isTaxonomyViewable( $taxonomy ) {
-		if ( is_scalar( $taxonomy ) ) {
-			$taxonomy = get_taxonomy( $taxonomy );
-			if ( ! is_a( $taxonomy, 'WP_Taxonomy' ) ) {
-				return false;
-			}
-		}
-
-		return $taxonomy->publicly_queryable;
 	}
 
 	/**

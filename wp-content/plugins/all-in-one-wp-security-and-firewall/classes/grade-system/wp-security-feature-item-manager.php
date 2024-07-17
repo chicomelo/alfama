@@ -244,12 +244,11 @@ class AIOWPSecurity_Feature_Item_Manager {
 					'aiowps_advanced_char_string_filter'
 				)
 			),
-			'firewall-enable-5g-6g-blacklist' => array(
-				'name' => __('5G/6G blacklist', 'all-in-one-wp-security-and-firewall'),
+			'firewall-enable-6g' => array(
+				'name' => __('6G firewall', 'all-in-one-wp-security-and-firewall'),
 				'points' => $this->feature_point_4,
 				'level' => $this->sec_level_advanced,
 				'options' => array(
-					'aiowps_enable_5g_firewall',
 					'aiowps_enable_6g_firewall',
 				)
 			),
@@ -324,6 +323,14 @@ class AIOWPSecurity_Feature_Item_Manager {
 				'level' => $this->sec_level_basic,
 				'options' => array(
 					'aiowps_enable_custom_login_captcha'
+				)
+			),
+			'password_protected-captcha' => array(
+				'name' => __('Password-protected CAPTCHA', 'all-in-one-wp-security-and-firewall'),
+				'points' => $this->feature_point_1,
+				'level' => $this->sec_level_basic,
+				'options' => array(
+					'aiowps_enable_password_protected_captcha'
 				)
 			),
 			'whitelist-manager-ip-login-whitelisting' => array(
@@ -472,6 +479,15 @@ class AIOWPSecurity_Feature_Item_Manager {
 					'aiowps_ban_post_blank_headers'
 				)
 			),
+			'contact-form-7-captcha' => array(
+				'name' => sprintf(__('%s CAPTCHA', 'all-in-one-wp-security-and-firewall'), 'Contact Form 7'),
+				'points' => $this->feature_point_1,
+				'level' => $this->sec_level_basic,
+				'options' => array(
+					'aiowps_enable_contact_form_7_captcha'
+				),
+				'feature_condition_callback' => array('AIOWPSecurity_Utility', 'is_contact_form_7_plugin_active'),
+			)
 		);
 
 		$feature_list = apply_filters('aiowpsecurity_feature_list', $feature_list);
@@ -597,12 +613,11 @@ class AIOWPSecurity_Feature_Item_Manager {
 	 * @return void
 	 */
 	private function is_feature_enabled($item) {
-		global $aio_wp_security;
-		global $aiowps_firewall_config;
-		
+		global $aio_wp_security, $aiowps_firewall_config;
+
 		$enabled = false;
 		foreach ($item->feature_options as $option) {
-			if ('1' == $aiowps_firewall_config->get_value($option) || $aio_wp_security->configs->get_value($option) == '1') $enabled = true;
+			if ('1' == $aiowps_firewall_config->get_value($option) || '1' == $aio_wp_security->configs->get_value($option)) $enabled = true;
 		}
 
 		if ($enabled) {
@@ -668,8 +683,7 @@ class AIOWPSecurity_Feature_Item_Manager {
 	private function check_filesystem_permissions_feature($item) {
 		//TODO
 		$is_secure = 1;
-		$util = new AIOWPSecurity_Utility_File;
-		$files_dirs_to_check = $util->files_and_dirs_to_check;
+		$files_dirs_to_check = AIOWPSecurity_Utility_File::get_files_and_dirs_to_check();
 
 		foreach ($files_dirs_to_check as $file_or_dir) {
 			$actual_perm = AIOWPSecurity_Utility_File::get_file_permission($file_or_dir['path']);

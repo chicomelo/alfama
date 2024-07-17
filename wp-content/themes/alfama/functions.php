@@ -48,20 +48,11 @@ if ( ! function_exists( 'alfama_assets' ) ) :
 			$version_string,
 			true
 		);
-		wp_register_script( 
-			'jquery-mask', 
-			get_template_directory_uri() . '/assets/js/jquery.mask.min.js',
-			array('jquery'),
-			$version_string,
-			true
-		);
 		
 		wp_enqueue_style( 'main-style' );
 		wp_enqueue_script( 'main-scripts' );
 		wp_enqueue_script( 'slick-slider' );
 		wp_enqueue_script( 'fancybox' );
-		wp_enqueue_script( 'jquery-mask' );
-
 	}
 
 endif;
@@ -100,5 +91,4 @@ add_theme_support( 'custom-logo' );
 // remove br e p no classic editor
 remove_filter( 'the_content', 'wpautop' );
 remove_filter( 'the_excerpt', 'wpautop' );
-
 ?>

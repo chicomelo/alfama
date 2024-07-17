@@ -281,12 +281,15 @@ class PostsCustomPosts extends AbstractGenerator {
             $getPostMeta   = array(
                 'meta_query' => array(
                     array(
-                        'key'   => $postMetaKey,
-                        'value' => $postMetaValue,
-                        'type'  => $this->data->get('postmetatype', 'CHAR')
+                        'key'  => $postMetaKey,
+                        'type' => $this->data->get('postmetatype', 'CHAR')
                     ) + $compare
                 )
             );
+
+            if ($compare_value != 'EXISTS' && $compare_value != 'NOT EXISTS') {
+                $getPostMeta['meta_query'][0]['value'] = $postMetaValue;
+            }
         } else {
             $getPostMeta = array();
         }
@@ -443,7 +446,7 @@ class PostsCustomPosts extends AbstractGenerator {
             $record['thumbnail'] = $record['image'] = $record['featured_image'];
             $record['url_label'] = 'View';
 
-            $record = array_merge($record, GeneratorGroupPosts::extractPostMeta(get_post_meta($post->ID)));
+            $record = GeneratorGroupPosts::arrayMerge($record, GeneratorGroupPosts::extractPostMeta(get_post_meta($post->ID)));
 
             $taxonomies = get_post_taxonomies($post->ID);
             $args       = array(
@@ -463,7 +466,7 @@ class PostsCustomPosts extends AbstractGenerator {
                 }
             }
 
-            $record = array_merge($record, GeneratorGroupPosts::getACFData($post->ID));
+            $record = GeneratorGroupPosts::arrayMerge($record, GeneratorGroupPosts::getACFData($post->ID), 'acf_');
 
             if (isset($record['primarytermcategory'])) {
                 $primary                         = get_category($record['primarytermcategory']);

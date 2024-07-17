@@ -22,16 +22,26 @@ the_content();
             <div class="col-12 col-md-6">
                 <h1 class="titulo mt-4 mt-md-0">Somos especialistas em <br /><b class="red">Food Service</b></h1>
                 <p class="paragrafo mb-5">Identificamos as dificuldades nas rotinas das principais cozinhas profissionais do Brasil e investimos no desenvolvimento de soluções completas em proteína animal: produtos que facilitam a operação, simplificam processos, reduzem custos e garantem qualidade e sabor às suas receitas.</p>
-                <a href="/sobre-a-alfama/" class="btn btn-outline" title="Saiba mais">Saiba mais</a>
+                <a href="#" class="btn btn-outline" title="Saiba mais">Saiba mais</a>
             </div>
         </div>
     </div>
 </section>
 <section class="solucoes">
-    <div class="container">
+    <div class="container-fluid">
         <h1 class="titulo">Soluções em <b class="red">proteína animal</b> pensadas para o seu negócio</h1>
 
         <div class="lista-solucoes">
+            <div class="card">
+                <div class="img">
+                    <img src="<?=do_shortcode("[img-url]"); ?>img-solucoes-porcionados.jpg" alt="Porcionados" />
+                </div>
+                <div class="card-content">
+                    <h2 class="sub-titulo">Porcionados</h2>
+                    <p class="paragrafo-2">Tecnologia e eficiência para melhorar o desempenho da sua operação.</p>
+                    <a href="/produtos/?produto=porcionados" class="link" title="Ver produtos">Ver produtos</a>
+                </div>
+            </div>
             <div class="card">
                 <div class="img">
                     <img src="<?=do_shortcode("[img-url]"); ?>img-solucoes-desfiados.jpg" alt="Desfiados" />
@@ -48,7 +58,7 @@ the_content();
                 </div>
                 <div class="card-content">
                     <h2 class="sub-titulo">Hambúrguer</h2>
-                    <p class="paragrafo-2">100% carne bovina com teor ideal de gordura, garantindo suculência e muito sabor.</p>
+                    <p class="paragrafo-2">100% carne bovina e gordura, garantindo suculência e muito sabor.</p>
                     <a href="/produtos/?produto=hamburguer" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
             </div>
@@ -94,12 +104,12 @@ the_content();
     <img class="d-md-none img-fluid" src="<?php echo do_shortcode("[img-url]"); ?>img-melhores-cozinhas-mobile.jpg" alt="Presente nas melhores cozinhas" />
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-5">
+            <div class="col-12 col-md-6">
                 <h1 class="titulo mt-5 mt-md-0">Presente nas melhores cozinhas</h1>
                 <p class="paragrafo mb-5">Nos tornamos o principal parceiro do Brasil no fornecimento de carnes pré-prontas para pizzarias, bares, restaurantes, padarias e cozinhas profissionais em geral. Nos orgulhamos em estar presente em mais de 25.000 cozinhas todos os meses, contribuindo diretamente com o sucesso desses empreendedores.</p>
                 <a href="/sobre-a-alfama" class="btn btn-outline" title="Saiba mais">Saiba mais</a>
             </div>
-            <div class="col-12 col-md-6 offset-md-1">
+            <div class="col-12 col-md-6">
                 <img class="d-none d-md-block" src="<?php echo do_shortcode("[img-url]"); ?>img-melhores-cozinhas.jpg" alt="Presente nas melhores cozinhas" />
             </div>
         </div>

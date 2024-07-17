@@ -2,15 +2,18 @@
 
 .page-template-template-contato {
     .banner-contato {
-        background-color: #003B71;
-        height: 164px;
+        background: url('../img/banner-contato-mobile.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 768px;
+        height: 218px;
         display: flex;
-        align-items: flex-end;
+        align-items: center;
 
         .titulo {
             color: @white;
+            padding-top: 24px;
             font-size: 3.2rem;
-            margin-bottom: 42px;
         }
     }
 
@@ -52,88 +55,6 @@
         }
 
         form {
-            position: relative;
-            .segmento, .cnpj, .nome-empresa, .motivo-contato{
-                display: none;
-            }
-            .btn-enviar, .btn-enviar-trabalhe-conosco{
-                display: flex;
-                justify-content: flex-end;
-                .wpcf7-spinner{
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 0;
-                    background: #fff;
-                    margin: 0;
-                    opacity: 0.8;
-                    top: 0;
-                    left: 0;
-                    &::before{
-                        content: none;
-                    }
-                    
-                    @dim : 42px;
-
-                    .spinner {
-                        height:@dim;
-                        width:@dim;
-                        position: absolute;
-                        top:50%;
-                        left:50%;
-                        margin: -(@dim/2) 0 0 -(@dim/2);
-                        -webkit-animation: rotation 1s infinite linear;
-                        -moz-animation: rotation 1s infinite linear;
-                        -o-animation: rotation 1s infinite linear;
-                        animation: rotation 1s infinite linear;
-                        border:6px solid rgba(0,0,0,.1);
-                        border-radius:100%;
-                    }
-
-                    .spinner:before {
-                        content:"";
-                        display:block;
-                        position:absolute;
-                        left:0;
-                        top:-5px;
-                        height:100%;
-                        width:100%;
-                        border-top:4px solid #BC204B;
-                        border-left:4px solid transparent;
-                        border-bottom:4px solid transparent;
-                        border-right:4px solid transparent;
-                        border-radius:100%;
-                    }
-
-                    @-webkit-keyframes rotation {
-                        from {-webkit-transform: rotate(0deg);}
-                        to {-webkit-transform: rotate(359deg);}
-                    }
-                    @-moz-keyframes rotation {
-                        from {-moz-transform: rotate(0deg);}
-                        to {-moz-transform: rotate(359deg);}
-                    }
-                    @-o-keyframes rotation {
-                        from {-o-transform: rotate(0deg);}
-                        to {-o-transform: rotate(359deg);}
-                    }
-                    @keyframes rotation {
-                        from {transform: rotate(0deg);}
-                        to {transform: rotate(359deg);}
-                    }
-                }
-            }
-
-            .wpcf7-response-output{
-                border: none;
-                padding: 0;
-                text-align: center;
-                color: #dc3232;
-            }
-            .btn-disabled{
-                background-color: @grey3;
-                cursor: default;
-            }
             p {
                 margin: 0;
                 margin-bottom: 20px;
@@ -144,7 +65,6 @@
                     color: @grey2;
                     display: block;
 
-                    textarea,
                     input,
                     select {
                         margin-top: 8px;
@@ -175,14 +95,7 @@
                         }
 
                         &:focus{
-                            border-color: @blue1;
-                        }
-
-                        &.wpcf7-not-valid{
                             border-color: @red1;
-                            &:focus{
-                                border-color: @blue1;
-                            }
                         }
                     }
 
@@ -257,7 +170,6 @@
 
                    
                 }
-
             }
         }
     }
@@ -279,9 +191,10 @@
         }
 
         .banner-contato {
+            background: url('../img/banner-contato.jpg');
             background-repeat: no-repeat;
             background-position: center;
-            height: 186px;
+            height: 320px;
 
             .titulo {
                 padding-top: 36px;

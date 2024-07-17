@@ -41,7 +41,7 @@
 		<div class="aiowps_time_now_wrapper">
 			<?php
 			// wp_date() is WP 5.3+, but performs translation into the site locale
-			$current_time = function_exists('wp_date') ? wp_date('D, F j, Y H:i') : get_date_from_gmt(gmdate('Y-m-d H:i:s'), 'D, F j, Y H:i');
+			$current_time = AIOWPSecurity_Utility::convert_timestamp(null, 'D, F j, Y H:i');
 			?>
 			<span class="aiowps_time_now_label"><?php echo __('Time now', 'all-in-one-wp-security-and-firewall').': ';?></span>
 			<span class="aiowps_time_now"><?php echo $current_time;?></span>
@@ -70,7 +70,7 @@
 					<th scope="row"><?php _e('Enable automated file change detection scan', 'all-in-one-wp-security-and-firewall'); ?>:</th>
 					<td>
 						<div class="aiowps_switch_container">
-							<?php AIOWPSecurity_Utility_UI::setting_checkbox(__('Check this if you want the system to automatically/periodically scan your files to check for file changes based on the settings below', 'all-in-one-wp-security-and-firewall'), 'aiowps_enable_automated_fcd_scan', '1' == $aio_wp_security->configs->get_value('aiowps_enable_automated_fcd_scan')); ?>
+							<?php AIOWPSecurity_Utility_UI::setting_checkbox(__('Enable this if you want the system to automatically and periodically scan your files to check for file changes based on the settings below', 'all-in-one-wp-security-and-firewall'), 'aiowps_enable_automated_fcd_scan', '1' == $aio_wp_security->configs->get_value('aiowps_enable_automated_fcd_scan')); ?>
 						</div>
 					</td>
 				</tr>
@@ -94,7 +94,7 @@
 						<span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
 						<div class="aiowps_more_info_body">
 							<?php
-								echo '<p class="description">' . __('You can exclude file types from the scan which would not normally pose any security threat if they were changed. These can include things such as image files.', 'all-in-one-wp-security-and-firewall') . '</p>';
+								echo '<p class="description">' . __('You can exclude file types from the scan which would not normally pose any security threat if they were changed.', 'all-in-one-wp-security-and-firewall') . ' ' . __('These can include things such as image files.', 'all-in-one-wp-security-and-firewall') . '</p>';
 								echo '<p class="description">' . sprintf(__('Example: If you want the scanner to ignore files of type %s, %s, and %s, then you would enter the following:', 'all-in-one-wp-security-and-firewall'), 'jpg', 'png', 'bmp'). '</p>';
 								echo '<p class="description">' . 'jpg' . '</p>';
 								echo '<p class="description">' . 'png' . '</p>';
@@ -112,7 +112,7 @@
 						<span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
 						<div class="aiowps_more_info_body">
 							<?php
-								echo '<p class="description">' . __('You can exclude specific files/directories from the scan which would not normally pose any security threat if they were changed. These can include things such as log files.', 'all-in-one-wp-security-and-firewall') . '</p>';
+								echo '<p class="description">' . __('You can exclude specific files/directories from the scan which would not normally pose any security threat if they were changed.', 'all-in-one-wp-security-and-firewall') . ' ' . __('These can include things such as log files.', 'all-in-one-wp-security-and-firewall') . '</p>';
 								echo '<p class="description">' . __('Example: If you want the scanner to ignore certain files in different directories or whole directories, then you would enter the following:', 'all-in-one-wp-security-and-firewall') . '</p>';
 								echo '<p class="description">' . 'cache/config/master.php' . '</p>';
 								echo '<p class="description">' . __('somedirectory', 'all-in-one-wp-security-and-firewall') . '</p>';
@@ -126,7 +126,7 @@
 					</th>
 					<td>
 						<div class="aiowps_switch_container">
-							<?php AIOWPSecurity_Utility_UI::setting_checkbox(__('Check this if you want the system to email you if a file change was detected', 'all-in-one-wp-security-and-firewall'), 'aiowps_send_fcd_scan_email', '1' == $aio_wp_security->configs->get_value('aiowps_send_fcd_scan_email')); ?>
+							<?php AIOWPSecurity_Utility_UI::setting_checkbox(__('Enable this if you want the system to email you if a file change was detected', 'all-in-one-wp-security-and-firewall'), 'aiowps_send_fcd_scan_email', '1' == $aio_wp_security->configs->get_value('aiowps_send_fcd_scan_email')); ?>
 						</div>
 						<br>
 							<textarea name="aiowps_fcd_scan_email_address" id="aiowps_fcd_scan_email_address" rows="5" cols="50"><?php echo esc_textarea(wp_unslash(AIOWPSecurity_Utility::get_textarea_str_val($aio_wp_security->configs->get_value('aiowps_fcd_scan_email_address')))); ?></textarea>

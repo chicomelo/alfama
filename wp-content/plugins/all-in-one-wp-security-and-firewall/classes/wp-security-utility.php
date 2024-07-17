@@ -301,13 +301,13 @@ class AIOWPSecurity_Utility {
 		if (!$edit_file_config_entry_exists) {
 			//Construct the config code which we will insert into wp-config.php
 			$new_snippet = '//Disable File Edits' . PHP_EOL;
-			$new_snippet .= 'define(\'DISALLOW_FILE_EDIT\', true);';
+			$new_snippet .= 'if (!defined(\'DISALLOW_FILE_EDIT\')) { define(\'DISALLOW_FILE_EDIT\', true); }';
 			$config_contents[] = $new_snippet; //Append the new snippet to the end of the array
 		}
 
 		//Make a backup of the config file
 		if (!AIOWPSecurity_Utility_File::backup_and_rename_wp_config($config_file)) {
-			AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Failed to make a backup of the wp-config.php file. This operation will not go ahead.', 'all-in-one-wp-security-and-firewall'));
+			AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Failed to make a backup of the wp-config.php file.', 'all-in-one-wp-security-and-firewall') . ' ' . __(' This operation will not go ahead.', 'all-in-one-wp-security-and-firewall'));
 			//$aio_wp_security->debug_logger->log_debug("Disable PHP File Edit - Failed to make a backup of the wp-config.php file.",4);
 			return false;
 		} else {
@@ -419,7 +419,10 @@ class AIOWPSecurity_Utility {
 
 		$data = apply_filters('aiowps_filter_event_logger_data', $data);
 		//log to database
-		$result = $wpdb->insert($events_table_name, $data);
+		$country_code = isset($data['country_code']) ? $data['country_code'] : '';
+		$sql = $wpdb->prepare("INSERT INTO ".$events_table_name." (event_type, username, user_id, event_date, ip_or_host, referer_info, url, event_data, country_code, created) VALUES (%s, %s, %d, %s, %s, %s, %s, %s, %s, UNIX_TIMESTAMP())", $data['event_type'], $data['username'], $data['user_id'], $data['event_date'], $data['ip_or_host'], $data['referer_info'], $data['url'], $data['event_data'], $country_code);
+
+		$result = $wpdb->query($sql);
 		if (false === $result) {
 			$aio_wp_security->debug_logger->log_debug("event_logger: Error inserting record into " . $events_table_name, 4);//Log the highly unlikely event of DB error
 			return false;
@@ -428,17 +431,37 @@ class AIOWPSecurity_Utility {
 	}
 
 	/**
-	 * Checks if IP address is locked
+	 * Checks if an IP address is locked.
 	 *
-	 * @param string $ip : ip address
-	 * @returns true if locked, false otherwise
+	 * @param string $ip          The IP address to be checked.
+	 * @param string $lock_reason Optional. Defaults to any lockout reason if not provided.
+	 *
+	 * @return bool True if locked, false otherwise.
 	 **/
-	public static function check_locked_ip($ip) {
+	public static function check_locked_ip($ip, $lock_reason = null) {
 		global $wpdb;
 		$login_lockdown_table = AIOWPSEC_TBL_LOGIN_LOCKOUT;
-		$now = current_time('mysql', true);
-		$locked_ip = $wpdb->get_row($wpdb->prepare("SELECT * FROM $login_lockdown_table WHERE release_date > %s AND failed_login_ip = %s", $now, $ip), ARRAY_A);
-		if (null != $locked_ip) {
+
+		if (null === $lock_reason) {
+			$locked_ip = $wpdb->get_row($wpdb->prepare("SELECT * FROM `$login_lockdown_table` WHERE released > UNIX_TIMESTAMP() AND failed_login_ip = %s", $ip), ARRAY_A);
+		} else {
+			$locked_ip = $wpdb->get_row($wpdb->prepare("SELECT * FROM `$login_lockdown_table` WHERE released > UNIX_TIMESTAMP() AND failed_login_ip = %s AND lock_reason = %s", $ip, $lock_reason), ARRAY_A);
+		}
+
+		return null != $locked_ip;
+	}
+
+	/**
+	 * Check if an IP address is blacklisted.
+	 *
+	 * @param string $ip The IP address to check.
+	 * @return bool True if the IP address is blacklisted, false otherwise.
+	 */
+	public static function check_blacklist_ip($ip) {
+		global $aio_wp_security;
+		$blacklisted_ips = $aio_wp_security->configs->get_value('aiowps_banned_ip_addresses');
+		$blacklisted_ips_array = explode("\n", $blacklisted_ips);
+		if (in_array($ip, $blacklisted_ips_array)) {
 			return true;
 		} else {
 			return false;
@@ -454,9 +477,7 @@ class AIOWPSecurity_Utility {
 	public static function get_locked_ips() {
 		global $wpdb;
 		$login_lockdown_table = AIOWPSEC_TBL_LOGIN_LOCKOUT;
-		$now = current_time('mysql', true);
-	$locked_ips = $wpdb->get_results($wpdb->prepare("SELECT * FROM $login_lockdown_table WHERE release_date > %s", $now), ARRAY_A);
-		
+		$locked_ips = $wpdb->get_results("SELECT * FROM $login_lockdown_table WHERE released > UNIX_TIMESTAMP()", ARRAY_A);
 		if (empty($locked_ips)) {
 			return false;
 		} else {
@@ -477,12 +498,26 @@ class AIOWPSecurity_Utility {
 	 *
 	 * @return Void
 	 */
-	public static function lock_IP($ip, $lock_reason, $username = '') {
+	public static function lock_ip($ip, $lock_reason, $username = '') {
 		global $wpdb, $aio_wp_security;
 		$login_lockdown_table = AIOWPSEC_TBL_LOGIN_LOCKOUT;
 
 		if ('404' == $lock_reason) {
+
+			// Query for existing lockouts record with that ip and 404 reason.
+			$existing_lock_query = $wpdb->prepare(
+				"SELECT * FROM {$login_lockdown_table} WHERE failed_login_IP = %s AND lock_reason = %s AND released > UNIX_TIMESTAMP() LIMIT 1",
+				$ip,
+				$lock_reason
+			);
+
+			$existing_lock_count = $wpdb->get_var($existing_lock_query);
+
+			if ($existing_lock_count) return; // IP is already blocked for '404', return.
+
 			$lock_minutes = $aio_wp_security->configs->get_value('aiowps_404_lockout_time_length');
+		} elseif ('audit-log' == $lock_reason) {
+			$lock_minutes = 24 * 60;
 		} else {
 			$lock_minutes = $aio_wp_security->user_login_obj->get_dynamic_lockout_time_length();
 		}
@@ -502,17 +537,50 @@ class AIOWPSecurity_Utility {
 
 		$ip = esc_sql($ip);
 
+		$lock_seconds = $lock_minutes * MINUTE_IN_SECONDS;
 		$lock_time = current_time('mysql', true);
-		$release_time = date('Y-m-d H:i:s', time() + ($lock_minutes * MINUTE_IN_SECONDS));
+		$ip_lookup_result = AIOS_Helper::get_ip_reverse_lookup($ip);
+		$ip_lookup_result = json_encode($ip_lookup_result);
+		if (false === $ip_lookup_result) $ip_lookup_result = null;
 
-		$data = array('user_id' => $user_id, 'user_login' => $username, 'lockdown_date' => $lock_time, 'release_date' => $release_time, 'failed_login_IP' => $ip, 'lock_reason' => $lock_reason);
-		$format = array('%d', '%s', '%s', '%s', '%s', '%s');
-		$result = $wpdb->insert($login_lockdown_table, $data, $format);
+		$release_time = date('Y-m-d H:i:s', time() + ($lock_seconds));
+		$data = array(
+			'user_id' => $user_id,
+			'user_login' => $username,
+			'lockdown_date' => $lock_time,
+			'release_date' => $release_time,
+			'failed_login_IP' => $ip,
+			'lock_reason' => $lock_reason,
+			'lock_seconds' => $lock_seconds,
+			'ip_lookup_result' => $ip_lookup_result
+		);
+		
+		$result = AIOWPSecurity_Utility::add_lockout($data);
 
-		if ($result > 0) {
-		} elseif (false === $result) {
-			$aio_wp_security->debug_logger->log_debug("lock_IP: Error inserting record into " . $login_lockdown_table, 4);//Log the highly unlikely event of DB error
+		if (false === $result) {
+			$error_msg = empty($wpdb->last_error) ? "lock_ip: Error inserting record into " . $login_lockdown_table : $wpdb->last_error;
+			$aio_wp_security->debug_logger->log_debug($error_msg, 4);//Log the highly unlikely event of DB error
 		}
+	}
+	
+	/**
+	 * Adds an entry to the AIOWPSEC_TBL_LOGIN_LOCKOUT table.
+	 *
+	 * @global wpdb $wpdb
+	 *
+	 * @param Array $data
+	 *
+	 * @return Boolean
+	 */
+	public static function add_lockout($data) {
+		global $wpdb;
+		if (!isset($data['is_lockout_email_sent'])) $data['is_lockout_email_sent'] = 0;
+		if (!isset($data['backtrace_log'])) $data['backtrace_log'] = '';
+		if (!isset($data['ip_lookup_result'])) $data['ip_lookup_result'] = '';
+		$login_lockdown_table = AIOWPSEC_TBL_LOGIN_LOCKOUT;
+		$sql = $wpdb->prepare("INSERT INTO ".$login_lockdown_table." (user_id, user_login, lockdown_date, created, release_date, released,  failed_login_IP, lock_reason, is_lockout_email_sent, backtrace_log, ip_lookup_result) VALUES ('%d', '%s', '%s', UNIX_TIMESTAMP(), '%s', UNIX_TIMESTAMP()+%d, '%s', '%s', '%d', '%s', '%s')", $data['user_id'], $data['user_login'], $data['lockdown_date'], $data['release_date'], $data['lock_seconds'], $data['failed_login_IP'], $data['lock_reason'], $data['is_lockout_email_sent'], $data['backtrace_log'], $data['ip_lookup_result']);
+		$result = $wpdb->query($sql);
+		return $result;
 	}
 
 	/**
@@ -546,7 +614,8 @@ class AIOWPSecurity_Utility {
 	public static function purge_table_records($table_name, $purge_records_after_days, $date_field) {
 		global $wpdb, $aio_wp_security;
 
-		$older_than_date_time = date('Y-m-d H:m:s', strtotime('-' . $purge_records_after_days . ' days', current_time('timestamp', true)));
+		$older_than_date_time = strtotime('-' . $purge_records_after_days . ' days', time());
+		if ('created' != $date_field) $older_than_date_time = date('Y-m-d H:i:s', $older_than_date_time);
 		$sql = $wpdb->prepare('DELETE FROM ' . $table_name . ' WHERE '.$date_field.' < %s', $older_than_date_time);
 		$ret_deleted = $wpdb->query($sql);
 		if (false === $ret_deleted) {
@@ -823,8 +892,12 @@ class AIOWPSecurity_Utility {
 			if ('apply_filters' == $backtrace[$index]['function'] && 'authenticate' == $backtrace[$index]['args'][0]) {
 				$backtrace[$index]['args'] = array('authenticate');
 			}
+
+			if ('do_action' == $backtrace[$index]['function'] && 'password_reset' == $backtrace[$index]['args'][0]) {
+				$backtrace[$index]['args'] = array('password_reset');
+			}
 			
-			$keys_to_filter = array('wp_create_user', 'wpmu_create_user', 'wp_authenticate', 'post_authenticate');
+			$keys_to_filter = array('wp_create_user', 'wpmu_create_user', 'wp_authenticate', 'post_authenticate', 'reset_password');
 			if (in_array($backtrace[$index]['function'], $keys_to_filter)) {
 				$backtrace[$index]['args'] = array();
 			}
@@ -1041,5 +1114,236 @@ class AIOWPSecurity_Utility {
 	 */
 	public static function is_buddypress_plugin_active() {
 		return is_plugin_active('buddypress/bp-loader.php');
+	}
+
+	/**
+	 * Checks if the Contact Form 7 plugin is active.
+	 *
+	 * @return Boolean - True if the Contact Form 7 plugin is active, otherwise false.
+	 */
+	public static function is_contact_form_7_plugin_active() {
+		return is_plugin_active('contact-form-7/wp-contact-form-7.php');
+	}
+	 
+	/**
+	 * Retrieves and returns current WP general settings date time format.
+	 *
+	 * @return string
+	 */
+	public static function get_wp_datetime_format() {
+		return get_option('date_format') . ' ' . get_option('time_format');
+	}
+
+	/**
+	 * This function gets the timezone of the site as a DateTimeZone object
+	 *
+	 * @see https://developer.wordpress.org/reference/functions/wp_timezone/
+	 *
+	 * @return DateTimeZone - the timezone of the site as a DateTimeZone object
+	 */
+	public static function get_wp_timezone() {
+		return new DateTimeZone(self::get_wp_timezone_string());
+	}
+
+	/**
+	 * This function gets the timezone of the site as a string
+	 *
+	 * @see https://developer.wordpress.org/reference/functions/wp_timezone_string/
+	 *
+	 * @return string - PHP timezone name or a ±HH:MM offset
+	 */
+	public static function get_wp_timezone_string() {
+		$timezone_string = get_option('timezone_string');
+		
+		if ($timezone_string) return $timezone_string;
+		
+		$offset  = (float) get_option('gmt_offset');
+		$hours   = (int) $offset;
+		$minutes = ($offset - $hours);
+		$sign    = ($offset < 0) ? '-' : '+';
+		$abs_hour = abs($hours);
+		$abs_mins = abs($minutes * 60);
+		$tz_offset = sprintf('%s%02d:%02d', $sign, $abs_hour, $abs_mins);
+		
+		return $tz_offset;
+	}
+
+	/**
+	 * Converts a Unix timestamp to WP general settings timezone and format. It will also translate with wp_date if available.
+	 *
+	 * @param string $timestamp Optional. Will default to time() if not provided.
+	 * @param string $format    Optional. Will default to WP general settings format if not provided.
+	 *
+	 * @return string
+	 */
+	public static function convert_timestamp($timestamp = null, $format = null) {
+
+		if (!$format) $format = self::get_wp_datetime_format();
+
+		if (!$timestamp) $timestamp = time();
+
+		return function_exists('wp_date') ? wp_date($format, $timestamp) : get_date_from_gmt(gmdate('Y-m-d H:i:s', $timestamp), $format);
+	}
+
+	/**
+	 * Deletes unneeded default WP files.
+	 *
+	 * @global AIO_WP_Security $aio_wp_security
+	 *
+	 * @param bool $echo_results
+	 *
+	 * @return void
+	 */
+	public static function delete_unneeded_default_files($echo_results = false) {
+		global $aio_wp_security;
+
+		foreach (array('readme.html', 'wp-config-sample.php') as $file_name) {
+			$file_path = ABSPATH . $file_name;
+
+			if (file_exists($file_path)) {
+				if (@unlink($file_path)) {
+					$success_message = sprintf(__('Successfully deleted the %s file.', 'all-in-one-wp-security-and-firewall'), $file_name);
+					$aio_wp_security->debug_logger->log_debug($success_message, 0);
+
+					if ($echo_results) {
+						AIOWPSecurity_Admin_Menu::show_msg_updated_st($success_message);
+					}
+				} else {
+					$failure_message = sprintf(__('Failed to delete the %s file.', 'all-in-one-wp-security-and-firewall'), $file_name) . ' ' . sprintf(__('Check the file/directory permissions at: %s', 'all-in-one-wp-security-and-firewall'), $file_path);
+					$aio_wp_security->debug_logger->log_debug($failure_message, 4);
+
+					if ($echo_results) {
+						AIOWPSecurity_Admin_Menu::show_msg_error_st($failure_message);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Convert a number of bytes into a suitable textual string
+	 *
+	 * @param Integer $size - the number of bytes
+	 *
+	 * @return String - the resulting textual string
+	 */
+	public static function convert_numeric_size_to_text($size) {
+		if ($size > 1073741824) {
+			return round($size / 1073741824, 1).' GB';
+		} elseif ($size > 1048576) {
+			return round($size / 1048576, 1).' MB';
+		} elseif ($size > 1024) {
+			return round($size / 1024, 1).' KB';
+		} else {
+			return round($size, 1).' B';
+		}
+	}
+
+	/**
+	 * Updates the Googlebot IP ranges config.
+	 *
+	 * @global AIOWPS\Firewall\Config $aiowps_firewall_config
+	 *
+	 * @return array|WP_Error
+	 */
+	public static function get_googlebot_ip_ranges() {
+		$response = wp_safe_remote_get('https://developers.google.com/static/search/apis/ipranges/googlebot.json');
+
+		$body = wp_remote_retrieve_body($response);
+		$json_array = json_decode($body, true);
+
+		$ip_list_array = array();
+
+		foreach ($json_array['prefixes'] as $prefix) {
+			$ip_list_array[] = array_key_exists('ipv4Prefix', $prefix) ? $prefix['ipv4Prefix'] : $prefix['ipv6Prefix'];
+		}
+
+		return AIOWPSecurity_Utility_IP::validate_ip_list($ip_list_array, 'whitelist');
+	}
+
+	/**
+	 * Blacklists an IP address.
+	 *
+	 * @global AIO_WP_Security $aio_wp_security
+	 * @global AIOWPS\Firewall\Config $aiowps_firewall_config
+	 *
+	 * @param string $ip The IP address to be blacklisted.
+	 *
+	 * @return void|WP_Error
+	 */
+	public static function blacklist_ip($ip) {
+		global $aio_wp_security, $aiowps_firewall_config;
+
+		$blacklisted_ip_addresses = $aio_wp_security->configs->get_value('aiowps_banned_ip_addresses');
+
+		$ip_list_array = AIOWPSecurity_Utility_IP::create_ip_list_array_from_string_with_newline($blacklisted_ip_addresses);
+		$ip_list_array[] = $ip;
+
+		$validated_ip_list_array = AIOWPSecurity_Utility_IP::validate_ip_list($ip_list_array, 'blacklist');
+
+		if (is_wp_error($validated_ip_list_array)) {
+			return $validated_ip_list_array;
+		} else {
+			$banned_ip_data = implode("\n", $validated_ip_list_array);
+
+			$aio_wp_security->configs->set_value('aiowps_enable_blacklisting', '1'); // Force blacklist feature to be enabled.
+			$aio_wp_security->configs->set_value('aiowps_banned_ip_addresses', $banned_ip_data);
+			$aio_wp_security->configs->save_config();
+
+			$aiowps_firewall_config->set_value('aiowps_blacklist_ips', $validated_ip_list_array);
+		}
+	}
+
+	/**
+	 * Unlocks an IP address.
+	 *
+	 * @global wpdb $wpdb
+	 *
+	 * @param string $ip The IP address to be blacklisted.
+	 *
+	 * @return boolean
+	 */
+	public static function unlock_ip($ip) {
+		global $wpdb;
+
+		$lockout_table = AIOWPSEC_TBL_LOGIN_LOCKOUT;
+
+		// Unlock single record.
+		$result = $wpdb->query($wpdb->prepare("UPDATE $lockout_table SET `released` = UNIX_TIMESTAMP() WHERE `failed_login_ip` = %s", $ip));
+
+		return null != $result;
+	}
+
+	/**
+	 * Unblacklists an IP address.
+	 *
+	 * @global AIO_WP_Security $aio_wp_security
+	 * @global AIOWPS\Firewall\Config $aiowps_firewall_config
+	 *
+	 * @param string $ip The IP address to be unblacklisted.
+	 *
+	 * @return boolean
+	 */
+	public static function unblacklist_ip($ip) {
+		global $aio_wp_security, $aiowps_firewall_config;
+
+		$blacklisted_ip_addresses = $aio_wp_security->configs->get_value('aiowps_banned_ip_addresses');
+
+		$ip_list_array = AIOWPSecurity_Utility_IP::create_ip_list_array_from_string_with_newline($blacklisted_ip_addresses);
+
+		if (!in_array($ip, $ip_list_array)) {
+			return false;
+		}
+
+		$ip_list_array = array_diff($ip_list_array, array($ip));
+
+		$banned_ip_data = implode("\n", $ip_list_array);
+
+		$aio_wp_security->configs->set_value('aiowps_banned_ip_addresses', $banned_ip_data);
+		$aio_wp_security->configs->save_config();
+
+		$aiowps_firewall_config->set_value('aiowps_blacklist_ips', $ip_list_array);
+
+		return true;
 	}
 }

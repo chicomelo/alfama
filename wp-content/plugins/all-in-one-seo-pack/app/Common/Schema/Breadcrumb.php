@@ -108,7 +108,7 @@ class Breadcrumb {
 
 		$breadcrumbs = [];
 		$dateName    = null;
-		$timestamp   = strtotime( $post->post_date_gmt );
+		$timestamp   = strtotime( $post->post_date );
 		foreach ( $pairs as $tag => $object ) {
 			// Escape the delimiter.
 			$escObject = aioseo()->helpers->escapeRegex( $object );
@@ -213,7 +213,7 @@ class Breadcrumb {
 			);
 
 			if ( $term->parent ) {
-				$term = get_term( $term->parent );
+				$term = get_term( $term->parent, $term->taxonomy );
 			} else {
 				$term = false;
 			}

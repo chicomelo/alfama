@@ -17,14 +17,22 @@
             width: 216px;
             padding: 12px;
             .img{
+                width: 216px;
+                height: 160px;
                 overflow: hidden;
                 border-radius: 24px 24px 0 0;
+                position: relative;
+                margin: 0 auto;
                 img{
+                    position: relative;
+                    left: 50%;
+                    transform: translate(-50%,0);
                     display: block;
                 }
             }
 
             .card-content{
+                margin: 0 auto;
                 width: 216px;
                 background-color: @white;
                 border-radius: 0 0 24px 24px;
@@ -71,7 +79,7 @@
                 svg{
                     height: 51px;
                     width: 53px;
-                    fill: #C6AA76;
+                    fill: #FF9FBA;
                 }
             }
             p{
@@ -119,7 +127,6 @@
     .food-service{
         padding: 72px 0;
     }
-    
     .solucoes{
         padding: 72px 0;
         background-image: url("../img/bg-solucoes.png");
@@ -128,10 +135,25 @@
         .lista-solucoes{
             margin-top: 42px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 8px;
             .card{
-                width: 216px;
+                width: 146px;
                 padding: 0;
+                .img{
+                    height: 120px;
+                    width: 146px;
+                }
+                .card-content{
+                    width: 146px;
+                    .sub-titulo{
+                        font-size: 1.6rem;
+                    }
+                    .paragrafo-2{
+                        font-size: 1.4rem;
+                    }
+                }
             }
         }
         .btn{
@@ -178,13 +200,58 @@
             }
         }
     }
-
     .nossas-unidades{
         padding: 72px 0;
         .lista-unidades{
             margin-top: 42px;
             display: flex;
             gap: 48px;
+        }
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .solucoes{
+        .lista-solucoes{
+            gap: 12px;
+            .card{
+                width: 210px;
+                .img{
+                    height: 160px;
+                    width: 210px;
+                }
+                .card-content{
+                    width: 210px;
+                    padding: 16px 16px 24px 16px;
+                    .sub-titulo{
+                        font-size: 2.1rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (min-width: 1600px) {
+    .solucoes{
+        .lista-solucoes{
+            gap: 20px;
+            .card{
+                width: 216px;
+                .img{
+                    height: 190px;
+                    width: 216px;
+                }
+                .card-content{
+                    width: 216px;
+                    padding: 16px 16px 24px 16px;
+                    .sub-titulo{
+                        font-size: 2.4rem;
+                    }
+                }
+            }
         }
     }
 }

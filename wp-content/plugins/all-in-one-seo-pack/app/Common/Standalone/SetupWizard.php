@@ -173,9 +173,6 @@ class SetupWizard {
 				echo sprintf( esc_html__( '%1$s &rsaquo; Onboarding Wizard', 'all-in-one-seo-pack' ), esc_html( AIOSEO_PLUGIN_SHORT_NAME ) );
 			?>
 			</title>
-			<?php do_action( 'admin_print_scripts' ); ?>
-			<?php do_action( 'admin_print_styles' ); ?>
-			<?php do_action( 'admin_head' ); ?>
 		</head>
 		<body class="aioseo-setup-wizard">
 		<?php
@@ -239,5 +236,31 @@ class SetupWizard {
 		}
 
 		return $currentStageCount + 1 === $totalStageCount;
+	}
+
+	/**
+	 * Get the next stage of the wizard.
+	 *
+	 * @since 4.6.2
+	 *
+	 * @return string The next stage or empty.
+	 */
+	public function getNextStage() {
+		$wizard    = (string) aioseo()->internalOptions->internal->wizard;
+		$wizard    = json_decode( $wizard );
+		if ( ! $wizard ) {
+			return '';
+		}
+
+		// Default to success.
+		$nextStage = 'success';
+
+		// Get the next stage of the wizard.
+		$currentStageIndex = array_search( $wizard->currentStage, $wizard->stages, true );
+		if ( ! empty( $wizard->stages[ $currentStageIndex + 1 ] ) ) {
+			$nextStage = $wizard->stages[ $currentStageIndex + 1 ];
+		}
+
+		return $nextStage;
 	}
 }
