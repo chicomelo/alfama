@@ -6817,6 +6817,7 @@ body.compensate-for-scrollbar {
   color: #8A8A8A;
   display: block;
 }
+.page-template-template-contato .conteudo-tabs-contato form p label textarea,
 .page-template-template-contato .conteudo-tabs-contato form p label input,
 .page-template-template-contato .conteudo-tabs-contato form p label select {
   margin-top: 8px;
@@ -6831,21 +6832,25 @@ body.compensate-for-scrollbar {
   color: #000;
   outline: none;
 }
+.page-template-template-contato .conteudo-tabs-contato form p label textarea::placeholder,
 .page-template-template-contato .conteudo-tabs-contato form p label input::placeholder,
 .page-template-template-contato .conteudo-tabs-contato form p label select::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #CACACA;
 }
+.page-template-template-contato .conteudo-tabs-contato form p label textarea:-ms-input-placeholder,
 .page-template-template-contato .conteudo-tabs-contato form p label input:-ms-input-placeholder,
 .page-template-template-contato .conteudo-tabs-contato form p label select:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: #CACACA;
 }
+.page-template-template-contato .conteudo-tabs-contato form p label textarea::-ms-input-placeholder,
 .page-template-template-contato .conteudo-tabs-contato form p label input::-ms-input-placeholder,
 .page-template-template-contato .conteudo-tabs-contato form p label select::-ms-input-placeholder {
   /* Microsoft Edge */
   color: #CACACA;
 }
+.page-template-template-contato .conteudo-tabs-contato form p label textarea:focus,
 .page-template-template-contato .conteudo-tabs-contato form p label input:focus,
 .page-template-template-contato .conteudo-tabs-contato form p label select:focus {
   border-color: #BC204B;
