@@ -6941,3 +6941,40 @@ body.compensate-for-scrollbar {
     font-size: 2rem;
   }
 }
+.page-template-template-contato-enviado .banner-contato {
+  background-color: #003B71;
+  height: 164px;
+  display: flex;
+  align-items: flex-end;
+}
+.page-template-template-contato-enviado .banner-contato .titulo {
+  color: #fff;
+  font-size: 3.2rem;
+  margin-bottom: 42px;
+}
+.page-template-template-contato-enviado .contato__wrapper {
+  padding-top: 42px;
+  padding-bottom: 64px;
+  text-align: center;
+}
+.page-template-template-contato-enviado .contato__wrapper svg {
+  margin-bottom: 32px;
+}
+.page-template-template-contato-enviado .contato__wrapper .btn {
+  margin: 0 auto;
+  margin-top: 42px;
+}
+@media (min-width: 768px) {
+  .page-template-template-contato-enviado .banner-contato {
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 186px;
+  }
+  .page-template-template-contato-enviado .banner-contato .titulo {
+    padding-top: 36px;
+    font-size: 3.2rem;
+  }
+  .page-template-template-contato-enviado .contato__wrapper {
+    padding: 64px 0 92px 0;
+  }
+}

@@ -422,35 +422,35 @@ $produtos = [
         "receitas"=> ""
 
     ],
-    [
-        "destaque"=> false,
-        "categoria"=> "hamburguer",
-        "fotos"=> [
-            "foto-produto-burguer-picanha.jpg",
-            "foto-produto-burguer-picanha.jpg"
-        ],
-        "nome"=> "Hambúrguer Gourmet Picanha",
-        "locais"=> [
-            "churrasqueira",
-            "chapa",
-            "broiler"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "110g",
-            "150g",
-            "200g"
-        ],
-        "caracteristicas" => [
-            "bovino",
-            "condimentos",
-            "mordida",
-            "grelhar"
-        ],
-        "descricao_curta"=> "&bull; 110g, 150g e 200g<br />&bull; 100% Carne Bovina<br />&bull; Aspecto artesanal",
-        "receitas"=> ""
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "hamburguer",
+    //     "fotos"=> [
+    //         "foto-produto-burguer-picanha.jpg",
+    //         "foto-produto-burguer-picanha.jpg"
+    //     ],
+    //     "nome"=> "Hambúrguer Gourmet Picanha",
+    //     "locais"=> [
+    //         "churrasqueira",
+    //         "chapa",
+    //         "broiler"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "110g",
+    //         "150g",
+    //         "200g"
+    //     ],
+    //     "caracteristicas" => [
+    //         "bovino",
+    //         "condimentos",
+    //         "mordida",
+    //         "grelhar"
+    //     ],
+    //     "descricao_curta"=> "&bull; 110g, 150g e 200g<br />&bull; 100% Carne Bovina<br />&bull; Aspecto artesanal",
+    //     "receitas"=> ""
 
-    ],
+    // ],
     [
         "destaque"=> false,
         "categoria"=> "hamburguer",
