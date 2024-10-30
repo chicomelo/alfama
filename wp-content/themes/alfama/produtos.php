@@ -310,6 +310,36 @@ $produtos = [
         "receitas"=> "Pizza, Escondidinho, Shawarma, Pulled pork, Pastel, Hambúrguer, Sanduíche e Esfiha."
 
     ],
+
+
+    [
+        "destaque"=> false,
+        "categoria"=> "desfiados",
+        "fotos"=> [
+            "foto-produto-carne-de-sol.jpg",
+            "foto-produto-carne-de-sol.jpg"
+        ],
+        "nome"=> "Carne Desfiada Bovina Carne de Sol",
+        "locais"=> [
+            "panela",
+            "forno",
+            "chapa",
+            "microondas"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "1kg"
+        ],
+        "caracteristicas" => [
+            "desfiamento",
+            "fibras-rusticas",
+            "nervos"
+        ],
+        "descricao_curta"=> "&bull; 1kg<br />&bull; Cozido e desfiado<br />&bull; Alta rentabilidade",
+        "receitas"=> "Pizza, Escondidinho, Salgados, Empadas, Pastel, Pratos regionais, Hambúrguer, Tapioca, Tábuas de porção."
+
+    ],
+
     [
         "destaque"=> true,
         "categoria"=> "moidas",
@@ -317,7 +347,7 @@ $produtos = [
             "foto-produto-carne-moida-acem.jpg",
             "foto-produto-carne-moida-acem.jpg"
         ],
-        "nome"=> "Carne Moída Acém",
+        "nome"=> "Carne Moída Bovina",
         "locais"=> [
             "panela",
             "forno",
@@ -366,6 +396,7 @@ $produtos = [
         "receitas"=> "Pastel, Empada, Carne moída refogada, Rocambole e Salgados."
 
     ],
+
     [
         "destaque"=> false,
         "categoria"=> "moidas",
@@ -373,7 +404,7 @@ $produtos = [
             "foto-produto-carne-moida-cortes.jpg",
             "foto-produto-carne-moida-cortes.jpg"
         ],
-        "nome"=> "Carne Moída Cortes",
+        "nome"=> "Carne Moída Bovina Cortes",
         "locais"=> [
             "panela",
             "forno",
@@ -400,7 +431,7 @@ $produtos = [
             "foto-produto-burguer-costela.jpg",
             "foto-produto-burguer-costela.jpg"
         ],
-        "nome"=> "Hambúrguer Gourmet Costela",
+        "nome"=> "Hambúrguer Costela",
         "locais"=> [
             "churrasqueira",
             "chapa",
@@ -458,7 +489,7 @@ $produtos = [
             "foto-produto-burguer-gourmet.jpg",
             "foto-produto-burguer-gourmet.jpg"
         ],
-        "nome"=> "Hambúrguer Gourmet",
+        "nome"=> "Hambúrguer Bovino",
         "locais"=> [
             "churrasqueira",
             "chapa",
@@ -480,32 +511,32 @@ $produtos = [
         "receitas"=> ""
 
     ],
-    [
-        "destaque"=> false,
-        "categoria"=> "hamburguer",
-        "fotos"=> [
-            "foto-produto-burguer-tradicional-2.jpg",
-            "foto-produto-burguer-tradicional-2.jpg"
-        ],
-        "nome"=> "Hambúrguer Tradicional",
-        "locais"=> [
-            "churrasqueira",
-            "chapa",
-            "broiler"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "90g"
-        ],
-        "caracteristicas" => [
-            "bovino",
-            "saboroso",
-            "lanches"
-        ],
-        "descricao_curta"=> "&bull; 90g<br />&bull; 100% Carne Bovina<br />&bull; Aspecto artesanal",
-        "receitas"=> ""
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "hamburguer",
+    //     "fotos"=> [
+    //         "foto-produto-burguer-tradicional-2.jpg",
+    //         "foto-produto-burguer-tradicional-2.jpg"
+    //     ],
+    //     "nome"=> "Hambúrguer Tradicional",
+    //     "locais"=> [
+    //         "churrasqueira",
+    //         "chapa",
+    //         "broiler"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "90g"
+    //     ],
+    //     "caracteristicas" => [
+    //         "bovino",
+    //         "saboroso",
+    //         "lanches"
+    //     ],
+    //     "descricao_curta"=> "&bull; 90g<br />&bull; 100% Carne Bovina<br />&bull; Aspecto artesanal",
+    //     "receitas"=> ""
 
-    ],
+    // ],
     [
         "destaque"=> false,
         "categoria"=> "formados",

@@ -6316,6 +6316,10 @@ body.compensate-for-scrollbar {
   width: 26px;
   height: 20px;
 }
+.page-template-template-produtos .lista-produtos .produto .locais > div .icone.microondas svg {
+  width: 24px;
+  height: 17px;
+}
 .page-template-template-produtos .lista-produtos .produto .paragrafo {
   font-size: 1.4rem;
 }
@@ -6512,6 +6516,10 @@ body.compensate-for-scrollbar {
 .page-template-template-produtos .modal-produto .produto .locais > div .icone.broiler svg {
   width: 26px;
   height: 20px;
+}
+.page-template-template-produtos .modal-produto .produto .locais > div .icone.microondas svg {
+  width: 24px;
+  height: 17px;
 }
 .page-template-template-produtos .modal-produto .produto .nome {
   font-weight: 600;
