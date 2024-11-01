@@ -368,34 +368,34 @@ $produtos = [
         "receitas"=> "Panqueca, Fricassê, Lasanha, Molho bolonhesa, Escondidinho e Salgados."
 
     ],
-    [
-        "destaque"=> false,
-        "categoria"=> "moidas",
-        "fotos"=> [
-            "foto-produto-carne-moida-patinho.jpg",
-            "foto-produto-carne-moida-patinho.jpg"
-        ],
-        "nome"=> "Carne Moída Patinho",
-        "locais"=> [
-            "panela",
-            "forno",
-            "chapa",
-            "fritadeira"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "500g",
-            "1kg"
-        ],
-        "caracteristicas" => [
-            "bovino",
-            "condimentos",
-            "nervos"
-        ],
-        "descricao_curta"=> "&bull; 1kg(Food service) e 500g(Varejo) <br />&bull; 100% Carne Bovina <br />&bull; Sem condimentos",
-        "receitas"=> "Pastel, Empada, Carne moída refogada, Rocambole e Salgados."
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "moidas",
+    //     "fotos"=> [
+    //         "foto-produto-carne-moida-patinho.jpg",
+    //         "foto-produto-carne-moida-patinho.jpg"
+    //     ],
+    //     "nome"=> "Carne Moída Patinho",
+    //     "locais"=> [
+    //         "panela",
+    //         "forno",
+    //         "chapa",
+    //         "fritadeira"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "500g",
+    //         "1kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "bovino",
+    //         "condimentos",
+    //         "nervos"
+    //     ],
+    //     "descricao_curta"=> "&bull; 1kg(Food service) e 500g(Varejo) <br />&bull; 100% Carne Bovina <br />&bull; Sem condimentos",
+    //     "receitas"=> "Pastel, Empada, Carne moída refogada, Rocambole e Salgados."
 
-    ],
+    // ],
 
     [
         "destaque"=> false,
@@ -510,7 +510,7 @@ $produtos = [
         "descricao_curta"=> "&bull; 110g, 150g e 200g<br />&bull; 100% Carne Bovina<br />&bull; Aspecto artesanal",
         "receitas"=> ""
 
-    ],
+    ]
     // [
     //     "destaque"=> false,
     //     "categoria"=> "hamburguer",
@@ -537,87 +537,87 @@ $produtos = [
     //     "receitas"=> ""
 
     // ],
-    [
-        "destaque"=> false,
-        "categoria"=> "formados",
-        "fotos"=> [
-            "foto-produto-almondega-bovina.jpg",
-            "foto-produto-almondega-bovina.jpg"
-        ],
-        "nome"=> "Almôndega Bovina",
-        "locais"=> [
-            "panela",
-            "forno",
-            "fritadeira"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "2kg"
-        ],
-        "caracteristicas" => [
-            "bovino",
-            "congelado",
-            "30g"
-        ],
-        "descricao_curta"=> "&bull; 2kg<br />&bull; 100% Carne Bovina<br />&bull; Congelado individualmente (IQF)",
-        "receitas"=> "Massa com almôndegas, Almôndegas ao molho, Almôndegas à parmegiana, Almôndegas fritas, Almôndegas empanadas, Pizza e Sanduíche."
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "formados",
+    //     "fotos"=> [
+    //         "foto-produto-almondega-bovina.jpg",
+    //         "foto-produto-almondega-bovina.jpg"
+    //     ],
+    //     "nome"=> "Almôndega Bovina",
+    //     "locais"=> [
+    //         "panela",
+    //         "forno",
+    //         "fritadeira"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "2kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "bovino",
+    //         "congelado",
+    //         "30g"
+    //     ],
+    //     "descricao_curta"=> "&bull; 2kg<br />&bull; 100% Carne Bovina<br />&bull; Congelado individualmente (IQF)",
+    //     "receitas"=> "Massa com almôndegas, Almôndegas ao molho, Almôndegas à parmegiana, Almôndegas fritas, Almôndegas empanadas, Pizza e Sanduíche."
 
-    ],
-    [
-        "destaque"=> false,
-        "categoria"=> "formados",
-        "fotos"=> [
-            "foto-produto-steak-churrasco.jpg",
-            "foto-produto-steak-churrasco.jpg"
-        ],
-        "nome"=> "Beef Steak Churrasco",
-        "locais"=> [
-            "churrasqueira",
-            "chapa",
-            "broiler"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "100g"
-        ],
-        "caracteristicas" => [
-            "bovino",
-            "saboroso",
-            "custo-beneficio",
-            "facil"
-        ],
-        "descricao_curta"=> "&bull; 100g<br />&bull; Preparo fácil<br />&bull; Muito saboroso",
-        "receitas"=> "Lanches de metro, Prato feito, À parmegiana, Beirute, Katsu sando, À milanesa e Salgados."
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "formados",
+    //     "fotos"=> [
+    //         "foto-produto-steak-churrasco.jpg",
+    //         "foto-produto-steak-churrasco.jpg"
+    //     ],
+    //     "nome"=> "Beef Steak Churrasco",
+    //     "locais"=> [
+    //         "churrasqueira",
+    //         "chapa",
+    //         "broiler"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "100g"
+    //     ],
+    //     "caracteristicas" => [
+    //         "bovino",
+    //         "saboroso",
+    //         "custo-beneficio",
+    //         "facil"
+    //     ],
+    //     "descricao_curta"=> "&bull; 100g<br />&bull; Preparo fácil<br />&bull; Muito saboroso",
+    //     "receitas"=> "Lanches de metro, Prato feito, À parmegiana, Beirute, Katsu sando, À milanesa e Salgados."
 
-    ],
-    [
-        "destaque"=> false,
-        "categoria"=> "defumados",
-        "fotos"=> [
-            "foto-produto-bacon-cubos.jpg",
-            "foto-produto-bacon-cubos.jpg"
-        ],
-        "nome"=> "Bacon em Cubos",
-        "locais"=> [
-            "panela",
-            "forno",
-            "fritadeira",
-            "chapa"
-        ],
-        "origem"=> "suino",
-        "peso"=> [
-            "100g"
-        ],
-        "caracteristicas" => [
-            "suino",
-            "cozido-defumado",
-            "topping",
-            "facil"
-        ],
-        "descricao_curta"=> "&bull; 1kg<br />&bull; Cozido e defumado<br />&bull; 100% Pernil suíno",
-        "receitas"=> "Batata frita, Hambúrguer, Sanduíche, Pizza, Risoto, Quiche, Macarrão e Salada."
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "defumados",
+    //     "fotos"=> [
+    //         "foto-produto-bacon-cubos.jpg",
+    //         "foto-produto-bacon-cubos.jpg"
+    //     ],
+    //     "nome"=> "Bacon em Cubos",
+    //     "locais"=> [
+    //         "panela",
+    //         "forno",
+    //         "fritadeira",
+    //         "chapa"
+    //     ],
+    //     "origem"=> "suino",
+    //     "peso"=> [
+    //         "100g"
+    //     ],
+    //     "caracteristicas" => [
+    //         "suino",
+    //         "cozido-defumado",
+    //         "topping",
+    //         "facil"
+    //     ],
+    //     "descricao_curta"=> "&bull; 1kg<br />&bull; Cozido e defumado<br />&bull; 100% Pernil suíno",
+    //     "receitas"=> "Batata frita, Hambúrguer, Sanduíche, Pizza, Risoto, Quiche, Macarrão e Salada."
 
-    ]
+    // ]
     
 ];
 

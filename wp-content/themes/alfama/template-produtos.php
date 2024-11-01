@@ -69,20 +69,20 @@ include_once 'produtos.php';
                 <span></span>
             </label>
         </a>
-        <a href="javascript: void(0);">
+        <!-- <a href="javascript: void(0);">
             <label class="tab formados">
                 Formados
                 <input type="radio" name="produto" value="formados" />
                 <span></span>
             </label>
-        </a>
-        <a href="javascript: void(0);">
+        </a> -->
+        <!-- <a href="javascript: void(0);">
             <label class="tab defumados">
                 Defumados
                 <input type="radio" name="produto" value="defumados" />
                 <span></span>
             </label>
-        </a>
+        </a> -->
         <a href="javascript: void(0);" class="btn">Ver produtos</a>
     </div>
 

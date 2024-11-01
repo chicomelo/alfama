@@ -5807,7 +5807,7 @@ body.compensate-for-scrollbar {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 8px;
+    gap: 12px;
   }
   .solucoes .lista-solucoes .card {
     width: 146px;
@@ -5876,7 +5876,7 @@ body.compensate-for-scrollbar {
 }
 @media (min-width: 1200px) {
   .solucoes .lista-solucoes {
-    gap: 12px;
+    gap: 16px;
   }
   .solucoes .lista-solucoes .card {
     width: 210px;
@@ -5895,7 +5895,7 @@ body.compensate-for-scrollbar {
 }
 @media (min-width: 1600px) {
   .solucoes .lista-solucoes {
-    gap: 20px;
+    gap: 32px;
   }
   .solucoes .lista-solucoes .card {
     width: 216px;

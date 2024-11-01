@@ -72,7 +72,7 @@ the_content();
                     <a href="/produtos/?produto=moidas" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
             </div>
-            <div class="card">
+            <!-- <div class="card">
                 <div class="img">
                     <img src="<?=do_shortcode("[img-url]"); ?>img-solucoes-formados.jpg" alt="Formados" />
                 </div>
@@ -81,8 +81,8 @@ the_content();
                     <p class="paragrafo-2">100% carne bovina. Por isso são tão deliciosos e com um gostinho de feitos em casa.</p>
                     <a href="/produtos/?produto=formados" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
-            </div>
-            <div class="card">
+            </div> -->
+            <!-- <div class="card">
                 <div class="img">
                     <img src="<?=do_shortcode("[img-url]"); ?>img-solucoes-defumados.jpg" alt="Defumados" />
                 </div>
@@ -91,7 +91,7 @@ the_content();
                     <p class="paragrafo-2">100% pernil suíno, pré-cozido e defumado. Zero perdas e alta rentabilidade.</p>
                     <a href="/produtos/?produto=defumados" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <a href="/produtos" class="btn btn-outline" title="Ver todas as solucões">Ver todas as solucões</a>
@@ -150,7 +150,7 @@ the_content();
                 </p>
                 <a target="_blank" href="https://www.google.com/maps/place/Alfama+Foods/@-24.9745466,-53.3757413,19z/data=!4m15!1m8!3m7!1s0x94f22ac440255705:0xe63e1cb6e1f324d9!2sAv.+Renato+Festugato,+677+-+Cascavel+Velho,+Cascavel+-+PR,+85818-118!3b1!8m2!3d-24.9744241!4d-53.3757941!16s%2Fg%2F11kqktcqf_!3m5!1s0x94f3d37b8a7f6131:0x43c58959dfd40db0!8m2!3d-24.9744152!4d-53.3758286!16s%2Fg%2F11csqgzz7_?entry=ttu" class="link">Ver no mapa</a>
             </div>
-            <div class="unidade">
+            <!-- <div class="unidade">
                 <div class="icone">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 43" xml:space="preserve"><path d="m43.2 9.3-21-8.2c-.2-.1-.5-.1-.8 0L.8 9.3c-.5.2-.8.7-.8 1.1v30.4c0 .7.5 1.2 1.2 1.2h41.6c.7 0 1.2-.5 1.2-1.2V10.4c0-.4-.3-.9-.8-1.1zM15.7 39.6v-8.4h12.5v8.4H15.7zm25.9 0h-11V30c0-.7-.5-1.2-1.2-1.2H14.5c-.7 0-1.2.5-1.2 1.2v9.6h-11V11.2l19.5-7.8 19.8 7.8v28.4z"/><path d="M7.1 15.6c-.7 0-1.2.5-1.2 1.2v6.8c0 .7.5 1.2 1.2 1.2h29.8c.7 0 1.2-.5 1.2-1.2v-6.8c0-.7-.5-1.2-1.2-1.2H7.1zm13.7 6.8h-5.1V18h5.1v4.4zm2.4-4.4h5.1v4.4h-5.1V18zM8.3 18h5.1v4.4H8.3V18zm27.4 4.4h-5.1V18h5.1v4.4z"/></svg>
                 </div>
@@ -162,7 +162,7 @@ the_content();
                     CEP 83650-000
                 </p>
                 <a target="_blank" href="https://www.google.com/maps/place/Alfama+foods/@-25.4625435,-49.591268,18z/data=!4m6!3m5!1s0x94dd17e14fbd5917:0x598cd31aa94d6ffd!8m2!3d-25.462391!4d-49.5908603!16s%2Fg%2F11kqxrszj4?entry=ttu" class="link">Ver no mapa</a>
-            </div>
+            </div> -->
             <div class="unidade">
                 <div class="icone">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 43" xml:space="preserve"><path d="M40 11h-9.4V4c0-2.2-1.8-4-4-4H4C1.8 0 0 1.8 0 4v37.9c0 .7.5 1.1 1.1 1.1h41.8c.6 0 1.1-.5 1.1-1.1V15c0-2.2-1.8-4-4-4zM2.2 4C2.2 3 3 2.2 4 2.2h22.4c1 0 1.8.8 1.8 1.8v36.8h-26V4zm39.6 36.8H30.5V13.2H40c1 0 1.8.8 1.8 1.8v25.8z"/><path d="M12.6 6.7H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1V7.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H7.9V8.9h3.6v3.6zM23.7 6.7h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1V7.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H19V8.9h3.6v3.6zM12.6 17.5H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H7.9v-3.6h3.6v3.6zM23.7 17.5h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zm-1.1 5.8H19v-3.6h3.6v3.6zM12.6 28.3H6.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zM11.5 34H7.9v-3.6h3.6V34zM23.7 28.3h-5.8c-.6 0-1.1.5-1.1 1.1v5.8c0 .6.5 1.1 1.1 1.1h5.8c.6 0 1.1-.5 1.1-1.1v-5.8c0-.6-.5-1.1-1.1-1.1zM22.6 34H19v-3.6h3.6V34zM38.9 17.5h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 23h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 28.5h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1zM38.9 34h-5.6c-.6 0-1.1.5-1.1 1.1 0 .6.5 1.1 1.1 1.1h5.6c.6 0 1.1-.5 1.1-1.1 0-.6-.4-1.1-1.1-1.1z"/></svg>
