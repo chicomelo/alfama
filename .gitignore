@@ -2,7 +2,7 @@
 # https://github.com/github/gitignore/blob/main/WordPress.gitignore
 
 # Configuration
-#wp-config.php
+wp-config.php
 
 # Example themes
 /wp-content/themes/twenty*/
