@@ -32,7 +32,7 @@ the_content();
         <h1 class="titulo">Soluções em <b class="red">proteína animal</b> pensadas para o seu negócio</h1>
 
         <div class="lista-solucoes">
-            <div class="card">
+            <!-- <div class="card">
                 <div class="img">
                     <img src="<?=do_shortcode("[img-url]"); ?>img-solucoes-porcionados.jpg" alt="Porcionados" />
                 </div>
@@ -41,7 +41,7 @@ the_content();
                     <p class="paragrafo-2">Tecnologia e eficiência para melhorar o desempenho da sua operação.</p>
                     <a href="/produtos/?produto=porcionados" class="link" title="Ver produtos">Ver produtos</a>
                 </div>
-            </div>
+            </div> -->
             <div class="card">
                 <div class="img">
                     <img src="<?=do_shortcode("[img-url]"); ?>img-solucoes-desfiados.jpg" alt="Desfiados" />

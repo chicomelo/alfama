@@ -3,181 +3,181 @@
 $produtos = [
 
 
-    [
-        "destaque"=> true,
-        "categoria"=> "porcionados",
-        "fotos"=> [
-            "foto-produto-porcionado-file-mignon.jpg",
-            "foto-produto-porcionado-file-mignon.jpg"
-        ],
-        "nome"=> "Filé Mignon Medalhão",
-        "locais"=> [
-            "churrasqueira",
-            "chapa",
-            "broiler"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "2,5kg"
-        ],
-        "caracteristicas" => [
-            "macio",
-            "praticidade",
-            "freezer-preparo"
-        ],
-        "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    ],
-    [
-        "destaque"=> false,
-        "categoria"=> "porcionados",
-        "fotos"=> [
-            "foto-produto-porcionado-contrafile-bife.jpg",
-            "foto-produto-porcionado-contrafile-bife.jpg"
-        ],
-        "nome"=> "Contrafilé Bife",
-        "locais"=> [
-            "churrasqueira",
-            "chapa",
-            "broiler"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "2,5kg"
-        ],
-        "caracteristicas" => [
-            "macio",
-            "praticidade",
-            "freezer-preparo"
-        ],
-        "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    ],
-    [
-        "destaque"=> false,
-        "categoria"=> "porcionados",
-        "fotos"=> [
-            "foto-produto-porcionado-coxao-mole-bife.jpg",
-            "foto-produto-porcionado-coxao-mole-bife.jpg"
-        ],
-        "nome"=> "Coxão Mole Bife",
-        "locais"=> [
-            "churrasqueira",
-            "chapa",
-            "broiler"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "2,5kg"
-        ],
-        "caracteristicas" => [
-            "macio",
-            "praticidade",
-            "freezer-preparo"
-        ],
-        "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    ],
-    [
-        "destaque"=> false,
-        "categoria"=> "porcionados",
-        "fotos"=> [
-            "foto-produto-porcionado-patinho-bife.jpg",
-            "foto-produto-porcionado-patinho-bife.jpg"
-        ],
-        "nome"=> "Patinho Bife",
-        "locais"=> [
-            "churrasqueira",
-            "chapa",
-            "broiler"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "2,5kg"
-        ],
-        "caracteristicas" => [
-            "macio",
-            "praticidade",
-            "freezer-preparo"
-        ],
-        "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    ],
-    [
-        "destaque"=> false,
-        "categoria"=> "porcionados",
-        "fotos"=> [
-            "foto-produto-porcionado-patinho-iscas.jpg",
-            "foto-produto-porcionado-patinho-iscas.jpg"
-        ],
-        "nome"=> "Patinho Iscas",
-        "locais"=> [
-            "churrasqueira",
-            "chapa",
-            "broiler"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "2,5kg"
-        ],
-        "caracteristicas" => [
-            "macio",
-            "praticidade",
-            "freezer-preparo"
-        ],
-        "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    ],
-    [
-        "destaque"=> false,
-        "categoria"=> "porcionados",
-        "fotos"=> [
-            "foto-produto-porcionado-paleta-bife.jpg",
-            "foto-produto-porcionado-paleta-bife.jpg"
-        ],
-        "nome"=> "Paleta Bife",
-        "locais"=> [
-            "churrasqueira",
-            "chapa",
-            "broiler"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "2,5kg"
-        ],
-        "caracteristicas" => [
-            "macio",
-            "praticidade",
-            "freezer-preparo"
-        ],
-        "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    ],
-    [
-        "destaque"=> false,
-        "categoria"=> "porcionados",
-        "fotos"=> [
-            "foto-produto-porcionado-paleta-cubos.jpg",
-            "foto-produto-porcionado-paleta-cubos.jpg"
-        ],
-        "nome"=> "Paleta Cubos",
-        "locais"=> [
-            "churrasqueira",
-            "chapa",
-            "broiler"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "2,5kg"
-        ],
-        "caracteristicas" => [
-            "macio",
-            "praticidade",
-            "freezer-preparo"
-        ],
-        "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    ],
+    // [
+    //     "destaque"=> true,
+    //     "categoria"=> "porcionados",
+    //     "fotos"=> [
+    //         "foto-produto-porcionado-file-mignon.jpg",
+    //         "foto-produto-porcionado-file-mignon.jpg"
+    //     ],
+    //     "nome"=> "Filé Mignon Medalhão",
+    //     "locais"=> [
+    //         "churrasqueira",
+    //         "chapa",
+    //         "broiler"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "2,5kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "macio",
+    //         "praticidade",
+    //         "freezer-preparo"
+    //     ],
+    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
+    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "porcionados",
+    //     "fotos"=> [
+    //         "foto-produto-porcionado-contrafile-bife.jpg",
+    //         "foto-produto-porcionado-contrafile-bife.jpg"
+    //     ],
+    //     "nome"=> "Contrafilé Bife",
+    //     "locais"=> [
+    //         "churrasqueira",
+    //         "chapa",
+    //         "broiler"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "2,5kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "macio",
+    //         "praticidade",
+    //         "freezer-preparo"
+    //     ],
+    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
+    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "porcionados",
+    //     "fotos"=> [
+    //         "foto-produto-porcionado-coxao-mole-bife.jpg",
+    //         "foto-produto-porcionado-coxao-mole-bife.jpg"
+    //     ],
+    //     "nome"=> "Coxão Mole Bife",
+    //     "locais"=> [
+    //         "churrasqueira",
+    //         "chapa",
+    //         "broiler"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "2,5kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "macio",
+    //         "praticidade",
+    //         "freezer-preparo"
+    //     ],
+    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
+    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "porcionados",
+    //     "fotos"=> [
+    //         "foto-produto-porcionado-patinho-bife.jpg",
+    //         "foto-produto-porcionado-patinho-bife.jpg"
+    //     ],
+    //     "nome"=> "Patinho Bife",
+    //     "locais"=> [
+    //         "churrasqueira",
+    //         "chapa",
+    //         "broiler"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "2,5kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "macio",
+    //         "praticidade",
+    //         "freezer-preparo"
+    //     ],
+    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
+    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "porcionados",
+    //     "fotos"=> [
+    //         "foto-produto-porcionado-patinho-iscas.jpg",
+    //         "foto-produto-porcionado-patinho-iscas.jpg"
+    //     ],
+    //     "nome"=> "Patinho Iscas",
+    //     "locais"=> [
+    //         "churrasqueira",
+    //         "chapa",
+    //         "broiler"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "2,5kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "macio",
+    //         "praticidade",
+    //         "freezer-preparo"
+    //     ],
+    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
+    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "porcionados",
+    //     "fotos"=> [
+    //         "foto-produto-porcionado-paleta-bife.jpg",
+    //         "foto-produto-porcionado-paleta-bife.jpg"
+    //     ],
+    //     "nome"=> "Paleta Bife",
+    //     "locais"=> [
+    //         "churrasqueira",
+    //         "chapa",
+    //         "broiler"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "2,5kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "macio",
+    //         "praticidade",
+    //         "freezer-preparo"
+    //     ],
+    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
+    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "porcionados",
+    //     "fotos"=> [
+    //         "foto-produto-porcionado-paleta-cubos.jpg",
+    //         "foto-produto-porcionado-paleta-cubos.jpg"
+    //     ],
+    //     "nome"=> "Paleta Cubos",
+    //     "locais"=> [
+    //         "churrasqueira",
+    //         "chapa",
+    //         "broiler"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "2,5kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "macio",
+    //         "praticidade",
+    //         "freezer-preparo"
+    //     ],
+    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
+    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    // ],
 
     [
         "destaque"=> true,

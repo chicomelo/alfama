@@ -41,13 +41,13 @@ include_once 'produtos.php';
                 <span></span>
             </label>
         </a>
-        <a href="javascript: void(0);">
+        <!-- <a href="javascript: void(0);">
             <label class="tab porcionados">
                 Porcionados
                 <input type="radio" name="produto" value="porcionados" />
                 <span></span>
             </label>
-        </a>
+        </a> -->
         <a href="javascript: void(0);">
             <label class="tab desfiados">
                 Desfiados
