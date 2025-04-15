@@ -264,7 +264,9 @@ class PostsTerms {
 
 		$posts = [];
 		foreach ( $ids as $postId ) {
-			$headlineResult = aioseo()->standalone->headlineAnalyzer->getResult( html_entity_decode( get_the_title( $postId ) ) );
+			$postTitle      = get_the_title( $postId );
+			$headline       = ! empty( $postTitle ) ? sanitize_text_field( $postTitle ) : ''; // We need this to achieve consistency for the score when using special characters in titles
+			$headlineResult = aioseo()->standalone->headlineAnalyzer->getResult( $headline );
 
 			$posts[] = [
 				'id'                => $postId,
@@ -302,11 +304,6 @@ class PostsTerms {
 
 		$aioseoPost = Models\Post::getPost( $postId );
 		$aioseoData = json_decode( wp_json_encode( $aioseoPost ), true );
-
-		// Decode these below because `savePost()` expects them to be an array.
-		if ( ! empty( $aioseoData['keyphrases'] ) ) {
-			$aioseoData['keyphrases'] = json_decode( $aioseoData['keyphrases'], true );
-		}
 
 		if ( $isMedia ) {
 			wp_update_post(

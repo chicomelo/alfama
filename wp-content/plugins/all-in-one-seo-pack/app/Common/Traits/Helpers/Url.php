@@ -173,7 +173,7 @@ trait Url {
 					$subdomain = str_replace( '.', '(.)', $subdomain );
 					$subdomain = str_replace( [ '*', '(.)' ], '(.*)', $subdomain );
 
-					if ( preg_match( '/^(' . $subdomain . ')$/', $sd ) ) {
+					if ( preg_match( '/^(' . $subdomain . ')$/', (string) $sd ) ) {
 						return true;
 					}
 				}
@@ -202,9 +202,32 @@ trait Url {
 			return false;
 		}
 
+		$domain = preg_replace( '/^\*\.+/', '', (string) $domain );
+
+		return preg_match( '/^(?!\-)(?:[a-z\d\-]{0,62}[a-z\d]\.){1,126}(?!\d+)[a-z\d]{1,63}$/i', (string) $domain );
+	}
+
+	/**
+	 * Checks if a domain is valid and optionally contains paths at the end.
+	 *
+	 * @since 4.7.7
+	 *
+	 * @param  string $domain The domain.
+	 * @return bool           Whether the domain is valid or not.
+	 */
+	private function isDomainWithPaths( $domain ) {
+		// In case there are unicode characters, convert it into IDNA ASCII URLs.
+		if ( function_exists( 'idn_to_ascii' ) ) {
+			$domain = idn_to_ascii( $domain, IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46 );
+		}
+
+		if ( ! $domain ) {
+			return false;
+		}
+
 		$domain = preg_replace( '/^\*\.+/', '', $domain );
 
-		return preg_match( '/^(?!\-)(?:[a-z\d\-]{0,62}[a-z\d]\.){1,126}(?!\d+)[a-z\d]{1,63}$/i', $domain );
+		return preg_match( '/^(?!\-)(?:[a-z\d\-]{0,62}[a-z\d]\.){1,126}(?!\d+)[a-z\d]{1,63}(\/[a-z\d\-\/]*)?$/i', $domain );
 	}
 
 	/**
@@ -235,10 +258,48 @@ trait Url {
 	 * @return string         The TLD.
 	 */
 	public function getTld( $domain ) {
-		if ( preg_match( '/(?P<tld>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $matches ) ) {
+		if ( preg_match( '/(?P<tld>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', (string) $domain, $matches ) ) {
 			return $matches['tld'];
 		}
 
 		return $domain;
+	}
+
+	/**
+	 * Returns a decoded URL string.
+	 *
+	 * @since 4.6.7
+	 *
+	 * @param  string $url The URL string.
+	 * @return string      The decoded URL.
+	 */
+	public function decodeUrl( $url ) {
+		// Check if URL was encoded multiple times.
+		while ( rawurldecode( $url ) !== $url ) {
+			$url = rawurldecode( $url );
+		}
+
+		return $url;
+	}
+
+	/**
+	 * Redirects to a specific URL.
+	 *
+	 * @since 4.8.0
+	 *
+	 * @param string $url    The URL to redirect to.
+	 * @param int    $status The status code to use.
+	 * @param string $reason The reason for redirecting.
+	 *
+	 * @return void
+	 */
+	public function redirect( $url, $status = 301, $reason = '' ) {
+		$redirectBy = 'AIOSEO';
+		if ( ! empty( $reason ) ) {
+			$redirectBy .= ': ' . $reason;
+		}
+
+		wp_safe_redirect( $url, $status, $redirectBy );
+		exit;
 	}
 }

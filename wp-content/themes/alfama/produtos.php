@@ -179,6 +179,154 @@ $produtos = [
     //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
     // ],
 
+
+    // STARTERS
+    [
+        "destaque"=> true,
+        "categoria"=> "starters",
+        "selos" => [
+            "posicao_1" => "selo-catupiry",
+            "posicao_2" => "selo-sem-massa",
+        ],
+        "fotos"=> [
+            "foto-produto-starters-carne-sol-requeijao.jpg",
+            "foto-produto-starters-carne-sol-requeijao.jpg"
+        ],
+        "nome"=> "Bolinho de Carne de Sol com Requeijão",
+        "locais"=> [
+            "fritadeira",
+            "forno"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "1,05kg"
+        ],
+        "caracteristicas" => [
+            "bolinho-sem-massa",
+            "freezer-preparo",
+            "eficiencia"
+        ],
+        "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
+        "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "starters",
+        "selos" => [
+            "posicao_2" => "selo-sem-massa",
+        ],
+        "fotos"=> [
+            "foto-produto-starters-bolinho-carne-seca.jpg",
+            "foto-produto-starters-bolinho-carne-seca.jpg"
+        ],
+        "nome"=> "Bolinho de Carne Seca",
+        "locais"=> [
+            "fritadeira",
+            "forno"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "1,05kg"
+        ],
+        "caracteristicas" => [
+            "bolinho-sem-massa",
+            "freezer-preparo",
+            "eficiencia"
+        ],
+        "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
+        "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
+
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "starters",
+        "selos" => [
+            "posicao_1" => "selo-catupiry",
+            "posicao_2" => "selo-sem-massa",
+        ],
+        "fotos"=> [
+            "foto-produto-starters-coxinha-costela-requeijao.jpg",
+            "foto-produto-starters-coxinha-costela-requeijao.jpg"
+        ],
+        "nome"=> "Coxinha de Costela com Requeijão",
+        "locais"=> [
+            "fritadeira",
+            "forno"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "1,05kg"
+        ],
+        "caracteristicas" => [
+            "coxinha-sem-massa",
+            "freezer-preparo",
+            "eficiencia"
+        ],
+        "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
+        "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
+
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "starters",
+        "selos" => [
+            "posicao_2" => "selo-sem-massa",
+        ],
+        "fotos"=> [
+            "foto-produto-starters-croquete-cupim.jpg",
+            "foto-produto-starters-croquete-cupim.jpg"
+        ],
+        "nome"=> "Croquete de Cupim",
+        "locais"=> [
+            "fritadeira",
+            "forno"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "1,05kg"
+        ],
+        "caracteristicas" => [
+            "croquete-sem-massa",
+            "freezer-preparo",
+            "eficiencia"
+        ],
+        "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
+        "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
+
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "starters",
+        "selos" => [
+            "posicao_2" => "selo-sem-massa",
+        ],
+        "fotos"=> [
+            "foto-produto-starters-croquete-pernil-limao.jpg",
+            "foto-produto-starters-croquete-pernil-limao.jpg"
+        ],
+        "nome"=> "Croquete de Pernil com Mostarda e Limão",
+        "locais"=> [
+            "fritadeira",
+            "forno"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "1,05kg"
+        ],
+        "caracteristicas" => [
+            "croquete-sem-massa",
+            "freezer-preparo",
+            "eficiencia"
+        ],
+        "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
+        "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
+
+    ],
+
+
+
+
+    // DESFIADOS
     [
         "destaque"=> true,
         "categoria"=> "desfiados",
@@ -340,14 +488,18 @@ $produtos = [
 
     ],
 
+    // MOÍDAS
     [
         "destaque"=> true,
         "categoria"=> "moidas",
-        "fotos"=> [
-            "foto-produto-carne-moida-acem.jpg",
-            "foto-produto-carne-moida-acem.jpg"
+        "selos" => [
+            "posicao_2" => "selo-9-gordura",
         ],
-        "nome"=> "Carne Moída Bovina",
+        "fotos"=> [
+            "foto-produto-carne-moida-light.jpg",
+            "foto-produto-carne-moida-light.jpg"
+        ],
+        "nome"=> "Carne Moída Light",
         "locais"=> [
             "panela",
             "forno",
@@ -356,7 +508,6 @@ $produtos = [
         ],
         "origem"=> "bovino",
         "peso"=> [
-            "500g",
             "1kg"
         ],
         "caracteristicas" => [
@@ -364,8 +515,68 @@ $produtos = [
             "condimentos",
             "nervos"
         ],
-        "descricao_curta"=> "&bull; 1kg(Food service) e 500g(Varejo) <br />&bull; 100% Carne Bovina <br />&bull; Sem condimentos",
-        "receitas"=> "Panqueca, Fricassê, Lasanha, Molho bolonhesa, Escondidinho e Salgados."
+        "descricao_curta"=> "&bull; 1kg<br />&bull; 100% Carne Bovina<br />&bull; Apenas 9% de gordura",
+        "receitas"=> "Mais leve, ideal para Refogados com legumes, Lasanha de Carne Moída e Pratos Fitness."
+
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "moidas",
+        "selos" => [
+            "posicao_2" => "selo-15-gordura",
+        ],
+        "fotos"=> [
+            "foto-produto-carne-moida-acem.jpg",
+            "foto-produto-carne-moida-acem.jpg"
+        ],
+        "nome"=> "Carne Moída",
+        "locais"=> [
+            "panela",
+            "forno",
+            "chapa",
+            "fritadeira"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "1kg"
+        ],
+        "caracteristicas" => [
+            "bovino",
+            "condimentos",
+            "nervos"
+        ],
+        "descricao_curta"=> "&bull; 1kg<br />&bull; 100% Carne Bovina <br />&bull; 15% de gordura",
+        "receitas"=> "Ideal para Hambúrgueres artesanais, Espaguete à bolonhesa e Almôndegas."
+
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "moidas",
+        "selos" => [
+            "posicao_2" => "selo-15-gordura",
+        ],
+        "fotos"=> [
+            "foto-produto-carne-moida-cortes.jpg",
+            "foto-produto-carne-moida-cortes.jpg"
+        ],
+        "nome"=> "Carne Moída Cortes",
+        "locais"=> [
+            "panela",
+            "forno",
+            "chapa",
+            "fritadeira"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "1kg"
+        ],
+        "caracteristicas" => [
+            "bovino",
+            "condimentos",
+            "nervos"
+        ],
+        "descricao_curta"=> "&bull; 1kg<br />&bull; 100% Carne Bovina<br />&bull; 15% de gordura",
+        "receitas"=> "Ideal para Torta de carne, Empadão, Polpetone, Empanada, Quibe e Salgados."
 
     ],
     // [
@@ -397,33 +608,6 @@ $produtos = [
 
     // ],
 
-    [
-        "destaque"=> false,
-        "categoria"=> "moidas",
-        "fotos"=> [
-            "foto-produto-carne-moida-cortes.jpg",
-            "foto-produto-carne-moida-cortes.jpg"
-        ],
-        "nome"=> "Carne Moída Bovina Cortes",
-        "locais"=> [
-            "panela",
-            "forno",
-            "chapa",
-            "fritadeira"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "2,5kg"
-        ],
-        "caracteristicas" => [
-            "bovino",
-            "condimentos",
-            "nervos"
-        ],
-        "descricao_curta"=> "&bull; 2,5kg<br />&bull; 100% Carne Bovina<br />&bull; Sem condimentos",
-        "receitas"=> "Torta de carne, Empadão, Polpetone, Empanada, Quibe e Salgados."
-
-    ],
     [
         "destaque"=> true,
         "categoria"=> "hamburguer",

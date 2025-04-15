@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 1.2.1
+Version: 1.3.6
 Author: Emre Vona
 Author URI: https://www.wpfastestcache.com/
 Text Domain: wp-fastest-cache
@@ -227,35 +227,7 @@ GNU General Public License for more details.
 					// /?action=wpfastestcache&type=clearcache&token=123
 					// /?action=wpfastestcache&type=clearcacheandminified&token=123
 
-					if(isset($_GET["token"]) && $_GET["token"]){
-						if(defined("WPFC_CLEAR_CACHE_URL_TOKEN") && WPFC_CLEAR_CACHE_URL_TOKEN){
-							if(WPFC_CLEAR_CACHE_URL_TOKEN == $_GET["token"]){
-								if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
-									include_once $this->get_premium_path("mobile-cache.php");
-								}
-
-								if($_GET["type"] == "clearcache"){
-									$this->deleteCache();
-								}
-
-								if($_GET["type"] == "clearcacheandminified"){
-									$this->deleteCache(true);
-								}
-
-								if($_GET["type"] == "clearcacheallsites"){
-									$this->wpfc_clear_cache_of_allsites_callback();
-								}
-
-								die("Done");
-							}else{
-								die("Wrong token");
-							}
-						}else{
-							die("WPFC_CLEAR_CACHE_URL_TOKEN must be defined");
-						}
-					}else{
-						die("Security token must be set.");
-					}
+					add_action('wp_loaded', array($this, "handle_custom_delete_cache_request"));
 				}
 			}else{
 				$this->setCustomInterval();
@@ -354,6 +326,59 @@ GNU General Public License for more details.
 					}
 				}
 			}
+		}
+
+		public function handle_custom_delete_cache_request(){
+			$action = false;
+			$wpfc_token = false;
+			
+			if(defined("WPFC_CLEAR_CACHE_URL_TOKEN") && WPFC_CLEAR_CACHE_URL_TOKEN){
+				$wpfc_token = WPFC_CLEAR_CACHE_URL_TOKEN;
+			}else{
+				$wpfc_token = apply_filters( 'wpfc_clear_cache_url_token', false );
+			}
+
+			if(isset($_GET["token"]) && $_GET["token"]){
+				if($wpfc_token){
+					if($wpfc_token == $_GET["token"]){
+						$action = true;
+					}else{
+						die("Wrong token");
+					}
+				}else{
+					die("WPFC_CLEAR_CACHE_URL_TOKEN must be defined");
+				}
+			}else{
+				die("Security token must be set.");
+			}
+
+			if($action){
+				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+					include_once $this->get_premium_path("mobile-cache.php");
+				}
+
+				if($_GET["type"] == "clearcache"){
+
+					if(isset($_GET["post_id"])){
+						$this->singleDeleteCache(false, $_GET["post_id"]);
+					}else{
+						$this->deleteCache();
+					}
+					
+				}
+
+				if($_GET["type"] == "clearcacheandminified"){
+					$this->deleteCache(true);
+				}
+
+				if($_GET["type"] == "clearcacheallsites"){
+					$this->wpfc_clear_cache_of_allsites_callback();
+				}
+
+				die("Done");
+			}
+			
+			exit;
 		}
 
 		public function enable_auto_cache_settings_panel(){
@@ -476,9 +501,11 @@ GNU General Public License for more details.
 			if($this->isPluginActive('polylang/polylang.php') || $this->isPluginActive('polylang-pro/polylang.php')){
 				$url =  parse_url($content_url);
 
-				if($url["host"] != $_SERVER['HTTP_HOST']){
-					$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-					$content_url = $protocol.$_SERVER['HTTP_HOST'].$url['path'];
+				if(isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST']){
+					if($url["host"] != $_SERVER['HTTP_HOST']){
+						$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+						$content_url = $protocol.$_SERVER['HTTP_HOST'].$url['path'];
+					}
 				}
 			}
 
@@ -857,7 +884,18 @@ GNU General Public License for more details.
 		}
 
 		public function load_admin_toolbar(){
-			if(!defined('WPFC_HIDE_TOOLBAR') || (defined('WPFC_HIDE_TOOLBAR') && !WPFC_HIDE_TOOLBAR)){
+			$display = true;
+			
+			if(apply_filters('wpfc_hide_toolbar', false )){
+				$display = "";
+			}
+
+			if(defined('WPFC_HIDE_TOOLBAR') && WPFC_HIDE_TOOLBAR){
+				$display = "";
+			}
+
+
+			if($display){
 				$user = wp_get_current_user();
 				$allowed_roles = array('administrator');
 
@@ -1164,7 +1202,7 @@ GNU General Public License for more details.
 						$path = preg_replace("/\/cache\/(all|wpfc-minified|wpfc-widget-cache|wpfc-mobile-cache)/", "/cache/".$_SERVER['HTTP_HOST']."/$1", $path);
 					}
 
-					if($this->isPluginActive('polylang/polylang.php')){
+					if($this->isPluginActive('polylang/polylang.php') || $this->isPluginActive('polylang-pro/polylang.php')){
 						$polylang_settings = get_option("polylang");
 
 						if(isset($polylang_settings["force_lang"])){
@@ -1293,6 +1331,12 @@ GNU General Public License for more details.
 				}
 
 				if($new_status == "trash" && $old_status == "publish"){
+
+					if($post->post_type == "shop_coupon"){
+						// YITH WooCommerce Coupon Email System Premium
+						return;
+					}
+
 					$this->singleDeleteCache(false, $post->ID);
 				}else if(($new_status == "draft" || $new_status == "pending" || $new_status == "private") && $old_status == "publish"){
 					$this->deleteCache();
@@ -1302,13 +1346,33 @@ GNU General Public License for more details.
 
 		protected function commentHooks(){
 			//it works when the status of a comment changes
-			add_action('wp_set_comment_status', array($this, 'singleDeleteCache'), 10, 1);
+			add_action('wp_set_comment_status', array($this, 'detect_comment_status_change'), 10, 2);
 
 			//it works when a comment is saved in the database
 			add_action('comment_post', array($this, 'detectNewComment'), 10, 2);
 
 			// it work when a commens is updated
 			add_action('edit_comment', array($this, 'detectEditComment'), 10, 2);
+		}
+
+		public function detect_comment_status_change($comment_id, $new_status) {
+		    $comment = get_comment($comment_id);
+		    
+		    if (!$comment) {
+		        return; // Exit if the comment doesn't exist
+		    }
+
+		    // Check if the comment was pending and is now marked as spam
+		    if($comment->comment_status == 'open' && $new_status === 'spam'){
+		    	return;
+		    }
+
+		    // Check if the comment was pending and is now marked as trash
+		    if($comment->comment_status == 'open' && $new_status === 'trash'){
+		    	return;
+		    }
+
+		    $this->singleDeleteCache($comment_id);
 		}
 
 		public function detectEditComment($comment_id, $comment_data){
@@ -1333,6 +1397,11 @@ GNU General Public License for more details.
 
 					if(preg_match("/https?:\/\/[^\/]+\/(.+)/", $value->url, $out)){
 
+						if(preg_match("/\.{2,}/", $out[1])){
+							// to prevent Directory Traversal Attack
+							continue;
+						}
+
 						if(preg_match("/\/\(\.\*\)/", $out[1])){
 							$out[1] = str_replace("(.*)", "", $out[1]);
 
@@ -1351,10 +1420,14 @@ GNU General Public License for more details.
 
 						if(is_dir($path)){
 							rename($path, $this->getWpContentDir("/cache/tmpWpfc/").time());
+						}else if(is_file($path)){
+							@unlink($path);
 						}
 
 						if(is_dir($mobile_path)){
 							rename($mobile_path, $this->getWpContentDir("/cache/tmpWpfc/mobile_").time());
+						}else if(is_file($mobile_path)){
+							@unlink($mobile_path);
 						}
 						
 					}
@@ -2064,20 +2137,28 @@ GNU General Public License for more details.
 		}
 
 		public function getABSPATH(){
-			$path = ABSPATH;
-			$siteUrl = site_url();
-			$homeUrl = home_url();
-			$diff = str_replace($homeUrl, "", $siteUrl);
-			$diff = trim($diff,"/");
 
-		    $pos = strrpos($path, $diff);
+			if(function_exists("get_home_path")){
+				return get_home_path();
+			}else{
 
-		    if($pos !== false){
-		    	$path = substr_replace($path, "", $pos, strlen($diff));
-		    	$path = trim($path,"/");
-		    	$path = "/".$path."/";
-		    }
-		    return $path;
+				$path = ABSPATH;
+				$siteUrl = site_url();
+				$homeUrl = home_url();
+				$diff = str_replace($homeUrl, "", $siteUrl);
+				$diff = trim($diff,"/");
+
+			    $pos = strrpos($path, $diff);
+
+			    if($pos !== false){
+			    	$path = substr_replace($path, "", $pos, strlen($diff));
+			    	$path = trim($path,"/");
+			    	$path = "/".$path."/";
+			    }
+			    return $path;
+
+			}
+			
 		}
 
 		public function rm_folder_recursively($dir, $i = 1) {

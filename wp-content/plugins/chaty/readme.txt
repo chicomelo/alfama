@@ -2,8 +2,8 @@
 Contributors: galdub, tomeraharon, premio
 Tags: whatsapp, whatsapp chat, facebook messenger, chat, chat button
 Requires at least: 3.1
-Tested up to: 6.7
-Stable tag: 3.3.4
+Tested up to: 6.8
+Stable tag: 3.3.8
 Plugin URI: https://premio.io/downloads/chaty/
 License: GPLv3
 
@@ -30,7 +30,7 @@ Chaty is the perfect chat plugin to display a call widget, WhatsApp button, emai
 
 = 💪 What can you do with Chaty =
 
-* Chaty VS live chat - using live chat alternatives, your visitors must stay on your website & wait for your response. When you let your visitors chat with you using chat apps like Facebook Messenger, WhatsApp, Viber, Telegram, etc, you give them the freedom to chat with you wherever they go.
+* Chaty VS live chat - using live chat alternatives, your visitors must stay on your website & wait for your response. When you let your visitors chat with you using chat apps like Facebook Messenger, WhatsApp, Viber, Telegram, etc, you give them the freedom to chat with you wherever they go. If you still interested in using live chat plugin, you can integrate Chatway live chat with your Chaty chat widget.
 * Show your visitors the chat channels you're available on & let them choose the chat app they prefer.
 * WhatsApp Business - chat with your visitors on WhatsApp Business.
 * Help your visitors navigate to your address.
@@ -180,7 +180,7 @@ In the Pro version, Chaty has many WooCommerce integrations, including dynamic c
 
 * Skype - add your Skype username and let your visitors call and message you easily via Skype.
 
-* Vkontakte (ВКонтакте) - add your Vkontakte username and let your visitors contact you directly through the app.
+* Vkontakte (ВКонтакте) - add your Vkontakte (ВКонтакте) username and let your visitors contact you directly through the app.
 
 * LinkedIn icon - link to your LinkedIn profile so your visitors can connect with you and send you direct messages.
 
@@ -294,6 +294,23 @@ Yes! You can even decide what chat buttons will show up on each device (desktop/
 
 
 == Changelog ==
+
+= 3.3.8 =
+Slack channel bug fixed
+
+= 3.3.7 =
+JavaScript bug fixed
+
+= 3.3.6 =
+WordPress 6.7 bug fixes
+DOM issue fixed
+
+= 3.3.5 =
+File upload bug fixed
+Custom field for email sent for leads bug fixed
+Custom channels bug fixed
+Contact form bug fixed
+WhatsApp iOS bug fixed
 
 = 3.3.4 =
 Added a chat button for Instagram Direct Messenger

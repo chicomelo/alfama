@@ -138,7 +138,7 @@
             }
             .locais{
                 display: flex;
-                gap: 16px;
+                gap: 8px;
                 margin: 16px 0 12px 0;
                 & > div{
                     display: flex;
@@ -336,13 +336,36 @@
             }
 
             .fotos{
-                margin-top: 16px;
+                margin-top: 24px;
                 margin-bottom: 8px;
                 img{
                     display: block;
                     max-width: 100%;
                     margin: 0 auto;
                 }
+
+                .selos{
+                    position: relative;
+                    .selos-content{
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 0 24px 0 24px;
+                        width: 100%;
+                        position: absolute;
+                        top: -8px;
+                    }
+                    img{
+                        height: 62px;
+                        width: fit-content;
+                    }
+
+                    &.moidas{
+                        .selos-content{
+                            top: 64px;
+                        }
+                    }
+                }
+
                 .slick-dots{
                     position: relative;
                     bottom: auto;
@@ -666,8 +689,21 @@
             padding: 36px 44px;
             .produto{
                 .fotos{
+
+                    .selos{
+                        position: relative;
+                        .selos-content{
+                            padding: 0 56px;
+                        }
+                        img{
+                            height: 62px;
+                            width: fit-content;
+                        }
+                    }
+
                     img{
                         margin: 0;
+                        max-width: 378px;
                     }
                 }
                 .nome{
@@ -677,11 +713,6 @@
                     display: flex;
                     gap: 24px;
                     margin: 24px 0 16px 0;
-                }
-                .fotos{
-                    img{
-                        max-width: 378px;
-                    }
                 }
                 .paragrafo{
                     font-size: 1.6rem;

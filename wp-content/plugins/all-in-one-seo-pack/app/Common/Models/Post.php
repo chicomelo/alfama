@@ -30,7 +30,7 @@ class Post extends Model {
 	 */
 	protected $jsonFields = [
 		'keywords',
-		// 'keyphrases',
+		'keyphrases',
 		'page_analysis',
 		'schema',
 		// 'schema_type_options',
@@ -81,6 +81,17 @@ class Post extends Model {
 	 * @var array
 	 */
 	protected $nullFields = [
+		'priority'
+	];
+
+	/**
+	 * Fields that should be float values.
+	 *
+	 * @since 4.7.3
+	 *
+	 * @var array
+	 */
+	protected $floatFields = [
 		'priority'
 	];
 
@@ -192,6 +203,7 @@ class Post extends Model {
 		$post = self::migrateRemovedQaSchema( $post );
 		$post = self::migrateImageTypes( $post );
 		$post = self::runDynamicSchemaMigration( $post );
+		$post = self::migrateKoreaCountryCodeSchemas( $post );
 
 		return $post;
 	}
@@ -219,6 +231,11 @@ class Post extends Model {
 		// is correctly propagated on the frontend after changing it.
 		$post->schema = self::getDefaultSchemaOptions( $post->schema );
 
+		// Filter out null or empty graphs.
+		$post->schema->graphs = array_filter( $post->schema->graphs, function( $graph ) {
+			return ! empty( $graph );
+		} );
+
 		foreach ( $post->schema->graphs as $graph ) {
 			// If the first character of the graph ID isn't a pound, add one.
 			// We have to do this because the schema migration in 4.2.5 didn't add the pound for custom graphs.
@@ -229,12 +246,21 @@ class Post extends Model {
 			// If the graph has an old rating value, we need to migrate it to the review.
 			if (
 				property_exists( $graph, 'id' ) &&
-				preg_match( '/(movie|software-application)/', $graph->id ) &&
+				preg_match( '/(movie|software-application)/', (string) $graph->id ) &&
 				property_exists( $graph->properties, 'rating' ) &&
 				property_exists( $graph->properties->rating, 'value' )
 			) {
 				$graph->properties->review->rating = $graph->properties->rating->value;
 				unset( $graph->properties->rating->value );
+			}
+
+			// If the graph has audience data, we need to migrate it to the correct one.
+			if (
+				property_exists( $graph, 'id' ) &&
+				preg_match( '/(product|product-review)/', $graph->id ) &&
+				property_exists( $graph->properties, 'audience' )
+			) {
+				$graph->properties->audience = self::migratePostAudienceAgeSchema( $graph->properties->audience );
 			}
 		}
 
@@ -318,8 +344,8 @@ class Post extends Model {
 	 * @return array          The data.
 	 */
 	private static function checkForDefaultFormat( $postId, $thePost, $data ) {
-		$data['title']       = trim( $data['title'] );
-		$data['description'] = trim( $data['description'] );
+		$data['title']       = trim( (string) $data['title'] );
+		$data['description'] = trim( (string) $data['description'] );
 
 		$post                     = aioseo()->helpers->getPost( $postId );
 		$defaultTitleFormat       = trim( aioseo()->meta->title->getPostTypeTitle( $post->post_type ) );
@@ -421,11 +447,11 @@ class Post extends Model {
 		$thePost->post_id                     = $postId;
 		$thePost->title                       = ! empty( $data['title'] ) ? sanitize_text_field( $data['title'] ) : null;
 		$thePost->description                 = ! empty( $data['description'] ) ? sanitize_text_field( $data['description'] ) : null;
-		$thePost->canonical_url               = ! empty( $data['canonicalUrl'] ) ? esc_url_raw( $data['canonicalUrl'] ) : null;
+		$thePost->canonical_url               = ! empty( $data['canonicalUrl'] ) ? sanitize_text_field( $data['canonicalUrl'] ) : null;
 		$thePost->keywords                    = ! empty( $data['keywords'] ) ? aioseo()->helpers->sanitize( $data['keywords'] ) : null;
 		$thePost->pillar_content              = isset( $data['pillar_content'] ) ? rest_sanitize_boolean( $data['pillar_content'] ) : 0;
 		// TruSEO
-		$thePost->keyphrases                  = ! empty( $data['keyphrases'] ) ? wp_json_encode( self::sanitizeKeyphrases( $data['keyphrases'] ) ) : null;
+		$thePost->keyphrases                  = ! empty( $data['keyphrases'] ) ? self::sanitizeKeyphrases( $data['keyphrases'] ) : null;
 		$thePost->page_analysis               = ! empty( $data['page_analysis'] ) ? self::sanitizePageAnalysis( $data['page_analysis'] ) : null;
 		$thePost->seo_score                   = ! empty( $data['seo_score'] ) ? sanitize_text_field( $data['seo_score'] ) : 0;
 		// Sitemap
@@ -440,7 +466,7 @@ class Post extends Model {
 		$thePost->robots_noimageindex         = isset( $data['noimageindex'] ) ? rest_sanitize_boolean( $data['noimageindex'] ) : 0;
 		$thePost->robots_nosnippet            = isset( $data['nosnippet'] ) ? rest_sanitize_boolean( $data['nosnippet'] ) : 0;
 		$thePost->robots_noodp                = isset( $data['noodp'] ) ? rest_sanitize_boolean( $data['noodp'] ) : 0;
-		$thePost->robots_max_snippet          = ! empty( $data['maxSnippet'] ) ? (int) sanitize_text_field( $data['maxSnippet'] ) : -1;
+		$thePost->robots_max_snippet          = isset( $data['maxSnippet'] ) && is_numeric( $data['maxSnippet'] ) ? (int) sanitize_text_field( $data['maxSnippet'] ) : -1;
 		$thePost->robots_max_videopreview     = isset( $data['maxVideoPreview'] ) && is_numeric( $data['maxVideoPreview'] ) ? (int) sanitize_text_field( $data['maxVideoPreview'] ) : -1;
 		$thePost->robots_max_imagepreview     = ! empty( $data['maxImagePreview'] ) ? sanitize_text_field( $data['maxImagePreview'] ) : 'large';
 		// Open Graph Meta
@@ -559,7 +585,7 @@ class Post extends Model {
 	 * @param  array $data   The data.
 	 * @return void
 	 */
-	private static function updatePostMeta( $postId, $data ) {
+	public static function updatePostMeta( $postId, $data ) {
 		// Update the post meta as well for localization.
 		$keywords      = ! empty( $data['keywords'] ) ? aioseo()->helpers->jsonTagsToCommaSeparatedList( $data['keywords'] ) : [];
 		$ogArticleTags = ! empty( $data['og_article_tags'] ) ? aioseo()->helpers->jsonTagsToCommaSeparatedList( $data['og_article_tags'] ) : [];
@@ -641,6 +667,8 @@ class Post extends Model {
 					'Movie'               => [],
 					'Person'              => [],
 					'Product'             => [],
+					'ProductReview'       => [],
+					'Car'                 => [],
 					'Recipe'              => [],
 					'Service'             => [],
 					'SoftwareApplication' => [],
@@ -679,12 +707,11 @@ class Post extends Model {
 	 *
 	 * @since 4.1.7
 	 *
-	 * @param  string $keyphrases The database keyphrases.
-	 * @return object             The defaults.
+	 * @param  null|object $keyphrases The database keyphrases.
+	 * @return object                  The defaults.
 	 */
-	public static function getKeyphrasesDefaults( $keyphrases = '' ) {
-		$keyphrases = json_decode( (string) $keyphrases );
-		$defaults   = [
+	public static function getKeyphrasesDefaults( $keyphrases = null ) {
+		$defaults = [
 			'focus'      => [
 				'keyphrase' => '',
 				'score'     => 0,
@@ -775,5 +802,104 @@ class Post extends Model {
 		$existingOptions = array_replace_recursive( $defaults, $existingOptions );
 
 		return json_decode( wp_json_encode( $existingOptions ) );
+	}
+
+	/**
+	 * Migrates the post's audience age schema data when it is loaded.
+	 * Min age: [0 => newborns, 0.25 => infants, 1 => toddlers, 5 => kids, 13 => adults]
+	 * Max age: [0.25 => newborns, 1 => infants, 5 => toddlers, 13 => kids]
+	 *
+	 * @since 4.7.9
+	 *
+	 * @param  object $audience The audience data.
+	 * @return object
+	 */
+	public static function migratePostAudienceAgeSchema( $audience ) {
+		$ages = [ 0, 0.25, 1, 5, 13 ];
+
+		// converts variable to integer if it's a number otherwise is null.
+		$parsedMinAge = filter_var( $audience->minimumAge, FILTER_VALIDATE_FLOAT, FILTER_NULL_ON_FAILURE );
+		$parsedMaxAge = filter_var( $audience->maximumAge, FILTER_VALIDATE_FLOAT, FILTER_NULL_ON_FAILURE );
+
+		if ( null === $parsedMinAge && null === $parsedMaxAge ) {
+			return $audience;
+		}
+
+		$minAge = is_numeric( $parsedMinAge ) ? $parsedMinAge : 0;
+		$maxAge = is_numeric( $parsedMaxAge ) ? $parsedMaxAge : null;
+
+		// get the minimumAge if available or the nearest bigger one.
+		foreach ( $ages as $age ) {
+			if ( $age >= $minAge ) {
+				$audience->minimumAge = $age;
+				break;
+			}
+		}
+
+		// get the maximumAge if available or the nearest bigger one.
+		foreach ( $ages as $age ) {
+			if ( $age >= $maxAge ) {
+				$maxAge = $age;
+				break;
+			}
+		}
+
+		// makes sure the maximumAge is 13 below
+		if ( null !== $maxAge ) {
+			$audience->maximumAge = 13 < $maxAge ? 13 : $maxAge;
+		}
+
+		// Minimum age 13 is for adults.
+		// If minimumAge is still higher or equal 13 then it's for adults and maximumAge should be empty.
+		if ( 13 <= $audience->minimumAge ) {
+			$audience->minimumAge = 13;
+			$audience->maximumAge = null;
+		}
+
+		return $audience;
+	}
+
+	/**
+	 * Migrates update Korea country code for Person, Product, Event, and JobsPosting schemas.
+	 *
+	 * @since 4.7.1
+	 *
+	 * @param  Post $aioseoPost The post object.
+	 * @return Post             The modified post object.
+	 */
+	private static function migrateKoreaCountryCodeSchemas( $aioseoPost ) {
+		if ( empty( $aioseoPost->schema ) || empty( $aioseoPost->schema->graphs ) ) {
+			return $aioseoPost;
+		}
+
+		foreach ( $aioseoPost->schema->graphs as $key => $graph ) {
+			if ( isset( $aioseoPost->schema->graphs[ $key ]->properties->location->country ) ) {
+				$aioseoPost->schema->graphs[ $key ]->properties->location->country = self::invertKoreaCode( $graph->properties->location->country );
+			}
+
+			if ( isset( $aioseoPost->schema->graphs[ $key ]->properties->shippingDestinations ) ) {
+				$aioseoPost->schema->graphs[ $key ]->properties->shippingDestinations = array_map( function( $item ) {
+					$item->country = self::invertKoreaCode( $item->country );
+
+					return $item;
+				}, $graph->properties->shippingDestinations );
+			}
+		}
+
+		$aioseoPost->save();
+
+		return $aioseoPost;
+	}
+
+	/**
+	 * Utility function to invert the country code for Korea.
+	 *
+	 * @since 4.7.1
+	 *
+	 * @param  string $code country code.
+	 * @return string       country code.
+	 */
+	public static function invertKoreaCode( $code ) {
+		return 'KP' === $code ? 'KR' : $code;
 	}
 }

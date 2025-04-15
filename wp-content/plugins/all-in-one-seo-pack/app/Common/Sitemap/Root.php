@@ -142,6 +142,21 @@ class Root {
 			$indexes[] = $this->buildIndex( 'date', $result[0]->amountOfUrls );
 		}
 
+		if (
+			aioseo()->helpers->isWooCommerceActive() &&
+			in_array( 'product_attributes', aioseo()->sitemap->helpers->includedTaxonomies(), true )
+		) {
+			$productAttributes = aioseo()->sitemap->content->productAttributes( true );
+
+			if ( ! empty( $productAttributes ) ) {
+				$indexes[] = $this->buildIndex( 'product_attributes', $productAttributes );
+			}
+		}
+
+		if ( isset( aioseo()->standalone->buddyPress->sitemap ) ) {
+			$indexes = array_merge( $indexes, aioseo()->standalone->buddyPress->sitemap->indexes() );
+		}
+
 		return apply_filters( 'aioseo_sitemap_indexes', array_filter( $indexes ) );
 	}
 
@@ -333,6 +348,14 @@ class Root {
 			}, $excludedPostIds );
 		}
 
+		if ( 'page' === $postType ) {
+			$isStaticHomepage = 'page' === get_option( 'show_on_front' );
+			if ( $isStaticHomepage ) {
+				$blogPageId = (int) get_option( 'page_for_posts' );
+				$excludedPostIds[] = $blogPageId;
+			}
+		}
+
 		$whereClause         = '';
 		$excludedPostsString = aioseo()->sitemap->helpers->excludedPosts();
 		if ( ! empty( $excludedPostsString ) ) {
@@ -350,12 +373,22 @@ class Root {
 			'product' === $postType
 		) {
 			$whereClause .= " AND p.ID NOT IN (
-				SELECT tr.object_id
+				SELECT CONVERT(tr.object_id, unsigned) AS object_id
 				FROM {$termRelationshipsTable} AS tr
 				JOIN {$termTaxonomyTable} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
 				JOIN {$termsTable} AS t ON tt.term_id = t.term_id
 				WHERE t.name = 'exclude-from-catalog'
 			)";
+		}
+
+		// Include the blog page in the posts post type unless manually excluded.
+		$blogPageId = (int) get_option( 'page_for_posts' );
+		if (
+			$blogPageId &&
+			! in_array( $blogPageId, $excludedPostIds, true ) &&
+			'post' === $postType
+		) {
+			$whereClause .= " OR `p`.`ID` = $blogPageId ";
 		}
 
 		$posts = aioseo()->core->db->execute(
@@ -534,7 +567,7 @@ class Root {
 					->whereRaw( "
 					( `p`.`ID` IN
 						(
-							SELECT `tr`.`object_id`
+							SELECT CONVERT(`tr`.`object_id`, unsigned)
 							FROM `$termRelationshipsTable` as tr
 							WHERE `tr`.`term_taxonomy_id` IN ( '$termIds' )
 						)

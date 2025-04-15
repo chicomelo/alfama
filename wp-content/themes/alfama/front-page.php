@@ -44,6 +44,18 @@ the_content();
             </div> -->
             <div class="card">
                 <div class="img">
+                    
+                    <img src="<?=do_shortcode("[img-url]"); ?>img-solucoes-starters.jpg" alt="Starters" />
+                </div>
+                <div class="card-content">
+                    <div class="selo-novo"><img src="<?=do_shortcode("[img-url]"); ?>selo-novo.png" alt="Novo" /></div>
+                    <h2 class="sub-titulo">Starters</h2>
+                    <p class="paragrafo-2">Os desfiados líderes do food service, agora prontos como aperitivos.</p>
+                    <a href="/produtos/?produto=starters" class="link" title="Ver produtos">Ver produtos</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="img">
                     <img src="<?=do_shortcode("[img-url]"); ?>img-solucoes-desfiados.jpg" alt="Desfiados" />
                 </div>
                 <div class="card-content">

@@ -1,12 +1,12 @@
 <?php
 namespace AIOSEO\Plugin\Common\Sitemap;
 
-use AIOSEO\Plugin\Common\Utils as CommonUtils;
-
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+use AIOSEO\Plugin\Common\Utils as CommonUtils;
 
 /**
  * Handles all complex queries for the sitemap.
@@ -91,9 +91,42 @@ class Query {
 
 		$excludedPosts = aioseo()->sitemap->helpers->excludedPosts();
 
+		if ( $excludedPosts ) {
+			$query->whereRaw( "( `p`.`ID` NOT IN ( $excludedPosts ) OR post_id = $homePageId )" );
+		}
+
+		// Exclude posts assigned to excluded terms.
+		$excludedTerms = aioseo()->sitemap->helpers->excludedTerms();
+		if ( $excludedTerms ) {
+			$termRelationshipsTable = aioseo()->core->db->db->prefix . 'term_relationships';
+			$query->whereRaw("
+				( `p`.`ID` NOT IN
+					(
+						SELECT `tr`.`object_id`
+						FROM `$termRelationshipsTable` as tr
+						WHERE `tr`.`term_taxonomy_id` IN ( $excludedTerms )
+					)
+				)" );
+		}
+
+		if ( $maxAge ) {
+			$query->whereRaw( "( `p`.`post_date_gmt` >= '$maxAge' )" );
+		}
+
+		if (
+			'rss' === aioseo()->sitemap->type ||
+			(
+				aioseo()->sitemap->indexes &&
+				empty( $additionalArgs['root'] ) &&
+				empty( $additionalArgs['count'] )
+			)
+		) {
+			$query->limit( aioseo()->sitemap->linksPerIndex, aioseo()->sitemap->offset );
+		}
+
 		$isStaticHomepage = 'page' === get_option( 'show_on_front' );
 		if ( $isStaticHomepage ) {
-			$excludedPostIds = explode( ',', $excludedPosts );
+			$excludedPostIds = array_map( 'intval', explode( ',', $excludedPosts ) );
 			$blogPageId      = (int) get_option( 'page_for_posts' );
 
 			if ( in_array( 'page', $postTypesArray, true ) ) {
@@ -124,44 +157,11 @@ class Query {
 			}
 		}
 
-		if ( $excludedPosts ) {
-			$query->whereRaw( "( `p`.`ID` NOT IN ( $excludedPosts ) OR post_id = $homePageId )" );
-		}
-
-		// Exclude posts assigned to excluded terms.
-		$excludedTerms = aioseo()->sitemap->helpers->excludedTerms();
-		if ( $excludedTerms ) {
-			$termRelationshipsTable = aioseo()->core->db->db->prefix . 'term_relationships';
-			$query->whereRaw("
-				( `p`.`ID` NOT IN
-					(
-						SELECT `tr`.`object_id`
-						FROM `$termRelationshipsTable` as tr
-						WHERE `tr`.`term_taxonomy_id` IN ( $excludedTerms )
-					)
-				)" );
-		}
-
-		if ( $maxAge ) {
-			$query->whereRaw( "( `p`.`post_date_gmt` >= '$maxAge' )" );
-		}
-
-		if (
-			'rss' === aioseo()->sitemap->type ||
-			(
-				aioseo()->sitemap->indexes &&
-				empty( $additionalArgs['root'] ) &&
-				( empty( $additionalArgs['count'] ) || ! $additionalArgs['count'] )
-			)
-		) {
-			$query->limit( aioseo()->sitemap->linksPerIndex, aioseo()->sitemap->offset );
-		}
-
 		$query->orderBy( $orderBy );
 		$query = $this->filterPostQuery( $query, $postTypes );
 
 		// Return the total if we are just counting the posts.
-		if ( ! empty( $additionalArgs['count'] ) && $additionalArgs['count'] ) {
+		if ( ! empty( $additionalArgs['count'] ) ) {
 			return (int) $query->run( true, 'var' )
 				->result();
 		}
@@ -296,13 +296,13 @@ class Query {
 	}
 
 	/**
-	 * Returns all eligble sitemap entries for a given taxonomy.
+	 * Returns all eligible sitemap entries for a given taxonomy.
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  string $taxonomy       The taxonomy.
-	 * @param  array  $additionalArgs Any additional arguments for the term query.
-	 * @return array|int              The term objects or the term count.
+	 * @param  string    $taxonomy       The taxonomy.
+	 * @param  array     $additionalArgs Any additional arguments for the term query.
+	 * @return array|int                 The term objects or the term count.
 	 */
 	public function terms( $taxonomy, $additionalArgs = [] ) {
 		// Set defaults.
@@ -313,7 +313,7 @@ class Query {
 		foreach ( $additionalArgs as $name => $value ) {
 			$$name = esc_sql( $value );
 			if ( 'root' === $name && $value ) {
-				$fields = 't.term_id';
+				$fields = 't.term_id, tt.count';
 			}
 			if ( 'count' === $name && $value ) {
 				$fields = 'count(t.term_id) as total';
@@ -322,16 +322,28 @@ class Query {
 
 		$termRelationshipsTable = aioseo()->core->db->db->prefix . 'term_relationships';
 		$termTaxonomyTable      = aioseo()->core->db->db->prefix . 'term_taxonomy';
+
+		// Include all terms that have assigned posts or whose children have assigned posts.
 		$query = aioseo()->core->db
 			->start( aioseo()->core->db->db->terms . ' as t', true )
 			->select( $fields )
+			->leftJoin( 'term_taxonomy as tt', '`tt`.`term_id` = `t`.`term_id`' )
 			->whereRaw( "
 			( `t`.`term_id` IN
 				(
 					SELECT `tt`.`term_id`
 					FROM `$termTaxonomyTable` as tt
 					WHERE `tt`.`taxonomy` = '$taxonomy'
-					AND `tt`.`count` > 0
+					AND 
+						(
+							`tt`.`count` > 0 OR
+							EXISTS (
+								SELECT 1
+								FROM `$termTaxonomyTable` as tt2
+								WHERE `tt2`.`parent` = `tt`.`term_id` 
+								AND `tt2`.`count` > 0
+							)
+						)
 				)
 			)" );
 
@@ -350,13 +362,13 @@ class Query {
 		if (
 			aioseo()->sitemap->indexes &&
 			empty( $additionalArgs['root'] ) &&
-			( empty( $additionalArgs['count'] ) || ! $additionalArgs['count'] )
+			empty( $additionalArgs['count'] )
 		) {
 			$query->limit( aioseo()->sitemap->linksPerIndex, $offset );
 		}
 
 		// Return the total if we are just counting the terms.
-		if ( ! empty( $additionalArgs['count'] ) && $additionalArgs['count'] ) {
+		if ( ! empty( $additionalArgs['count'] ) ) {
 			return (int) $query->run( true, 'var' )
 				->result();
 		}

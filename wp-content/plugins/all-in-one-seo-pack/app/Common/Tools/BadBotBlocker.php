@@ -219,11 +219,11 @@ class BadBotBlocker {
 
 			$blockReferer = aioseo()->options->deprecated->tools->blocker->blockReferer;
 			$track        = aioseo()->options->deprecated->tools->blocker->track;
-			$ip           = ! empty( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '';
+			$ip           = ! empty( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
 			$ip           = aioseo()->helpers->validateIp( $ip ) ? $ip : __( '(Invalid IP)', 'all-in-one-seo-pack' );
 			if ( ! $this->allowBot() ) {
 				if ( $track ) {
-					$userAgent = $_SERVER['HTTP_USER_AGENT'];
+					$userAgent = ! empty( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : __( 'Unknown User Agent', 'all-in-one-seo-pack' );
 					// Translators: 1 - The IP address. 2 - The user agent.
 					$this->track( sprintf( __( 'Blocked bot with IP %1$s -- matched user agent %2$s found in blocklist.', 'all-in-one-seo-pack' ), $ip, $userAgent ) );
 				}
@@ -339,19 +339,19 @@ class BadBotBlocker {
 			if ( ! isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
 				return false;
 			}
-			$ua  = $_SERVER['HTTP_USER_AGENT'];
+			$ua  = ! empty( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
 			$uas = $this->prepareList( $botList );
-			if ( preg_match( '/' . $uas . '/i', $ua ) ) {
-				$ip           = $_SERVER['REMOTE_ADDR'];
+			if ( preg_match( '/' . $uas . '/i', (string) $ua ) ) {
+				$ip           = ! empty( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
 				$hostname     = gethostbyaddr( $ip );
 				$ipByHostName = gethostbyname( $hostname );
 				if ( $ipByHostName === $ip ) {
 					$hosts = array_values( $botList );
 					foreach ( $hosts as $k => $h ) {
-						$hosts[ $k ] = preg_quote( $h ) . '$';
+						$hosts[ $k ] = preg_quote( (string) $h ) . '$';
 					}
 					$hosts = join( '|', $hosts );
-					if ( preg_match( '/' . $hosts . '/i', $hostname ) ) {
+					if ( preg_match( '/' . $hosts . '/i', (string) $hostname ) ) {
 						return true;
 					}
 				}
@@ -377,9 +377,9 @@ class BadBotBlocker {
 			if ( ! isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
 				return false;
 			}
-			$ua  = $_SERVER['HTTP_USER_AGENT'];
+			$ua  = ! empty( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
 			$uas = $this->prepareList( $botList );
-			if ( preg_match( '/' . $uas . '/i', $ua ) ) {
+			if ( preg_match( '/' . $uas . '/i', (string) $ua ) ) {
 				return true;
 			}
 		}
@@ -401,9 +401,9 @@ class BadBotBlocker {
 		$refererList = apply_filters( 'aioseo_bad_referer_list', $refererList );
 
 		if ( ! empty( $refererList ) && ! empty( $_SERVER ) && ! empty( $_SERVER['HTTP_REFERER'] ) ) {
-			$referer = esc_url_raw( wp_unslash( $_SERVER['HTTP_REFERER'] ) );
+			$referer = esc_url_raw( sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) );
 			$regex   = $this->prepareList( $refererList );
-			if ( preg_match( '/' . $regex . '/i', $referer ) ) {
+			if ( preg_match( '/' . $regex . '/i', (string) $referer ) ) {
 				return true;
 			}
 		}
@@ -424,13 +424,13 @@ class BadBotBlocker {
 		$regex = '';
 		$cont  = 0;
 		foreach ( $list as $l ) {
-			$trim_l = trim( $l );
-			if ( ! empty( $trim_l ) ) {
+			$trim_l = trim( $l ); // phpcs:ignore Squiz.NamingConventions.ValidVariableName
+			if ( ! empty( $trim_l ) ) { // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 				if ( $cont ) {
 					$regex .= '|';
 				}
 				$cont   = 1;
-				$regex .= preg_quote( trim( $l ), $quote );
+				$regex .= preg_quote( (string) trim( $l ), $quote );
 			}
 		}
 
