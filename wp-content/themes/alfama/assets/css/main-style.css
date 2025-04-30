@@ -6039,6 +6039,63 @@ body.compensate-for-scrollbar {
 .qualidade .conteudo-qualidade {
   padding-top: 42px;
 }
+.content-pilares {
+  padding: 42px 0 112px 0;
+}
+.content-pilares .paragrafo b {
+  color: #003B71;
+  font-weight: 700;
+  font-style: italic;
+}
+.content-pilares .pilar-texto {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 42px;
+}
+.content-pilares .icone-pilar {
+  max-width: 130px;
+  width: 130px;
+  height: fit-content;
+  margin: 0 auto;
+}
+.content-pilares h3.titulo {
+  color: #BC204B;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.8;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.content-pilares .pilares {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.content-pilares .pilares .item {
+  padding: 12px 20px;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.content-pilares .pilares .item p {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #003B71;
+}
+.content-pilares .pilares .item .icone {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content-pilares .pilares .item .icone svg {
+  height: 39px;
+  width: fit-content;
+}
 @media (min-width: 768px) {
   .banner-sobre {
     background: url('../img/banner-sobre-alfama.jpg');
@@ -6153,6 +6210,29 @@ body.compensate-for-scrollbar {
   }
   .qualidade .conteudo-qualidade {
     padding-top: 0;
+  }
+  .content-pilares {
+    padding: 92px 0 162px 0;
+  }
+  .content-pilares .pilar-texto {
+    flex-direction: column;
+    gap: 92px;
+  }
+  .content-pilares .icone-pilar {
+    margin: 0;
+  }
+  .content-pilares h3.titulo {
+    margin-top: 56px;
+    text-align: left;
+  }
+  .content-pilares .pilares {
+    gap: 24px;
+  }
+  .content-pilares .pilares .item {
+    gap: 24px;
+  }
+  .content-pilares .pilares .item p {
+    font-size: 2rem;
   }
 }
 .page-template-template-produtos .banner-produtos {

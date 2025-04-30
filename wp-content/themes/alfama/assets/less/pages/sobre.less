@@ -1,7 +1,6 @@
 // main: "../main.less"
 
 .banner-sobre{
-
     background: url('../img/banner-sobre-alfama-mobile.jpg');
     background-size: 768px;
     background-position: center;
@@ -17,7 +16,6 @@
         text-align: center;
         font-size: 3.6rem;
     }
-
 
 }
 
@@ -133,6 +131,70 @@
     overflow: hidden;
     .conteudo-qualidade{
         padding-top: 42px;
+    }
+}
+
+.content-pilares{
+    padding: 42px 0 112px 0;
+    .paragrafo{
+        b{
+            color: @blue1;
+            font-weight: 700;
+            font-style: italic;
+        }
+    }
+
+    .pilar-texto{
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 42px;
+    }
+
+    .icone-pilar{
+        max-width: 130px;
+        width: 130px;
+        height: fit-content;
+        margin: 0 auto;
+    }
+
+    h3.titulo{
+        color: @red1;
+        font-size: 2.4rem;
+        font-weight: 700;
+        line-height: 1.8;
+        margin-top: 24px;
+        margin-bottom: 24px;
+        text-align: center;
+    }
+
+    .pilares{
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        .item{
+            padding: 12px 20px;
+            box-shadow: 4px 4px 20px rgba(0,0,0,0.1);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            p{
+                font-size: 1.8rem;
+                font-weight: 700;
+                color: @blue1;
+            }
+            .icone{
+                width: 45px;
+                height: 45px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                svg{
+                    height: 39px;
+                    width: fit-content;
+                }
+            }
+        }
     }
 }
 
@@ -254,6 +316,33 @@
         }
         .conteudo-qualidade{
             padding-top: 0;
+        }
+    }
+
+    .content-pilares{
+        padding: 92px 0 162px 0;
+
+        .pilar-texto{
+            flex-direction: column;
+            gap: 92px;
+        }
+    
+        .icone-pilar{
+            margin: 0;
+        }
+        h3.titulo{
+            margin-top: 56px;
+            text-align: left;
+        }
+    
+        .pilares{
+            gap: 24px;
+            .item{
+                gap: 24px;
+                p{
+                    font-size: 2.0rem;
+                }
+            }
         }
     }
 }

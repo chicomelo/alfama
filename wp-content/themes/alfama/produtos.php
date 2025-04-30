@@ -189,7 +189,6 @@ $produtos = [
             "posicao_2" => "selo-sem-massa",
         ],
         "fotos"=> [
-            "foto-produto-starters-carne-sol-requeijao.jpg",
             "foto-produto-starters-carne-sol-requeijao.jpg"
         ],
         "nome"=> "Bolinho de Carne de Sol com Requeijão",
@@ -216,7 +215,6 @@ $produtos = [
             "posicao_2" => "selo-sem-massa",
         ],
         "fotos"=> [
-            "foto-produto-starters-bolinho-carne-seca.jpg",
             "foto-produto-starters-bolinho-carne-seca.jpg"
         ],
         "nome"=> "Bolinho de Carne Seca",
@@ -245,7 +243,6 @@ $produtos = [
             "posicao_2" => "selo-sem-massa",
         ],
         "fotos"=> [
-            "foto-produto-starters-coxinha-costela-requeijao.jpg",
             "foto-produto-starters-coxinha-costela-requeijao.jpg"
         ],
         "nome"=> "Coxinha de Costela com Requeijão",
@@ -273,7 +270,6 @@ $produtos = [
             "posicao_2" => "selo-sem-massa",
         ],
         "fotos"=> [
-            "foto-produto-starters-croquete-cupim.jpg",
             "foto-produto-starters-croquete-cupim.jpg"
         ],
         "nome"=> "Croquete de Cupim",
@@ -301,7 +297,6 @@ $produtos = [
             "posicao_2" => "selo-sem-massa",
         ],
         "fotos"=> [
-            "foto-produto-starters-croquete-pernil-limao.jpg",
             "foto-produto-starters-croquete-pernil-limao.jpg"
         ],
         "nome"=> "Croquete de Pernil com Mostarda e Limão",
@@ -331,7 +326,6 @@ $produtos = [
         "destaque"=> true,
         "categoria"=> "desfiados",
         "fotos"=> [
-            "foto-produto-desfiada-carne-seca.jpg",
             "foto-produto-desfiada-carne-seca.jpg"
         ],
         "nome"=> "Carne Desfiada Bovina Carne Seca",
@@ -356,7 +350,6 @@ $produtos = [
         "destaque"=> false,
         "categoria"=> "desfiados",
         "fotos"=> [
-            "foto-produto-desfiada-costela.jpg",
             "foto-produto-desfiada-costela.jpg"
         ],
         "nome"=> "Carne Desfiada Bovina Costela",
@@ -384,7 +377,6 @@ $produtos = [
         "destaque"=> false,
         "categoria"=> "desfiados",
         "fotos"=> [
-            "foto-produto-desfiada-cupim.jpg",
             "foto-produto-desfiada-cupim.jpg"
         ],
         "nome"=> "Carne Desfiada Bovina Cupim",
@@ -410,7 +402,6 @@ $produtos = [
         "destaque"=> false,
         "categoria"=> "desfiados",
         "fotos"=> [
-            "foto-produto-desfiada-frango.jpg",
             "foto-produto-desfiada-frango.jpg"
         ],
         "nome"=> "Peito de Frango Desfiado",
@@ -436,7 +427,6 @@ $produtos = [
         "destaque"=> false,
         "categoria"=> "desfiados",
         "fotos"=> [
-            "foto-produto-desfiada-suino.jpg",
             "foto-produto-desfiada-suino.jpg"
         ],
         "nome"=> "Pernil Suíno Desfiado",
@@ -464,7 +454,6 @@ $produtos = [
         "destaque"=> false,
         "categoria"=> "desfiados",
         "fotos"=> [
-            "foto-produto-carne-de-sol.jpg",
             "foto-produto-carne-de-sol.jpg"
         ],
         "nome"=> "Carne Desfiada Bovina Carne de Sol",
@@ -496,7 +485,6 @@ $produtos = [
             "posicao_2" => "selo-9-gordura",
         ],
         "fotos"=> [
-            "foto-produto-carne-moida-light.jpg",
             "foto-produto-carne-moida-light.jpg"
         ],
         "nome"=> "Carne Moída Light",
@@ -526,7 +514,6 @@ $produtos = [
             "posicao_2" => "selo-15-gordura",
         ],
         "fotos"=> [
-            "foto-produto-carne-moida-acem.jpg",
             "foto-produto-carne-moida-acem.jpg"
         ],
         "nome"=> "Carne Moída",
@@ -556,7 +543,6 @@ $produtos = [
             "posicao_2" => "selo-15-gordura",
         ],
         "fotos"=> [
-            "foto-produto-carne-moida-cortes.jpg",
             "foto-produto-carne-moida-cortes.jpg"
         ],
         "nome"=> "Carne Moída Cortes",
@@ -612,7 +598,6 @@ $produtos = [
         "destaque"=> true,
         "categoria"=> "hamburguer",
         "fotos"=> [
-            "foto-produto-burguer-costela.jpg",
             "foto-produto-burguer-costela.jpg"
         ],
         "nome"=> "Hambúrguer Costela",
@@ -670,7 +655,6 @@ $produtos = [
         "destaque"=> false,
         "categoria"=> "hamburguer",
         "fotos"=> [
-            "foto-produto-burguer-gourmet.jpg",
             "foto-produto-burguer-gourmet.jpg"
         ],
         "nome"=> "Hambúrguer Bovino",
