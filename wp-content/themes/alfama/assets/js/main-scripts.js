@@ -218,17 +218,26 @@ jQuery(document).ready(function ($) {
 
     
     if ($('.lista-produtos .produto > .fotos')) {
-        $('.lista-produtos .produto > .fotos').slick({
-            centerMode: false,
-            lazyLoad: 'ondemand',
-            centerPadding: '0',
-            infinite: false,
-            dots: true,
-            prevArrow: arrow_esquerda,
-            nextArrow: arrow_direita,
-            arrows: true,
-            slidesToShow: 1
+
+        $('.lista-produtos .produto > .fotos').each(function() {
+            const $this = $(this);
+            const imageCount = $this.find('img').length;
+
+            if (imageCount > 1) {
+                $this.slick({
+                    centerMode: false,
+                    lazyLoad: 'ondemand',
+                    centerPadding: '0',
+                    infinite: false,
+                    dots: true,
+                    prevArrow: arrow_esquerda,
+                    nextArrow: arrow_direita,
+                    arrows: true,
+                    slidesToShow: 1
+                });
+            }
         });
+
     }
 
     // Produtos: FIM
