@@ -46,28 +46,7 @@ class HT_CTC_Admin_Greetings {
 
         if ( true == $options_page || true == $get_url ) {
             
-
-            /**
-             * 
-             * fallback_values: 
-             *  created this because 
-             *   options_sanitize runs mulitiple times if settings field not exist
-             *   https://core.trac.wordpress.org/ticket/21989
-             *   due to this htmlentities calling twice at options_sanitize and changes values..  
-             *   but untill user save the first settings, fallback values have to display at settings field.. for easy to understand
-             *   so here we added option with key fallback_values - as need to load fallback values to display in input fileds as user not saved any values..
-             */
-            $ht_ctc_greetings_options = get_option('ht_ctc_greetings_options');
-            if ( isset($ht_ctc_greetings_options['greetings_template']) || isset($ht_ctc_greetings_options['fallback_values']) ) {
-            } else {
-                $values = array(
-                    'fallback_values' => 'yes',
-                );
-                add_option('ht_ctc_greetings_options', $values);
-            }
-
-
-
+            // load settings page if option page or greetings settings page
             add_action('admin_init', [$this, 'settings'] );
         }
 
@@ -92,6 +71,7 @@ class HT_CTC_Admin_Greetings {
         include_once HT_CTC_PLUGIN_DIR . 'new/admin/db/defaults/class-ht-ctc-defaults-greetings.php';
         $default_greetings = new HT_CTC_Defaults_Greetings();
 
+        // @uses at greetings-1.php, on this page. 
         $greetings_fallback_values = $default_greetings->greetings;
         $g1_fallback_values = $default_greetings->g_1;
         $g2_fallback_values = $default_greetings->g_2;
@@ -195,6 +175,10 @@ class HT_CTC_Admin_Greetings {
                         'default_color' => '#075e54',
                         'description' => 'Header - Background Color',
                         'parent_class' => 'pr_g1_header_bg_color',
+                        'data_update_type' => 'background-color',
+                        'data_update_selector' => '.template-greetings-1 .ctc_g_heading',
+                        'data_update_2_type' => 'border-color',
+                        'data_update_2_selector' => '.greetings_header_image span',
                     ],
                     [
                         'title' => __( 'Main Content - Background Color', 'click-to-chat-for-whatsapp'),
@@ -203,6 +187,8 @@ class HT_CTC_Admin_Greetings {
                         'default_color' => '#ece5dd',
                         'description' => 'Main Content - Background Color',
                         'parent_class' => 'pr_g1_main_bg_color',
+                        'data_update_type' => 'background-color',
+                        'data_update_selector' => '.template-greetings-1 .ctc_g_content',
                     ],
                     [
                         'title' => __( 'Message Box - Background Color', 'click-to-chat-for-whatsapp'),
@@ -211,6 +197,8 @@ class HT_CTC_Admin_Greetings {
                         'default_color' => '#dcf8c6',
                         'description' => 'Main Content as a Message Box with Background Color',
                         'parent_class' => 'pr_g1_message_box_bg_color',
+                        'data_update_type' => 'background-color',
+                        'data_update_selector' => '.template-greetings-1 .ctc_g_message_box',
                     ],
                     [
                         'title' => 'Background image, Call to Action - button type',
@@ -221,7 +209,7 @@ class HT_CTC_Admin_Greetings {
                         'db' => 'main_bg_image',
                         'template' => 'checkbox',
                         'description' => 'Add WhatsApp like Background image to main content. ',
-                        'parent_class' => 'pr_main_bg_image',
+                        'parent_class' => 'pr_main_bg_image ctc_no_demo',
                     ],
                     [
                         'title' => __( 'Call to Action - button type', 'click-to-chat-for-whatsapp'),
@@ -232,7 +220,7 @@ class HT_CTC_Admin_Greetings {
                             '1' => __( 'Themes Button (style-1)', 'click-to-chat-for-whatsapp'),
                             '7_1' => __( 'Button with WhatsApp Icon (style-7 Extend)', 'click-to-chat-for-whatsapp'),
                         ],
-                        'parent_class' => 'pr_g1_cta_style',
+                        'parent_class' => 'pr_g1_cta_style ctc_no_demo ',
                     ],
                     [
                         'template' => 'element_details_end',
@@ -266,6 +254,8 @@ class HT_CTC_Admin_Greetings {
                         'default_color' => '#ffffff',
                         'description' => 'Greetings Dialog Background Color',
                         'parent_class' => 'pr_g2_bg_color greetings-2',
+                        'data_update_type' => 'background-color',
+                        'data_update_selector' => '.template-greetings-2 .ctc_g_content, .template-greetings-2 .ctc_g_sentbutton, .template-greetings-2 .ctc_g_bottom',
                     ],
                     [
                         'template' => 'collapsible_end',
@@ -299,7 +289,7 @@ class HT_CTC_Admin_Greetings {
                         'db' => 'is_opt_in',
                         'template' => 'checkbox',
                         'description' => __( "Get website visitors consent before initiating the chat.", 'click-to-chat-for-whatsapp') . " <br> " . __( "Once the website visitor opt-in, the consent prompt will not reappear", 'click-to-chat-for-whatsapp') . " - <a href='https://holithemes.com/plugins/click-to-chat/opt-in/' target='_blank'>Opt-in</a>",
-                        'parent_class' => 'pr_is_opt_in',
+                        'parent_class' => 'pr_is_opt_in ctc_no_demo',
                     ],
                     [
                         'title' => '',
@@ -323,7 +313,7 @@ class HT_CTC_Admin_Greetings {
                             'desktop' => __( 'Desktop Only', 'click-to-chat-for-whatsapp'),
                             'mobile' => __( 'Mobile Only', 'click-to-chat-for-whatsapp')
                         ],
-                        'parent_class' => 'pr_g_device',
+                        'parent_class' => 'pr_g_device ctc_no_demo',
                     ],
                     [
                         'title' => __( 'Greetings dialog Size', 'click-to-chat-for-whatsapp'),
@@ -333,7 +323,8 @@ class HT_CTC_Admin_Greetings {
                             's' => 'Small',
                             'm' => 'Desktop: Medium, Mobile: Full width',
                             'l' => 'Desktop: Large, Mobile: Full width',
-                        ]
+                        ],
+                        'parent_class' => 'pr_g_size',
                     ],
                     [
                         'title' => __( 'Initial stage', 'click-to-chat-for-whatsapp'),
@@ -346,7 +337,7 @@ class HT_CTC_Admin_Greetings {
                             'close' => 'Close',
                         ],
                         'parent_id' => 'g_init',
-                        'parent_class' => 'pr_g_init',
+                        'parent_class' => 'pr_g_init ctc_no_demo',
                     ],
                 ]
             ]
@@ -593,6 +584,7 @@ class HT_CTC_Admin_Greetings {
             'woo_pre_filled'
         ];
 
+        // tinyMCE editor values.
         $editor = [
             'header_content',
             'main_content',
