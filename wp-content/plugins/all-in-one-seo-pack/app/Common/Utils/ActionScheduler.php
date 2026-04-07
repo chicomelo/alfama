@@ -226,12 +226,16 @@ class ActionScheduler {
 			->select( 'aa.hook, aa.args' )
 			->join( 'actionscheduler_groups as ag', 'ag.group_id', 'aa.group_id' )
 			->where( 'ag.slug', $this->actionSchedulerGroup )
-			->whereIn( 'status', [ 'pending', 'in-progress' ] )
+			->whereIn( 'status', [ 'pending', 'in-progress', 'past-due' ] )
 			->run()
 			->result();
 
 		// Decode the args.
 		foreach ( $scheduledActions as $key => $action ) {
+			if ( is_array( $action->args ) || ! aioseo()->helpers->isJsonString( $action->args ) ) {
+				continue;
+			}
+
 			$scheduledActions[ $key ]->args = json_decode( $action->args, true );
 		}
 

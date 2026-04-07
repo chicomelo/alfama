@@ -193,10 +193,6 @@ class Migration {
 			new RobotsTxt();
 		}
 
-		if ( ! empty( $this->oldOptions['modules']['aiosp_feature_manager_options']['aiosp_feature_manager_enable_bad_robots'] ) ) {
-			new BadRobots();
-		}
-
 		if ( aioseo()->helpers->isWpmlActive() ) {
 			new Wpml();
 		}
@@ -239,6 +235,16 @@ class Migration {
 	 * @return bool Whether the V3 migration is running.
 	 */
 	public function isMigrationRunning() {
-		return aioseo()->core->cache->get( 'v3_migration_in_progress_settings' ) || aioseo()->core->cache->get( 'v3_migration_in_progress_posts' );
+		static $migrationRunning = null;
+		if ( null !== $migrationRunning ) {
+			return $migrationRunning;
+		}
+
+		$migrationRunning = (
+			aioseo()->core->cache->get( 'v3_migration_in_progress_settings' ) ||
+			aioseo()->core->cache->get( 'v3_migration_in_progress_posts' )
+		) ?? false;
+
+		return $migrationRunning;
 	}
 }

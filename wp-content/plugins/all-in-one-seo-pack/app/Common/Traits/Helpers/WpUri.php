@@ -70,12 +70,12 @@ trait WpUri {
 			return $url;
 		}
 
-		global $wp, $wp_rewrite; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
+		global $wp;
 		// Permalink url without the query string.
 		$url = user_trailingslashit( home_url( $wp->request ) );
 
 		// If permalinks are not being used we need to append the query string to the home url.
-		if ( ! $wp_rewrite->using_permalinks() ) { // phpcs:ignore Squiz.NamingConventions.ValidVariableName
+		if ( ! $this->usingPermalinks() ) {
 			$url = home_url( ! empty( $wp->query_string ) ? '?' . $wp->query_string : '' );
 		}
 
@@ -145,9 +145,8 @@ trait WpUri {
 			in_array( 'noPaginationForCanonical', aioseo()->internalOptions->deprecatedOptions, true ) &&
 			aioseo()->options->deprecated->searchAppearance->advanced->noPaginationForCanonical
 		) {
-			global $wp_rewrite; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 			if ( 1 < $pageNumber ) {
-				if ( $wp_rewrite->using_permalinks() ) { // phpcs:ignore Squiz.NamingConventions.ValidVariableName
+				if ( $this->usingPermalinks() ) {
 					// Replace /page/3 and /page/3/.
 					$url[ $hash ] = preg_replace( "@(?<=/)page/$pageNumber(/|)$@", '', (string) $url[ $hash ] );
 					// Replace /3 and /3/.
@@ -176,31 +175,6 @@ trait WpUri {
 		$url[ $hash ] = apply_filters( 'aioseo_canonical_url', $url[ $hash ] );
 
 		return $url[ $hash ];
-	}
-
-	/**
-	 * Formats a given URL as an absolute URL if it is relative.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @param  string $url The URL.
-	 * @return string $url The absolute URL.
-	 */
-	public function makeUrlAbsolute( $url ) {
-		if ( 0 !== strpos( $url, 'http' ) && '/' !== $url ) {
-			$url = $this->sanitizeDomain( $url );
-			if ( $this->isDomainWithPaths( $url ) ) {
-				$scheme = wp_parse_url( home_url(), PHP_URL_SCHEME );
-				$url    = $scheme . '://' . $url;
-			} elseif ( 0 === strpos( $url, '//' ) ) {
-				$scheme = wp_parse_url( home_url(), PHP_URL_SCHEME );
-				$url    = $scheme . ':' . $url;
-			} else {
-				$url = home_url( $url );
-			}
-		}
-
-		return $url;
 	}
 
 	/**
@@ -285,7 +259,12 @@ trait WpUri {
 	* @param  string|array $postType The post type(s) to check against.
 	* @return object|false           The post or false on failure.
 	*/
-	public function getPostByPath( $path, $output = OBJECT, $postType = 'page' ) {
+	public function getPostByPath( $path, $output = OBJECT, $postType = null ) {
+		// If no post type specified, use all public post types
+		if ( null === $postType ) {
+			$postType = $this->getPublicPostTypes( true );
+		}
+
 		$lastChanged = wp_cache_get_last_changed( 'aioseo_posts_by_path' );
 		$hash        = md5( $path . serialize( $postType ) );
 		$cacheKey    = "get_page_by_path:$hash:$lastChanged";
@@ -305,28 +284,41 @@ trait WpUri {
 		$path          = str_replace( '%20', ' ', $path );
 		$parts         = explode( '/', trim( $path, '/' ) );
 		$reversedParts = array_reverse( $parts );
-		$postNames     = "'" . implode( "','", $parts ) . "'";
 
-		$postTypes = is_array( $postType ) ? $postType : [ $postType, 'attachment' ];
-		$postTypes = "'" . implode( "','", $postTypes ) . "'";
+		$postTypes = is_array( $postType ) ? $postType : [ $postType ];
 
 		$posts = aioseo()->core->db->start( 'posts' )
 			->select( 'ID, post_name, post_parent, post_type' )
-			->whereRaw( "post_name in ( $postNames )" )
-			->whereRaw( "post_type in ( $postTypes )" )
+			->whereIn( 'post_name', $parts )
+			->whereIn( 'post_type', $postTypes )
+			->whereIn( 'post_status', [ 'publish' ] )
 			->run()
 			->result();
 
+		if ( empty( $posts ) ) {
+			wp_cache_set( $cacheKey, 0, 'aioseo_posts_by_path' );
+
+			return false;
+		}
+
+		// Create a lookup array for posts by ID for efficient parent lookups
+		$postsById = [];
+		foreach ( $posts as $post ) {
+			$postsById[ $post->ID ] = $post;
+		}
+
 		$foundId = 0;
+		$targetPostTypes = is_array( $postType ) ? $postType : [ $postType ];
+
 		foreach ( $posts as $post ) {
 			if ( $post->post_name === $reversedParts[0] ) {
 				$count = 0;
 				$p     = $post;
 
 				// Loop through the given path parts from right to left, ensuring each matches the post ancestry.
-				while ( 0 !== (int) $p->post_parent && isset( $posts[ $p->post_parent ] ) ) {
+				while ( 0 !== (int) $p->post_parent && isset( $postsById[ $p->post_parent ] ) ) {
 					$count++;
-					$parent = $posts[ $p->post_parent ];
+					$parent = $postsById[ $p->post_parent ];
 					if ( ! isset( $reversedParts[ $count ] ) || $parent->post_name !== $reversedParts[ $count ] ) {
 						break;
 					}
@@ -339,7 +331,13 @@ trait WpUri {
 					$p->post_name === $reversedParts[ $count ]
 				) {
 					$foundId = $post->ID;
-					if ( $post->post_type === $postType ) {
+
+					// If we're looking for specific post types, prefer exact matches
+					if ( ! is_array( $postType ) && $post->post_type === $postType ) {
+						break;
+					}
+					// If we're looking for multiple post types, any match is good
+					if ( is_array( $postType ) && in_array( $post->post_type, $targetPostTypes, true ) ) {
 						break;
 					}
 				}
@@ -570,5 +568,18 @@ trait WpUri {
 		}
 
 		return apply_filters( 'get_canonical_url', $canonical_url, $post ); // phpcs:ignore Squiz.NamingConventions.ValidVariableName
+	}
+
+	/**
+	 * Checks if permalinks are enabled.
+	 *
+	 * @since 4.8.3
+	 *
+	 * @return bool Whether permalinks are enabled.
+	 */
+	public function usingPermalinks() {
+		global $wp_rewrite; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
+
+		return $wp_rewrite->using_permalinks();  // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 	}
 }

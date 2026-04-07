@@ -175,7 +175,7 @@ trait Wp {
 			'include' => [] // Post types to include.
 		], $args );
 
-		$postTypes   = [];
+		$postTypes       = [];
 		$postTypeObjects = get_post_types( [], 'objects' );
 		foreach ( $postTypeObjects as $postTypeObject ) {
 			if ( ! is_post_type_viewable( $postTypeObject ) ) {
@@ -612,7 +612,7 @@ trait Wp {
 			return aioseo()->standalone->pageBuilderIntegrations[ $pageBuilder ]->getEditUrl( $postId );
 		}
 
-		return get_edit_post_link( $postId );
+		return get_edit_post_link( $postId, 'raw' );
 	}
 
 	/**
@@ -650,27 +650,7 @@ trait Wp {
 			return $capabilities[ $postType ];
 		}
 
-		$capabilityType = $postTypeObject->capability_type;
-		if ( ! is_array( $capabilityType ) ) {
-			$capabilityType = [
-				$capabilityType,
-				$capabilityType . 's'
-			];
-		}
-
-		// Singular base for meta capabilities, plural base for primitive capabilities.
-		list( $singularBase, $pluralBase ) = $capabilityType;
-
-		$capabilities[ $postType ] = [
-			'edit_post'          => 'edit_' . $singularBase,
-			'read_post'          => 'read_' . $singularBase,
-			'delete_post'        => 'delete_' . $singularBase,
-			'edit_posts'         => 'edit_' . $pluralBase,
-			'edit_others_posts'  => 'edit_others_' . $pluralBase,
-			'delete_posts'       => 'delete_' . $pluralBase,
-			'publish_posts'      => 'publish_' . $pluralBase,
-			'read_private_posts' => 'read_private_' . $pluralBase,
-		];
+		$capabilities[ $postType ] = (array) $postTypeObject->cap;
 
 		return $capabilities[ $postType ];
 	}
@@ -763,6 +743,21 @@ trait Wp {
 		}
 
 		return $json;
+	}
+
+	/**
+	 * Checks whether WordPress is currently serving a REST API request.
+	 *
+	 * @since 4.8.9
+	 *
+	 * @return bool Whether WordPress is currently serving a REST API request.
+	 */
+	public function isServingRestRequest() {
+		if ( function_exists( 'wp_is_serving_rest_request' ) ) {
+			return wp_is_serving_rest_request(); // phpcs:ignore WordPress.NamingConventions.ValidHookName, AIOSEO.WpFunctionUse.NewFunctions.wp_is_serving_rest_requestFound
+		}
+
+		return defined( 'REST_REQUEST' ) && REST_REQUEST;
 	}
 
 	/**
@@ -978,9 +973,76 @@ trait Wp {
 				return null;
 			}
 
-			$postTypeLabels[ $postType ] = get_post_type_labels( $postTypeObject );
+			$postTypeLabels[ $postType ] = $postTypeObject->labels;
 		}
 
 		return $postTypeLabels[ $postType ];
+	}
+
+	/**
+	 * Cleans the slug of the current request before we use it.
+	 *
+	 * @since 4.8.4
+	 *
+	 * @param  string $slug The slug.
+	 * @return string       The cleaned slug.
+	 */
+	public function cleanSlug( $slug ) {
+		$slug = strtolower( $slug );
+		$slug = aioseo()->helpers->unleadingSlashIt( $slug );
+		$slug = untrailingslashit( $slug );
+
+		return $slug;
+	}
+
+	/**
+	 * Returns the scannable post types.
+	 *
+	 * @since 4.8.6
+	 *
+	 * @return array The scannable post types.
+	 */
+	public function getScannablePostTypes() {
+		static $scannablePostTypes = null;
+		if ( null !== $scannablePostTypes ) {
+			return $scannablePostTypes;
+		}
+
+		// We exclude these post types to optimize performance.
+		$nonSupportedPostTypes = [ 'attachment' ];
+		$scannablePostTypes    = array_diff(
+			$this->getPublicPostTypes( true ),
+			$nonSupportedPostTypes
+		);
+
+		return $scannablePostTypes;
+	}
+
+	/**
+	 * Returns the user data.
+	 *
+	 * @since 4.8.7
+	 *
+	 * @param  int $userId The user ID.
+	 * @return \WP_User|null The user data.
+	 */
+	public function getUserData( $userId ) {
+		$userData = get_userdata( $userId );
+		if ( ! is_a( $userData, 'WP_User' ) ) {
+			return null;
+		}
+
+		$toUnset = [
+			'user_pass',
+			'user_activation_key'
+		];
+
+		foreach ( $toUnset as $key ) {
+			if ( isset( $userData->$key ) ) {
+				unset( $userData->$key );
+			}
+		}
+
+		return $userData;
 	}
 }

@@ -399,14 +399,42 @@
 			// 	}
 			// }
 
-			if($this->isPluginActive('elementor/elementor.php')){
-				// Elementor Plugin - Element Caching
-				if($elementor_cache = get_option("elementor_experiment-e_element_cache")){
-					if($elementor_cache != "inactive"){
-						return array("You have to set the <u><a target='_blank' href='https://www.wpfastestcache.com/tutorial/elementor-plugin-settings/'>Element Caching</a></u> option of the Elementor plugin to Inactive", "error");
-					}
-				}
+
+			if ($this->isPluginActive('elementor/elementor.php')) {
+			    // Elementor Plugin - Element Caching
+			    $new_option = get_option("elementor_element_cache_ttl");
+			    $old_option = get_option("elementor_experiment-e_element_cache");
+
+			    if ($new_option !== false) {
+			        // New version: if TTL > 0, element caching is active
+			        if ($new_option !== "disable") {
+			            return array(
+			                "You have to set the <u><a target='_blank' href='https://www.wpfastestcache.com/tutorial/elementor-plugin-settings/'>Element Caching</a></u> option of the Elementor plugin to Inactive",
+			                "error"
+			            );
+			        }
+			    } elseif ($old_option !== false) {
+			        // Old version: only check the old option if the new one does not exist
+			        if ($old_option !== "inactive") {
+			            return array(
+			                "You have to set the <u><a target='_blank' href='https://www.wpfastestcache.com/tutorial/elementor-plugin-settings/'>Element Caching</a></u> option of the Elementor plugin to Inactive",
+			                "error"
+			            );
+			        }
+			    }
+
+
+			    $elementor_css_print_method_option = get_option("elementor_css_print_method");
+
+			    if($elementor_css_print_method_option && $elementor_css_print_method_option != "internal"){
+			    	return array(
+		                "You have to set the <u><a target='_blank' href='https://www.wpfastestcache.com/tutorial/elementor-plugin-settings/'>CSS Print Method</a></u> option of the Elementor plugin to Internal Embedding",
+		                "error"
+		            );
+			    }
 			}
+
+
 
 			if(file_exists($path.".htaccess")){
 				$htaccess = @file_get_contents($path.".htaccess");
@@ -417,9 +445,11 @@
 			// if(defined('DONOTCACHEPAGE')){
 			// 	return array("DONOTCACHEPAGE <label>constant is defined as TRUE. It must be FALSE</label>", "error");
 			// }else 
-			
 
-			if(!get_option('permalink_structure')){
+
+			if(!preg_match("/^https/i", get_option("home")) && is_ssl()){
+				return array("Mismatch detected: Site is using HTTPS but the 'Home' URL is set to HTTP. <a target='_blank' href='https://www.wpfastestcache.com/tutorial/plugin-does-not-work-after-https-redirection/'>Please update your WordPress 'Home' URL to use HTTPS</a>", "error");
+			}else if(!get_option('permalink_structure')){
 				return array("You have to set <strong><u><a target='_blank' href='https://www.wpfastestcache.com/tutorial/how-to-change-default-permalink-in-wordpress/'>permalinks</a></u></strong>", "error");
 			}else if($res = $this->checkSuperCache($path, $htaccess)){
 				return $res;
@@ -736,10 +766,10 @@
 
 			if(preg_match("/^https:\/\//", home_url())){
 				if(preg_match("/^https:\/\/www\./", home_url())){
-					$forceTo = "\nRewriteCond %{HTTPS} =on"."\n".
+					$forceTo = "\nRewriteCond %{HTTPS} on"."\n".
 					           "RewriteCond %{HTTP_HOST} ^www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n";
 				}else{
-					$forceTo = "\nRewriteCond %{HTTPS} =on"."\n".
+					$forceTo = "\nRewriteCond %{HTTPS} on"."\n".
 							   "RewriteCond %{HTTP_HOST} ^".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n";
 				}
 			}else{
@@ -1923,10 +1953,10 @@
 				                @media only screen and (min-width: 80rem) { #wpfc-premium .xl\:py-0 { padding-bottom:0; padding-top: 0 } #wpfc-premium .xl\:px-2 { padding-left: .5rem; padding-right: .5rem } #wpfc-premium .xl\:px-3 { padding-left: .75rem; padding-right: .75rem } #wpfc-premium .xl\:px-4 { padding-left: 1rem; padding-right: 1rem } #wpfc-premium .xl\:px-14 { padding-left: 3.5rem; padding-right: 3.5rem } #wpfc-premium .xl\:px-32 { padding-left: 8rem; padding-right: 8rem } #wpfc-premium .xl\:max-w-sm { max-width: 40rem } #wpfc-premium .xl\:gap-0 { gap: 0 } #wpfc-premium .xl\:flex-nowrap { flex-wrap: nowrap } #wpfc-premium .xl\:block { display: block } #wpfc-premium .xl\:inline { display: inline } #wpfc-premium .xl\:w-auto { width: auto } #wpfc-premium .xl\:radius { border-radius: .25rem } }
 				            </style>
 				            <ul class="flex flex-wrap xl:flex-nowrap justify-center gap-4 md:gap-0 w-full mt-2">
-				                <li class="w-full max-w-72 radius-lg xs:w-44 mx-2 mt-6"> <div class="text-center w-full h-full flex flex-col cursor-pointer" aria-label="BRONZE"> <div class="w-full"> <div class="relative flex justify-center items-center w-full font-bold radius-tl-lg radius-tr-lg text-xl" style="background-color: rgb(255, 96, 56); color: rgb(255, 255, 255);"> <span class="my-3">Bronze</span> </div> <div class="flex flex-col justify-center items-center w-full text-sm min-h-32" style="background-color: rgb(243, 243, 254); color: rgb(10, 21, 81);"> <span class="text-xl"> <div class="flex flex-col">  <div class="text-md py-2"> <div class="flex items-end"> <span class="text-sm">$</span> <strong class="font-extrabold flex items-end text-6xl line-height-4xl"> 49 <span class="flex flex-col text-left"> <strong class="font-bold text-xl line-height-md">.99</strong> <span class="text-sm font-normal line-height-xs" style="color: rgb(69, 78, 128);">/lifetime</span> </span> </strong> </div> </div> </div> </span>  </div> </div> <div class="w-full p-3" data-test-id="jf-pt-plan-cta" style="background-color: rgb(243, 243, 254);"> <form action="https://www.wpfastestcache.com/#buy" method="post"> <button class="flex justify-center items-center w-full font-bold transition hover:opacity-70 radius max-w-10/12 mx-auto h-10" style="background-color: rgb(255, 96, 56); color: rgb(255, 255, 255);">Buy</button></form> </div> <div class="w-full flex-1 radius-bl-lg radius-br-lg px-3" style="background: rgb(227, 229, 245); color: rgb(52, 60, 106);"> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">1 License</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Number of Licenses</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">1,000</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Image Credits per License</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong style="font-size:30px;" class="font-bold block flex justify-center items-center mx-2 text-lg">∞</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Support and Updates</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/dollar-gold.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">One-Time Fee</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/left-right.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">1 year license transfer right</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/refund.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">30 Day Money Back Guarantee</span> </span> </div>       </div> </div> </li>
-				                <li class="w-full max-w-72 radius-lg xs:w-44 mx-2 mt-6"> <div class="text-center w-full h-full flex flex-col cursor-pointer" aria-label="SILVER"> <div class="w-full"> <div class="relative flex justify-center items-center w-full font-bold radius-tl-lg radius-tr-lg text-xl" style="background-color: rgb(46, 105, 255); color: rgb(255, 255, 255);"> <span class="my-3">Silver</span>  </div> <div class="flex flex-col justify-center items-center w-full text-sm min-h-32" style="background-color: rgb(243, 243, 254); color: rgb(10, 21, 81);"> <span class="text-xl"> <div class="flex flex-col">  <div class="text-md py-2"> <div class="flex items-end"> <span class="text-sm">$</span> <strong class="font-extrabold flex items-end text-6xl line-height-4xl"> 125 <span class="flex flex-col text-left"> <strong class="font-bold text-xl line-height-md">.00</strong> <span class="text-sm font-normal line-height-xs" style="color: rgb(69, 78, 128);">/lifetime</span> </span> </strong> </div> </div> </div> </span>  </div> </div> <div class="w-full p-3" data-test-id="jf-pt-plan-cta" style="background-color: rgb(243, 243, 254);"> <form action="https://www.wpfastestcache.com/#buy" method="post"> <button class="flex justify-center items-center w-full font-bold transition hover:opacity-70 radius max-w-10/12 mx-auto h-10" style="background-color: rgb(46, 105, 255); color: rgb(255, 255, 255);">Buy</button></form> </div> <div class="w-full flex-1 radius-bl-lg radius-br-lg px-3" style="background: rgb(227, 229, 245); color: rgb(52, 60, 106);"> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">3 Licenses</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Number of Licenses</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">1,000</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Image Credits per License</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong style="font-size:30px;" class="font-bold block flex justify-center items-center mx-2 text-lg">∞</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Support and Updates</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/dollar-gold.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">One-Time Fee</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/left-right.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">1 year license transfer right</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/refund.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">30 Day Money Back Guarantee</span> </span> </div>       </div> </div> </li>
-				                <li class="w-full max-w-72 radius-lg xs:w-44 mx-2 mt-6"> <div class="text-center w-full h-full flex flex-col cursor-pointer" aria-label="GOLD"> <div class="w-full"> <div class="relative flex justify-center items-center w-full font-bold radius-tl-lg radius-tr-lg text-xl" style="background-color: rgb(255, 184, 40); color: rgb(43, 50, 69);"> <span class="my-3">Gold</span> </div> <div class="flex flex-col justify-center items-center w-full text-sm min-h-32" style="background-color: rgb(243, 243, 254); color: rgb(10, 21, 81);"> <span class="text-xl"> <div class="flex flex-col">  <div class="text-md py-2"> <div class="flex items-end"> <span class="text-sm">$</span> <strong class="font-extrabold flex items-end text-6xl line-height-4xl"> 175 <span class="flex flex-col text-left"> <strong class="font-bold text-xl line-height-md">.00</strong> <span class="text-sm font-normal line-height-xs" style="color: rgb(69, 78, 128);">/lifetime</span> </span> </strong> </div> </div> </div> </span>  </div> </div> <div class="w-full p-3" data-test-id="jf-pt-plan-cta" style="background-color: rgb(243, 243, 254);"> <form action="https://www.wpfastestcache.com/#buy" method="post"> <button class="flex justify-center items-center w-full font-bold transition hover:opacity-70 radius max-w-10/12 mx-auto h-10" style="background-color: rgb(255, 184, 40); color: rgb(43, 50, 69);">Buy</button></form> </div> <div class="w-full flex-1 radius-bl-lg radius-br-lg px-3" style="background: rgb(227, 229, 245); color: rgb(52, 60, 106);"> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">5 Licenses</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Number of Licenses</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">1,000</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Image Credits per License</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong style="font-size:30px;" class="font-bold block flex justify-center items-center mx-2 text-lg">∞</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Support and Updates</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/dollar-gold.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">One-Time Fee</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/left-right.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">1 year license transfer right</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/refund.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">30 Day Money Back Guarantee</span> </span> </div>       </div> </div> </li>
-				                <li class="w-full max-w-72 radius-lg xs:w-44 mx-2 mt-6"> <div class="text-center w-full h-full flex flex-col cursor-pointer" aria-label="GOLD"> <div class="w-full"> <div class="relative flex justify-center items-center w-full font-bold radius-tl-lg radius-tr-lg text-xl" style="background-color: #9661f9; color: rgb(255, 255, 255);"> <span class="my-3">Platinum</span> </div> <div class="flex flex-col justify-center items-center w-full text-sm min-h-32" style="background-color: rgb(243, 243, 254); color: rgb(10, 21, 81);"> <span class="text-xl"> <div class="flex flex-col">  <div class="text-md py-2"> <div class="flex items-end"> <span class="text-sm">$</span> <strong class="font-extrabold flex items-end text-6xl line-height-4xl"> 300 <span class="flex flex-col text-left"> <strong class="font-bold text-xl line-height-md">.00</strong> <span class="text-sm font-normal line-height-xs" style="color: rgb(69, 78, 128);">/lifetime</span> </span> </strong> </div> </div> </div> </span>  </div> </div> <div class="w-full p-3" data-test-id="jf-pt-plan-cta" style="background-color: rgb(243, 243, 254);"> <form action="https://www.wpfastestcache.com/#buy" method="post"> <button class="flex justify-center items-center w-full font-bold transition hover:opacity-70 radius max-w-10/12 mx-auto h-10" style="background-color: #9661f9; color: rgb(255, 255, 255);">Buy</button></form> </div> <div class="w-full flex-1 radius-bl-lg radius-br-lg px-3" style="background: rgb(227, 229, 245); color: rgb(52, 60, 106);"> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">10 Licenses</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Number of Licenses</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">1,000</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Image Credits per License</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong style="font-size:30px;" class="font-bold block flex justify-center items-center mx-2 text-lg">∞</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Support and Updates</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/dollar-gold.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">One-Time Fee</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/left-right.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">1 year license transfer right</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/refund.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">30 Day Money Back Guarantee</span> </span> </div>       </div> </div> </li>
+				                <li class="w-full max-w-72 radius-lg xs:w-44 mx-2 mt-6"> <div class="text-center w-full h-full flex flex-col cursor-pointer" aria-label="BRONZE"> <div class="w-full"> <div class="relative flex justify-center items-center w-full font-bold radius-tl-lg radius-tr-lg text-xl" style="background-color: rgb(255, 96, 56); color: rgb(255, 255, 255);"> <span class="my-3">Bronze</span> </div> <div class="flex flex-col justify-center items-center w-full text-sm min-h-32" style="background-color: rgb(243, 243, 254); color: rgb(10, 21, 81);"> <span class="text-xl"> <div class="flex flex-col">  <div class="text-md py-2"> <div class="flex items-end"> <span class="text-sm">$</span> <strong class="font-extrabold flex items-end text-6xl line-height-4xl"> 49 <span class="flex flex-col text-left"> <strong class="font-bold text-xl line-height-md">.99</strong> <span class="text-sm font-normal line-height-xs" style="color: rgb(69, 78, 128);">/lifetime</span> </span> </strong> </div> </div> </div> </span>  </div> </div> <div class="w-full p-3" data-test-id="jf-pt-plan-cta" style="background-color: rgb(243, 243, 254);"> <form action="https://www.wpfastestcache.com/#buy" method="post"> <button class="flex justify-center items-center w-full font-bold transition hover:opacity-70 radius max-w-10/12 mx-auto h-10" style="background-color: rgb(255, 96, 56); color: rgb(255, 255, 255);">Buy</button></form> </div> <div class="w-full flex-1 radius-bl-lg radius-br-lg px-3" style="background: rgb(227, 229, 245); color: rgb(52, 60, 106);"> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">1 License</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Number of Licenses</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">5,000</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Image Credits per License</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong style="font-size:30px;" class="font-bold block flex justify-center items-center mx-2 text-lg">∞</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Support and Updates</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/dollar-gold.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">One-Time Fee</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/left-right.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">1 year license transfer right</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/refund.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">30 Day Money Back Guarantee</span> </span> </div>       </div> </div> </li>
+				                <li class="w-full max-w-72 radius-lg xs:w-44 mx-2 mt-6"> <div class="text-center w-full h-full flex flex-col cursor-pointer" aria-label="SILVER"> <div class="w-full"> <div class="relative flex justify-center items-center w-full font-bold radius-tl-lg radius-tr-lg text-xl" style="background-color: rgb(46, 105, 255); color: rgb(255, 255, 255);"> <span class="my-3">Silver</span>  </div> <div class="flex flex-col justify-center items-center w-full text-sm min-h-32" style="background-color: rgb(243, 243, 254); color: rgb(10, 21, 81);"> <span class="text-xl"> <div class="flex flex-col">  <div class="text-md py-2"> <div class="flex items-end"> <span class="text-sm">$</span> <strong class="font-extrabold flex items-end text-6xl line-height-4xl"> 125 <span class="flex flex-col text-left"> <strong class="font-bold text-xl line-height-md">.00</strong> <span class="text-sm font-normal line-height-xs" style="color: rgb(69, 78, 128);">/lifetime</span> </span> </strong> </div> </div> </div> </span>  </div> </div> <div class="w-full p-3" data-test-id="jf-pt-plan-cta" style="background-color: rgb(243, 243, 254);"> <form action="https://www.wpfastestcache.com/#buy" method="post"> <button class="flex justify-center items-center w-full font-bold transition hover:opacity-70 radius max-w-10/12 mx-auto h-10" style="background-color: rgb(46, 105, 255); color: rgb(255, 255, 255);">Buy</button></form> </div> <div class="w-full flex-1 radius-bl-lg radius-br-lg px-3" style="background: rgb(227, 229, 245); color: rgb(52, 60, 106);"> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">3 Licenses</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Number of Licenses</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">5,000</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Image Credits per License</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong style="font-size:30px;" class="font-bold block flex justify-center items-center mx-2 text-lg">∞</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Support and Updates</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/dollar-gold.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">One-Time Fee</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/left-right.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">1 year license transfer right</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/refund.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">30 Day Money Back Guarantee</span> </span> </div>       </div> </div> </li>
+				                <li class="w-full max-w-72 radius-lg xs:w-44 mx-2 mt-6"> <div class="text-center w-full h-full flex flex-col cursor-pointer" aria-label="GOLD"> <div class="w-full"> <div class="relative flex justify-center items-center w-full font-bold radius-tl-lg radius-tr-lg text-xl" style="background-color: rgb(255, 184, 40); color: rgb(43, 50, 69);"> <span class="my-3">Gold</span> </div> <div class="flex flex-col justify-center items-center w-full text-sm min-h-32" style="background-color: rgb(243, 243, 254); color: rgb(10, 21, 81);"> <span class="text-xl"> <div class="flex flex-col">  <div class="text-md py-2"> <div class="flex items-end"> <span class="text-sm">$</span> <strong class="font-extrabold flex items-end text-6xl line-height-4xl"> 175 <span class="flex flex-col text-left"> <strong class="font-bold text-xl line-height-md">.00</strong> <span class="text-sm font-normal line-height-xs" style="color: rgb(69, 78, 128);">/lifetime</span> </span> </strong> </div> </div> </div> </span>  </div> </div> <div class="w-full p-3" data-test-id="jf-pt-plan-cta" style="background-color: rgb(243, 243, 254);"> <form action="https://www.wpfastestcache.com/#buy" method="post"> <button class="flex justify-center items-center w-full font-bold transition hover:opacity-70 radius max-w-10/12 mx-auto h-10" style="background-color: rgb(255, 184, 40); color: rgb(43, 50, 69);">Buy</button></form> </div> <div class="w-full flex-1 radius-bl-lg radius-br-lg px-3" style="background: rgb(227, 229, 245); color: rgb(52, 60, 106);"> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">5 Licenses</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Number of Licenses</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">5,000</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Image Credits per License</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong style="font-size:30px;" class="font-bold block flex justify-center items-center mx-2 text-lg">∞</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Support and Updates</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/dollar-gold.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">One-Time Fee</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/left-right.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">1 year license transfer right</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/refund.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">30 Day Money Back Guarantee</span> </span> </div>       </div> </div> </li>
+				                <li class="w-full max-w-72 radius-lg xs:w-44 mx-2 mt-6"> <div class="text-center w-full h-full flex flex-col cursor-pointer" aria-label="GOLD"> <div class="w-full"> <div class="relative flex justify-center items-center w-full font-bold radius-tl-lg radius-tr-lg text-xl" style="background-color: #9661f9; color: rgb(255, 255, 255);"> <span class="my-3">Platinum</span> </div> <div class="flex flex-col justify-center items-center w-full text-sm min-h-32" style="background-color: rgb(243, 243, 254); color: rgb(10, 21, 81);"> <span class="text-xl"> <div class="flex flex-col">  <div class="text-md py-2"> <div class="flex items-end"> <span class="text-sm">$</span> <strong class="font-extrabold flex items-end text-6xl line-height-4xl"> 300 <span class="flex flex-col text-left"> <strong class="font-bold text-xl line-height-md">.00</strong> <span class="text-sm font-normal line-height-xs" style="color: rgb(69, 78, 128);">/lifetime</span> </span> </strong> </div> </div> </div> </span>  </div> </div> <div class="w-full p-3" data-test-id="jf-pt-plan-cta" style="background-color: rgb(243, 243, 254);"> <form action="https://www.wpfastestcache.com/#buy" method="post"> <button class="flex justify-center items-center w-full font-bold transition hover:opacity-70 radius max-w-10/12 mx-auto h-10" style="background-color: #9661f9; color: rgb(255, 255, 255);">Buy</button></form> </div> <div class="w-full flex-1 radius-bl-lg radius-br-lg px-3" style="background: rgb(227, 229, 245); color: rgb(52, 60, 106);"> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">10 Licenses</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Number of Licenses</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg">5,000</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Image Credits per License</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong style="font-size:30px;" class="font-bold block flex justify-center items-center mx-2 text-lg">∞</strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">Support and Updates</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/dollar-gold.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">One-Time Fee</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/left-right.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">1 year license transfer right</span> </span> </div> <div class="relative flex justify-center items-center text-sm py-3" style="border-bottom: 1px solid rgb(200, 206, 237);"> <span class="flex flex-col space-y-1"> <strong class="font-bold block flex justify-center items-center mx-2 text-lg"> <img src="<?php echo plugins_url("wp-fastest-cache/images/refund.png"); ?>" width="40" height="40" /> </strong> <span class="font-medium text-xs" style="color: rgb(69, 78, 128);">30 Day Money Back Guarantee</span> </span> </div>       </div> </div> </li>
 				            </ul>
 				        </div>
 
@@ -2147,11 +2177,13 @@
 				    				jQuery("#revert-loader-toolbar").show();
 				    				jQuery("div[id='wpfc-modal-maxcdn'], div[id='wpfc-modal-other'], div[id='wpfc-modal-photon']").remove();
 
+				    				let wpfc_cdn_nonce = "<?php echo wp_create_nonce("cdn-nonce"); ?>";
+
 					    			jQuery.ajax({
 										type: 'GET', 
 										url: ajaxurl,
 										cache: false,
-										data : {"action": "wpfc_cdn_options"},
+										data : {"action": "wpfc_cdn_options", "nonce" : wpfc_cdn_nonce},
 										dataType : "json",
 										success: function(data){
 											if(data.id){
@@ -2164,7 +2196,7 @@
 											WpfcCDN.init({"id" : jQuery(e.currentTarget).attr("wpfc-cdn-name"),
 							    				"template_main_url" : "<?php echo plugins_url('wp-fastest-cache/templates/cdn'); ?>",
 							    				"values" : data,
-							    				"nonce" : "<?php echo wp_create_nonce("cdn-nonce"); ?>"
+							    				"nonce" : wpfc_cdn_nonce
 							    			});
 
 
@@ -2223,73 +2255,103 @@
 
 				    		<div class="integration-page" style="display: block;width:98%;float:left;">
 
-				    			<div wpfc-db-name="all_warnings" class="int-item int-item-left">
-				    				<div style="float:left;width:45px;height:45px;margin-right:12px;">
-				    					<span class="flaticon-technology"></span> 
-				    				</div>
-				    				<div class="app db">
-				    					<div style="font-weight:bold;font-size:14px;">ALL <span class="db-number">(0)</span></div>
-				    					<p>Clean all of them</p>
-				    				</div>
-				    				<div class="meta"></div>
-				    			</div>
 
-				    			<div wpfc-db-name="post_revisions" class="int-item int-item-right">
-				    				<div style="float:left;width:45px;height:45px;margin-right:12px;">
-				    					<span class="flaticon-draft"></span> 
-				    				</div>
-				    				<div class="app db">
-				    					<div style="font-weight:bold;font-size:14px;">Post Revisions <span class="db-number">(0)</span></div>
-				    					<p>Clean all post revisions</p>
-				    				</div>
-				    				<div class="meta"></div>
-				    			</div>
+							<?php
 
-				    			<div wpfc-db-name="trashed_contents" class="int-item int-item-left">
-				    				<div style="float:left;width:45px;height:45px;margin-right:12px;">
-				    					<span class="flaticon-recycling"></span> 
-				    				</div>
-				    				<div class="app db">
-				    					<div style="font-weight:bold;font-size:14px;">Trashed Contents <span class="db-number">(0)</span></div>
-				    					<p>Clean all trashed posts & pages</p>
-				    				</div>
-				    				<div class="meta"></div>
-				    			</div>
+							$items = [
+							    [
+							        "name" => "all_warnings",
+							        "class" => "int-item-left",
+							        "icon"  => "flaticon-technology",
+							        "title" => "ALL",
+							        "desc"  => "Clean all of them"
+							    ],
+							    [
+							        "name" => "post_revisions",
+							        "class" => "int-item-right",
+							        "icon"  => "flaticon-draft",
+							        "title" => "Post Revisions",
+							        "desc"  => "Clean all post revisions"
+							    ],
+							    [
+							        "name" => "trashed_contents",
+							        "class" => "int-item-left",
+							        "icon"  => "flaticon-recycling",
+							        "title" => "Trashed Contents",
+							        "desc"  => "Clean all trashed posts & pages"
+							    ],
+							    [
+							        "name" => "trashed_spam_comments",
+							        "class" => "int-item-right",
+							        "icon"  => "flaticon-interface",
+							        "title" => "Trashed & Spam Comments",
+							        "desc"  => "Clean all comments from trash & spam"
+							    ],
+							    [
+							        "name" => "trackback_pingback",
+							        "class" => "int-item-left",
+							        "icon"  => "flaticon-pingback",
+							        "title" => "Trackbacks and Pingbacks",
+							        "desc"  => "Clean all trackbacks and pingbacks"
+							    ],
+							    [
+							        "name" => "transient_options",
+							        "class" => "int-item-right",
+							        "icon"  => "flaticon-file",
+							        "title" => "Transient Options",
+							        "desc"  => "Clean all transient options"
+							    ],
+							    [
+							        "name" => "orphaned_post_meta",
+							        "class" => "int-item-left",
+							        "icon"  => "flaticon-xxx",
+							        "title" => "Orphaned Post Meta",
+							        "desc"  => "Clean all orphaned post meta"
+							    ],
+							    [
+							        "name" => "orphaned_comment_meta",
+							        "class" => "int-item-right",
+							        "icon"  => "flaticon-xxx",
+							        "title" => "Orphaned Comment Meta",
+							        "desc"  => "Clean all orphaned comment meta"
+							    ],
+							    [
+							        "name" => "orphaned_user_meta",
+							        "class" => "int-item-left",
+							        "icon"  => "flaticon-user",
+							        "title" => "Orphaned User Meta",
+							        "desc"  => "Clean all orphaned user meta"
+							    ],
+							    [
+							        "name" => "orphaned_term_meta",
+							        "class" => "int-item-right",
+							        "icon"  => "flaticon-tag",
+							        "title" => "Orphaned Term Meta",
+							        "desc"  => "Clean all orphaned term meta"
+							    ],
+							    [
+							        "name" => "orphaned_term_relationships",
+							        "class" => "int-item-left",
+							        "icon"  => "flaticon-connection",
+							        "title" => "Orphaned Term Relationships",
+							        "desc"  => "Clean all orphaned term relationships"
+							    ]
+							];
 
-				    			<div wpfc-db-name="trashed_spam_comments" class="int-item int-item-right">
-				    				<div style="float:left;width:45px;height:45px;margin-right:12px;">
-				    					<span class="flaticon-interface"></span> 
-				    				</div>
-				    				<div class="app db">
-				    					<div style="font-weight:bold;font-size:14px;">Trashed & Spam Comments <span class="db-number">(0)</span></div>
-				    					<p>Clean all comments from trash & spam</p>
-				    				</div>
-				    				<div class="meta"></div>
-				    			</div>
 
-				    			<div wpfc-db-name="trackback_pingback" class="int-item int-item-left">
-				    				<div style="float:left;width:45px;height:45px;margin-right:12px;">
-				    					<span class="flaticon-pingback"></span> 
-				    				</div>
-				    				<div class="app db">
-				    					<div style="font-weight:bold;font-size:14px;">Trackbacks and Pingbacks <span class="db-number">(0)</span></div>
-				    					<p>Clean all trackbacks and pingbacks</p>
-				    				</div>
-				    				<div class="meta"></div>
-				    			</div>
-
-				    			<div wpfc-db-name="transient_options" class="int-item int-item-right">
-				    				<div style="float:left;width:45px;height:45px;margin-right:12px;">
-				    					<span class="flaticon-file"></span> 
-				    				</div>
-				    				<div class="app db">
-				    					<div style="font-weight:bold;font-size:14px;">Transient Options <span class="db-number">(0)</span></div>
-				    					<p>Clean all transient options</p>
-				    				</div>
-				    				<div class="meta"></div>
-				    			</div>
-
-
+								foreach ($items as $item) {
+								    echo '<div wpfc-db-name="'.$item['name'].'" class="int-item '.$item['class'].'">
+								            <div style="display:none;float:left;width:45px;height:45px;margin-right:12px;">
+								                <span class="'.$item['icon'].'"></span> 
+								            </div>
+								            <div class="app db">
+								                <div style="font-weight:bold;font-size:14px;">'.$item['title'].' <span class="db-number">(0)</span></div>
+								                <p>'.$item['desc'].'</p>
+								            </div>
+								            <div class="meta"></div>
+								          </div>';
+								}
+							?>
 
 
 				    		</div>

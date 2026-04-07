@@ -1,322 +1,636 @@
 <?php
 
 $produtos = [
-
-
-    // [
-    //     "destaque"=> true,
-    //     "categoria"=> "porcionados",
-    //     "fotos"=> [
-    //         "foto-produto-porcionado-file-mignon.jpg",
-    //         "foto-produto-porcionado-file-mignon.jpg"
-    //     ],
-    //     "nome"=> "Filé Mignon Medalhão",
-    //     "locais"=> [
-    //         "churrasqueira",
-    //         "chapa",
-    //         "broiler"
-    //     ],
-    //     "origem"=> "bovino",
-    //     "peso"=> [
-    //         "2,5kg"
-    //     ],
-    //     "caracteristicas" => [
-    //         "macio",
-    //         "praticidade",
-    //         "freezer-preparo"
-    //     ],
-    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    // ],
-    // [
-    //     "destaque"=> false,
-    //     "categoria"=> "porcionados",
-    //     "fotos"=> [
-    //         "foto-produto-porcionado-contrafile-bife.jpg",
-    //         "foto-produto-porcionado-contrafile-bife.jpg"
-    //     ],
-    //     "nome"=> "Contrafilé Bife",
-    //     "locais"=> [
-    //         "churrasqueira",
-    //         "chapa",
-    //         "broiler"
-    //     ],
-    //     "origem"=> "bovino",
-    //     "peso"=> [
-    //         "2,5kg"
-    //     ],
-    //     "caracteristicas" => [
-    //         "macio",
-    //         "praticidade",
-    //         "freezer-preparo"
-    //     ],
-    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    // ],
-    // [
-    //     "destaque"=> false,
-    //     "categoria"=> "porcionados",
-    //     "fotos"=> [
-    //         "foto-produto-porcionado-coxao-mole-bife.jpg",
-    //         "foto-produto-porcionado-coxao-mole-bife.jpg"
-    //     ],
-    //     "nome"=> "Coxão Mole Bife",
-    //     "locais"=> [
-    //         "churrasqueira",
-    //         "chapa",
-    //         "broiler"
-    //     ],
-    //     "origem"=> "bovino",
-    //     "peso"=> [
-    //         "2,5kg"
-    //     ],
-    //     "caracteristicas" => [
-    //         "macio",
-    //         "praticidade",
-    //         "freezer-preparo"
-    //     ],
-    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    // ],
-    // [
-    //     "destaque"=> false,
-    //     "categoria"=> "porcionados",
-    //     "fotos"=> [
-    //         "foto-produto-porcionado-patinho-bife.jpg",
-    //         "foto-produto-porcionado-patinho-bife.jpg"
-    //     ],
-    //     "nome"=> "Patinho Bife",
-    //     "locais"=> [
-    //         "churrasqueira",
-    //         "chapa",
-    //         "broiler"
-    //     ],
-    //     "origem"=> "bovino",
-    //     "peso"=> [
-    //         "2,5kg"
-    //     ],
-    //     "caracteristicas" => [
-    //         "macio",
-    //         "praticidade",
-    //         "freezer-preparo"
-    //     ],
-    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    // ],
-    // [
-    //     "destaque"=> false,
-    //     "categoria"=> "porcionados",
-    //     "fotos"=> [
-    //         "foto-produto-porcionado-patinho-iscas.jpg",
-    //         "foto-produto-porcionado-patinho-iscas.jpg"
-    //     ],
-    //     "nome"=> "Patinho Iscas",
-    //     "locais"=> [
-    //         "churrasqueira",
-    //         "chapa",
-    //         "broiler"
-    //     ],
-    //     "origem"=> "bovino",
-    //     "peso"=> [
-    //         "2,5kg"
-    //     ],
-    //     "caracteristicas" => [
-    //         "macio",
-    //         "praticidade",
-    //         "freezer-preparo"
-    //     ],
-    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    // ],
-    // [
-    //     "destaque"=> false,
-    //     "categoria"=> "porcionados",
-    //     "fotos"=> [
-    //         "foto-produto-porcionado-paleta-bife.jpg",
-    //         "foto-produto-porcionado-paleta-bife.jpg"
-    //     ],
-    //     "nome"=> "Paleta Bife",
-    //     "locais"=> [
-    //         "churrasqueira",
-    //         "chapa",
-    //         "broiler"
-    //     ],
-    //     "origem"=> "bovino",
-    //     "peso"=> [
-    //         "2,5kg"
-    //     ],
-    //     "caracteristicas" => [
-    //         "macio",
-    //         "praticidade",
-    //         "freezer-preparo"
-    //     ],
-    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    // ],
-    // [
-    //     "destaque"=> false,
-    //     "categoria"=> "porcionados",
-    //     "fotos"=> [
-    //         "foto-produto-porcionado-paleta-cubos.jpg",
-    //         "foto-produto-porcionado-paleta-cubos.jpg"
-    //     ],
-    //     "nome"=> "Paleta Cubos",
-    //     "locais"=> [
-    //         "churrasqueira",
-    //         "chapa",
-    //         "broiler"
-    //     ],
-    //     "origem"=> "bovino",
-    //     "peso"=> [
-    //         "2,5kg"
-    //     ],
-    //     "caracteristicas" => [
-    //         "macio",
-    //         "praticidade",
-    //         "freezer-preparo"
-    //     ],
-    //     "descricao_curta"=> "&bull; 2,5kg <br />&bull; 100% Carne Bovina <br />&bull; Congelamento Individual (IQF)",
-    //     "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
-    // ],
-
-
-    // STARTERS
     [
         "destaque"=> true,
-        "categoria"=> "starters",
-        "selos" => [
-            "posicao_1" => "selo-catupiry",
-            "posicao_2" => "selo-sem-massa",
-        ],
+        "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-starters-carne-sol-requeijao.jpg"
+            "foto-produto-porcionado-alcatra-bifes.jpg",
+            "foto-produto-porcionado-alcatra-bifes.jpg"
         ],
-        "nome"=> "Bolinho de Carne de Sol com Requeijão",
+        "nome"=> "Alcatra Bifes",
         "locais"=> [
-            "fritadeira",
-            "forno"
+            "churrasqueira",
+            "chapa",
+            "broiler"
         ],
         "origem"=> "bovino",
         "peso"=> [
-            "1,05kg"
+            "2 kg",
+            "Peso bife: 160g",
+            "Espessura: 1,5cm"
         ],
         "caracteristicas" => [
-            "bolinho-sem-massa",
+            "padrao-corte",
             "freezer-preparo",
-            "eficiencia"
+            "validade-12-meses",
+            "extra-limpo"
         ],
-        "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
-        "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
     ],
     [
         "destaque"=> false,
-        "categoria"=> "starters",
-        "selos" => [
-            "posicao_2" => "selo-sem-massa",
-        ],
+        "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-starters-bolinho-carne-seca.jpg"
+            "foto-produto-porcionado-coxao-mole-bifes.jpg",
+            "foto-produto-porcionado-coxao-mole-bifes.jpg"
         ],
-        "nome"=> "Bolinho de Carne Seca",
+        "nome"=> "Coxão Mole Bifes",
         "locais"=> [
-            "fritadeira",
-            "forno"
+            "churrasqueira",
+            "chapa",
+            "broiler"
         ],
         "origem"=> "bovino",
         "peso"=> [
-            "1,05kg"
+            "2 kg",
+            "Peso bife: 150g",
+            "Espessura: 1,5cm"
         ],
         "caracteristicas" => [
-            "bolinho-sem-massa",
+            "padrao-corte",
             "freezer-preparo",
-            "eficiencia"
+            "validade-12-meses",
+            "extra-limpo"
         ],
-        "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
-        "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
-
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
     ],
     [
         "destaque"=> false,
-        "categoria"=> "starters",
-        "selos" => [
-            "posicao_1" => "selo-catupiry",
-            "posicao_2" => "selo-sem-massa",
-        ],
+        "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-starters-coxinha-costela-requeijao.jpg"
+            "foto-produto-porcionado-patinhos-bifes.jpg",
+            "foto-produto-porcionado-patinhos-bifes.jpg"
         ],
-        "nome"=> "Coxinha de Costela com Requeijão",
+        "nome"=> "Patinho Bifes",
         "locais"=> [
-            "fritadeira",
-            "forno"
+            "churrasqueira",
+            "chapa",
+            "broiler"
         ],
         "origem"=> "bovino",
         "peso"=> [
-            "1,05kg"
+            "2 kg",
+            "Peso bife: 140g",
+            "Espessura: 1,4cm"
         ],
         "caracteristicas" => [
-            "coxinha-sem-massa",
+            "padrao-corte",
             "freezer-preparo",
-            "eficiencia"
+            "validade-12-meses",
+            "extra-limpo"
         ],
-        "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
-        "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
-
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
     ],
     [
         "destaque"=> false,
-        "categoria"=> "starters",
-        "selos" => [
-            "posicao_2" => "selo-sem-massa",
-        ],
+        "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-starters-croquete-cupim.jpg"
+            "foto-produto-porcionado-paleta-bifes.jpg",
+            "foto-produto-porcionado-paleta-bifes.jpg"
         ],
-        "nome"=> "Croquete de Cupim",
+        "nome"=> "Paleta Bifes",
         "locais"=> [
-            "fritadeira",
-            "forno"
+            "churrasqueira",
+            "chapa",
+            "broiler"
         ],
         "origem"=> "bovino",
         "peso"=> [
-            "1,05kg"
+            "2 kg",
+            "Peso bife: 130g",
+            "Espessura: 1,3cm"
         ],
         "caracteristicas" => [
-            "croquete-sem-massa",
+            "padrao-corte",
             "freezer-preparo",
-            "eficiencia"
+            "validade-12-meses",
+            "extra-limpo"
         ],
-        "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
-        "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
-
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
     ],
     [
         "destaque"=> false,
-        "categoria"=> "starters",
-        "selos" => [
-            "posicao_2" => "selo-sem-massa",
-        ],
+        "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-starters-croquete-pernil-limao.jpg"
+            "foto-produto-porcionado-bisteca-contra-file.jpg",
+            "foto-produto-porcionado-bisteca-contra-file.jpg"
         ],
-        "nome"=> "Croquete de Pernil com Mostarda e Limão",
+        "nome"=> "Bisteca do Contrafilé <span>com osso</span>",
         "locais"=> [
-            "fritadeira",
-            "forno"
+            "churrasqueira",
+            "chapa",
+            "broiler"
         ],
         "origem"=> "bovino",
         "peso"=> [
-            "1,05kg"
+            "2 kg",
+            "Peso bife: Variável",
+            "Espessura: 1,8cm"
         ],
         "caracteristicas" => [
-            "croquete-sem-massa",
+            "padrao-corte",
             "freezer-preparo",
-            "eficiencia"
+            "validade-12-meses",
+            "extra-limpo"
         ],
-        "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
-        "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
-
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
     ],
+    [
+        "destaque"=> false,
+        "categoria"=> "porcionados",
+        "fotos"=> [
+            "foto-produto-porcionado-file-mignon-cubos.jpg",
+            "foto-produto-porcionado-file-mignon-cubos.jpg"
+        ],
+        "nome"=> "Filé Mignon Cubos",
+        "locais"=> [
+            "churrasqueira",
+            "chapa",
+            "broiler"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "2 kg",
+            "Dimensões: 2 x 2 x 2cm"
+        ],
+        "caracteristicas" => [
+            "padrao-corte",
+            "freezer-preparo",
+            "validade-12-meses",
+            "extra-limpo"
+        ],
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "porcionados",
+        "fotos"=> [
+            "foto-produto-porcionado-bovino-iscas-slice.jpg",
+            "foto-produto-porcionado-bovino-iscas-slice.jpg"
+        ],
+        "nome"=> "Bovino Iscas Slice",
+        "locais"=> [
+            "churrasqueira",
+            "chapa",
+            "broiler"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "2 kg",
+            "Dimensões: 2,5 x 2,5cm"
+        ],
+        "caracteristicas" => [
+            "padrao-corte",
+            "freezer-preparo",
+            "validade-12-meses",
+            "extra-limpo"
+        ],
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "porcionados",
+        "fotos"=> [
+            "foto-produto-porcionado-patinho-cubos.jpg",
+            "foto-produto-porcionado-patinho-cubos.jpg"
+        ],
+        "nome"=> "Patinho Cubos",
+        "locais"=> [
+            "churrasqueira",
+            "chapa",
+            "broiler"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "2 kg",
+            "Dimensões: 2 x 2 x 2cm"
+        ],
+        "caracteristicas" => [
+            "padrao-corte",
+            "freezer-preparo",
+            "validade-12-meses",
+            "extra-limpo"
+        ],
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "porcionados",
+        "fotos"=> [
+            "foto-produto-porcionado-patinho-tiras.jpg",
+            "foto-produto-porcionado-patinho-tiras.jpg"
+        ],
+        "nome"=> "Patinho Tiras",
+        "locais"=> [
+            "churrasqueira",
+            "chapa",
+            "broiler"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "2 kg",
+            "Dimensões: 4 x 1,5 x 1,5cm"
+        ],
+        "caracteristicas" => [
+            "padrao-corte",
+            "freezer-preparo",
+            "validade-12-meses",
+            "extra-limpo"
+        ],
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "porcionados",
+        "fotos"=> [
+            "foto-produto-porcionado-acem-cubos.jpg",
+            "foto-produto-porcionado-acem-cubos.jpg"
+        ],
+        "nome"=> "Acém Cubos",
+        "locais"=> [
+            "churrasqueira",
+            "chapa",
+            "broiler"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "2 kg",
+            "Dimensões: 3 x 3 x 3cm"
+        ],
+        "caracteristicas" => [
+            "padrao-corte",
+            "freezer-preparo",
+            "validade-12-meses",
+            "extra-limpo"
+        ],
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "porcionados",
+        "fotos"=> [
+            "foto-produto-porcionado-costela-cubos-osso.jpg",
+            "foto-produto-porcionado-costela-cubos-osso.jpg"
+        ],
+        "nome"=> "Costela Cubos <span>com osso (panela)</span>",
+        "locais"=> [
+            "churrasqueira",
+            "chapa",
+            "broiler"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "2 kg",
+            "Dimensões: 5 x 5 x 5cm"
+        ],
+        "caracteristicas" => [
+            "padrao-corte",
+            "freezer-preparo",
+            "validade-12-meses",
+            "extra-limpo"
+        ],
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "porcionados",
+        "fotos"=> [
+            "foto-produto-porcionado-carne-seca-cubos.jpg",
+            "foto-produto-porcionado-carne-seca-cubos.jpg"
+        ],
+        "nome"=> "Carne Seca Cubos traseiro",
+        "locais"=> [
+            "churrasqueira",
+            "chapa",
+            "broiler"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "2 kg",
+            "Dimensões: 3 x 3 x 3cm"
+        ],
+        "caracteristicas" => [
+            "padrao-corte",
+            "freezer-preparo",
+            "validade-12-meses",
+            "extra-limpo"
+        ],
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "porcionados",
+        "fotos"=> [
+            "foto-produto-porcionado-peito-frango-bifes-160.jpg",
+            "foto-produto-porcionado-peito-frango-bifes-160.jpg"
+        ],
+        "nome"=> "Peito de Frango Bifes 160g",
+        "locais"=> [
+            "churrasqueira",
+            "chapa",
+            "broiler"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "2 kg",
+            "Peso bife: 160g",
+            "Espessura: 1,5cm"
+        ],
+        "caracteristicas" => [
+            "padrao-corte",
+            "freezer-preparo",
+            "validade-12-meses",
+            "extra-limpo"
+        ],
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "porcionados",
+        "fotos"=> [
+            "foto-produto-porcionado-peito-frango-bifes-130.jpg",
+            "foto-produto-porcionado-peito-frango-bifes-130.jpg"
+        ],
+        "nome"=> "Peito de Frango Bifes 130g",
+        "locais"=> [
+            "churrasqueira",
+            "chapa",
+            "broiler"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "2 kg",
+            "Peso bife: 130g",
+            "Espessura: 1,3cm"
+        ],
+        "caracteristicas" => [
+            "padrao-corte",
+            "freezer-preparo",
+            "validade-12-meses",
+            "extra-limpo"
+        ],
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "porcionados",
+        "fotos"=> [
+            "foto-produto-porcionado-peito-frango-cubos.jpg",
+            "foto-produto-porcionado-peito-frango-cubos.jpg"
+        ],
+        "nome"=> "Peito de Frango Cubos",
+        "locais"=> [
+            "churrasqueira",
+            "chapa",
+            "broiler"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "2 kg",
+            "Dimensões: 2 x 2 x 2cm"
+        ],
+        "caracteristicas" => [
+            "padrao-corte",
+            "freezer-preparo",
+            "validade-12-meses",
+            "extra-limpo"
+        ],
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    ],
+    [
+        "destaque"=> false,
+        "categoria"=> "porcionados",
+        "fotos"=> [
+            "foto-produto-porcionado-peito-frango-tiras.jpg",
+            "foto-produto-porcionado-peito-frango-tiras.jpg"
+        ],
+        "nome"=> "Peito de Frango Tiras",
+        "locais"=> [
+            "churrasqueira",
+            "chapa",
+            "broiler"
+        ],
+        "origem"=> "bovino",
+        "peso"=> [
+            "2 kg",
+            "Dimensões: 4 x 1,5 x 1,5cm"
+        ],
+        "caracteristicas" => [
+            "padrao-corte",
+            "freezer-preparo",
+            "validade-12-meses",
+            "extra-limpo"
+        ],
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
+        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+    ],
+    // STARTERS
+    // [
+    //     "destaque"=> true,
+    //     "categoria"=> "starters",
+    //     "selos" => [
+    //         "posicao_1" => "selo-catupiry",
+    //         "posicao_2" => "selo-sem-massa",
+    //     ],
+    //     "fotos"=> [
+    //         "foto-produto-starters-carne-sol-requeijao.jpg"
+    //     ],
+    //     "nome"=> "Bolinho de Carne de Sol com Requeijão",
+    //     "locais"=> [
+    //         "fritadeira",
+    //         "forno"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "1,05kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "bolinho-sem-massa",
+    //         "freezer-preparo",
+    //         "eficiencia"
+    //     ],
+    //     "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
+    //     "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "starters",
+    //     "selos" => [
+    //         "posicao_2" => "selo-sem-massa",
+    //     ],
+    //     "fotos"=> [
+    //         "foto-produto-starters-bolinho-carne-seca.jpg"
+    //     ],
+    //     "nome"=> "Bolinho de Carne Seca",
+    //     "locais"=> [
+    //         "fritadeira",
+    //         "forno"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "1,05kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "bolinho-sem-massa",
+    //         "freezer-preparo",
+    //         "eficiencia"
+    //     ],
+    //     "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
+    //     "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
+
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "starters",
+    //     "selos" => [
+    //         "posicao_1" => "selo-catupiry",
+    //         "posicao_2" => "selo-sem-massa",
+    //     ],
+    //     "fotos"=> [
+    //         "foto-produto-starters-coxinha-costela-requeijao.jpg"
+    //     ],
+    //     "nome"=> "Coxinha de Costela com Requeijão",
+    //     "locais"=> [
+    //         "fritadeira",
+    //         "forno"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "1,05kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "coxinha-sem-massa",
+    //         "freezer-preparo",
+    //         "eficiencia"
+    //     ],
+    //     "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
+    //     "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
+
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "starters",
+    //     "selos" => [
+    //         "posicao_1" => "selo-catupiry"
+    //     ],
+    //     "fotos"=> [
+    //         "foto-produto-starters-pastel-carne-seca-requeijao.jpg"
+    //     ],
+    //     "nome"=> "Mini Pastel de Carne Seca com Requeijão",
+    //     "locais"=> [
+    //         "fritadeira",
+    //         "forno"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "1,05kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "pastel-sem-massa",
+    //         "freezer-preparo",
+    //         "eficiencia"
+    //     ],
+    //     "descricao_curta"=> "&bull; 1,05 kg <br />&bull; Massa leve, mais recheio. <br />&bull; Alta lucratividade",
+    //     "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
+
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "starters",
+    //     "selos" => [
+    //         "posicao_1" => "selo-catupiry"
+    //     ],
+    //     "fotos"=> [
+    //         "foto-produto-starters-pastel-costela-mussarela.jpg"
+    //     ],
+    //     "nome"=> "Mini Pastel de Costela com Mussarela",
+    //     "locais"=> [
+    //         "fritadeira",
+    //         "forno"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "1,05kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "pastel-sem-massa",
+    //         "freezer-preparo",
+    //         "eficiencia"
+    //     ],
+    //     "descricao_curta"=> "&bull; 1,05 kg <br />&bull; Massa leve, mais recheio. <br />&bull; Alta lucratividade",
+    //     "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
+
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "starters",
+    //     "selos" => [
+    //         "posicao_2" => "selo-sem-massa",
+    //     ],
+    //     "fotos"=> [
+    //         "foto-produto-starters-croquete-cupim.jpg"
+    //     ],
+    //     "nome"=> "Croquete de Cupim",
+    //     "locais"=> [
+    //         "fritadeira",
+    //         "forno"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "1,05kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "croquete-sem-massa",
+    //         "freezer-preparo",
+    //         "eficiencia"
+    //     ],
+    //     "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
+    //     "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
+
+    // ],
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "starters",
+    //     "selos" => [
+    //         "posicao_2" => "selo-sem-massa",
+    //     ],
+    //     "fotos"=> [
+    //         "foto-produto-starters-croquete-pernil-limao.jpg"
+    //     ],
+    //     "nome"=> "Croquete de Pernil com Mostarda e Limão",
+    //     "locais"=> [
+    //         "fritadeira",
+    //         "forno"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "1,05kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "croquete-sem-massa",
+    //         "freezer-preparo",
+    //         "eficiencia"
+    //     ],
+    //     "descricao_curta"=> "&bull; 1,05 kg (Média 30g cada) <br />&bull; Sem massa, só panko e recheio. <br />&bull; Alta lucratividade",
+    //     "operacoes"=> "Restaurantes, Bares, Lanchonetes, Padarias, Pizzarias, Esfiharias e Varejo alimentar."
+
+    // ],
 
 
 
@@ -536,35 +850,35 @@ $produtos = [
         "receitas"=> "Ideal para Hambúrgueres artesanais, Espaguete à bolonhesa e Almôndegas."
 
     ],
-    [
-        "destaque"=> false,
-        "categoria"=> "moidas",
-        "selos" => [
-            "posicao_2" => "selo-15-gordura",
-        ],
-        "fotos"=> [
-            "foto-produto-carne-moida-cortes.jpg"
-        ],
-        "nome"=> "Carne Moída Cortes",
-        "locais"=> [
-            "panela",
-            "forno",
-            "chapa",
-            "fritadeira"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "1kg"
-        ],
-        "caracteristicas" => [
-            "bovino",
-            "condimentos",
-            "nervos"
-        ],
-        "descricao_curta"=> "&bull; 1kg<br />&bull; 100% Carne Bovina<br />&bull; 15% de gordura",
-        "receitas"=> "Ideal para Torta de carne, Empadão, Polpetone, Empanada, Quibe e Salgados."
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "moidas",
+    //     "selos" => [
+    //         "posicao_2" => "selo-15-gordura",
+    //     ],
+    //     "fotos"=> [
+    //         "foto-produto-carne-moida-cortes.jpg"
+    //     ],
+    //     "nome"=> "Carne Moída Cortes",
+    //     "locais"=> [
+    //         "panela",
+    //         "forno",
+    //         "chapa",
+    //         "fritadeira"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "1kg"
+    //     ],
+    //     "caracteristicas" => [
+    //         "bovino",
+    //         "condimentos",
+    //         "nervos"
+    //     ],
+    //     "descricao_curta"=> "&bull; 1kg<br />&bull; 100% Carne Bovina<br />&bull; 15% de gordura",
+    //     "receitas"=> "Ideal para Torta de carne, Empadão, Polpetone, Empanada, Quibe e Salgados."
 
-    ],
+    // ],
     // [
     //     "destaque"=> false,
     //     "categoria"=> "moidas",
@@ -594,34 +908,34 @@ $produtos = [
 
     // ],
 
-    [
-        "destaque"=> true,
-        "categoria"=> "hamburguer",
-        "fotos"=> [
-            "foto-produto-burguer-costela.jpg"
-        ],
-        "nome"=> "Hambúrguer Costela",
-        "locais"=> [
-            "churrasqueira",
-            "chapa",
-            "broiler"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "110g",
-            "150g",
-            "200g"
-        ],
-        "caracteristicas" => [
-            "bovino",
-            "condimentos",
-            "mordida",
-            "grelhar"
-        ],
-        "descricao_curta"=> "&bull; 110g, 150g e 200g<br />&bull; 100% Carne Bovina<br />&bull; Aspecto artesanal",
-        "receitas"=> ""
+    // [
+    //     "destaque"=> true,
+    //     "categoria"=> "hamburguer",
+    //     "fotos"=> [
+    //         "foto-produto-burguer-costela.jpg"
+    //     ],
+    //     "nome"=> "Hambúrguer Costela",
+    //     "locais"=> [
+    //         "churrasqueira",
+    //         "chapa",
+    //         "broiler"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "110g",
+    //         "150g",
+    //         "200g"
+    //     ],
+    //     "caracteristicas" => [
+    //         "bovino",
+    //         "condimentos",
+    //         "mordida",
+    //         "grelhar"
+    //     ],
+    //     "descricao_curta"=> "&bull; 110g, 150g e 200g<br />&bull; 100% Carne Bovina<br />&bull; Aspecto artesanal",
+    //     "receitas"=> ""
 
-    ],
+    // ],
     // [
     //     "destaque"=> false,
     //     "categoria"=> "hamburguer",
@@ -651,34 +965,34 @@ $produtos = [
     //     "receitas"=> ""
 
     // ],
-    [
-        "destaque"=> false,
-        "categoria"=> "hamburguer",
-        "fotos"=> [
-            "foto-produto-burguer-gourmet.jpg"
-        ],
-        "nome"=> "Hambúrguer Bovino",
-        "locais"=> [
-            "churrasqueira",
-            "chapa",
-            "broiler"
-        ],
-        "origem"=> "bovino",
-        "peso"=> [
-            "110g",
-            "150g",
-            "200g"
-        ],
-        "caracteristicas" => [
-            "bovino",
-            "condimentos",
-            "mordida",
-            "grelhar"
-        ],
-        "descricao_curta"=> "&bull; 110g, 150g e 200g<br />&bull; 100% Carne Bovina<br />&bull; Aspecto artesanal",
-        "receitas"=> ""
+    // [
+    //     "destaque"=> false,
+    //     "categoria"=> "hamburguer",
+    //     "fotos"=> [
+    //         "foto-produto-burguer-gourmet.jpg"
+    //     ],
+    //     "nome"=> "Hambúrguer Bovino",
+    //     "locais"=> [
+    //         "churrasqueira",
+    //         "chapa",
+    //         "broiler"
+    //     ],
+    //     "origem"=> "bovino",
+    //     "peso"=> [
+    //         "110g",
+    //         "150g",
+    //         "200g"
+    //     ],
+    //     "caracteristicas" => [
+    //         "bovino",
+    //         "condimentos",
+    //         "mordida",
+    //         "grelhar"
+    //     ],
+    //     "descricao_curta"=> "&bull; 110g, 150g e 200g<br />&bull; 100% Carne Bovina<br />&bull; Aspecto artesanal",
+    //     "receitas"=> ""
 
-    ]
+    // ]
     // [
     //     "destaque"=> false,
     //     "categoria"=> "hamburguer",

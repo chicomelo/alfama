@@ -55,7 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									</div>
 								</div>
 								<div class="aioseo-col col-xs-12 col-md-9 text-xs-left">
-									<div class="settings-content">
+									<div class="aioseo-settings-content">
 										<div class="aioseo-radio-toggle circle">
 											<div><input id="id_previewGeneralIsMobile_0" name="previewGeneralIsMobile"
 													type="radio"><label for="id_previewGeneralIsMobile_0" class="dark"><svg
@@ -86,7 +86,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									</div>
 								</div>
 								<div class="aioseo-col col-xs-12 col-md-9 text-xs-left">
-									<div class="settings-content">
+									<div class="aioseo-settings-content">
 										<div class="aioseo-google-search-preview">
 											<div class="domain"> https://aioseo.com/category/uncategorized/ </div>
 											<div class="site-title">Taxonomy Title | aioseo.com</div>
@@ -102,7 +102,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									</div>
 								</div>
 								<div class="aioseo-col col-xs-12 col-md-9 text-xs-left">
-									<div class="settings-content">
+									<div class="aioseo-settings-content">
 										<div class="aioseo-html-tags-editor">
 
 											<div>
@@ -475,7 +475,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									</div>
 								</div>
 								<div class="aioseo-col col-xs-12 col-md-9 text-xs-left">
-									<div class="settings-content">
+									<div class="aioseo-settings-content">
 										<div class="aioseo-html-tags-editor">
 											<!---->
 											<div>
@@ -875,7 +875,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<div class="aioseo-alert yellow medium bonus-alert"> 🎁 <span>
 									<strong><?php esc_html_e( 'Bonus:', 'all-in-one-seo-pack' ); ?></strong>
 									<?php esc_html_e( 'You can upgrade to the Pro plan today and ', 'all-in-one-seo-pack' ); ?>
-									<strong><?php esc_html_e( 'save 60% off', 'all-in-one-seo-pack' ); ?></strong>
+									<strong><?php esc_html_e( 'save 50% off', 'all-in-one-seo-pack' ); ?></strong>
 									<?php esc_html_e( '(discount auto-applied)', 'all-in-one-seo-pack' ); ?>.</span>
 								</div>
 							</div>

@@ -1,9 +1,9 @@
 === Click to Chat - HoliThemes ===
 Requires at least: 4.7
-Tested up to: 6.8.1
+Tested up to: 6.9
 Requires PHP: 5.6
-Contributors: holithemes
-Stable tag: 4.22
+Contributors: HoliThemes
+Stable tag: 4.35
 Tags: whatsapp, whatsapp business, click to chat, whatsapp chat, WooCommerce WhatsApp
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -23,7 +23,6 @@ Add 'WhatsApp' or 'WhatsApp Business' Number and let your website visitors conta
 **📱 Mobile:**  Open the WhatsApp Mobile App for a seamless connection.
 
 **💻 Desktop:** Direct visitors to the WhatsApp Desktop App or Web WhatsApp page (web.whatsapp.com)
-
 
 https://youtu.be/O_BF9rhazvI
 
@@ -535,15 +534,62 @@ Thank you so much in advance from "Click to Chat" Team
 * Upload "Click-to-Chat" folder to the "/wp-content/plugins/" directory.
 * Activate the plugin through the "Plugins" menu in WordPress.
 
-= From Dashboard ( WordPress admin ) =
-* When a new version is released - we can see the 'update now' link at wp-admin -> plugins
-* click on 'update now'
-or
-* since WordPress 5.5, If auto update for the plugin is enabled, the plugin will update automatically when a new version is released
-
-After Activating the plugin, add a WhatsApp Number in the plugin settings.
+= From WordPress Dashboard =
+* From wp-admin -> plugins
+* Click Update now when a new version is available
+* Or enable Auto-updates to update automatically
 
 == Changelog ==
+
+= 4.35 =
+* Enhancement: Custom CSS feature.
+* Enhancement: Aria hidden attribute settings.
+
+= 4.34 =
+* Enhancement: Added settings to send dataLayer objects to Google Tag Manager.
+* Enhancement: Chat widget now works on WooCommerce shop pages with page-level call to action and pre-filled messages.
+* Enhancement: Added Notification badge feature.
+* Fix: Shortcodes were not working with WooCommerce-specific variables.
+
+= 4.33 =
+* Fix: Animations issues for call to action, Greetings dialog.
+
+= 4.32 =
+* Enhancement: Display chat button like WooCommerce add to cart button.
+* Fix: Greetings dialog header image not adding properly.
+
+= 4.31 =
+* Fix: Shortcode style-1 added icon
+
+= 4.30 =
+* Enhancement: Google Analytics feature.
+
+= 4.29 =
+* Settings to load JavaScript files as Normal, Async, or Defer for improved performance.
+
+= 4.28 =
+* Fix: The Custom Element feature now works correctly even when the 'ctc_chat' class is added dynamically.
+
+= 4.27 =
+* app.js file now loads asynchronously and deferred to improve page load performance.
+
+= 4.26 =
+* Custom URL feature is now available in this main plugin. We can add WhatsApp Chanel URL in the plugin settings to open WhatsApp Channel. 
+* Enhancement: Page level settings design.
+
+= 4.25 =
+* Fix: Greeting dialog modal not displaying correctly due to z-index issues when certain background elements were present.
+
+= 4.24 =
+* Fixed: Page-level settings now work correctly on the WooCommerce Shop page.
+* Improved: Better visual styling for the base widget.
+
+= 4.23 =
+🚨 Important Update
+* ✨ New Feature: Greetings Dialog can now appear as a modal for better visibility and UX.
+* 🛠️ Fix: Resolved an issue where the Greetings Dialog was not displaying correctly when the base widget was positioned at the top.
+* 🛠️ Fix: On iPhone Chrome, the Share feature now opens WhatsApp correctly without opening a new tab.
+* 🔧 Improvement: When a WhatsApp number is not set, the admin notice is now displayed using a more reliable and secure method — instead of using JS .html().
 
 = 4.22 =
 * The Custom Image widget now automatically uses the image file name as the alt attribute

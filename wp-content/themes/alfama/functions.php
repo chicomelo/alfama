@@ -86,9 +86,13 @@ function alfama_custom_logo_setup() {
 }
 add_action( 'after_setup_theme', 'alfama_custom_logo_setup' );
 
-add_theme_support( 'custom-logo' );
+// add_theme_support( 'custom-logo' );
 
 // remove br e p no classic editor
 remove_filter( 'the_content', 'wpautop' );
 remove_filter( 'the_excerpt', 'wpautop' );
+
+
+add_theme_support('title-tag');
+
 ?>

@@ -1,7 +1,7 @@
 // main: "../main.less"
 
 .footer__alfama{
-    background-color: @blue1;
+    background-color: @blue0;
     color: @white;
     padding: 42px 0;
 
@@ -11,7 +11,11 @@
         justify-content: space-between;
         flex-direction: column;
         .logo{
-            width: 172px;
+            width: 112px;
+            svg{
+                max-width: 100%;
+                height: auto;
+            }
         }
         .menu-footer__wrapper{
             padding: 24px 0;
@@ -28,12 +32,11 @@
                             display: block;
                             color: @white;
                             padding: 10px;
-                            text-transform: uppercase;
                             font-size: 1.6rem;
                             font-weight: 500;
                             transition: all 0.2s;
                             &:hover{
-                                color: @blue2;
+                                color: @blue4;
                             }
                         }
                     }
@@ -83,9 +86,14 @@
 
         .copy{
             margin-top: 24px;
-            color: @blue2;
+            color: @blue4;
             font-size: 1.2rem;
         }
+    }
+
+    .menu-footer__social_copyright{
+        display: flex;
+        flex-direction: column;
     }
 }
 
@@ -97,7 +105,7 @@
             flex-direction: row;
 
             .logo{
-                width: 200px;
+                width: 112px;
             }
 
             .menu-footer__wrapper{
@@ -139,5 +147,11 @@
                 margin: 0;
             }
         }
+        .menu-footer__social_copyright{
+            align-items: center;
+            flex-direction: row;
+            gap: 24px;
+        }
     }
+
 }

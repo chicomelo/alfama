@@ -79,15 +79,13 @@ class Helpers {
 	 * @return string                 Formatted date string (ISO 8601).
 	 */
 	public function lastModifiedPostTime( $postTypes = [ 'post', 'page' ], $additionalArgs = [] ) {
-		if ( is_array( $postTypes ) ) {
-			$postTypes = implode( "', '", $postTypes );
-		}
+		$postTypesArray = ! is_array( $postTypes ) ? [ $postTypes ] : $postTypes;
 
 		$query = aioseo()->core->db
 			->start( aioseo()->core->db->db->posts . ' as p', true )
 			->select( 'MAX(`p`.`post_modified_gmt`) as last_modified' )
 			->where( 'p.post_status', 'publish' )
-			->whereRaw( "( `p`.`post_type` IN ( '$postTypes' ) )" );
+			->whereIn( 'p.post_type', $postTypesArray );
 
 		if ( isset( $additionalArgs['author'] ) ) {
 			$query->where( 'p.post_author', $additionalArgs['author'] );
@@ -353,7 +351,7 @@ class Helpers {
 	 * @return string       The formatted datetime.
 	 */
 	public function lastModifiedAdditionalPage( $page ) {
-		return gmdate( 'c', strtotime( (string) $page->lastModified ) );
+		return aioseo()->helpers->isValidDate( $page->lastModified ) ? gmdate( 'c', strtotime( $page->lastModified ) ) : '';
 	}
 
 	/**
@@ -401,9 +399,35 @@ class Helpers {
 	 */
 	private function excludedObjectIds( $option ) {
 		$type = aioseo()->sitemap->type;
+
 		// The RSS Sitemap needs to exclude whatever is excluded in the general sitemap.
 		if ( 'rss' === $type ) {
 			$type = 'general';
+		}
+
+		// For LLMS sitemap, use LLMS-specific settings
+		if ( 'llms' === $type ) {
+			// Handle LLMS-specific excluded items
+			$excluded = aioseo()->options->sitemap->llms->advancedSettings->{$option};
+
+			if ( empty( $excluded ) ) {
+				return '';
+			}
+
+			$ids = [];
+			foreach ( $excluded as $object ) {
+				if ( is_int( $object ) ) {
+					$ids[] = (int) $object;
+					continue;
+				}
+
+				$object = json_decode( $object );
+				if ( is_int( $object->value ) ) {
+					$ids[] = $object->value;
+				}
+			}
+
+			return count( $ids ) ? esc_sql( implode( ', ', $ids ) ) : '';
 		}
 
 		// Allow WPML to filter out hidden language posts/terms.

@@ -46,7 +46,7 @@ class Tags {
 			$tagId   = aioseo()->tags->denotationChar . $tag['id'];
 			$pattern = "/$tagId(?![a-zA-Z0-9_])/im";
 			if ( preg_match( $pattern, (string) $string ) ) {
-				$tagValue = str_replace( '$', '\$', $this->getTagValue( $tag, $item ) );
+				$tagValue = str_replace( '$', '\$', (string) $this->getTagValue( $tag, $item ) );
 				$string   = preg_replace( $pattern, $tagValue, (string) $string );
 			}
 		}
@@ -57,10 +57,10 @@ class Tags {
 
 		// Remove any remaining tags from the title attribute.
 		$string = preg_replace_callback( '/title="([^"]*)"/i', function ( $matches ) {
-			$sanitizedTitle = wp_strip_all_tags( html_entity_decode( $matches[1] ) );
+			$sanitizedTitle = wp_strip_all_tags( aioseo()->helpers->decodeHtmlEntities( $matches[1] ) );
 
 			return 'title="' . esc_attr( $sanitizedTitle ) . '"';
-		}, html_entity_decode( $string ) );
+		}, aioseo()->helpers->decodeHtmlEntities( $string ) );
 
 		return preg_replace(
 			'/>thisisjustarandomplaceholder<(?![a-zA-Z0-9_])/im',

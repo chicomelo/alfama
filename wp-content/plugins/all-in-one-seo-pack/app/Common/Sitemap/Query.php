@@ -19,9 +19,9 @@ class Query {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  mixed $postTypes      The post type(s). Either a singular string or an array of strings.
-	 * @param  array $additionalArgs Any additional arguments for the post query.
-	 * @return array|int             The post objects or the post count.
+	 * @param  mixed            $postTypes      The post type(s). Either a singular string or an array of strings.
+	 * @param  array            $additionalArgs Any additional arguments for the post query.
+	 * @return array[object|int]                The post objects or the post count.
 	 */
 	public function posts( $postTypes, $additionalArgs = [] ) {
 		$includedPostTypes = $postTypes;
@@ -38,36 +38,54 @@ class Query {
 		}
 
 		// Set defaults.
-		$fields  = '`p`.`ID`, `p`.`post_title`, `p`.`post_content`, `p`.`post_excerpt`, `p`.`post_type`, `p`.`post_password`, ';
-		$fields .= '`p`.`post_parent`, `p`.`post_date_gmt`, `p`.`post_modified_gmt`, `ap`.`priority`, `ap`.`frequency`';
-		$maxAge  = '';
+		$maxAge = '';
+		$fields = implode( ', ', [
+			'p.ID',
+			'p.post_excerpt',
+			'p.post_type',
+			'p.post_password',
+			'p.post_parent',
+			'p.post_date_gmt',
+			'p.post_modified_gmt',
+			'ap.priority',
+			'ap.frequency'
+		] );
 
-		if ( ! aioseo()->sitemap->helpers->excludeImages() ) {
-			$fields .= ', `ap`.`images`';
+		if ( in_array( aioseo()->sitemap->type, [ 'html', 'rss', 'llms' ], true ) ) {
+			$fields .= ', p.post_title';
+		}
+
+		if ( 'general' !== aioseo()->sitemap->type || ! aioseo()->sitemap->helpers->excludeImages() ) {
+			$fields .= ', ap.images';
 		}
 
 		// Order by highest priority first (highest priority at the top),
 		// then by post modified date (most recently updated at the top).
-		$orderBy = '`ap`.`priority` DESC, `p`.`post_modified_gmt` DESC';
+		$orderBy = 'ap.priority DESC, p.post_modified_gmt DESC';
+
+		// For llms sitemap type, prioritize posts with pillar_content = 1
+		if ( 'llms' === aioseo()->sitemap->type ) {
+			$orderBy = 'ap.pillar_content DESC, ' . $orderBy;
+		}
 
 		// Override defaults if passed as additional arg.
 		foreach ( $additionalArgs as $name => $value ) {
 			// Attachments need to be fetched with all their fields because we need to get their post parent further down the line.
 			$$name = esc_sql( $value );
 			if ( 'root' === $name && $value && 'attachment' !== $includedPostTypes ) {
-				$fields = '`p`.`ID`, `p`.`post_type`';
+				$fields = 'p.ID, p.post_type';
 			}
 			if ( 'count' === $name && $value ) {
-				$fields = 'count(`p`.`ID`) as total';
+				$fields = 'count(p.ID) as total';
 			}
 		}
 
 		$query = aioseo()->core->db
 			->start( aioseo()->core->db->db->posts . ' as p', true )
 			->select( $fields )
-			->leftJoin( 'aioseo_posts as ap', '`ap`.`post_id` = `p`.`ID`' )
+			->leftJoin( 'aioseo_posts as ap', 'ap.post_id = p.ID' )
 			->where( 'p.post_status', 'attachment' === $includedPostTypes ? 'inherit' : 'publish' )
-			->whereRaw( "p.post_type IN ( '$includedPostTypes' )" );
+			->whereIn( 'p.post_type', $postTypesArray );
 
 		$homePageId = (int) get_option( 'page_on_front' );
 
@@ -110,7 +128,7 @@ class Query {
 		}
 
 		if ( $maxAge ) {
-			$query->whereRaw( "( `p`.`post_date_gmt` >= '$maxAge' )" );
+			$query->where( 'p.post_date_gmt >=', $maxAge );
 		}
 
 		if (
@@ -132,7 +150,7 @@ class Query {
 			if ( in_array( 'page', $postTypesArray, true ) ) {
 				// Exclude the blog page from the pages post type.
 				if ( $blogPageId ) {
-					$query->whereRaw( "`p`.`ID` != $blogPageId" );
+					$query->where( 'p.ID !=', $blogPageId );
 				}
 
 				// Custom order by statement to always move the home page to the top.
@@ -232,10 +250,11 @@ class Query {
 			foreach ( $hiddenProducts as $hiddenProduct ) {
 				$hiddenProductIds[] = (int) $hiddenProduct->object_id;
 			}
-			$hiddenProductIds = esc_sql( implode( ', ', $hiddenProductIds ) );
-		}
 
-		$query->whereRaw( "p.ID NOT IN ( $hiddenProductIds )" );
+			if ( ! empty( $hiddenProductIds ) ) {
+				$query->whereNotIn( 'p.ID', $hiddenProductIds );
+			}
+		}
 
 		return $query;
 	}
@@ -300,14 +319,19 @@ class Query {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  string    $taxonomy       The taxonomy.
-	 * @param  array     $additionalArgs Any additional arguments for the term query.
-	 * @return array|int                 The term objects or the term count.
+	 * @param  string           $taxonomy       The taxonomy.
+	 * @param  array            $additionalArgs Any additional arguments for the term query.
+	 * @return array[object|int]                The term objects or the term count.
 	 */
 	public function terms( $taxonomy, $additionalArgs = [] ) {
 		// Set defaults.
 		$fields  = 't.term_id';
 		$offset  = aioseo()->sitemap->offset;
+
+		// Include term name for llms sitemap type
+		if ( 'llms' === aioseo()->sitemap->type ) {
+			$fields .= ', t.name';
+		}
 
 		// Override defaults if passed as additional arg.
 		foreach ( $additionalArgs as $name => $value ) {
@@ -328,24 +352,18 @@ class Query {
 			->start( aioseo()->core->db->db->terms . ' as t', true )
 			->select( $fields )
 			->leftJoin( 'term_taxonomy as tt', '`tt`.`term_id` = `t`.`term_id`' )
+			->where( 'tt.taxonomy', $taxonomy )
 			->whereRaw( "
-			( `t`.`term_id` IN
 				(
-					SELECT `tt`.`term_id`
-					FROM `$termTaxonomyTable` as tt
-					WHERE `tt`.`taxonomy` = '$taxonomy'
-					AND 
-						(
-							`tt`.`count` > 0 OR
-							EXISTS (
-								SELECT 1
-								FROM `$termTaxonomyTable` as tt2
-								WHERE `tt2`.`parent` = `tt`.`term_id` 
-								AND `tt2`.`count` > 0
-							)
-						)
+					`tt`.`count` > 0 OR
+					EXISTS (
+						SELECT 1
+						FROM `$termTaxonomyTable` as tt2
+						WHERE `tt2`.`parent` = `tt`.`term_id` 
+						AND `tt2`.`count` > 0
+					)
 				)
-			)" );
+			" );
 
 		$excludedTerms = aioseo()->sitemap->helpers->excludedTerms();
 		if ( $excludedTerms ) {

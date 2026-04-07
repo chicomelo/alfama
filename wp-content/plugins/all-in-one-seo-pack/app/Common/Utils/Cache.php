@@ -77,26 +77,29 @@ class Cache {
 	 * @since 4.1.5
 	 *
 	 * @param  string     $key            The cache key name. Use a '%' for a like query.
-	 * @param  bool|array $allowedClasses Whether to allow objects to be returned.
+	 * @param  bool|array $allowedClasses Deprecated. No longer used since migrating from serialize to JSON.
 	 * @return mixed                      The value or null if the cache does not exist.
 	 */
-	public function get( $key, $allowedClasses = false ) {
+	public function get( $key, $allowedClasses = false ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
 		$key = $this->prepareKey( $key );
 		if ( isset( self::$cache[ $key ] ) ) {
 			return self::$cache[ $key ];
 		}
 
-		// Are we searching for a group of keys?
-		$isLikeGet = preg_match( '/%/', (string) $key );
-
 		$result = aioseo()->core->db
 			->start( $this->table )
-			->select( '`key`, `value`' )
+			->select( '`key`, `value`, `is_object`' )
 			->whereRaw( '( `expiration` IS NULL OR `expiration` > \'' . aioseo()->helpers->timeToMysql( time() ) . '\' )' );
 
-		$isLikeGet ?
-			$result->whereRaw( '`key` LIKE \'' . $key . '\'' ) :
+		// Check if we're supposed to do a LIKE get.
+		$isLikeGet = preg_match( '/%/', (string) $key );
+
+		if ( $isLikeGet ) {
+			$result->whereLike( 'key', $key, true );
+		} else {
+			$key = esc_sql( $key );
 			$result->where( 'key', $key );
+		}
 
 		$result->output( ARRAY_A )->run();
 
@@ -106,7 +109,8 @@ class Cache {
 		// If we have something let's normalize it.
 		if ( $values ) {
 			foreach ( $values as &$value ) {
-				$value['value'] = aioseo()->helpers->maybeUnserialize( $value['value'], $allowedClasses );
+				// Use is_object flag to determine decode type: if 0 (false) decode to array, if 1 (true) decode to object.
+				$value['value'] = json_decode( $value['value'], empty( $value['is_object'] ) );
 			}
 			// Return only the single cache value.
 			if ( ! $isLikeGet ) {
@@ -142,19 +146,32 @@ class Cache {
 			$expiration = 10 * MINUTE_IN_SECONDS;
 		}
 
-		$serializedValue = serialize( $value );
-		$expiration      = 0 < $expiration ? aioseo()->helpers->timeToMysql( time() + $expiration ) : null;
+		$isObject   = is_object( $value );
+		$jsonValue  = wp_json_encode( $value );
+		$expiration = 0 < $expiration ? aioseo()->helpers->timeToMysql( time() + $expiration ) : null;
+
+		// Handle JSON encoding errors.
+		if ( false === $jsonValue && JSON_ERROR_NONE !== json_last_error() ) {
+			if ( aioseo()->helpers->isDev() ) {
+				// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				error_log( 'AIOSEO Cache: JSON encode failed for key "' . $key . '" - ' . json_last_error_msg() );
+			}
+
+			return;
+		}
 
 		aioseo()->core->db->insert( $this->table )
 			->set( [
 				'key'        => $this->prepareKey( $key ),
-				'value'      => $serializedValue,
+				'value'      => $jsonValue,
+				'is_object'  => $isObject,
 				'expiration' => $expiration,
 				'created'    => aioseo()->helpers->timeToMysql( time() ),
 				'updated'    => aioseo()->helpers->timeToMysql( time() )
 			] )
 			->onDuplicate( [
-				'value'      => $serializedValue,
+				'value'      => $jsonValue,
+				'is_object'  => $isObject,
 				'expiration' => $expiration,
 				'updated'    => aioseo()->helpers->timeToMysql( time() )
 			] )
@@ -208,12 +225,16 @@ class Cache {
 	 * @return void
 	 */
 	public function clear() {
-		// Bust the tableExists and columnExists cache.
-		aioseo()->internalOptions->database->installedTables = '';
-
 		if ( $this->prefix ) {
 			$this->clearPrefix( '' );
 
+			return;
+		}
+
+		// Try to acquire the lock.
+		if ( ! aioseo()->core->db->acquireLock( 'aioseo_cache_clear_lock', 0 ) ) {
+			// If we couldn't acquire the lock, exit early without doing anything.
+			// This means another process is already clearing the cache.
 			return;
 		}
 
@@ -273,7 +294,7 @@ class Cache {
 		$prefix = $this->prepareKey( $prefix );
 
 		aioseo()->core->db->delete( $this->table )
-			->whereRaw( "`key` LIKE '$prefix%'" )
+			->whereLike( 'key', $prefix . '%', true )
 			->run();
 
 		$this->clearStaticPrefix( $prefix );

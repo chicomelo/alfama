@@ -135,6 +135,9 @@
                 font-size: 1.8rem;
                 line-height: 1.4;
                 min-height: 52px;
+                span{
+                    font-size: 1.4rem;
+                }
             }
             .locais{
                 display: flex;
@@ -258,76 +261,33 @@
             .origem{
                 display: flex;
                 align-items: center;
+                gap: 12px;
                 .icone{
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     width: 36px;
                     height: 36px;
-                    border: 2px solid #fff;
-                    background-color: grey;
-                    border-radius: 50%;
-                    position: absolute;
                     z-index: 2;
                     svg{
-                        fill: @white;
-                        width: 22px;
-                        height: 22px;
+                        fill: @red;
+                        width: 100%;
+                        height: 100%;
                     }
                 }
                 .texto{
                     position: relative;
                     z-index: 1;
-                    font-size: 14px;
+                    font-size: 1.6rem;
                     font-weight: 600;
-                    color: @grey1;
+                    color: @red;
                     height: 26px;
                     left: 1px;
-                    border: 1px solid grey;
-                    padding: 0 12px 2px 42px;
                     line-height: 1;
                     display: flex;
                     align-items: center;
-                    border-radius: 20px;
-                    text-transform: uppercase;
                 }
 
-                &.bovino{
-                    .icone{
-                        background-color: @red1;
-                        svg{
-                            fill: @white;
-                        }
-                    }
-                    .texto{
-                        color: @red1;
-                        border-color: @red1;
-                    }
-                }
-                &.suino{
-                    .icone{
-                        background-color: @pink;
-                        svg{
-                            fill: @white;
-                        }
-                    }
-                    .texto{
-                        color: @pink;
-                        border-color: @pink;
-                    }
-                }
-                &.frango{
-                    .icone{
-                        background-color: @orange2;
-                        svg{
-                            fill: @white;
-                        }
-                    }
-                    .texto{
-                        color: @orange2;
-                        border-color: @orange2;
-                    }
-                }
             }
 
             .galeria{
@@ -461,20 +421,25 @@
 
             .nome{
                 font-weight: 600;
-                color: @blue1;
+                color: @blue0;
                 font-size: 2.1rem;
                 line-height: 1.4;
+                span{
+                    font-size: 1.8rem;
+                    display: block;
+                }
             }
 
             .pesos{
                 display: flex;
                 gap: 12px;
                 margin-top: 16px;
+                flex-wrap: wrap;
                 .peso{
-                    color: @blue1;
+                    color: @blue0;
                     font-size: 1.6rem;
                     font-weight: 600;
-                    border: 2px solid @blue1;
+                    border: 2px solid @blue0;
                     border-radius: 20px;
                     padding: 3px 12px 6px 12px;
                     line-height: 1;
@@ -494,7 +459,7 @@
             }
             .paragrafo{
                 font-size: 1.4rem;
-                color: @black;
+                color: @blue0;
             }
 
             .caracteristicas{
@@ -657,6 +622,9 @@
                 .nome{
                     font-size: 2.1rem;
                     min-height: 62px;
+                    span{
+                        font-size: 1.8rem;
+                    }
                 }
                 .locais{
                     display: flex;
@@ -761,6 +729,9 @@
                 .nome{
                     font-size: 2.4rem;
                     min-height: 68px;
+                    span{
+                        font-size: 2.0rem;
+                    }
                 }
                 .locais{
                     gap: 24px;

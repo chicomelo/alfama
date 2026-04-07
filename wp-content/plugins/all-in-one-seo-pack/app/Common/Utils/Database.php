@@ -56,6 +56,15 @@ class Database {
 	public $prefix = '';
 
 	/**
+	 * Cached result of php_sapi_name() for performance.
+	 *
+	 * @since 4.9.1.1
+	 *
+	 * @var string|null
+	 */
+	private static $sapiName = null;
+
+	/**
 	 * The database table in use by this query.
 	 *
 	 * @since 4.0.0
@@ -320,20 +329,8 @@ class Database {
 	}
 
 	/**
-	 * Gets all AIOSEO installed tables.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @return array An array of custom AIOSEO tables.
-	 */
-	public function getInstalledTables() {
-		$results = $this->db->get_results( 'SHOW TABLES', 'ARRAY_N' );
-
-		return ! empty( $results ) ? wp_list_pluck( $results, 0 ) : [];
-	}
-
-	/**
 	 * Get all the database info such as data size, index size, table list.
+	 * This is used for our Tools menu.
 	 *
 	 * @since 4.4.5
 	 *
@@ -395,70 +392,100 @@ class Database {
 	/**
 	 * Gets all columns from a table.
 	 *
-	 * @since 4.0.0
+	 * @since   4.0.0
+	 * @version 4.8.9 Refactored logic.
 	 *
 	 * @param  string $table The name of the table to lookup columns for.
 	 * @return array         An array of custom AIOSEO tables.
 	 */
 	public function getColumns( $table ) {
-		$installedTables = json_decode( aioseo()->internalOptions->database->installedTables, true );
-		$table           = $this->prefix . $table;
-
-		if ( ! isset( $installedTables[ $table ] ) ) {
-			return [];
+		// Ensure the table name has the DB prefix.
+		if ( 0 !== strpos( $table, $this->prefix ) ) {
+			$table = $this->prefix . $table;
 		}
 
-		if ( empty( $installedTables[ $table ] ) ) {
-			$installedTables[ $table ]                           = $this->db->get_col( 'SHOW COLUMNS FROM `' . $table . '`' );
-			aioseo()->internalOptions->database->installedTables = wp_json_encode( $installedTables );
+		// If the table is not an AIOSEO one, get it from the DB.
+		if ( 0 !== strpos( $table, $this->prefix . 'aioseo_' ) ) {
+			return $this->db->get_col( 'SHOW COLUMNS FROM `' . $table . '`' );
 		}
 
-		return $installedTables[ $table ];
+		$schema = $this->getTablesWithColumns();
+
+		return $schema[ $table ];
 	}
 
 	/**
 	 * Checks if a table exists.
 	 *
-	 * @since 4.0.0
+	 * @since   4.0.0
+	 * @version 4.8.9 Refactored logic.
 	 *
 	 * @param  string $table The name of the table.
 	 * @return bool          Whether or not the table exists.
 	 */
 	public function tableExists( $table ) {
-		$table           = $this->prefix . $table;
-		$installedTables = json_decode( aioseo()->internalOptions->database->installedTables, true ) ?: [];
-		if ( isset( $installedTables[ $table ] ) ) {
-			return true;
+		// Ensure the table name has the DB prefix.
+		if ( 0 !== strpos( $table, $this->prefix ) ) {
+			$table = $this->prefix . $table;
 		}
 
-		$results = $this->db->get_results( "SHOW TABLES LIKE '" . $table . "'" );
-		if ( empty( $results ) ) {
-			return false;
-		}
+		$tables = $this->getTablesWithColumns();
 
-		$installedTables[ $table ]                           = [];
-		aioseo()->internalOptions->database->installedTables = wp_json_encode( $installedTables );
-
-		return true;
+		return isset( $tables[ $table ] );
 	}
 
 	/**
 	 * Checks if a column exists on a given table.
 	 *
-	 * @since 4.0.5
+	 * @since   4.0.5
+	 * @version 4.8.9 Refactored logic.
 	 *
 	 * @param  string $table  The name of the table.
 	 * @param  string $column The name of the column.
 	 * @return bool           Whether or not the column exists.
 	 */
 	public function columnExists( $table, $column ) {
-		if ( ! $this->tableExists( $table ) ) {
-			return false;
+		// Ensure the table name has the DB prefix.
+		if ( 0 !== strpos( $table, $this->prefix ) ) {
+			$table = $this->prefix . $table;
 		}
 
-		$columns = $this->getColumns( $table );
+		$tables = $this->getTablesWithColumns();
 
-		return in_array( $column, $columns, true );
+		return isset( $tables[ $table ] ) && in_array( $column, $tables[ $table ], true );
+	}
+
+	/**
+	 * Get all AIOSEO tables with their columns.
+	 *
+	 * @since 4.8.9
+	 *
+	 * @return array List of AIOSEO tables with their columns.
+	 */
+	public function getTablesWithColumns() {
+		$tables = aioseo()->core->cache->get( 'db_schema' );
+		if ( ! empty( $tables ) ) {
+			return $tables;
+		}
+
+		$schema = $this->db->get_results(
+			'SELECT TABLE_NAME, COLUMN_NAME
+			FROM INFORMATION_SCHEMA.COLUMNS
+			WHERE TABLE_SCHEMA = DATABASE();'
+		);
+
+		$tables = [];
+		foreach ( $schema as $row ) {
+			if ( ! isset( $tables[ $row->TABLE_NAME ] ) ) {
+				$tables[ $row->TABLE_NAME ] = [];
+			}
+
+			$tables[ $row->TABLE_NAME ][] = $row->COLUMN_NAME;
+		}
+
+		aioseo()->core->cache->update( 'db_schema', $tables, DAY_IN_SECONDS );
+
+		return $tables;
 	}
 
 	/**
@@ -470,16 +497,31 @@ class Database {
 	 * @return int           The size of the table in bytes.
 	 */
 	public function getTableSize( $table ) {
-		$this->db->query( 'ANALYZE TABLE ' . $this->prefix . $table );
-		$results = $this->db->get_results( '
+		// Escape table and database names to prevent SQL injection.
+		$tableName = esc_sql( $this->prefix . $table );
+		$dbName    = esc_sql( $this->db->dbname );
+
+		// Check if table has any rows
+		$rowCount = $this->db->get_var( 'SELECT COUNT(*) FROM `' . $tableName . '`' );
+
+		if ( 0 === (int) $rowCount ) {
+			return 0;
+		}
+
+		$this->db->query( 'ANALYZE TABLE `' . $tableName . '`' );
+		$results = $this->db->get_results( $this->db->prepare(
+			'
 			SELECT
 				TABLE_NAME AS `table`,
 				ROUND(SUM(DATA_LENGTH + INDEX_LENGTH)) AS `size`
 			FROM information_schema.TABLES
-			WHERE TABLE_SCHEMA = "' . $this->db->dbname . '"
-			AND TABLE_NAME = "' . $this->prefix . $table . '"
+			WHERE TABLE_SCHEMA = %s
+			AND TABLE_NAME = %s
 			ORDER BY (DATA_LENGTH + INDEX_LENGTH) DESC;
-		' );
+			',
+			$dbName,
+			$tableName
+		) );
 
 		return ! empty( $results ) ? $results[0]->size : 0;
 	}
@@ -876,6 +918,7 @@ class Database {
 			if ( is_null( $value ) ) {
 				// WHERE `field` IS NULL.
 				$or[] = "$field NULL";
+				continue;
 			}
 
 			$or[] = sprintf( "$field %s", $this->escape( $value, $this->getEscapeOptions() | self::ESCAPE_QUOTE ) );
@@ -949,7 +992,8 @@ class Database {
 			}
 
 			foreach ( $values as &$value ) {
-				if ( is_numeric( $value ) ) {
+				// Note: We can no longer check for `is_numeric` because a value like `61021e6242255` returns true and breaks the query.
+				if ( is_int( $value ) || is_float( $value ) ) {
 					// No change.
 					continue;
 				}
@@ -1008,6 +1052,38 @@ class Database {
 			$values = implode( ' AND ', $values );
 			$this->whereRaw( "$field BETWEEN $values" );
 		}
+
+		return $this;
+	}
+
+	/**
+	 * Adds a WHERE LIKE clause.
+	 *
+	 * @since 4.9.1.1
+	 *
+	 * @param  string   $field        The column name.
+	 * @param  string   $value        The value to search for.
+	 * @param  bool     $hasWildcard  Whether the value contains LIKE wildcards (% and _) for pattern matching. Default false for security.
+	 * @return Database Returns the Database class which can be method chained for more query building.
+	 */
+	public function whereLike( $field, $value, $hasWildcard = false ) {
+		if ( is_null( $value ) ) {
+			return $this;
+		}
+
+		// Escape the column name.
+		$escapedField = $this->escapeColNames( $field );
+		$field        = array_pop( $escapedField );
+
+		// Escape LIKE wildcards (% and _) unless the value is intended to contain wildcards for pattern matching.
+		if ( ! $hasWildcard ) {
+			$value = $this->db->esc_like( $value );
+		}
+
+		// Escape and quote the value for safe use in LIKE clause.
+		$escapedValue = $this->escape( $value, $this->getEscapeOptions() | self::ESCAPE_QUOTE );
+
+		$this->where[] = sprintf( "$field LIKE %s", $escapedValue );
 
 		return $this;
 	}
@@ -1288,8 +1364,10 @@ class Database {
 			$return = 'results';
 		}
 
-		$prepare        = $this->db->prepare( $this->query(), 1, 1 );
-		$queryHash      = sha1( $this->query() );
+		// Cache query string to avoid generating it twice.
+		$queryString     = $this->query();
+		$prepare         = $this->db->prepare( $queryString, 1, 1 );
+		$queryHash       = md5( $queryString );
 		$cacheTableName = $this->getCacheTableName();
 
 		// Pull the result from the in-memory cache if everything checks out.
@@ -1322,7 +1400,10 @@ class Database {
 			$this->reset();
 		}
 
-		$this->cache[ $cacheTableName ][ $queryHash ][ $return ] = $this->result;
+		// Only cache SELECT queries for performance.
+		if ( in_array( $this->statement, [ 'SELECT', 'SELECT DISTINCT' ], true ) ) {
+			$this->cache[ $cacheTableName ][ $queryHash ][ $return ] = $this->result;
+		}
 
 		// Reset the cache trigger for the next run.
 		$this->shouldResetCache = false;
@@ -1574,14 +1655,18 @@ class Database {
 			$value = wp_strip_all_tags( $value );
 		}
 
-		if (
-			( ( $options & self::ESCAPE_FORCE ) !== 0 || php_sapi_name() === 'cli' ) ||
-			( ( $options & self::ESCAPE_QUOTE ) !== 0 && ! is_int( $value ) )
-		) {
+		// Cache php_sapi_name() result for performance.
+		if ( null === self::$sapiName ) {
+			self::$sapiName = php_sapi_name();
+		}
+
+		// Check if we need to escape and quote the value.
+		$needsEscaping = ( ( $options & self::ESCAPE_FORCE ) !== 0 || 'cli' === self::$sapiName ) ||
+			( ( $options & self::ESCAPE_QUOTE ) !== 0 && ! is_int( $value ) && ! is_float( $value ) );
+
+		if ( $needsEscaping ) {
 			$value = esc_sql( $value );
-			if ( ! is_int( $value ) ) {
-				$value = "'$value'";
-			}
+			$value = "'$value'";
 		}
 
 		return $value;
@@ -1831,7 +1916,7 @@ class Database {
 	 */
 	public function indexExists( $tableName, $indexName, $includesPrefix = false ) {
 		$prefix    = $includesPrefix ? '' : $this->prefix;
-		$tableName = strtolower( $prefix . $tableName );
+		$tableName = esc_sql( strtolower( $prefix . $tableName ) );
 		$indexName = strtolower( $indexName );
 
 		$indexes = $this->db->get_results( "SHOW INDEX FROM `$tableName`" );
@@ -1846,5 +1931,42 @@ class Database {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Acquires a database lock with the given name.
+	 *
+	 * @since 4.8.3
+	 *
+	 * @param  string  $lockName The name of the lock to acquire.
+	 * @param  integer $timeout  The timeout in seconds. Default is 0 which means it will return immediately if the lock cannot be acquired.
+	 * @return boolean           Whether the lock was acquired.
+	 */
+	public function acquireLock( $lockName, $timeout = 0 ) {
+		$lockResult = $this->db->get_var( $this->db->prepare( 'SELECT GET_LOCK(%s, %d)', $lockName, $timeout ) );
+		$acquired   = '1' === $lockResult;
+
+		if ( $acquired ) {
+			// Register a shutdown function to always release the lock even if a fatal error occurs.
+			register_shutdown_function( function () use ( $lockName ) {
+				$this->releaseLock( $lockName );
+			} );
+		}
+
+		return $acquired;
+	}
+
+	/**
+	 * Releases a database lock with the given name.
+	 *
+	 * @since 4.8.3
+	 *
+	 * @param  string  $lockName The name of the lock to release.
+	 * @return boolean           Whether the lock was released.
+	 */
+	public function releaseLock( $lockName ) {
+		$releaseResult = $this->db->query( $this->db->prepare( 'SELECT RELEASE_LOCK(%s)', $lockName ) );
+
+		return false !== $releaseResult;
 	}
 }

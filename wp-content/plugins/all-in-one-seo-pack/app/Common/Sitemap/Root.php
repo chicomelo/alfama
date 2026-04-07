@@ -400,7 +400,7 @@ class Root {
 						SELECT p.ID, ap.priority, p.post_modified_gmt
 						FROM {$postsTable} AS p
 						LEFT JOIN {$aioseoPostsTable} AS ap ON p.ID = ap.post_id
-						WHERE p.post_status IN ( 'publish', 'inherit' )
+						WHERE p.post_status = %s
 							AND p.post_type = %s
 							AND p.post_password = ''
 							AND (ap.robots_noindex IS NULL OR ap.robots_default = 1 OR ap.robots_noindex = 0)
@@ -412,6 +412,7 @@ class Root {
 				) AS y
 				WHERE rownum = 1 OR rownum % %d = 1;",
 				[
+					'attachment' === $postType ? 'inherit' : 'publish',
 					$postType,
 					$linksPerIndex
 				]
@@ -424,13 +425,14 @@ class Root {
 				"SELECT COUNT(*) as count
 				FROM {$postsTable} as p
 				LEFT JOIN {$aioseoPostsTable} as ap ON p.ID = ap.post_id
-				WHERE p.post_status IN ( 'publish', 'inherit' )
+				WHERE p.post_status = %s
 					AND p.post_type = %s
 					AND p.post_password = ''
 					AND (ap.robots_noindex IS NULL OR ap.robots_default = 1 OR ap.robots_noindex = 0)
 					{$whereClause}
 				",
 				[
+					'attachment' === $postType ? 'inherit' : 'publish',
 					$postType
 				]
 			),
@@ -532,14 +534,13 @@ class Root {
 				$ids = array_map( function( $post ) {
 					return $post->ID;
 				}, $chunk );
-				$ids = implode( "', '", $ids );
 
 				$lastModified = null;
 				if ( ! apply_filters( 'aioseo_sitemap_lastmod_disable', false ) ) {
 					$lastModified = aioseo()->core->db
 						->start( aioseo()->core->db->db->posts . ' as p', true )
 						->select( 'MAX(`p`.`post_modified_gmt`) as last_modified' )
-						->whereRaw( "( `p`.`ID` IN ( '$ids' ) )" )
+						->whereIn( 'p.ID', $ids )
 						->run()
 						->result();
 				}

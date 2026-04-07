@@ -153,8 +153,7 @@ namespace AIOSEO\Plugin {
 			$dependencies = [
 				'/vendor/autoload.php'                                      => true,
 				'/vendor/woocommerce/action-scheduler/action-scheduler.php' => true,
-				'/vendor/jwhennessey/phpinsight/autoload.php'               => false,
-				'/vendor_prefixed/monolog/monolog/src/Monolog/Logger.php'   => false
+				'/vendor/jwhennessey/phpinsight/autoload.php'               => false
 			];
 
 			foreach ( $dependencies as $path => $shouldRequire ) {
@@ -222,44 +221,14 @@ namespace AIOSEO\Plugin {
 		private function preLoad() {
 			$this->core = new Common\Core\Core();
 
-			$this->backwardsCompatibility();
-
 			// Internal Options.
-			$this->helpers                = $this->pro ? new Pro\Utils\Helpers() : new Lite\Utils\Helpers();
+			$this->helpers                = $this->pro ? new Pro\Utils\Helpers() : new Lite\Utils\Helpers(); // Needs to load before preUpdates.
 			$this->internalNetworkOptions = ( $this->pro && $this->helpers->isPluginNetworkActivated() ) ? new Pro\Options\InternalNetworkOptions() : new Common\Options\InternalNetworkOptions();
 			$this->internalOptions        = $this->pro ? new Pro\Options\InternalOptions() : new Lite\Options\InternalOptions();
 			$this->uninstall              = new Common\Main\Uninstall();
 
 			// Run pre-updates.
 			$this->preUpdates = $this->pro ? new Pro\Main\PreUpdates() : new Common\Main\PreUpdates();
-		}
-
-		/**
-		 * To prevent errors and bugs from popping up,
-		 * we will run this backwards compatibility method.
-		 *
-		 * @since 4.1.9
-		 *
-		 * @return void
-		 */
-		private function backwardsCompatibility() {
-			$this->db           = $this->core->db;
-			$this->cache        = $this->core->cache;
-			$this->transients   = $this->cache;
-			$this->cachePrune   = $this->core->cachePrune;
-			$this->optionsCache = $this->core->optionsCache;
-		}
-
-		/**
-		 * To prevent errors and bugs from popping up,
-		 * we will run this backwards compatibility method.
-		 *
-		 * @since 4.2.0
-		 *
-		 * @return void
-		 */
-		private function backwardsCompatibilityLoad() {
-			$this->postSettings->integrations = $this->standalone->pageBuilderIntegrations;
 		}
 
 		/**
@@ -291,7 +260,6 @@ namespace AIOSEO\Plugin {
 			$this->features           = $this->pro ? new Pro\Utils\Features() : new Common\Utils\Features();
 			$this->tags               = $this->pro ? new Pro\Utils\Tags() : new Common\Utils\Tags();
 			$this->blocks             = new Common\Utils\Blocks();
-			$this->badBotBlocker      = new Common\Tools\BadBotBlocker();
 			$this->breadcrumbs        = $this->pro ? new Pro\Breadcrumbs\Breadcrumbs() : new Common\Breadcrumbs\Breadcrumbs();
 			$this->dynamicBackup      = $this->pro ? new Pro\Options\DynamicBackup() : new Common\Options\DynamicBackup();
 			$this->options            = $this->pro ? new Pro\Options\Options() : new Lite\Options\Options();
@@ -323,19 +291,22 @@ namespace AIOSEO\Plugin {
 			$this->templates          = $this->pro ? new Pro\Utils\Templates() : new Common\Utils\Templates();
 			$this->categoryBase       = new Common\Main\CategoryBase();
 			$this->postSettings       = $this->pro ? new Pro\Admin\PostSettings() : new Lite\Admin\PostSettings();
-			$this->standalone         = new Common\Standalone\Standalone();
+			$this->standalone         = $this->pro ? new Pro\Standalone\Standalone() : new Common\Standalone\Standalone();
 			$this->searchStatistics   = $this->pro ? new Pro\SearchStatistics\SearchStatistics() : new Common\SearchStatistics\SearchStatistics();
 			$this->slugMonitor        = new Common\Admin\SlugMonitor();
 			$this->schema             = $this->pro ? new Pro\Schema\Schema() : new Common\Schema\Schema();
 			$this->actionScheduler    = new Common\Utils\ActionScheduler();
 			$this->seoRevisions       = $this->pro ? new Pro\SeoRevisions\SeoRevisions() : new Common\SeoRevisions\SeoRevisions();
-			$this->ai                 = $this->pro ? new Pro\Ai\Ai() : null;
+			$this->ai                 = $this->pro ? new Pro\Ai\Ai() : new Common\Ai\Ai();
 			$this->filters            = $this->pro ? new Pro\Main\Filters() : new Lite\Main\Filters();
 			$this->crawlCleanup       = new Common\QueryArgs\CrawlCleanup();
 			$this->searchCleanup      = new Common\SearchCleanup\SearchCleanup();
 			$this->emailReports       = new Common\EmailReports\EmailReports();
+			$this->seoAnalysis        = $this->pro ? new Pro\SeoAnalysis\SeoAnalysis() : new Common\SeoAnalysis\SeoAnalysis();
 			$this->thirdParty         = new Common\ThirdParty\ThirdParty();
 			$this->writingAssistant   = new Common\WritingAssistant\WritingAssistant();
+			$this->llms               = $this->pro ? new Pro\Llms\Llms() : new Common\Llms\Llms();
+			$this->redirects          = $this->pro ? new Pro\Redirects\Redirects() : null;
 
 			if ( ! wp_doing_ajax() && ! wp_doing_cron() ) {
 				$this->rss       = new Common\Rss();
@@ -345,8 +316,6 @@ namespace AIOSEO\Plugin {
 				$this->api       = $this->pro ? new Pro\Api\Api() : new Lite\Api\Api();
 				$this->help      = new Common\Help\Help();
 			}
-
-			$this->backwardsCompatibilityLoad();
 
 			add_action( 'init', [ $this, 'loadInit' ], 999 );
 		}
@@ -361,8 +330,6 @@ namespace AIOSEO\Plugin {
 		public function loadInit() {
 			$this->settings = new Common\Utils\VueSettings( '_aioseo_settings' );
 			$this->sitemap->init();
-
-			$this->badBotBlocker->init();
 
 			// We call this again to reset any post types/taxonomies that have not yet been set up.
 			$this->dynamicOptions->refresh();

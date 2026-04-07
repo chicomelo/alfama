@@ -426,6 +426,7 @@ class CHT_Frontend extends CHT_Admin_Base
         if ($this->canInsertWidget()) :
             // Initialize widget if widget is enable for current page
             $social = $this->get_social_icon_list();
+
             // get active icon list
             $chtActive = get_option("cht_active");
 
@@ -736,10 +737,7 @@ class CHT_Frontend extends CHT_Admin_Base
                 if (!function_exists( 'is_plugin_active' ) ) {
                     require_once ABSPATH . 'wp-admin/includes/plugin.php';
                 }
-                // Checked if the CookieYes plugin is active
-                $data['has_CookieYes'] = is_plugin_active( 'cookie-law-info/cookie-law-info.php' ) ? true : false;
-                // Checked if the iubenda-cookie plugin is active
-                $data['has_iubenda_cookie'] = is_plugin_active( 'iubenda-cookie-law-solution/iubenda_cookie_solution.php' ) ? true : false;
+
                  
                 wp_localize_script('chaty-front-end', 'chaty_settings',  $data);
 
@@ -1045,20 +1043,20 @@ class CHT_Frontend extends CHT_Admin_Base
                             if ($isViber !== false) {
                                 $url = esc_attr($val);
                             } else if ($isExist === false) {
-                                $url = esc_url($val);
+                                $url = esc_url_raw($val);
                                 if ($channelType == "custom_link" || $channelType == "link" || $channelType == "custom_link_3" || $channelType == "custom_link_4" || $channelType == "custom_link_5") {
                                     $desktopTarget = (isset($value['new_window']) && $value['new_window'] == 0) ? "" : "_blank";
                                     $mobileTarget  = (isset($value['new_window']) && $value['new_window'] == 0) ? "" : "_blank";
                                 }
                             } else {
-                                $url       = "javascript:;";
+                                $url       = "#";
                                 $onClickFn     = str_replace('"', "'", $val);
                                 $onClickFn     = str_replace('`', "'", $onClickFn);
                                 $onClickFn     = urldecode($onClickFn);
                             }
                         } else if ($channelType == "wechat") {
                             // setting for WeChat
-                            $url = "javascript:;";
+                            $url = "#";
                             if (!empty($value['title'])) {
                                 $value['title'] .= ": ".$this->sanitize_xss($val);
                             } else {
@@ -1176,7 +1174,7 @@ class CHT_Frontend extends CHT_Admin_Base
                             $desktopTarget = $mobileTarget = "_blank";
                             $url           = esc_url($url);
                         } else if ($channelType == "chatway") {
-                            $url = "javascript:;";
+                            $url = "#";
                             $desktopTarget = $mobileTarget = "";
                         } //end if//end if
 
@@ -1209,7 +1207,7 @@ class CHT_Frontend extends CHT_Admin_Base
                         $valid = true;
 
                         if ($channelType == "contact_us") {
-                            $url           = "javascript:;";
+                            $url           = "#";
                             $desktopTarget = "";
                             $mobileTarget  = "";
                             if (isset($value['name']) || isset($value['email']) || isset($value['message'])) {

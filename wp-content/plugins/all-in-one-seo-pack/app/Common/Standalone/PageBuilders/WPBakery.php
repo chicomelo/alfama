@@ -53,8 +53,8 @@ class WPBakery extends Base {
 		add_action( 'vc_frontend_editor_enqueue_js_css', [ $this, 'enqueue' ] );
 		add_action( 'vc_backend_editor_enqueue_js_css', [ $this, 'enqueue' ] );
 
-		add_filter( 'vc_nav_front_controls', [ $this, 'addNavbarCotnrols' ] );
-		add_filter( 'vc_nav_controls', [ $this, 'addNavbarCotnrols' ] );
+		add_filter( 'vc_nav_front_controls', [ $this, 'addNavbarControls' ] );
+		add_filter( 'vc_nav_controls', [ $this, 'addNavbarControls' ] );
 	}
 
 	/**
@@ -75,7 +75,22 @@ class WPBakery extends Base {
 		return $value;
 	}
 
-	public function addNavbarCotnrols( $controlList ) {
+	/**
+	 * Add AIOSEO controls to the WPBakery navbar.
+	 *
+	 * @since 4.5.2
+	 *
+	 * @param  array $controlList The control list.
+	 * @return array              The control list.
+	 */
+	public function addNavbarControls( $controlList ) {
+		if ( ! $controlList ) {
+			return $controlList;
+		}
+
+		remove_filter( 'vc_nav_front_controls', [ $this, 'addNavbarControls' ] );
+		remove_filter( 'vc_nav_controls', [ $this, 'addNavbarControls' ] );
+
 		$controlList[] = [
 			'aioseo',
 			'<li class="vc_show-mobile"><div id="aioseo-wpbakery" style="height: 100%;"></div></li>'
@@ -129,14 +144,14 @@ class WPBakery extends Base {
 	 * @since 4.5.2
 	 *
 	 * @param  int    $postId  The post id.
-	 * @param  string $content The raw content.
+	 * @param  mixed  $content The raw content.
 	 * @return string          The processed content.
 	 */
-	public function processContent( $postId, $content = '' ) {
+	public function processContent( $postId, $content = null ) {
 		if ( method_exists( '\WPBMap', 'addAllMappedShortcodes' ) ) {
 			\WPBMap::addAllMappedShortcodes();
 		}
 
-		return parent::processContent( $postId, $content );
+		return parent::processContent( $postId, $content ?? '' );
 	}
 }

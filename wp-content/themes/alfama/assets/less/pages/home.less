@@ -5,7 +5,7 @@
 }
 
 .solucoes{
-    background-color: @yellow;
+    background-color: #F9F9F9;
     padding: 42px 0;
     .titulo{
         text-align: center;
@@ -72,7 +72,7 @@
 }
 
 .contato{
-    background-color: @red1;
+    background-color: @blue4;
     
     p{
         color: @white;
@@ -92,7 +92,7 @@
                 svg{
                     height: 51px;
                     width: 53px;
-                    fill: #FF9FBA;
+                    fill: @blue0;
                 }
             }
             p{
@@ -105,7 +105,7 @@
 
 .nossas-unidades{
     padding: 42px 0 64px 0;
-    background-color: #FFF9F1;
+    background-color: #F9F9F9;
     .lista-unidades{
         margin-top: 24px;
         .unidade{
@@ -142,9 +142,6 @@
     }
     .solucoes{
         padding: 72px 0;
-        background-image: url("../img/bg-solucoes.png");
-        background-repeat: no-repeat;
-        background-position: bottom left;
         .lista-solucoes{
             margin-top: 42px;
             display: flex;
@@ -189,6 +186,11 @@
             left: 0;
             top:0;
         }
+        .container{
+            .paragrafo{
+                width: 80%;
+            }
+        }
     }
     .contato{
         p{
@@ -196,7 +198,6 @@
         }
         .contato__wrapper{
             padding: 64px 0;
-            background-image: url("../img/bg-contato.png");
             background-repeat: no-repeat;
             background-position: bottom right;
             flex-direction: row;
@@ -225,6 +226,7 @@
 
 
 @media (min-width: 1200px) {
+
     .solucoes{
         .lista-solucoes{
             gap: 16px;

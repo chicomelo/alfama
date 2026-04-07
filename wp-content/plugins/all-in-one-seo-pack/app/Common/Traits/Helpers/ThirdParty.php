@@ -98,7 +98,13 @@ trait ThirdParty {
 			return false;
 		}
 
-		if ( ! is_admin() && ! aioseo()->helpers->isAjaxCronRestRequest() && function_exists( 'is_shop' ) ) {
+		// If the id is empty, we want to check against the queried object.
+		if (
+			empty( $id ) &&
+			function_exists( 'is_shop' ) &&
+			! is_admin() &&
+			! aioseo()->helpers->isAjaxCronRestRequest()
+		) {
 			return is_shop();
 		}
 
@@ -736,7 +742,7 @@ trait ThirdParty {
 		}
 
 		// AMP plugin requires the `wp` action to be called to function properly, otherwise, it will throw warnings.
-		// https://github.com/awesomemotive/aioseo/issues/6056
+
 		if ( did_action( 'wp' ) ) {
 			// Check for the "AMP" plugin.
 			if ( function_exists( 'amp_is_request' ) ) {
@@ -848,7 +854,8 @@ trait ThirdParty {
 	public function isPluginActive( $slug ) {
 		$mapped = [
 			'buddypress' => 'buddypress/bp-loader.php',
-			'bbpress'    => 'bbpress/bbpress.php'
+			'bbpress'    => 'bbpress/bbpress.php',
+			'weglot'     => 'weglot/weglot.php'
 		];
 
 		static $output = [];
@@ -860,5 +867,22 @@ trait ThirdParty {
 		$output[ $slug ] = function_exists( 'is_plugin_active' ) && is_plugin_active( $mapped[ $slug ] );
 
 		return $output[ $slug ];
+	}
+
+	/**
+	 * Call the callback given by the first parameter.
+	 *
+	 * @since 4.9.2
+	 *
+	 * @param  callable   $callback The function to be called.
+	 * @param  mixed      ...$args  Zero or more parameters to be passed to the function
+	 * @return mixed|null           The function result or null if the function is not callable.
+	 */
+	public function callFunc( $callback, ...$args ) {
+		if ( is_callable( $callback ) ) {
+			return call_user_func( $callback, ...$args );
+		}
+
+		return null;
 	}
 }
