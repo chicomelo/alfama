@@ -17,6 +17,7 @@
 
 <body <?php body_class(); ?>>
 
+
 <header class="header-principal">
 
     <div class="container">
@@ -67,7 +68,8 @@
             </div>
             <div class="menu-principal__wrapper">
                 <?php
-                    wp_nav_menu( array( 'header-menu' => 'header-menu' ) );
+
+                    wp_nav_menu( array( 'menu' => 'menu-principal', ) );
                 ?>
                 <div class="menu-social__wrapper">
                     <div class="menu-social">

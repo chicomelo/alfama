@@ -1,6 +1,11 @@
 // main: "../main.less"
 
 .page-template-template-contato {
+
+    .wpcf7-response-output{
+        display: none;
+    }
+
     .banner-contato {
         background-color: #0F2350;
         height: 218px;
@@ -20,7 +25,7 @@
 
     .tabs-contato {
         display: flex;
-        gap: 24px;
+        gap: 8px;
 
         a {
             padding: 0 6px;
@@ -42,6 +47,11 @@
 
     .conteudo-tabs-contato {
         padding-top: 42px;
+
+        .btn-enviar, .btn-enviar-trabalhe-conosco{
+            display: flex;
+            justify-content: flex-end;
+        }
 
         &>div {
             display: none;
@@ -170,6 +180,28 @@
                 }
             }
         }
+
+        .imprensa{
+            h3{
+                color: @blue0;
+            }
+
+            .contatos-imprensa{
+                margin: 24px 0 44px 0;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+
+                div {
+                    color: @blue0;
+                    font-size: 2.0rem;
+                }
+            }
+
+            form{
+                margin-top: 40px;
+            }
+        }
     }
 
 }
@@ -179,6 +211,10 @@
 
 
     .page-template-template-contato {
+
+        .tabs-contato {
+            gap: 24px;
+        }
 
         .conteudo-contato__wrapper {
             padding: 0;
@@ -198,6 +234,17 @@
             }
         }
 
+        .conteudo-tabs-contato {
+            .imprensa{
+                .contatos-imprensa{
+                    flex-direction: row;
+                    gap: 24px;
+                }
+                form{
+                    margin-top: 40px;
+                }
+            }
+        }
 
     }
 }
@@ -206,7 +253,6 @@
 
     .page-template-template-contato {
         .tabs-contato {
-            display: flex;
             gap: 24px;
         }
     }

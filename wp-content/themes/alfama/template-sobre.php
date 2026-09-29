@@ -23,7 +23,7 @@ the_content();
 
         <div class="row">
             <div class="col-12 col-md-4">
-                <h2 class="titulo">Somos especialistas em soluções de <span class="red">proteína animal</span></h2>
+                <h2 class="titulo">Transformamos cozinhas profisionais em <span class="red">negócios mais inteligentes.</span></h2>
                 <div class="icones-animais">
                     <div class="boi">
                         <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="enable-background:new 0 0 48.35 52" viewBox="0 0 48.35 52"><path d="M42.6 31.77c-2.2-1.7-4.69-3.62-6.36-5.74l-.39-.49c-1.37-1.7-1.93-2.41-1.74-4.68.38-4.44-4.28-7.31-7.66-8.52.53-1.14 1.14-3.1.85-5.69-.03-.3-.37-2.9-1.86-3.11-.79-.11-1.41.41-1.86 1.55-.88 2.2-3.47 4.11-4.04 4.51-.03-.01-.06-.03-.08-.04-.61-.74-3.16-4.01-3.9-7.33C15.23.78 14.61.03 13.72 0h-.04c-1.81 0-2.78 3.39-2.82 3.54-.97 3.45-.47 6.38.04 8.12C4.58 11.17.61 14.2.38 14.38c-.21.16-.34.41-.37.67-.03.27.05.54.21.74 3.69 4.57 7.48 7.07 11.27 7.42 3.76.34 6.06-1.6 6.16-1.69.41-.35.46-.98.11-1.4a.963.963 0 0 0-1.38-.11c-.02.01-1.78 1.49-4.71 1.22-3.01-.27-6.11-2.23-9.22-5.84 1.52-.87 4.94-2.34 9.65-1.59.09.03.18.04.27.04 2.07.36 4.38 1.16 6.89 2.62.47.27 1.07.11 1.34-.37s.11-1.08-.36-1.36c-2.58-1.5-4.98-2.36-7.16-2.79-.43-1.11-1.37-4.17-.33-7.87.2-.7.53-1.38.8-1.78.03.1.06.22.09.37.95 4.26 4.33 8.2 4.47 8.36.09.11.2.19.33.25.18.08 4.41 2.05 6.58 2.69.08.02 7.53 2.27 7.15 6.73-.26 3.07.76 4.34 2.17 6.1l.38.47c1.83 2.31 4.42 4.31 6.7 6.08 2.68 2.07 5.46 4.22 4.88 5.47-2.07 4.46-5.14 6.83-6.06 7.31-1.5.78-9.1.68-13.24-1.65a.972.972 0 0 0-1.17.17c-.04.04-4.31 4.2-14.03 2.91-1.81-.24-3.15.75-4.23 1.55-.56.42-1.1.82-1.57.94-.52.14-.84.68-.7 1.21.1.46.5.75.94.75.08 0 .16-.01.25-.03.84-.22 1.55-.75 2.24-1.26.95-.71 1.77-1.31 2.82-1.18 8.81 1.17 13.57-1.77 15.11-2.99 4.57 2.22 12.28 2.51 14.48 1.36 1.43-.75 4.71-3.43 6.93-8.23 1.25-2.7-1.86-5.11-5.47-7.9zM24.57 11.73c-.92-.34-2.02-.79-2.98-1.21 1.1-.9 2.76-2.45 3.63-4.3.06.21.1.44.13.66.26 2.37-.36 4.04-.78 4.85z"/></svg>
@@ -55,10 +55,11 @@ the_content();
             </div>
             <div class="col-12 col-md-5 offset-md-1">
                 <div class="conteudo-nossa-missao">
-                    <h2 class="titulo">Nossa <span class="blue4">missão</span></h2>
-                    <p class="paragrafo">A missão da Alfama é ajudar o empreendedor do setor de alimentação a encantar seus clientes e otimizar seu negócio, com pratos saborosos, padronizados, com baixo desperdício e alta rentabilidade.</p>
-                    <p class="paragrafo">Para isso, estudamos a fundo o mercado, identificamos as dificuldades nas rotinas das principais cozinhas profissionais do Brasil e investimos no desenvolvimento de soluções completas em proteína animal: produtos que facilitam a operação, simplificam processos, reduzem custos e garantem qualidade e sabor às suas receitas.</p>
-                    <p class="paragrafo">Com isso nos tornamos o principal parceiro do Brasil no fornecimento de carnes pré-prontas para pizzarias, bares, restaurantes, padarias e cozinhas profissionais em geral. Nos orgulhamos em estar presente em mais de 25.000 cozinhas todos os meses, contribuindo diretamente com o sucesso desses empreendedores.</p>
+                    <h2 class="titulo">Como transformamos a operação em resultado</h2>
+                    <p class="paragrafo">A Alfama atua para tornar operações de cozinha mais eficientes, controladas e previsíveis.</p>
+                    <p class="paragrafo">Por isso, desenvolvemos produtos inteligentes que reduzem etapas, evitam perdas e garantem consistência, mesmo em cenários de alta demanda e equipes em constante mudança.</p>
+                    <p class="paragrafo">Ao simplificar a execução e trazer mais controle para o dia a dia, a operação ganha fluidez, reduz variações e passa a funcionar com mais previsibilidade.</p>
+                    <p class="paragrafo">O resultado aparece no negócio: mais eficiência, melhor aproveitamento de recursos e crescimento sustentado.</p>
                 </div>
             </div>
         </div>
@@ -76,9 +77,8 @@ the_content();
             <div><p>2017</p></div>
             <div><p>2019</p></div>
             <div><p>2020</p></div>
-            <div><p>2021</p></div>
             <div><p>2022</p></div>
-
+            <div><p>2026</p></div>
         </div>
 
         <div class="row">
@@ -121,7 +121,7 @@ the_content();
                     </div>
                     <div>
                         <p>
-                            Aquisição do Frigorífico Novilho Nobre, fortalecendo a estratégia de expansão da companhia, com foco em aumento de capacidade produtiva, diversificação do portfólio e abertura de novos canais de venda.
+                            Implantação e início da operação da unidade de Louveira/SP, ampliando a capacidade produtiva das linhas Porcionados e in natura e fortalecendo nossa atuação nacional no Food Service.
                         </p>
                     </div>
                 </div>
@@ -141,9 +141,15 @@ the_content();
             </div>
             <div class="col-12 col-md-6 offset-md-1">
                 <div class="conteudo-eficiencia">
-                    <h2 class="titulo">Eficiência e <span class="red">tecnologia</span></h2>
+                    <h2 class="titulo"><span class="red">Eficiência </span>que começa na operação</h2>
                     <p class="paragrafo">
-                        Nosso propósito é ajudar o empreendedor do setor de alimentação a vender mais, gerir melhor e a desenvolver seus negócios. Somos obcecados por eficiência em tudo que fazemos e transportamos isso para o nosso modelo de gestão. Utilizamos tecnologia para aproximar pessoas e negócios, transportando resultados sólidos para toda a cadeia.
+                        Eficiência operacional exige método.
+                    </p>
+                    <p class="paragrafo">
+                        Por isso, desenvolvemos produtos com base na realidade das cozinhas profissionais, buscando reduzir desperdícios, melhorar processos e aumentar a previsibilidade da operação.
+                    </p>
+                    <p class="paragrafo">
+                        Utilizamos tecnologia para transformar dados e processos em decisões mais claras — conectando eficiência operacional ao resultado do negócio.
                     </p>
                 </div>
             </div>
@@ -159,12 +165,18 @@ the_content();
 
             <div class="col-12 col-md-6">
                 <div class="conteudo-qualidade">
-                    <h2 class="titulo">Qualidade e <span class="red">relacionamentos</span></h2>
+                    <h2 class="titulo"><span class="red">Qualidade</span> que garante consistência</h2>
                     <p class="paragrafo">
-                        Entregamos produtos que são desenvolvidos através de um processo Lean Manufacturing, feito com muita dedicação, garra e intensidade. Pensados para não focar apenas qualidade de produtos, mas sim, qualidade em resultados, solidez nas relações e perenidade nos negócios para todos.
+                        Qualidade, para nós, é garantir consistência na operação.
                     </p>
                     <p class="paragrafo">
-                        Desafiamos nossos próprios limites em busca de melhores resultados. Isso, sem perder de vista, processos sustentáveis, respeitando, valorizando e garantindo a segurança de toda a nossa cadeia produtiva e de parcerias.
+                        Nossos produtos são desenvolvidos para manter padrão, reduzir variações e dar mais previsibilidade ao dia a dia da cozinha.
+                    </p>
+                    <p class="paragrafo">
+                        Isso significa menos diferença entre preparos, mais controle sobre o resultado e mais segurança na execução — mesmo com equipes em constante mudança.
+                    </p>
+                    <p class="paragrafo">
+                        Com mais estabilidade, a operação reduz retrabalho, evita desperdícios e mantém o desempenho ao longo do tempo.
                     </p>
                 </div>
             </div>

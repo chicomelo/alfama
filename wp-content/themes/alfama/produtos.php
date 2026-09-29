@@ -5,10 +5,9 @@ $produtos = [
         "destaque"=> true,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-alcatra-bifes.jpg",
             "foto-produto-porcionado-alcatra-bifes.jpg"
         ],
-        "nome"=> "Alcatra Bifes",
+        "nome"=> "Alcatra <i>Bifes</i>",
         "locais"=> [
             "churrasqueira",
             "chapa",
@@ -27,13 +26,12 @@ $produtos = [
             "extra-limpo"
         ],
         "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "operacoes"=> "Indicado para buffet, à la carte, marmitaria, churrascaria, restaurante executivo e delivery de pratos feitos."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-coxao-mole-bifes.jpg",
             "foto-produto-porcionado-coxao-mole-bifes.jpg"
         ],
         "nome"=> "Coxão Mole Bifes",
@@ -55,13 +53,12 @@ $produtos = [
             "extra-limpo"
         ],
         "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "operacoes"=> "Indicado para à la carte, marmitaria, restaurante executivo, buffet e prato feito (PF)."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-patinhos-bifes.jpg",
             "foto-produto-porcionado-patinhos-bifes.jpg"
         ],
         "nome"=> "Patinho Bifes",
@@ -83,13 +80,12 @@ $produtos = [
             "extra-limpo"
         ],
         "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "operacoes"=> "Indicado para marmitaria, à la carte, restaurante executivo, delivery de pratos feitos e cozinha industrial."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-paleta-bifes.jpg",
             "foto-produto-porcionado-paleta-bifes.jpg"
         ],
         "nome"=> "Paleta Bifes",
@@ -111,13 +107,12 @@ $produtos = [
             "extra-limpo"
         ],
         "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "operacoes"=> "Indicado para marmitaria, prato feito (PF), buffet, restaurante econômico e cozinha industrial."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-bisteca-contra-file.jpg",
             "foto-produto-porcionado-bisteca-contra-file.jpg"
         ],
         "nome"=> "Bisteca do Contrafilé <span>com osso</span>",
@@ -139,13 +134,12 @@ $produtos = [
             "extra-limpo"
         ],
         "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "operacoes"=> "Indicado para churrascaria de preço baixo, à la carte, buffet, delivery, marmitaria e cozinhas industriais."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-file-mignon-cubos.jpg",
             "foto-produto-porcionado-file-mignon-cubos.jpg"
         ],
         "nome"=> "Filé Mignon Cubos",
@@ -166,13 +160,12 @@ $produtos = [
             "extra-limpo"
         ],
         "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "operacoes"=> "Indicado para à la carte premium, bistrôs e restaurantes gourmet, hamburguerias premium, pizzarias gourmet e dark kitchens."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-bovino-iscas-slice.jpg",
             "foto-produto-porcionado-bovino-iscas-slice.jpg"
         ],
         "nome"=> "Bovino Iscas Slice",
@@ -193,13 +186,12 @@ $produtos = [
             "extra-limpo"
         ],
         "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "operacoes"=> "Indicado para restaurante oriental, hamburgueria, pizzaria, fast food e dark kitchens."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-patinho-cubos.jpg",
             "foto-produto-porcionado-patinho-cubos.jpg"
         ],
         "nome"=> "Patinho Cubos",
@@ -220,13 +212,12 @@ $produtos = [
             "extra-limpo"
         ],
         "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "operacoes"=> "Indicado para buffet, marmitaria, restaurante tradicional, cozinha industrial e prato feito (PF)."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-patinho-tiras.jpg",
             "foto-produto-porcionado-patinho-tiras.jpg"
         ],
         "nome"=> "Patinho Tiras",
@@ -247,13 +238,12 @@ $produtos = [
             "extra-limpo"
         ],
         "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "operacoes"=> "Indicado para restaurante oriental, à la carte, delivery, bistrôs e restaurante saudável."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-acem-cubos.jpg",
             "foto-produto-porcionado-acem-cubos.jpg"
         ],
         "nome"=> "Acém Cubos",
@@ -274,13 +264,12 @@ $produtos = [
             "extra-limpo"
         ],
         "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "operacoes"=> "Indicado para marmitaria, buffet, cozinha industrial, restaurante caseiro e delivery popular."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-costela-cubos-osso.jpg",
             "foto-produto-porcionado-costela-cubos-osso.jpg"
         ],
         "nome"=> "Costela Cubos <span>com osso (panela)</span>",
@@ -301,13 +290,12 @@ $produtos = [
             "extra-limpo"
         ],
         "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "operacoes"=> "Indicado para cozinha industrial, buffet, restaurante tradicional e bar e boteco."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-carne-seca-cubos.jpg",
             "foto-produto-porcionado-carne-seca-cubos.jpg"
         ],
         "nome"=> "Carne Seca Cubos traseiro",
@@ -328,13 +316,12 @@ $produtos = [
             "extra-limpo"
         ],
         "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "operacoes"=> "Indicado para restaurante nordestino, buffet, marmitaria premium, pizzaria gourmet e bares e botecos."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-peito-frango-bifes-160.jpg",
             "foto-produto-porcionado-peito-frango-bifes-160.jpg"
         ],
         "nome"=> "Peito de Frango Bifes 160g",
@@ -355,14 +342,13 @@ $produtos = [
             "validade-12-meses",
             "extra-limpo"
         ],
-        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Peito de Frango <br />&bull; Extra limpo",
+        "operacoes"=> "Indicado para marmitaria, restaurante saudável, buffet, academia/alimentação fit e cozinha industrial."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-peito-frango-bifes-130.jpg",
             "foto-produto-porcionado-peito-frango-bifes-130.jpg"
         ],
         "nome"=> "Peito de Frango Bifes 130g",
@@ -371,7 +357,7 @@ $produtos = [
             "chapa",
             "broiler"
         ],
-        "origem"=> "bovino",
+        "origem"=> "frango",
         "peso"=> [
             "2 kg",
             "Peso bife: 130g",
@@ -383,14 +369,13 @@ $produtos = [
             "validade-12-meses",
             "extra-limpo"
         ],
-        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Peito de Frango <br />&bull; Extra limpo",
+        "operacoes"=> "Indicado para marmitaria, restaurante saudável, buffet, academia/alimentação fit e cozinha industrial."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-peito-frango-cubos.jpg",
             "foto-produto-porcionado-peito-frango-cubos.jpg"
         ],
         "nome"=> "Peito de Frango Cubos",
@@ -399,7 +384,7 @@ $produtos = [
             "chapa",
             "broiler"
         ],
-        "origem"=> "bovino",
+        "origem"=> "frango",
         "peso"=> [
             "2 kg",
             "Dimensões: 2 x 2 x 2cm"
@@ -410,14 +395,13 @@ $produtos = [
             "validade-12-meses",
             "extra-limpo"
         ],
-        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Peito de Frango <br />&bull; Extra limpo",
+        "operacoes"=> "Indicado para marmitaria, restaurante saudável, fast food, buffet e delivery."
     ],
     [
         "destaque"=> false,
         "categoria"=> "porcionados",
         "fotos"=> [
-            "foto-produto-porcionado-peito-frango-tiras.jpg",
             "foto-produto-porcionado-peito-frango-tiras.jpg"
         ],
         "nome"=> "Peito de Frango Tiras",
@@ -426,7 +410,7 @@ $produtos = [
             "chapa",
             "broiler"
         ],
-        "origem"=> "bovino",
+        "origem"=> "frango",
         "peso"=> [
             "2 kg",
             "Dimensões: 4 x 1,5 x 1,5cm"
@@ -437,8 +421,8 @@ $produtos = [
             "validade-12-meses",
             "extra-limpo"
         ],
-        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Carne Bovina <br />&bull; Extra limpo",
-        "operacoes"=> "Restaurantes a la carte, Buffets, Dark Kitchen, Padarias e Bares/Botecos"
+        "descricao_curta"=> "&bull; 2 kg <br />&bull; 100% Peito de Frango <br />&bull; Extra limpo",
+        "operacoes"=> "Indicado para hamburgueria, fast food, restaurante casual, delivery e bar (petiscos)."
     ],
     // STARTERS
     // [
@@ -674,9 +658,7 @@ $produtos = [
         ],
         "origem"=> "bovino",
         "peso"=> [
-            "1kg",
-            "2kg",
-            "3kg"
+            "1kg"
         ],
         "caracteristicas" => [
             "desfiamento",
@@ -846,7 +828,7 @@ $produtos = [
             "condimentos",
             "nervos"
         ],
-        "descricao_curta"=> "&bull; 1kg<br />&bull; 100% Carne Bovina <br />&bull; 15% de gordura",
+        "descricao_curta"=> "&bull; 1kg<br />&bull; 100% Carne Bovina <br />&bull; Até 18% de gordura",
         "receitas"=> "Ideal para Hambúrgueres artesanais, Espaguete à bolonhesa e Almôndegas."
 
     ],

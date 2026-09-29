@@ -1,345 +1,344 @@
 // main: "../main.less"
 
-.banner-sobre{
-    background: url('../img/banner-sobre-alfama-mobile.jpg');
-    background-size: 768px;
-    background-position: center;
-    height: 530px;
+.banner-sobre {
+  background: url("../img/banner-sobre-alfama-mobile.jpg");
+  background-size: 768px;
+  background-position: center;
+  height: 530px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .titulo {
+    color: @white;
+    margin-bottom: 42px;
+    text-align: center;
+    font-size: 3.6rem;
+  }
+}
+
+#video-alfama {
+  padding: 0;
+}
+.especialistas-proteina {
+  padding: 42px 0;
+  .row {
+    align-items: center;
+  }
+  .titulo {
+    text-align: center;
+  }
+  .icones-animais {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 12px;
+    margin: 42px 0;
+    svg {
+      width: 59px;
+      height: 52px;
+    }
+    .boi {
+      svg {
+        fill: @blue4;
+      }
+    }
+    .frango {
+      svg {
+        fill: @blue4;
+      }
+    }
+    .suino {
+      svg {
+        fill: @blue4;
+      }
+    }
+  }
+}
+
+.nossa-missao {
+  background-color: @blue0;
+  padding-bottom: 42px;
+  .paragrafo,
+  .titulo {
+    color: @white;
+  }
+  .conteudo-nossa-missao {
+    padding-top: 42px;
+  }
+}
+
+.timeline {
+  padding: 64px 0 124px 0;
+  .titulo {
+    text-align: center;
+    margin: 0;
+  }
+  .slider-ano {
+    text-align: center;
+    margin: 32px 0;
+    p {
+      font-size: 4.2rem;
+      color: @grey4;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .slick-current {
+      p {
+        color: @blue4;
+      }
+    } 
+  }
+  .slider-conteudo {
+    height: 90px;
+    p {
+      font-size: 1.6rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: @blue0;
+      text-align: center;
+    }
+    .slick-dots {
+      bottom: -64px;
+    }
+    .slick-prev,
+    .slick-next {
+      top: auto;
+      bottom: -72px;
+      width: 30px;
+    }
+    .slick-prev {
+      left: 5%;
+    }
+    .slick-next {
+      right: 5%;
+    }
+  }
+}
+
+.eficiencia {
+  overflow: hidden;
+  padding-bottom: 42px;
+  .conteudo-eficiencia {
+    padding-top: 42px;
+  }
+}
+
+.qualidade {
+  padding-bottom: 42px;
+  overflow: hidden;
+  .conteudo-qualidade {
+    padding-top: 42px;
+  }
+}
+
+.content-pilares {
+  padding: 42px 0 112px 0;
+  .paragrafo {
+    b {
+      color: @blue0;
+      font-weight: 700;
+      font-style: italic;
+    }
+  }
+
+  .pilar-texto {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 42px;
+  }
+
+  .icone-pilar {
+    max-width: 130px;
+    width: 130px;
+    height: fit-content;
+    margin: 0 auto;
+  }
+
+  h3.titulo {
+    color: @red1;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.8;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .pilares {
+    display: flex;
     flex-direction: column;
-
-    .titulo{
-        color: @white;
-        margin-bottom: 42px;
-        text-align: center;
-        font-size: 3.6rem;
-    }
-
-}
-
-
-#video-alfama{
-    padding: 0;
-}
-.especialistas-proteina{
-    padding: 42px 0;
-    .row{
-        align-items: center;
-    }
-    .titulo{
-        text-align: center;
-    }
-    .icones-animais{
+    gap: 24px;
+    .item {
+      padding: 12px 20px;
+      box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      p {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: @blue0;
+      }
+      .icone {
+        width: 45px;
+        height: 45px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 12px;
-        margin: 42px 0;
-        svg{
-            width: 59px;
-            height: 52px;
+        svg {
+          height: 39px;
+          width: fit-content;
         }
-        .boi{
-            svg{
-                fill: @blue4;
-            }
-        }
-        .frango{
-            svg{
-                fill: @blue4;
-            }
-        }
-        .suino{
-            svg{
-                fill: @blue4;
-            }
-        }
+      }
     }
-
+  }
 }
-
-.nossa-missao{
-    background-color: @blue0;
-    padding-bottom: 42px;
-    .paragrafo, .titulo{
-        color: @white;
-    }
-    .conteudo-nossa-missao{
-        padding-top: 42px;
-    }
-}
-
-.timeline{
-    padding: 64px 0 124px 0;
-    .titulo{
-        text-align: center;
-        margin: 0;
-    }
-    .slider-ano{
-        text-align: center;
-        margin: 32px 0;
-        p{
-            font-size: 4.2rem;
-            color: @grey4;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .slick-current{
-            p{
-                color: @blue4;
-            }
-        }
-    }
-    .slider-conteudo{
-        p{
-            font-size: 1.6rem;
-            font-weight: 600;
-            line-height: 1.4;
-            color: @blue0;
-            text-align: center;
-        }
-        .slick-dots{
-            bottom: -64px;
-        }
-        .slick-prev,
-        .slick-next {
-            top: auto;
-            bottom: -72px;
-            width: 30px;
-        }
-        .slick-prev{
-            left: 5%;
-        }
-        .slick-next{
-            right: 5%;
-        }
-    }
-}
-
-.eficiencia{
-    overflow: hidden;
-    padding-bottom: 42px;
-    .conteudo-eficiencia{
-        padding-top: 42px;
-    }
-}
-
-.qualidade{
-    padding-bottom: 42px;
-    overflow: hidden;
-    .conteudo-qualidade{
-        padding-top: 42px;
-    }
-}
-
-.content-pilares{
-    padding: 42px 0 112px 0;
-    .paragrafo{
-        b{
-            color: @blue0;
-            font-weight: 700;
-            font-style: italic;
-        }
-    }
-
-    .pilar-texto{
-        display: flex;
-        flex-direction: column-reverse;
-        gap: 42px;
-    }
-
-    .icone-pilar{
-        max-width: 130px;
-        width: 130px;
-        height: fit-content;
-        margin: 0 auto;
-    }
-
-    h3.titulo{
-        color: @red1;
-        font-size: 2.4rem;
-        font-weight: 700;
-        line-height: 1.8;
-        margin-top: 24px;
-        margin-bottom: 24px;
-        text-align: center;
-    }
-
-    .pilares{
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-        .item{
-            padding: 12px 20px;
-            box-shadow: 4px 4px 20px rgba(0,0,0,0.1);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            p{
-                font-size: 1.8rem;
-                font-weight: 700;
-                color: @blue0;
-            }
-            .icone{
-                width: 45px;
-                height: 45px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                svg{
-                    height: 39px;
-                    width: fit-content;
-                }
-            }
-        }
-    }
-}
-
 
 @media (min-width: 768px) {
+  .banner-sobre {
+    background: url("../img/banner-sobre-alfama.jpg");
+    height: 800px;
+    background-size: cover;
+    .titulo {
+      font-size: 3.6rem;
+    }
+    .btn {
+      margin: 0 auto;
+    }
+  }
+  .especialistas-proteina {
+    height: 470px;
+    display: flex;
+    align-items: center;
+    .titulo {
+      text-align: left;
+      font-size: 3.6rem;
+    }
+    .icones-animais {
+      justify-content: flex-start;
+    }
+  }
+  .nossa-missao {
+    padding: 0;
+    .col-12 {
+      position: relative;
+      height: 800px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    img {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    .paragrafo,
+    .titulo {
+      color: @white;
+    }
+    .conteudo-nossa-missao {
+      padding-top: 0;
+    }
+  }
+  .timeline {
+    padding: 92px 0 142px 0;
+    .slider-ano {
+      p {
+        font-size: 4.8rem;
+      }
+    }
+    .slider-conteudo {
+      height: 45px;
+      p {
+        font-size: 1.6rem;
+      }
+      .slick-dots {
+        bottom: -64px;
+      }
+      .slick-prev,
+      .slick-next {
+        top: auto;
+        bottom: -68px;
+        width: 40px;
+      }
+      .slick-prev {
+        left: 25%;
+      }
+      .slick-next {
+        right: 25%;
+      }
+    }
+  }
+  .eficiencia {
+    padding: 0;
+    .col-12 {
+      position: relative;
+      height: 482px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    img {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    .conteudo-eficiencia {
+      padding-top: 0;
+    }
+  }
+  .qualidade {
+    padding: 64px 0;
+    .col-12 {
+      position: relative;
+      height: 482px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .conteudo-qualidade {
+      padding-top: 0;
+    }
+  }
 
-    .banner-sobre{
-        background: url('../img/banner-sobre-alfama.jpg');
-        height: 800px;
-        background-size: cover;
-        .titulo{
-            font-size: 3.6rem;
-        }
-        .btn{
-            margin: 0 auto;
-        }
-    }
-    .especialistas-proteina{
-        height: 470px;
-        display: flex;
-        align-items: center;
-        .titulo{
-            text-align: left;
-            font-size: 3.6rem;
-        }
-        .icones-animais{
-            justify-content: flex-start;
-        }
-    }
-    .nossa-missao{
-        padding: 0;
-        .col-12{
-            position: relative;
-            height: 800px;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-        }
-        img{
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
-        .paragrafo, .titulo{
-            color: @white;
-        }
-        .conteudo-nossa-missao{
-            padding-top: 0;
-        }
-    }
-    .timeline{
-        padding: 92px 0 142px 0;
-        .slider-ano{
-            p{
-                font-size: 4.8rem;
-            }
-        }
-        .slider-conteudo{
-            p{
-                font-size: 1.6rem;
-            }
-            .slick-dots{
-                bottom: -64px;
-            }
-            .slick-prev,
-            .slick-next {
-                top: auto;
-                bottom: -68px;
-                width: 40px;
-            }
-            .slick-prev{
-                left: 30%;
-            }
-            .slick-next{
-                right: 30%;
-            }
-        }
-    }
-    .eficiencia{
-        padding: 0;
-        .col-12{
-            position: relative;
-            height: 482px;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-        }
-        img{
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
-        .conteudo-eficiencia{
-            padding-top: 0;
-        }
-    }
-    .qualidade{
-        padding: 64px 0;
-        .col-12{
-            position: relative;
-            height: 482px;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-        }
-        img{
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        .conteudo-qualidade{
-            padding-top: 0;
-        }
+  .content-pilares {
+    padding: 92px 0 162px 0;
+
+    .pilar-texto {
+      flex-direction: column;
+      gap: 92px;
     }
 
-    .content-pilares{
-        padding: 92px 0 162px 0;
-
-        .pilar-texto{
-            flex-direction: column;
-            gap: 92px;
-        }
-    
-        .icone-pilar{
-            margin: 0;
-        }
-        h3.titulo{
-            margin-top: 56px;
-            text-align: left;
-        }
-    
-        .pilares{
-            gap: 24px;
-            .item{
-                gap: 24px;
-                p{
-                    font-size: 2.0rem;
-                }
-            }
-        }
+    .icone-pilar {
+      margin: 0;
     }
+    h3.titulo {
+      margin-top: 56px;
+      text-align: left;
+    }
+
+    .pilares {
+      gap: 24px;
+      .item {
+        gap: 24px;
+        p {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
 }

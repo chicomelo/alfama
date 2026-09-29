@@ -27,7 +27,7 @@
             </div>
             <div class="menu-footer__wrapper">
                 <?php
-                    wp_nav_menu( array( 'header-menu' => 'header-menu' ) );
+                    wp_nav_menu( array( 'header-footer' => 'header-footer' ) );
                 ?>
             </div>
             <div class="menu-footer__social_copyright">

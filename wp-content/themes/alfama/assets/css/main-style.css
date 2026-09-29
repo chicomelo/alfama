@@ -5598,16 +5598,16 @@ body.compensate-for-scrollbar {
 .footer__alfama .footer__wrapper .menu-footer__wrapper {
   padding: 24px 0;
 }
-.footer__alfama .footer__wrapper .menu-footer__wrapper .menu-menu-principal-container {
+.footer__alfama .footer__wrapper .menu-footer__wrapper .menu-menu-footer-container {
   width: 100%;
 }
-.footer__alfama .footer__wrapper .menu-footer__wrapper .menu-menu-principal-container .menu {
+.footer__alfama .footer__wrapper .menu-footer__wrapper .menu-menu-footer-container .menu {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-direction: column;
 }
-.footer__alfama .footer__wrapper .menu-footer__wrapper .menu-menu-principal-container .menu .menu-item a {
+.footer__alfama .footer__wrapper .menu-footer__wrapper .menu-menu-footer-container .menu .menu-item a {
   line-height: 1;
   display: block;
   color: #fff;
@@ -5616,7 +5616,7 @@ body.compensate-for-scrollbar {
   font-weight: 500;
   transition: all 0.2s;
 }
-.footer__alfama .footer__wrapper .menu-footer__wrapper .menu-menu-principal-container .menu .menu-item a:hover {
+.footer__alfama .footer__wrapper .menu-footer__wrapper .menu-menu-footer-container .menu .menu-item a:hover {
   color: #899BBB;
 }
 .footer__alfama .footer__wrapper .menu-social__wrapper {
@@ -5676,11 +5676,11 @@ body.compensate-for-scrollbar {
     position: relative;
     transition: none;
   }
-  .footer__alfama .footer__wrapper .menu-footer__wrapper .menu-menu-principal-container .menu {
+  .footer__alfama .footer__wrapper .menu-footer__wrapper .menu-menu-footer-container .menu {
     flex-direction: row;
     gap: 42px;
   }
-  .footer__alfama .footer__wrapper .menu-footer__wrapper .menu-menu-principal-container .menu .menu-item a {
+  .footer__alfama .footer__wrapper .menu-footer__wrapper .menu-menu-footer-container .menu .menu-item a {
     padding: 6px;
   }
   .footer__alfama .footer__wrapper .menu-footer__wrapper.active {
@@ -5944,7 +5944,7 @@ body.compensate-for-scrollbar {
   }
 }
 .banner-sobre {
-  background: url('../img/banner-sobre-alfama-mobile.jpg');
+  background: url("../img/banner-sobre-alfama-mobile.jpg");
   background-size: 768px;
   background-position: center;
   height: 530px;
@@ -6021,6 +6021,9 @@ body.compensate-for-scrollbar {
 }
 .timeline .slider-ano .slick-current p {
   color: #899BBB;
+}
+.timeline .slider-conteudo {
+  height: 90px;
 }
 .timeline .slider-conteudo p {
   font-size: 1.6rem;
@@ -6117,7 +6120,7 @@ body.compensate-for-scrollbar {
 }
 @media (min-width: 768px) {
   .banner-sobre {
-    background: url('../img/banner-sobre-alfama.jpg');
+    background: url("../img/banner-sobre-alfama.jpg");
     height: 800px;
     background-size: cover;
   }
@@ -6169,6 +6172,9 @@ body.compensate-for-scrollbar {
   .timeline .slider-ano p {
     font-size: 4.8rem;
   }
+  .timeline .slider-conteudo {
+    height: 45px;
+  }
   .timeline .slider-conteudo p {
     font-size: 1.6rem;
   }
@@ -6182,10 +6188,10 @@ body.compensate-for-scrollbar {
     width: 40px;
   }
   .timeline .slider-conteudo .slick-prev {
-    left: 30%;
+    left: 25%;
   }
   .timeline .slider-conteudo .slick-next {
-    right: 30%;
+    right: 25%;
   }
   .eficiencia {
     padding: 0;
@@ -6881,6 +6887,9 @@ body.compensate-for-scrollbar {
     font-size: 3.2rem;
   }
 }
+.page-template-template-contato .wpcf7-response-output {
+  display: none;
+}
 .page-template-template-contato .banner-contato {
   background-color: #0F2350;
   height: 218px;
@@ -6897,7 +6906,7 @@ body.compensate-for-scrollbar {
 }
 .page-template-template-contato .tabs-contato {
   display: flex;
-  gap: 24px;
+  gap: 8px;
 }
 .page-template-template-contato .tabs-contato a {
   padding: 0 6px;
@@ -6916,6 +6925,11 @@ body.compensate-for-scrollbar {
 }
 .page-template-template-contato .conteudo-tabs-contato {
   padding-top: 42px;
+}
+.page-template-template-contato .conteudo-tabs-contato .btn-enviar,
+.page-template-template-contato .conteudo-tabs-contato .btn-enviar-trabalhe-conosco {
+  display: flex;
+  justify-content: flex-end;
 }
 .page-template-template-contato .conteudo-tabs-contato > div {
   display: none;
@@ -7028,7 +7042,26 @@ body.compensate-for-scrollbar {
 .page-template-template-contato .conteudo-tabs-contato form p label.file input[type=file]:active {
   outline: 0;
 }
+.page-template-template-contato .conteudo-tabs-contato .imprensa h3 {
+  color: #041E42;
+}
+.page-template-template-contato .conteudo-tabs-contato .imprensa .contatos-imprensa {
+  margin: 24px 0 44px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.page-template-template-contato .conteudo-tabs-contato .imprensa .contatos-imprensa div {
+  color: #041E42;
+  font-size: 2rem;
+}
+.page-template-template-contato .conteudo-tabs-contato .imprensa form {
+  margin-top: 40px;
+}
 @media (min-width: 768px) {
+  .page-template-template-contato .tabs-contato {
+    gap: 24px;
+  }
   .page-template-template-contato .conteudo-contato__wrapper {
     padding: 0;
   }
@@ -7042,10 +7075,16 @@ body.compensate-for-scrollbar {
     padding-top: 36px;
     font-size: 3.2rem;
   }
+  .page-template-template-contato .conteudo-tabs-contato .imprensa .contatos-imprensa {
+    flex-direction: row;
+    gap: 24px;
+  }
+  .page-template-template-contato .conteudo-tabs-contato .imprensa form {
+    margin-top: 40px;
+  }
 }
 @media (min-width: 1200px) {
   .page-template-template-contato .tabs-contato {
-    display: flex;
     gap: 24px;
   }
 }

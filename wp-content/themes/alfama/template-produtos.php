@@ -631,7 +631,7 @@ include_once 'produtos.php';
                 <?php
                     }
                 ?>
-                <a href="javascript: void(0);" class="btn btn-outline" title="Quero conhecer">Quero conhecer</a>
+                <a target="_blank" href="https://api.whatsapp.com/send/?phone=5545991172722&text=Ol%C3%A1%2C+Alfama%21+Quero+saber+como+potencializar+minha+opera%C3%A7%C3%A3o+hoje+...&type=phone_number&app_absent=0" class="btn btn-outline btn-conhecer" title="Quero conhecer">Quero conhecer</a>
             </div>
         </div>
     <?php
