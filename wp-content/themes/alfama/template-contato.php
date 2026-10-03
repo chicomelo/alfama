@@ -49,7 +49,7 @@ the_content();
                         <p class="paragrafo">
                             Se preferir, preencha o <b>formulário</b> abaixo com sua solicitação. Nossa equipe retornará o mais breve possível.
                         </p>
-                        <?php echo apply_shortcodes('[contact-form-7 id="c9648fb" title="Imprensa"]'); ?>
+                        <?php echo apply_shortcodes('[contact-form-7 id="e5f0302" title="Imprensa"]'); ?>
                     </div>
                 </div>
             </div>

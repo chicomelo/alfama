@@ -95,11 +95,98 @@
 
     .lista-produtos{
         padding: 24px 0;
-
+        .row{
+            margin: 0 -9px;
+            .col-6, .col-12{
+                padding: 0 9px;
+            }
+        }
         .produto{
-            margin-bottom: 42px;
+            margin-bottom: 20px;
+            .card{
+                border: 1px solid #E6E6E6;
+                padding: 16px 0;
+                border-radius: 12px;
+                .card-body{
+                    padding: 0 16px;
+                }
+            }
             .fotos{
                 margin-bottom: 16px;
+                position: relative;
+                .selos{
+                    position: absolute;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0 16px;
+                    .selo-posicao_1{
+                        background-color: @white;
+                        border: 2px solid @red;
+                        height: 52px;
+                        width: 48px;
+                        border-radius: 12px;
+                        color: @blue0;
+                        font-weight: 500;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        line-height: 1;
+                        font-size: 1.2rem;
+                        span{
+                            display: block;
+                            font-weight: 700;
+                            font-size: 2.4rem;
+                        }
+                    }
+                    .selo-posicao_2{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: @white;
+                        background-color: @red;
+                        margin-left: 4px;
+                        margin-top: 6px;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 8px;
+                        font-weight: 500;
+                        line-height: 0.4rem;
+                        font-size: 1.2rem;
+                        span{
+                            font-weight: 700;
+                            font-size: 2.1rem;
+                        }
+                        &.primeiro-selo{
+                            margin: 0;
+                        }
+                    }
+                    .selo-posicao_3{
+                        right: 16px;
+                        top: 0;
+                        position: absolute;
+                        font-size: 1.6rem;
+                        font-weight: 700;
+                        border-radius:50px;
+                        padding: 2px 10px 4px 10px;
+                        background-color: #bbb;
+                        & > div{
+                            font-weight: 600;
+                        }
+                        &.light{
+                            background-color: #B1C9E8;
+                            color: @blue0;
+                        }
+                        &.dark{
+                            background-color: #6E7CA0;
+                            color: @white;
+                        }
+                    }
+                }
+
+
+
                 img{
                     display: block;
                 }
@@ -134,9 +221,34 @@
                 color: @blue1;
                 font-size: 1.8rem;
                 line-height: 1.4;
-                min-height: 52px;
+                min-height: 58px;
+                i{
+                    display:block;
+                    font-weight: 600;
+                }
                 span{
-                    font-size: 1.4rem;
+                    font-size: 1.6rem;
+                }
+            }
+            .especificacoes{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 6px;
+                padding: 16px 0;
+                min-height: 126px;
+                font-size: 1.4rem;
+                & > div{
+                    display: flex;
+                    gap: 6px;
+                    color: @grey1;
+                    .icone{
+                        transform: translateY(-3px);
+                        svg{
+                            color: @red1;
+                            fill: @red1;
+                        }
+                    }
                 }
             }
             .locais{
@@ -207,21 +319,77 @@
                 font-size: 1.4rem;
             }
             .link{
-                font-size: 1.6rem;
+                font-size: 1.4rem;
                 padding: 6px 0;
             }
 
             &.col-12{
                 .nome{
                     min-height: auto;
-                    font-size: 2.1rem;
+                    font-size: 2.8rem;
+                }
+                .especificacoes{
+                    min-height: auto;
+                }
+                .fotos{
+                    .selos{
+                        .selo-posicao_1{
+                            height: 58px;
+                            width: 58px;
+                            font-size: 1.4rem;
+                            span{
+                                font-size: 2.8rem;
+                            }
+                        }
+                        .selo-posicao_2{
+                            margin-left: 6px;
+                            margin-top: 6px;
+                            width: 46px;
+                            height: 46px;
+                            font-size: 1.4rem;
+                            span{
+                                font-size: 2.8rem;
+                            }
+                        }
+                    }
+
+
+
+                    img{
+                        display: block;
+                    }
+                    .slick-dots{
+                        position: relative;
+                        bottom: auto;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        li {
+                            position: relative;
+                            margin: 0;
+                            button {
+                                padding: 0;
+                            }
+                        }
+                    }
+                    .slick-prev,
+                    .slick-next {
+                        top: auto;
+                        bottom: -12px;
+                    }
+                    .slick-prev{
+                        left: 0%;
+                    }
+                    .slick-next{
+                        right: 0%;
+                    }
                 }
             }
         }
     }
 
     .modal-produto{
-        padding: 32px 24px;
+        padding: 0;
 
         .fancybox-button{
             display: none;
@@ -232,7 +400,6 @@
             align-items: center;
             color: @red1;
             line-height: 1;
-            margin-bottom: 32px;
             cursor: pointer;
             width: 100px;
             outline: none;
@@ -258,6 +425,28 @@
         }
 
         .produto{
+            overflow-y: auto;
+            height: calc(100vh - 100px);
+            padding-bottom: 0;
+            padding-top: 24px;
+            .modal-header{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 24px;
+            }
+            .modal-body{
+                padding: 0 24px;
+
+            }
+            .modal-footer{
+                border-top: 1px solid @grey5;
+                padding: 24px;
+                background-color: @white;
+                bottom:0;
+                width: 100%;
+                position: sticky;
+            }
             .origem{
                 display: flex;
                 align-items: center;
@@ -290,14 +479,12 @@
 
             }
 
-            .galeria{
-                display: flex;
-                align-items: center;
-            }
+            
 
             .fotos{
-                margin-top: 24px;
                 margin-bottom: 8px;
+                width: 62%;
+                position: relative;
                 img{
                     display: block;
                     max-width: 100%;
@@ -305,23 +492,59 @@
                 }
 
                 .selos{
-                    position: relative;
-                    .selos-content{
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0;
+                    width: 100%;
+                    .selo-posicao_1{
+                        background-color: @white;
+                        border: 2px solid @red;
+                        height: 58px;
+                        width: 58px;
+                        border-radius: 12px;
+                        color: @blue0;
+                        font-weight: 500;
                         display: flex;
-                        justify-content: space-between;
-                        padding: 0 24px 0 24px;
-                        width: 100%;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        line-height: 1;
+                        font-size: 1.4rem;
+                        span{
+                            display: block;
+                            font-weight: 700;
+                            font-size: 2.8rem;
+                        }
+                    }
+                    .selo-posicao_2{
+                        margin-left: 6px;
+                        margin-top: 6px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: @white;
+                        background-color: @red;
+                        width: 44px;
+                        height: 44px;
+                        border-radius: 8px;
+                        font-weight: 500;
+                        line-height: 0.4rem;
+                        span{
+                            font-weight: 700;
+                            font-size: 2.4rem;
+                        }
+                        &.primeiro-selo{
+                            margin: 0;
+                        }
+                    }
+                    .selo-destaque{
+                        right: 0;
+                        top: 0;
                         position: absolute;
-                        top: -8px;
-                    }
-                    img{
-                        height: 62px;
-                        width: fit-content;
-                    }
-
-                    &.moidas{
-                        .selos-content{
-                            top: 64px;
+                        svg{
+                            max-width: 106px;
+                            max-height: 46px;
                         }
                     }
                 }
@@ -353,137 +576,187 @@
                 }
             }
 
-            .locais{
+            .galeria{
                 display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-top: 24px;
+            }
+
+            .selos-foto{
+                display: flex;
+                flex-direction: column;
                 gap: 16px;
                 margin: 0;
-                flex-direction: column;
+                width: 38%;
                 & > div{
                     display: flex;
                     flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 1.2rem;
-                    color: @grey1;
+                    gap: 6px;
                     .icone{
                         height: 24px;
                         display: flex;
                         align-items: center;
-                        margin-bottom: 4px;
                         svg{
-                            fill: @red1;
+                            height: 100%;
+                            width: fit-content;
                         }
-                        &.churrasqueira{
-                            svg{
-                                width: 20px;
-                                height: 24px;
-                            }
+                    }
+                    p{
+                        font-size: 1.4rem;
+                        font-weight: 700;
+                        color: @blue0;
+                    }
+                }
+            }
+
+            .selos-moidas{
+                .icone{
+                    svg{
+                        color: @red1;
+                    }
+                }
+            }
+
+            .selos-carne-seca-desfiada{
+                .icone{
+                    svg{
+                        color: #C42E3B;
+                    }
+                }
+            }
+
+            .selos-costela-desfiada{
+                .icone{
+                    svg{
+                        color: #FE5000;
+                    }
+                }
+            }
+
+            .selos-carne-de-sol-desfiada{
+                .icone{
+                    svg{
+                        color: #CA9E72;
+                    }
+                }
+            }
+
+            .selos-cupim-desfiado{
+                .icone{
+                    svg{
+                        color: #B37C72;
+                    }
+                }
+            }
+
+            .selos-pernil-suino-desfiado{
+                .icone{
+                    svg{
+                        color: #D67DA8;
+                    }
+                }
+            }
+
+            .selos-peito-de-frango-desfiado{
+                .icone{
+                    svg{
+                        color: #E59E00;
+                    }
+                }
+            }
+
+            .tags{
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
+                margin: 32px 0 0 0;
+                .tag{
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 6px 14px 8px 14px;
+                    background-color: @grey5;
+                    border-radius: 20px;
+                    .icone{
+                        display: flex;
+                        color: @red1;
+                    }
+                    p{
+                        font-size: 1.6rem;
+                        color: @grey1;
+                    }
+                    &.tag-aproveitamento{
+                        background-color: @red1;
+
+                        .icone{
+                            color: @white;
                         }
-                        &.panela{
-                            svg{
-                                width: 24px;
-                                height: 19px;
-                            }
+                        p{
+                            color: @white;
                         }
-                        &.fritadeira{
-                            svg{
-                                width: 27px;
-                                height: 19px;
-                            }
+                    }
+                    &.tag-quantidade{
+                        border: 2px solid @red1;
+                        background-color: @white;
+                    }
+                    &.tag-gordura{
+                        background-color: #B1C9E8;
+                        p{
+                            color: @blue0;
                         }
-                        &.forno{
-                            svg{
-                                width: 23px;
-                                height: 24px;
-                            }
+                        .icone{
+                            color: @white;
                         }
-                        &.chapa{
-                            svg{
-                                width: 19px;
-                                height: 24px;
-                            }
+                    }
+
+                    &.tag-dark{
+                        background-color: #6E7CA0;
+                        p{
+                            color: @white;
                         }
-                        &.broiler{
-                            svg{
-                                width: 26px;
-                                height: 20px;
-                            }
-                        }
-                        &.microondas{
-                            svg{
-                                width: 24px;
-                                height: 17px;
-                            }
+                        .icone{
+                            color: @white;
                         }
                     }
                 }
             }
 
+            .pratos{
+                margin: 32px 0 32px 0;
+            }
+            .negocios{
+                margin-bottom: 42px;
+            }
+
             .nome{
                 font-weight: 600;
                 color: @blue0;
-                font-size: 2.1rem;
-                line-height: 1.4;
-                span{
-                    font-size: 1.8rem;
-                    display: block;
-                }
-            }
+                font-size: 2.8rem;
+                line-height: 1.2;
 
-            .pesos{
-                display: flex;
-                gap: 12px;
-                margin-top: 16px;
-                flex-wrap: wrap;
-                .peso{
-                    color: @blue0;
-                    font-size: 1.6rem;
+                i{
+                    display:block;
                     font-weight: 600;
-                    border: 2px solid @blue0;
-                    border-radius: 20px;
-                    padding: 3px 12px 6px 12px;
-                    line-height: 1;
                 }
             }
 
             .sub-titulo{
                 display: flex;
                 align-items: center;
-                
-                svg{
-                    fill: @red1;
-                    width: 24px;
-                    height: 22px;
-                    margin-right: 16px;
-                }
+                gap: 16px;
+                margin-bottom: 10px;
+                font-style: italic;
             }
             .paragrafo{
                 font-size: 1.4rem;
                 color: @blue0;
             }
 
-            .caracteristicas{
-                display: flex;
-                align-items: flex-start;
-                gap: 16px;
-                flex-wrap: wrap;
-                margin: 32px 0;
-                & > div{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 6px;
-                    color: @grey1;
-                    text-align: center;
-                    font-size: 1.4rem;
-                    font-style: normal;
-                    font-weight: 300;
-                }
-            }
-
             .receitas{
                 margin: 32px 0 32px 0;
             }
+
             .btn{
                 outline: none ;
             }
@@ -609,6 +882,13 @@
             padding: 42px 0 92px;
 
             .produto{
+                margin-bottom: 42px;
+                .card{
+                    padding: 24px 0;
+                    .card-body{
+                        padding: 0 24px;
+                    }
+                }
                 .fotos{
                     height: 220px;
                     overflow: hidden;
@@ -618,13 +898,46 @@
                     .slick-next{
                         right: 20%;
                     }
+
+                    .selos{
+                        padding: 0 24px;
+                        .selo-posicao_1{
+                            font-size: 1.4rem;
+                            height: 58px;
+                            width: 58px;
+                            span{
+                                font-size: 2.8rem;
+                            }
+                        }
+                        .selo-posicao_2{
+                            margin-left: 6px;
+                            margin-top: 6px;
+                            width: 44px;
+                            height: 44px;
+                            font-size: 1.4rem;
+                            span{
+                                font-size: 2.4rem;
+                            }
+                            &.primeiro-selo{
+                                margin: 0;
+                            }
+                        }
+                        .selo-posicao_3{
+                            font-size: 1.6rem;
+                        }
+                        .selo-destaque{
+                            border:1px solid red;
+                        }
+                    }
                 }
                 .nome{
-                    font-size: 2.1rem;
-                    min-height: 62px;
-                    span{
-                        font-size: 1.8rem;
-                    }
+                    font-size: 2.2rem;
+                    min-height: 68px;
+                }
+                .especificacoes{
+                    padding: 24px 0;
+                    min-height: 142px;
+                    font-size: 1.4rem;
                 }
                 .locais{
                     display: flex;
@@ -640,8 +953,11 @@
                 }
                 &.col-12{
                     .nome{
-                        min-height: 62px;
-                        font-size: 2.4rem;
+                        min-height: 68px;
+                        font-size: 2.2rem;
+                    }
+                    .especificacoes{
+                        min-height: 103px;
                     }
                 }
             }
@@ -650,28 +966,37 @@
         .modal-produto{
             height: 100%;
             width: 100%;
-            max-width: 520px;
+            max-width: 614px;
             right: 0px;
             top: 0px;
             position: absolute;
-            padding: 36px 44px;
             .produto{
+
+                .modal-header{
+                    padding: 0 44px;
+                }
+                .modal-body{
+                    padding: 0 44px;
+                }
+                .modal-footer{
+                    padding: 24px;
+                    position: fixed;
+                    bottom:0;
+                    width: 100%;
+                    padding: 24px 44px 24px 44px;
+                    position: fixed;
+                }
+
                 .fotos{
-
-                    .selos{
-                        position: relative;
-                        .selos-content{
-                            padding: 0 56px;
-                        }
-                        img{
-                            height: 62px;
-                            width: fit-content;
-                        }
-                    }
-
                     img{
                         margin: 0;
-                        max-width: 378px;
+                        max-width: 100%;
+                    }
+
+                    .selo-destaque{
+                        svg{
+                            max-width: 140px;
+                        }
                     }
                 }
                 .nome{
@@ -690,6 +1015,29 @@
                         font-size: 2.1rem;
                     }
                 }
+
+                .galeria{
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+                    margin-top: 24px;
+                }
+
+                .selos-foto{
+                    gap: 24px;
+                    width: 38%;
+                    & > div{
+                        .icone{
+                            svg{
+                                height: auto;
+                            }
+                        }
+                        p{
+                            font-size: 1.6rem;
+                        }
+                    }
+                }
+
             }
         }
 
@@ -704,10 +1052,24 @@
                 .fotos{
                     height: 278px;
                 }
+                .especificacoes{
+                    min-height: 103px;
+                    font-size: 1.6rem;
+                }
+                .nome{
+                    font-size: 2.6rem;
+                    min-height: 72px;
+                }
+                &.col-12{
+                    .nome{
+                        font-size: 2.6rem;
+                        min-height: 72px;
+                    }
+                }
             }
         }
         .modal-produto{
-            max-width: 680px;
+            max-width: 614px;
         }
     }
 }
@@ -727,8 +1089,8 @@
         .lista-produtos{
             .produto{
                 .nome{
-                    font-size: 2.4rem;
-                    min-height: 68px;
+                    font-size: 3.2rem;
+                    min-height: 90px;
                     span{
                         font-size: 2.0rem;
                     }
@@ -739,17 +1101,18 @@
                 }
                 &.col-12{
                     .nome{
-                        min-height: 68px;
+                        min-height: 90px;
+                        font-size: 3.2rem;
                     }
                 }
             }
         }
 
         .modal-produto{
-            max-width: 880px;
+            max-width: 614px;
             .produto{
                 .nome{
-                    font-size: 3.2rem;
+                    font-size: 4.8rem;
                 }
             }
         }
