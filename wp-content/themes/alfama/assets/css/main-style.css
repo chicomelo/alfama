@@ -6376,12 +6376,13 @@ body.compensate-for-scrollbar {
   display: flex;
   flex-direction: column;
   padding: 0 16px;
+  text-align: center;
 }
 .page-template-template-produtos .lista-produtos .produto .fotos .selos .selo-posicao_1 {
   background-color: #fff;
   border: 2px solid #E40046;
-  height: 52px;
-  width: 48px;
+  height: 46px;
+  width: 44px;
   border-radius: 12px;
   color: #041E42;
   font-weight: 500;
@@ -6391,11 +6392,12 @@ body.compensate-for-scrollbar {
   flex-direction: column;
   line-height: 1;
   font-size: 1.2rem;
+  letter-spacing: -0.4px;
 }
 .page-template-template-produtos .lista-produtos .produto .fotos .selos .selo-posicao_1 span {
   display: block;
   font-weight: 700;
-  font-size: 2.4rem;
+  font-size: 2.3rem;
 }
 .page-template-template-produtos .lista-produtos .produto .fotos .selos .selo-posicao_2 {
   display: flex;
@@ -6403,10 +6405,10 @@ body.compensate-for-scrollbar {
   justify-content: center;
   color: #fff;
   background-color: #E40046;
-  margin-left: 4px;
+  margin-left: 3px;
   margin-top: 6px;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 8px;
   font-weight: 500;
   line-height: 0.4rem;
@@ -6472,7 +6474,7 @@ body.compensate-for-scrollbar {
   font-weight: 600;
   color: #003B71;
   font-size: 1.8rem;
-  line-height: 1.4;
+  line-height: 1.2;
   min-height: 58px;
 }
 .page-template-template-produtos .lista-produtos .produto .nome i {
@@ -6484,6 +6486,7 @@ body.compensate-for-scrollbar {
 }
 .page-template-template-produtos .lista-produtos .produto .especificacoes {
   display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   gap: 6px;
@@ -6497,11 +6500,15 @@ body.compensate-for-scrollbar {
   color: #757575;
 }
 .page-template-template-produtos .lista-produtos .produto .especificacoes > div .icone {
+  width: 20px;
   transform: translateY(-3px);
 }
 .page-template-template-produtos .lista-produtos .produto .especificacoes > div .icone svg {
   color: #E40046;
   fill: #E40046;
+}
+.page-template-template-produtos .lista-produtos .produto .especificacoes > div b {
+  font-weight: bold;
 }
 .page-template-template-produtos .lista-produtos .produto .locais {
   display: flex;
@@ -6562,10 +6569,16 @@ body.compensate-for-scrollbar {
 }
 .page-template-template-produtos .lista-produtos .produto.col-12 .nome {
   min-height: auto;
-  font-size: 2.8rem;
+  font-size: 3.2rem;
+  line-height: 1.2;
 }
 .page-template-template-produtos .lista-produtos .produto.col-12 .especificacoes {
   min-height: auto;
+  display: flex;
+  font-size: 1.8rem;
+}
+.page-template-template-produtos .lista-produtos .produto.col-12 .link {
+  font-size: 1.8rem;
 }
 .page-template-template-produtos .lista-produtos .produto.col-12 .fotos .selos .selo-posicao_1 {
   height: 58px;
@@ -6715,12 +6728,13 @@ body.compensate-for-scrollbar {
   flex-direction: column;
   padding: 0;
   width: 100%;
+  text-align: center;
 }
 .page-template-template-produtos .modal-produto .produto .fotos .selos .selo-posicao_1 {
   background-color: #fff;
   border: 2px solid #E40046;
-  height: 58px;
-  width: 58px;
+  height: 46px;
+  width: 44px;
   border-radius: 12px;
   color: #041E42;
   font-weight: 500;
@@ -6729,30 +6743,31 @@ body.compensate-for-scrollbar {
   justify-content: center;
   flex-direction: column;
   line-height: 1;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 .page-template-template-produtos .modal-produto .produto .fotos .selos .selo-posicao_1 span {
   display: block;
   font-weight: 700;
-  font-size: 2.8rem;
+  font-size: 2.4rem;
 }
 .page-template-template-produtos .modal-produto .produto .fotos .selos .selo-posicao_2 {
-  margin-left: 6px;
+  margin-left: 3px;
   margin-top: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   background-color: #E40046;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   border-radius: 8px;
   font-weight: 500;
   line-height: 0.4rem;
+  font-size: 1.2rem;
 }
 .page-template-template-produtos .modal-produto .produto .fotos .selos .selo-posicao_2 span {
   font-weight: 700;
-  font-size: 2.4rem;
+  font-size: 2.1rem;
 }
 .page-template-template-produtos .modal-produto .produto .fotos .selos .selo-posicao_2.primeiro-selo {
   margin: 0;
@@ -6866,6 +6881,9 @@ body.compensate-for-scrollbar {
   font-size: 1.6rem;
   color: #757575;
 }
+.page-template-template-produtos .modal-produto .produto .tags .tag p b {
+  font-weight: bold;
+}
 .page-template-template-produtos .modal-produto .produto .tags .tag.tag-aproveitamento {
   background-color: #E40046;
 }
@@ -6912,6 +6930,9 @@ body.compensate-for-scrollbar {
 .page-template-template-produtos .modal-produto .produto .nome i {
   display: block;
   font-weight: 600;
+}
+.page-template-template-produtos .modal-produto .produto .nome span {
+  font-size: 1.8rem;
 }
 .page-template-template-produtos .modal-produto .produto .sub-titulo {
   display: flex;
@@ -7059,7 +7080,7 @@ body.compensate-for-scrollbar {
     font-size: 2.8rem;
   }
   .page-template-template-produtos .lista-produtos .produto .fotos .selos .selo-posicao_2 {
-    margin-left: 6px;
+    margin-left: 7px;
     margin-top: 6px;
     width: 44px;
     height: 44px;
@@ -7074,14 +7095,12 @@ body.compensate-for-scrollbar {
   .page-template-template-produtos .lista-produtos .produto .fotos .selos .selo-posicao_3 {
     font-size: 1.6rem;
   }
-  .page-template-template-produtos .lista-produtos .produto .fotos .selos .selo-destaque {
-    border: 1px solid red;
-  }
   .page-template-template-produtos .lista-produtos .produto .nome {
     font-size: 2.2rem;
     min-height: 68px;
   }
   .page-template-template-produtos .lista-produtos .produto .especificacoes {
+    display: flex;
     padding: 24px 0;
     min-height: 142px;
     font-size: 1.4rem;
@@ -7104,6 +7123,11 @@ body.compensate-for-scrollbar {
   }
   .page-template-template-produtos .lista-produtos .produto.col-12 .especificacoes {
     min-height: 103px;
+    display: flex;
+    font-size: 1.4rem;
+  }
+  .page-template-template-produtos .lista-produtos .produto.col-12 .link {
+    font-size: 1.6rem;
   }
   .page-template-template-produtos .modal-produto {
     height: 100%;
@@ -7130,11 +7154,32 @@ body.compensate-for-scrollbar {
     margin: 0;
     max-width: 100%;
   }
-  .page-template-template-produtos .modal-produto .produto .fotos .selo-destaque svg {
-    max-width: 140px;
+  .page-template-template-produtos .modal-produto .produto .fotos .selos .selo-posicao_1 {
+    height: 58px;
+    width: 58px;
+    font-size: 1.4rem;
+  }
+  .page-template-template-produtos .modal-produto .produto .fotos .selos .selo-posicao_1 span {
+    font-size: 2.8rem;
+  }
+  .page-template-template-produtos .modal-produto .produto .fotos .selos .selo-posicao_2 {
+    margin-left: 7px;
+    height: 44px;
+    width: 44px;
+    font-size: 1.4rem;
+  }
+  .page-template-template-produtos .modal-produto .produto .fotos .selos .selo-posicao_2 span {
+    font-size: 2.4rem;
+  }
+  .page-template-template-produtos .modal-produto .produto .fotos .selos .selo-destaque svg {
+    max-width: 137px;
+    max-height: 57px;
   }
   .page-template-template-produtos .modal-produto .produto .nome {
     font-size: 2.8rem;
+  }
+  .page-template-template-produtos .modal-produto .produto .nome span {
+    font-size: 1.8rem;
   }
   .page-template-template-produtos .modal-produto .produto .locais {
     display: flex;
@@ -7180,6 +7225,12 @@ body.compensate-for-scrollbar {
     font-size: 2.6rem;
     min-height: 72px;
   }
+  .page-template-template-produtos .lista-produtos .produto.col-12 .especificacoes {
+    font-size: 1.6rem;
+  }
+  .page-template-template-produtos .lista-produtos .produto.col-12 .link {
+    font-size: 1.6rem;
+  }
   .page-template-template-produtos .modal-produto {
     max-width: 614px;
   }
@@ -7211,6 +7262,9 @@ body.compensate-for-scrollbar {
   }
   .page-template-template-produtos .modal-produto .produto .nome {
     font-size: 4.8rem;
+  }
+  .page-template-template-produtos .modal-produto .produto .nome span {
+    font-size: 3.2rem;
   }
 }
 .page-template-template-contato .wpcf7-response-output {

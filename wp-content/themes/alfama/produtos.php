@@ -19,7 +19,7 @@ $produtos = [
         ],
         "selos_modal" => [
             "selos" => [
-                "posicao_1" => "<span>16</span> bifes",
+                "posicao_1" => "<span>14</span> bifes",
                 "posicao_2" => "<span>2</span> kg"
             ],
             "selos_foto" => [
@@ -29,7 +29,7 @@ $produtos = [
             ],
             "tags" => [
                 "aproveitamento" => "2 kg",
-                "quantidade" => "16 bifes",
+                "quantidade" => "14 bifes",
                 "peso" => "150g",
                 "espessura" => "1,5cm"
             ]
@@ -633,6 +633,7 @@ $produtos = [
         ],
         "selos_modal" => [
             "selos" => [
+                "posicao_1" => "<span>16</span> bifes",
                 "posicao_2" => "<span>2</span> kg"
             ],
             "selos_foto" => [
@@ -977,7 +978,7 @@ $produtos = [
         ],
         "selos_modal" => [
             "selos" => [
-                "posicao_2" => "<span>2</span> kg"
+                "posicao_2" => "<span>1</span> kg"
             ],
             "selos_foto" => [
                 "preparo" => "Pronto para o preparo",
@@ -1025,7 +1026,7 @@ $produtos = [
         ],
         "selos_modal" => [
             "selos" => [
-                "posicao_2" => "<span>2</span> kg"
+                "posicao_2" => "<span>1</span> kg"
             ],
             "selos_foto" => [
                 "preparo" => "Pronto para o preparo",
@@ -1137,7 +1138,7 @@ $produtos = [
                 "desfiamento" => "Desfiamento padronizado"
             ]
         ],
-        "pratos"=> "Pizza • Pastel • Empadas • Salgados",
+        "pratos"=> "Escondidinho • Pizza • Pastel • Sanduíche",
         "negocios" => "Pizzaria • Pastelaria • Bar e Boteco • Salgadaria",
         "locais"=> [
             "panela",

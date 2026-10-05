@@ -57,7 +57,7 @@ jQuery(document).ready(function ($) {
             arrows: false,
             dots: true,
             centerMode: true,
-            centerPadding: "56px",
+            centerPadding: "68px",
             slidesToShow: 1,
           },
         },

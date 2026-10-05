@@ -142,7 +142,7 @@ include_once 'produtos.php';
                                                             <path d="M10 5.45a2.24 2.24 0 1 0 0-4.47 2.24 2.24 0 0 0 0 4.47Zm0 .98a3.21 3.21 0 1 1 0-6.43 3.21 3.21 0 0 1 0 6.43Z"/>
                                                         </svg>
                                                     </div>
-                                                    Peso-médio do bife: ' . $especificacao . '
+                                                    Peso-médio do bife: <b>' . $especificacao . '</b>
                                                 </div>';
                                         }
                                         if ($key_especificacao === 'espessura') {
@@ -154,7 +154,7 @@ include_once 'produtos.php';
                                                             <path d="M14.74 13.22h-4.48a.49.49 0 0 1 0-.98h4.48a.49.49 0 0 1 0 .98Zm-1.32-3.13h-3.16a.49.49 0 0 1 0-.98h3.16a.49.49 0 0 1 0 .98Zm1.32-3.13h-4.48a.49.49 0 0 1 0-.98h4.48a.49.49 0 0 1 0 .98Zm-1.32-3.13h-3.16a.49.49 0 0 1 0-.98h3.16a.49.49 0 0 1 0 .98Z"/>
                                                         </svg>
                                                     </div>
-                                                    Espessura do bife: ' . $especificacao . '
+                                                    Espessura do bife: <b>' . $especificacao . '</b>
                                                 </div>';
                                         }
                                         if ($key_especificacao === 'dimensoes') {
@@ -169,7 +169,7 @@ include_once 'produtos.php';
                                                             </g>
                                                         </svg>
                                                     </div>
-                                                    Dimensões: ' . $especificacao . '
+                                                    Dimensões: <b>' . $especificacao . '</b>
                                                 </div>';
                                         }
                                         if ($key_especificacao === 'preparo') {
@@ -333,7 +333,7 @@ include_once 'produtos.php';
                                     echo "Bovino";
                                 }
                                 if($produto['origem'] == 'frango'){
-                                    echo "Frango";
+                                    echo "Ave";
                                 }
                                 if($produto['origem'] == 'suino'){
                                     echo "Suíno";
@@ -661,7 +661,7 @@ include_once 'produtos.php';
                                     echo '</div>';
                                     echo '<p>';
                                     if($titulo_tag != ''){
-                                        echo $titulo_tag . ': ' . $tags;
+                                        echo $titulo_tag . ': <b>' . $tags . '</b>';
                                     } else {
                                         echo $tags;
                                     }
@@ -712,7 +712,7 @@ include_once 'produtos.php';
                     ?>
                 </div>
                 <div class="modal-footer">
-                    <a target="_blank" href="https://api.whatsapp.com/send/?phone=5545991172722&text=Ol%C3%A1%2C+Alfama%21+Quero+saber+como+potencializar+minha+opera%C3%A7%C3%A3o+hoje+...&type=phone_number&app_absent=0" class="btn btn-outline btn-conhecer" title="Quero conhecer">Quero conhecer</a>
+                    <a target="_blank" href="<?php echo esc_url( home_url( '/contato/' ) ); ?>" class="btn btn-outline btn-conhecer" title="Quero na minha operação">Quero na minha operação</a>
                 </div>
             </div>
         </div>
